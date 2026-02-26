@@ -1,0 +1,55 @@
+name: morphs
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.23.3
+  - opencv=4.6
+  - dlib
+  - cmake
+  - setuptools
+  - ffmpeg
+  - future
+  - imageio
+  - imutils
+  - networkx
+  - packaging
+  - pillow
+  - pyparsing
+  - pywavelets
+  - scikit-image
+  - scipy
+  - tifffile
+
+
+# name: morphs
+# channels:
+#   - conda-forge
+#   - pytorch
+#   - nvidia
+# dependencies:
+#   - python==3.10 
+#   - pip
+#   - cmake
+#   - setuptools
+#   - ffmpeg
+#   - ffmpeg-python
+#   - future
+#   - imageio
+#   - imutils
+#   - networkx
+#   - packaging
+#   - Pillow
+#   - pyparsing
+#   - PyWavelets
+#   - scikit-image
+#   - scipy
+#   - tifffile
+#   - pip :
+#      - numpy==1.23.3
+#      - git+https://github.com/davisking/dlib.git@dd1ec1fcff9479b00b233755aa673c028004d96d
+#      - opencv-python==4.6.0.66
+
