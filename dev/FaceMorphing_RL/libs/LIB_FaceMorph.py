@@ -431,7 +431,8 @@ def AlignFace(File, TempFile):
 ██      ██   ██ ██      ██          ██  ██  ██ ██    ██ ██   ██ ██      ██   ██ ██      ██   ██ 
 ██      ██   ██  ██████ ███████     ██      ██  ██████  ██   ██ ██      ██   ██ ███████ ██   ██ 
 '''
-    
+
+# Delaunay MorphFace
 def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT 
 
 	alpha = Options.Alpha;
@@ -487,32 +488,100 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 	os.system("rm %s" %(Options.Sb1));
 	os.system("rm %s" %(Options.Sb2));
 
+def morph_2_faces_process(file1_path, file2_path, alpha, Morph_Results, temp_dir_path, log = False): #Sun 26 Feb 2026 11:21:45 GMT by MAPA
+    # ---- Face align process
+    # -- Align face 1
+    aligned_face_path_file1 = temp_dir_path + "/temp_" + file1_path.split("/")[-1]
+    original_file1_path = file1_path
+
+    # aligned temp file existance validation
+    if aligned_face_path_file1.split("/")[-1] not in os.listdir(temp_dir_path):
+        if log: print("-- New temp file: ", aligned_face_path_file1)
+        AlignFace(file1_path, aligned_face_path_file1);
+    file1_path = aligned_face_path_file1;
+
+    # -- Align face 2
+    aligned_face_path_file2 = temp_dir_path + "/temp_" + file2_path.split("/")[-1]
+    original_file2_path = file2_path
+
+    # aligned temp file existance validation
+    if aligned_face_path_file2.split("/")[-1] not in os.listdir(temp_dir_path):
+        if log: print("-- New temp file: ", aligned_face_path_file2)
+        AlignFace(file2_path, aligned_face_path_file2);
+    file2_path = aligned_face_path_file2;
 
 
+    # Read images
+    img1 = cv2.imread(file1_path);
+    img2 = cv2.imread(file2_path);
 
+    # Generate correspondances
+    [size, img1, img2, points1, points2, list3] = generate_face_correspondences(img1, img2);
 
+    # Delaunay
+    tri_list = make_delaunay(size[1], size[0], list3, img1, img2);
 
+    img1 = numpy.float32(img1);
+    img2 = numpy.float32(img2);
+    points = [];
 
+    if log: print("\nComputing weighted average point coordinates ... \n");
 
+    for i in range(len(points1)):
+        x = (1 - alpha) * points1[i][0] + alpha * points2[i][0];
+        y = (1 - alpha) * points1[i][1] + alpha * points2[i][1];
+        points.append((x,y))
 
+    if log: print("\nComputing Morph ... \n");
+    
+    morphed_frame = numpy.zeros(img1.shape, dtype = img1.dtype);
+    #
+    for i in range(len(tri_list)):    
+        x = tri_list[i][0];
+        y = tri_list[i][1];
+        z = tri_list[i][2];
+        t1 = [points1[x], points1[y], points1[z]];
+        t2 = [points2[x], points2[y], points2[z]];
+        t = [points[x], points[y], points[z]];
+        morph_triangle(img1, img2, morphed_frame, t1, t2, t, alpha);
+        #
+    #
+    morphed_frame = Image.fromarray(cv2.cvtColor(numpy.uint8(morphed_frame), cv2.COLOR_BGR2RGB));
 
+    file_Morph_Results = Morph_Results + "/morph_" + original_file1_path.split("/")[-1].split(".")[-2] + "_" + original_file2_path.split("/")[-1].split(".")[-2] + ".png"
 
+    if log: print("\nWritting morphed face : %s ... \n" %(file_Morph_Results));	
 
+    # Save morphed face
+    morphed_frame.save(file_Morph_Results, "PNG");
 
+def Dir_Automation_MorphFace(Options): #Sun 26 Feb 2026 11:21:45 GMT by MAPA
+    
+    alpha = Options.Alpha;
+    DirProportion = Options.DirProportion;
 
+    # Parameter validation
+    assert alpha > 0 and alpha < 1, "alpha not in [0,1]";
+    assert DirProportion > 0 and DirProportion <= 1, "DirProportion not in [0,1]";
+    assert os.path.exists(Options.ImageDir), "Directory not found " + Options.ImageDir;
+    assert os.path.exists(Options.MorphDir), "Ouput Directory not found " + Options.MorphDir
 
+    # Read directory
+    all_files_path = sorted(os.listdir(Options.ImageDir))
 
+    # Check temp dir existance
+    temp_dir_path = "TempImages"
+    os.makedirs(temp_dir_path, exist_ok=True)
 
+    # Optimized and automated image morphing all vs all 
+    for file_x_idx in range(int(len(all_files_path)*DirProportion)):
+        for file_y_idx in range(file_x_idx, int(len(all_files_path)*DirProportion)):
+            if file_y_idx != file_x_idx:   
+                file1 = Options.ImageDir + "/" + all_files_path[file_x_idx] 
+                file2 = Options.ImageDir + "/" + all_files_path[file_y_idx]
 
-
-
-
-
-
-
-
-
-
-
-
-
+                # Process 2 faces
+                morph_2_faces_process(file1, file2, alpha, Options.MorphDir, temp_dir_path, log = False)
+    
+    # Remove temp_dir
+    os.system("rm -r %s" %(temp_dir_path));
