@@ -1,0 +1,24 @@
+name: genmorph
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - pip
+  - cmake
+  - dlib
+  - ffmpeg
+  - ffmpeg-python
+  - future
+  - imageio
+  - imutils
+  - networkx
+  - numpy
+  - packaging
+  - Pillow
+  - pyparsing
+  - PyWavelets
+  - scikit-image
+  - scipy
+  - tifffile
+  - opencv
