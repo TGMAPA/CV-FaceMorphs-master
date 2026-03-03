@@ -4,6 +4,8 @@ __pycache__/
 __pycache__/
 .cache/
 
+*.pkl
+MODELS/
 
 # C extensions
 *.so

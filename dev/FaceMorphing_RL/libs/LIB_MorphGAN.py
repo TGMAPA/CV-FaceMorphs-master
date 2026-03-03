@@ -148,7 +148,7 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 
 
 	# Load the generator model from the pickle file
-	with open('./MODELS/ffhq_res256.pkl', 'rb') as f:
+	with open('./libs/stylegan2-ada-pytorch-main/MODELS/ffhq_res256.pkl', 'rb') as f:
 		G = pickle.load(f)['G_ema'].to(device) 
     
 	face1_tensor = face1_tensor.squeeze()
