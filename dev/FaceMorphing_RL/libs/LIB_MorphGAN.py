@@ -223,3 +223,156 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 	os.system("rm %s" %(Options.Sb1));
 	os.system("rm %s" %(Options.Sb2));	
 	
+
+
+
+def morph_2_faces_process(file1_path, file2_path, alpha, Morph_Results, temp_dir_path, log = False): #Sun 26 Feb 2026 11:21:45 GMT by MAPA
+    # ---- Face align process
+    # -- Align face 1
+    aligned_face_path_file1 = temp_dir_path + "/temp_" + file1_path.split("/")[-1]
+    original_file1_path = file1_path
+
+    # aligned temp file existance validation
+    if aligned_face_path_file1.split("/")[-1] not in os.listdir(temp_dir_path):
+        if log: print("-- New temp file: ", aligned_face_path_file1)
+        AlignFace(file1_path, aligned_face_path_file1);
+    file1_path = aligned_face_path_file1;
+
+    # -- Align face 2
+    aligned_face_path_file2 = temp_dir_path + "/temp_" + file2_path.split("/")[-1]
+    original_file2_path = file2_path
+
+    # aligned temp file existance validation
+    if aligned_face_path_file2.split("/")[-1] not in os.listdir(temp_dir_path):
+        if log: print("-- New temp file: ", aligned_face_path_file2)
+        AlignFace(file2_path, aligned_face_path_file2);
+    file2_path = aligned_face_path_file2;
+
+
+    # Read images
+    face1 = Image.open(file1_path)
+    face2 = Image.open(file2_path)
+
+    face1_array = numpy.array(face1)
+    face2_array = numpy.array(face2)
+
+    face1_tensor = torch.tensor(face1_array, dtype=torch.float32)  # Change dtype as needed
+    face2_tensor = torch.tensor(face2_array, dtype=torch.float32)
+
+    # Set device
+    # if(torch.backends.mps.is_available()): # True
+    #     print("MPS is available")
+    #     device = torch.device("mps")
+    # else:
+    #     device = torch.device("cpu")
+
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+
+    # Load the generator model from the pickle file
+    with open('./libs/stylegan2-ada-pytorch-main/MODELS/ffhq_res256.pkl', 'rb') as f:
+        G = pickle.load(f)['G_ema'].to(device) 
+
+    face1_tensor = face1_tensor.squeeze()
+    face1_tensor = face1_tensor.permute(2, 0, 1)
+    face1_tensor = torch.nn.functional.interpolate(face1_tensor.unsqueeze(0), size=(G.img_resolution, G.img_resolution), mode='bilinear', align_corners=False)
+    face1_tensor = face1_tensor.squeeze(0)
+
+    face2_tensor = face2_tensor.squeeze()
+    face2_tensor = face2_tensor.permute(2, 0, 1)
+    face2_tensor = torch.nn.functional.interpolate(face2_tensor.unsqueeze(0), size=(G.img_resolution, G.img_resolution), mode='bilinear', align_corners=False)
+    face2_tensor = face2_tensor.squeeze(0)
+
+    face1_tensor = face1_tensor.to(device)
+    face2_tensor = face2_tensor.to(device)
+
+    # Project the image
+    projected_w_steps1 = projector.project(G, target=face1_tensor, num_steps=2, w_avg_samples = 1000, device = device, verbose=False);
+
+    projected_w_steps2 = projector.project(G, target=face2_tensor, num_steps=2, w_avg_samples = 1000,   device=device, verbose=False)
+
+    # check if the projected_w_steps1 and projected_w_steps2 are exactly the same
+    (projected_w_steps1 == projected_w_steps2).all()
+
+    w1 = projected_w_steps1[-1].unsqueeze(0)
+    w2 = projected_w_steps2[-1].unsqueeze(0)
+
+    img1 = G.synthesis(w1, noise_mode='const', force_fp32=True)
+
+    sz_im = 255;
+
+    img1 = (img1 + 1) * (sz_im/2)
+    img1 = img1.permute(0, 2, 3, 1).clamp(0, sz_im).to(torch.uint8)[0].cpu().numpy()
+
+    img1 = Image.fromarray(img1, 'RGB')
+    img1.save("temp_1.png")
+
+    img2 = G.synthesis(w2, noise_mode='const', force_fp32=True)
+
+    img2 = (img2 + 1) * (sz_im/2)
+    img2 = img2.permute(0, 2, 3, 1).clamp(0, sz_im).to(torch.uint8)[0].cpu().numpy()
+
+    img2 = Image.fromarray(img2, 'RGB')
+    img2.save("temp_2.png")
+
+    # linear interpolation between w1 and w2
+    num_interpolations = 10
+    interpolations = torch.zeros((num_interpolations, w1.shape[1], w1.shape[2]), device=device)
+    for i in range(num_interpolations):
+        interpolations[i] = w1 + (w2 - w1) * i / (num_interpolations - 1)
+
+    # Generate the images
+    interpolated_images = G.synthesis(interpolations, noise_mode='const', force_fp32=True)
+
+    interpolated_images.shape
+    interpolated_images[5].shape
+
+    interpolated_images = (interpolated_images + 1) * (sz_im/2)
+
+    interpolated_images = interpolated_images.permute(0, 2, 3, 1).clamp(0, sz_im).to(torch.uint8).cpu().numpy()
+
+    morph = interpolated_images[5];
+
+    morph = Image.fromarray(morph, 'RGB')
+    morph = morph.resize((1024, 1024))
+
+
+    file_Morph_Results = Morph_Results + "/morph_" + original_file1_path.split("/")[-1].split(".")[-2] + "_" + original_file2_path.split("/")[-1].split(".")[-2] + ".png"
+
+    if log: print("\nWritting morphed face : %s ... \n" %(file_Morph_Results));	
+
+    # Save morphed face
+    morph.save(file_Morph_Results, "PNG");
+
+def Dir_Automation_MorphFace(Options): #Thursday 05 March 2026 11:30:50 GMT by MAPA
+    
+    alpha = Options.Alpha;
+    DirProportion = Options.DirProportion;
+
+    # Parameter validation
+    assert alpha > 0 and alpha < 1, "alpha not in [0,1]";
+    assert DirProportion > 0 and DirProportion <= 1, "DirProportion not in [0,1]";
+    assert os.path.exists(Options.ImageDir), "Directory not found " + Options.ImageDir;
+    assert os.path.exists(Options.MorphDir), "Ouput Directory not found " + Options.MorphDir
+
+    # Read directory
+    all_files_path = sorted(os.listdir(Options.ImageDir))
+
+    # Check temp dir existance
+    temp_dir_path = "TempImages"
+    os.makedirs(temp_dir_path, exist_ok=True)
+
+    # Optimized and automated image morphing all vs all 
+    for file_x_idx in range(int(len(all_files_path)*DirProportion)):
+        for file_y_idx in range(file_x_idx, int(len(all_files_path)*DirProportion)):
+            if file_y_idx != file_x_idx:   
+                file1 = Options.ImageDir + "/" + all_files_path[file_x_idx] 
+                file2 = Options.ImageDir + "/" + all_files_path[file_y_idx]
+
+                # Process 2 faces
+                morph_2_faces_process(file1, file2, alpha, Options.MorphDir, temp_dir_path, log = False)
+    
+    # Remove temp_dir
+    os.system("rm -r %s" %(temp_dir_path));

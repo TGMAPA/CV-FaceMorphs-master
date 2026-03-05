@@ -38,7 +38,7 @@ def main():
 	subparser.set_defaults(func = LIB_FaceMorph.MorphFace);
 
 	# Execute Directory Delaunay Image morphing
-	subparser = subparsers.add_parser("DelaunayImageDirMorph", description = "Image Directory all-vs-all morphs");
+	subparser = subparsers.add_parser("DelaunayImageDirMorph", description = "Image Directory all-vs-all Delaunay morphs");
 	subparser.add_argument("--ImageDir", required = False, type = str, default = "./DATA", help = "Image Directory with Subject's faces"),
 	subparser.add_argument("--MorphDir", required = False, type = str, default = "./Morph_Results", help = "Morph output Directory"),	
 	subparser.add_argument("--Alpha", type = float, default = 0.5, help = "Blending factor");
@@ -47,12 +47,20 @@ def main():
 
 	# -- GAN MorphFace
 	# Execute GAN Image morphing for 2 images
-	subparser = subparsers.add_parser("GANImageMorph", description = "Image 2 Image morphs");
+	subparser = subparsers.add_parser("GANImageMorph", description = "Image 2 Image Delaunay morphs");
 	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one's face"),
 	subparser.add_argument("--Sb2", required = False, type = str, default = "./DATA/Sb2.png", help = "Subject two's face"),
 	subparser.add_argument("--Morph", required = False, type = str, default = "MorphedFace.png", help = "Morph output <MorphedFace.png>"),	
 	subparser.add_argument("--Alpha", type = float, default = 0.5, help = "Blending factor");
 	subparser.set_defaults(func = LIB_MorphGAN.MorphFace);
+
+	# Execute Directory GAN Image morphing
+	subparser = subparsers.add_parser("GANImageDirMorph", description = "Image Directory all-vs-all GAN morphs");
+	subparser.add_argument("--ImageDir", required = False, type = str, default = "./DATA", help = "Image Directory with Subject's faces"),
+	subparser.add_argument("--MorphDir", required = False, type = str, default = "./Morph_Results", help = "Morph output Directory"),	
+	subparser.add_argument("--Alpha", type = float, default = 0.5, help = "Blending factor");
+	subparser.add_argument("--DirProportion", type = float, default = 1.0, help = "Directory percentage to process");
+	subparser.set_defaults(func = LIB_MorphGAN.Dir_Automation_MorphFace);
 
 
 	Options = parser.parse_args();
