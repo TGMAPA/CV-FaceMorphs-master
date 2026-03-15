@@ -18,3 +18,11 @@ benchmarks/outputs
 benchmarks/dataset
 benchmarks/lfwe
 venv
+
+BUPT_Equalized_Demographic.json
+BUPT_Balanced_demographics_N10.csv
+
+*.csv
+*.json
+
+CSV/
