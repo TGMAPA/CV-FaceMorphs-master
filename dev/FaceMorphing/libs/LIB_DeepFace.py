@@ -1,6 +1,7 @@
 import datetime, pandas, tqdm, glob, os, random, json
-from deepface_master.deepface import DeepFace
+from deepfaceMaster.deepface import DeepFace
 from pathlib import Path
+
 
 def GetRace(Files, pbar, subsample = 10):
 	# Some identities have 500 samples
@@ -45,6 +46,7 @@ def GetRace(Files, pbar, subsample = 10):
 	Age["age"] /= k;
 	
 	return Race, Gender, Age;
+
 
 def MetaDemographicsVGG2(Options):
 
@@ -91,9 +93,8 @@ def MetaDemographicsVGG2(Options):
 	print(DF_ID)
 		
 	DF_ID.to_csv(Options.CSV_meta.replace(".csv","_races.csv"));
-	
-	
-	
+
+
 def MetaDemographicsCELEBA(Options):
 
 	DF = pandas.read_csv(Options.CSV_meta);
@@ -139,7 +140,6 @@ def MetaDemographicsCELEBA(Options):
 	
 	
 def InsertDemographics(Options):
-
 	DF_full = pandas.read_csv(Options.MetaSRC);
 	
 	DF_dem = pandas.read_csv(Options.MetaDem);
@@ -158,6 +158,7 @@ def InsertDemographics(Options):
 	DF_full.to_csv(Options.MetaSRC.replace(".csv","_dem.csv"), index = False);
 
 
+# Get demographic metadata from a single file
 def SingleSampleDemographic(File, Options):
 	#
 	Demographics = {"File" : File.replace(Options.SPath, "") , "asian": 0, "indian": 0, "black": 0, "white": 0, "middle eastern": 0, "latino hispanic": 0, "age" : 0, "Woman" : 0, "Man" : 0};
@@ -181,7 +182,7 @@ def SingleSampleDemographic(File, Options):
 	#
 	return Demographics;
 
-
+# Retrieve all leaf directories inside a source path.
 def leafDirs(SPath):
 	Folders = []
 	for root, dirs, files in os.walk(SPath):
@@ -189,36 +190,53 @@ def leafDirs(SPath):
 			Folders.append(os.path.abspath(root))
 	return Folders
 
+# Get demographic meta data as json from an image directory
 def Demographics4Folder(Options):
-
+	# Retrieve all leaf directories inside the source path.
 	Folders = leafDirs(Options.SPath);
 	
 	Register = [];
 	
+	# Iterate through each folder found in the source path
 	for Folder in Folders:
 		print("Processing ... %s " %(Folder));
 		
+		# Retrieve all files inside the folder
 		Files = glob.glob(Folder + "/*.*");
 	
 		if len(Files) == 0:
 			continue
-
+		
+		# Shuffle files randomly to avoid sampling bias
 		random.shuffle(Files);
+
+		# List to store demographics extracted from sampled files
 		Dem = [];
-			
+		
+		# Process only the first N files defined in Options.N
+		# This acts as a sampling mechanism to limit processing time
 		for File in Files[0:Options.N]:
+			# Extract demographic attributes from file
 			Demographics = SingleSampleDemographic(File, Options);
+
+			# If the function returns no result, log the issue and skip the file
 			if Demographics is None:
 				print("File : %s produced no output." %(File));
 				continue
+
+			# Append valid demographic result to the folder list
 			Dem.append(Demographics)
 
+		# Store folder-level results including:
+		# - folder name (relative to source path)
+		# - total number of files in the folder
+		# - demographics extracted from sampled images
 		Register.append( {"Folder" : Folder.replace(Options.SPath, ""), "Samples" : len(Files), "Demographics" : Dem} );
 	
+	# Convert the collected results into a formatted JSON string
 	json_obj = json.dumps(Register, indent = 3);
 
+	# Write the JSON output to the specified file
 	with open(Options.JSON, "w") as fid:
 		fid.write(json_obj)	
 	fid.close()
-	
-	

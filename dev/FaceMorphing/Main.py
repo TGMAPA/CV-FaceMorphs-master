@@ -69,7 +69,7 @@ def main():
 
 
 	# -- DeepFace 	#Sun 15 March 13:25:35 GMT by MAPA
-	# Execute Delaunay Image morphing for 2 images
+	# 
 	subparser = subparsers.add_parser("MetaDemographicsVGG2", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--CSV_meta", required = True, type = str, help = "CSV meta data");
@@ -86,9 +86,10 @@ def main():
 	subparser.add_argument("--MetaSRC", required = True, type = str, help = "CSV meta data");
 	subparser.set_defaults(func = LIB_DeepFace.InsertDemographics);
 
+	# Analyze image directory and get meta data
 	subparser = subparsers.add_parser("Demographics4Folder", description = "Insert demographic from exsiting image folder");
-	subparser.add_argument("--SPath", required = True, type = str, help = "Source path of face images");
-	subparser.add_argument("--JSON", required = True, type = str, help = "JSON meta data to save");
+	subparser.add_argument("--SPath", required = True, type = str, default = "./DATA", help = "Source path of face images");
+	subparser.add_argument("--JSON", required = True, type = str, default = "./deepface_metadata.json", help = "JSON meta data to save");
 	subparser.add_argument("--N", required = False, default = -1, type = int, help = "Number of samples per subfolder, default all");
 	subparser.add_argument("--os_png_tool", required = False, default = "magick", type = str, help = "Default png system converter tool");	
 	subparser.set_defaults(func = LIB_DeepFace.Demographics4Folder);
