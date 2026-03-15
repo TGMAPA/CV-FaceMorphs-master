@@ -1,5 +1,5 @@
 import datetime, pandas, tqdm, glob, os, random, json
-from deepface import DeepFace
+from deepface_master.deepface import DeepFace
 from pathlib import Path
 
 def GetRace(Files, pbar, subsample = 10):
