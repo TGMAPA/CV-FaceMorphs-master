@@ -1,5 +1,6 @@
 import datetime, pandas, tqdm, glob, os, random, json
-from deepfaceMaster.deepface import DeepFace
+
+from deepface import DeepFace
 from pathlib import Path
 
 
