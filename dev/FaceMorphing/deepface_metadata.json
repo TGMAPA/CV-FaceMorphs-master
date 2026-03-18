@@ -4,40 +4,40 @@
       "Samples": 4,
       "Demographics": [
          {
-            "File": "/home/mapa/Documents/Tec/NextGenS/FacesDetection/CV-FaceMorphs-master/dev/FaceMorphing/DATA/Sb1.png",
-            "asian": 99.97593760490417,
-            "indian": 0.009337703522760421,
-            "black": 5.416171955374693e-07,
-            "white": 0.0008026357136259321,
-            "middle eastern": 7.73665753683872e-07,
-            "latino hispanic": 0.013917568139731884,
-            "age": 27.0,
-            "Woman": 6.451443582773209,
-            "Man": 93.54856014251709
-         },
-         {
             "File": "/home/mapa/Documents/Tec/NextGenS/FacesDetection/CV-FaceMorphs-master/dev/FaceMorphing/DATA/img5.jpg",
-            "asian": 7.627608627080917,
-            "indian": 3.5891160368919373,
-            "black": 0.9633956477046013,
-            "white": 22.23985195159912,
-            "middle eastern": 8.426149934530258,
-            "latino hispanic": 57.15387463569641,
+            "asian": 7.692824304103851,
+            "indian": 3.6134805530309677,
+            "black": 0.9712362661957741,
+            "white": 22.144803404808044,
+            "middle eastern": 8.411119878292084,
+            "latino hispanic": 57.16654062271118,
             "age": 25.0,
-            "Woman": 60.723793506622314,
-            "Man": 39.27621245384216
+            "Woman": 60.44127941131592,
+            "Man": 39.558714628219604
          },
          {
-            "File": "/home/mapa/Documents/Tec/NextGenS/FacesDetection/CV-FaceMorphs-master/dev/FaceMorphing/DATA/Sb2.png",
-            "asian": 3.1407009810209274,
-            "indian": 4.5921918004751205,
-            "black": 84.681636095047,
-            "white": 0.3320250194519758,
-            "middle eastern": 0.09216193575412035,
-            "latino hispanic": 7.161282002925873,
-            "age": 26.0,
-            "Woman": 99.99985694885254,
-            "Man": 0.00013974744206279865
+            "File": "/home/mapa/Documents/Tec/NextGenS/FacesDetection/CV-FaceMorphs-master/dev/FaceMorphing/DATA/Sb1.png",
+            "asian": 99.97583627556779,
+            "indian": 0.009380598762406335,
+            "black": 5.46184241526685e-07,
+            "white": 0.0008053275930960345,
+            "middle eastern": 7.785738740377541e-07,
+            "latino hispanic": 0.013979184692416173,
+            "age": 27.0,
+            "Woman": 6.454703211784363,
+            "Man": 93.5452938079834
+         },
+         {
+            "File": "/home/mapa/Documents/Tec/NextGenS/FacesDetection/CV-FaceMorphs-master/dev/FaceMorphing/DATA/img10.jpg",
+            "asian": 1.18445735424757,
+            "indian": 2.4624699726700783,
+            "black": 0.25756065733730793,
+            "white": 46.13272547721863,
+            "middle eastern": 21.177448332309723,
+            "latino hispanic": 28.78533899784088,
+            "age": 34.0,
+            "Woman": 99.81379508972168,
+            "Man": 0.18620073096826673
          }
       ]
    }

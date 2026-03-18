@@ -1,4 +1,4 @@
-import datetime, pandas, tqdm, glob, os, random, json
+import datetime, pandas, tqdm, glob, os, random, json, cv2
 
 from deepface import DeepFace
 from pathlib import Path
@@ -158,8 +158,16 @@ def InsertDemographics(Options):
 	
 	DF_full.to_csv(Options.MetaSRC.replace(".csv","_dem.csv"), index = False);
 
+# Retrieve all leaf directories inside a source path.
+def leafDirs(SPath):
+	Folders = []
+	for root, dirs, files in sorted(os.walk(SPath)):
+		if not dirs:
+			Folders.append(os.path.abspath(root))
+	return Folders
 
-# Get demographic metadata from a single file
+
+# Get demographic metadata from a single file with magick
 def SingleSampleDemographic(File, Options):
 	#
 	Demographics = {"File" : File.replace(Options.SPath, "") , "asian": 0, "indian": 0, "black": 0, "white": 0, "middle eastern": 0, "latino hispanic": 0, "age" : 0, "Woman" : 0, "Man" : 0};
@@ -183,13 +191,44 @@ def SingleSampleDemographic(File, Options):
 	#
 	return Demographics;
 
-# Retrieve all leaf directories inside a source path.
-def leafDirs(SPath):
-	Folders = []
-	for root, dirs, files in os.walk(SPath):
-		if not dirs:
-			Folders.append(os.path.abspath(root))
-	return Folders
+
+# Get demographic metadata from a single file with opencv  #Tuesday 17 March 2026 23:30:50 GMT by MAPA
+def SingleSampleDemographic_cv2(File, Options):
+
+    Demographics = {
+        "File": File.replace(Options.SPath, ""),
+        "asian": 0, "indian": 0, "black": 0, "white": 0,
+        "middle eastern": 0, "latino hispanic": 0,
+        "age": 0, "Woman": 0, "Man": 0
+    }
+
+    try:
+        img = cv2.imread(File)
+
+        if img is None:
+            return None
+
+        objs = DeepFace.analyze(
+            img_path=img,
+            actions=["age", "gender", "race"],
+            enforce_detection=False 
+        )[0]
+
+    except Exception as e:
+        print(f"Error en {File}: {e}")
+        return None
+
+    # Procesar resultados
+    for r in objs.get("race", {}).keys():
+        Demographics[r] = float(objs["race"][r])
+
+    Demographics["age"] = float(objs.get("age"))
+
+    for r in objs.get("gender", {}).keys():
+        Demographics[r] = float(objs["gender"][r])
+
+    return Demographics
+
 
 # Get demographic meta data as json from an image directory
 def Demographics4Folder(Options):
@@ -197,7 +236,7 @@ def Demographics4Folder(Options):
 	Folders = leafDirs(Options.SPath);
 	
 	Register = [];
-	
+
 	# Iterate through each folder found in the source path
 	for Folder in Folders:
 		print("Processing ... %s " %(Folder));
@@ -218,7 +257,7 @@ def Demographics4Folder(Options):
 		# This acts as a sampling mechanism to limit processing time
 		for File in Files[0:Options.N]:
 			# Extract demographic attributes from file
-			Demographics = SingleSampleDemographic(File, Options);
+			Demographics = SingleSampleDemographic_cv2(File, Options);
 
 			# If the function returns no result, log the issue and skip the file
 			if Demographics is None:
