@@ -1,0 +1,35 @@
+{'File': './DATA/img5.jpg', 'asian': 7.6276227831840515, 'indian': 3.5891156643629074, 'black': 0.9633968584239483, 'white': 22.2398579120636, 'middle eastern': 8.42614620923996, 'latino hispanic': 57.153868675231934, 'age': 25.0, 'Woman': 60.72365045547485, 'Man': 39.27634954452515}
+{'File': './DATA/img5.jpg', 'asian': 7.685713469982147, 'indian': 3.608579561114311, 'black': 0.9693915955722332, 'white': 22.170904278755188, 'middle eastern': 8.415080606937408, 'latino hispanic': 57.150328159332275, 'age': 25.0, 'Woman': 60.422587394714355, 'Man': 39.577412605285645}
+
+==============================
+IMAGE: ./DATA/img5.jpg
+==============================
+
+--- IMAGE QUALITY ---
+
+[MAGICK]
+MSE (Mean Squared Error)           | Expected: close to 0 |  : 0.0527 
+PSNR (Peak Signal-to-Noise Ratio)  | Expected: > 40 dB    |  : 60.91 dB 
+SSIM (Structural Similarity Index) | Expected: close to 1 |  : 1.0000 
+File size: 929762 bytes
+
+[CV2]
+MSE (Mean Squared Error)           | Expected: close to 0 |  : 0.0000 
+PSNR (Peak Signal-to-Noise Ratio)  | Expected: > 40 dB    |  : 361.20 dB 
+SSIM (Structural Similarity Index) | Expected: close to 1 |  : 1.0000 
+File size: 1312111 bytes
+
+--- Demographic Differences ---
+asian               : 0.0581
+indian              : 0.0195
+black               : 0.0060
+white               : 0.0690
+middle eastern      : 0.0111
+latino hispanic     : 0.0035
+age                 : 0.0000
+Woman               : 0.3011
+Man                 : 0.3011
+
+Average demographic shift: 0.0855
+
+Comparison completed.
