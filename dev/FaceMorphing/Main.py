@@ -20,17 +20,9 @@ def main():
 	parser = argparse.ArgumentParser("Face Morphs");
 	subparsers = parser.add_subparsers();
 
-	subparser = subparsers.add_parser("VideoMorph", description = "The original code generating a video of morphs");
-	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one face"),
-	subparser.add_argument("--Sb2", required = False, type = str, default = "./DATA/Sb2.png", help = "Subject two face"),
-	subparser.add_argument("--Morph", required = False, type = str, default = "MorphedFace.mp4", help = "Morph output <MorphedFace.mp4>"),	
-	subparser.add_argument("--Length", required = False, type = int, default = 5, help = "Video length in seconds")
-	subparser.add_argument("--FPS", required = False, type = int, default = 20, help = "Frames Per Second")
-	subparser.set_defaults(func = LIB_FaceMorph.VideoMorph);
-
-
-
+	# ----------------------
 	# -- Delaunay MorphFace   #Sun 26 Feb 2026 11:21:45 GMT by MAPA
+	# ----------------------
 	# Execute Delaunay Image morphing for 2 images
 	subparser = subparsers.add_parser("DelaunayImageMorph", description = "Image 2 Image morphs");
 	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one's face"),
@@ -47,9 +39,19 @@ def main():
 	subparser.add_argument("--DirProportion", type = float, default = 1.0, help = "Directory percentage to process");
 	subparser.set_defaults(func = LIB_FaceMorph.Dir_Automation_MorphFace);
 
+	# Execute Directory Delaunay Image morphing and get morphing process as a video
+	subparser = subparsers.add_parser("VideoMorph", description = "The original code generating a video of morphs");
+	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one face"),
+	subparser.add_argument("--Sb2", required = False, type = str, default = "./DATA/Sb2.png", help = "Subject two face"),
+	subparser.add_argument("--Morph", required = False, type = str, default = "MorphedFace.mp4", help = "Morph output <MorphedFace.mp4>"),	
+	subparser.add_argument("--Length", required = False, type = int, default = 5, help = "Video length in seconds")
+	subparser.add_argument("--FPS", required = False, type = int, default = 20, help = "Frames Per Second")
+	subparser.set_defaults(func = LIB_FaceMorph.VideoMorph);
 
 
+	# ----------------------
 	# -- GAN MorphFace   #Thursday 05 March 2026 11:30:50 GMT by MAPA
+	# ----------------------
 	# Execute GAN Image morphing for 2 images
 	subparser = subparsers.add_parser("GANImageMorph", description = "Image 2 Image Delaunay morphs");
 	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one's face"),
@@ -67,15 +69,16 @@ def main():
 	subparser.set_defaults(func = LIB_MorphGAN.Dir_Automation_MorphFace);
 
 	
-
+	# ----------------------
 	# -- DeepFace 	#Sun 15 March 13:25:35 GMT by MAPA
-	# Obtain demographic metrics from metrics
+	# ----------------------
+	# Obtain demographic metrics from metrics VGG2
 	subparser = subparsers.add_parser("MetaDemographicsVGG2", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--CSV_meta", required = True, type = str, help = "CSV meta data");
 	subparser.set_defaults(func = LIB_DeepFace.MetaDemographicsVGG2);
 
-	# Obtain demographic metrics from metrics
+	# Obtain demographic metrics from metrics CELEBA
 	subparser = subparsers.add_parser("MetaDemographicsCELEBA", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--CSV_meta", required = True, type = str, help = "CSV meta data");
@@ -96,6 +99,14 @@ def main():
 	subparser.add_argument("--os_png_tool", required = False, default = "magick", type = str, help = "Default png system converter tool");	
 	subparser.set_defaults(func = LIB_DeepFace.Demographics4Folder);
 
+	# Analyze single image and get meta data #Monday 23 March 2026 19:21:50 GMT by MAPA
+	subparser = subparsers.add_parser("Demographics4SingleFile", description = "Insert demographic from exsiting single image");
+	subparser.add_argument("--input_file", required = False, type = str, default = "./DATA/img5.jpg", help = "Image Source Path");
+	subparser.add_argument("--temp_output_file", required = False, type = str, default = "./temp.png", help = "Temporal compressed image file");
+	subparser.add_argument("--remove_temp_file", required = False, default = True, type = bool, help = "Bool for allowing temporal file removal");
+	subparser.add_argument("--os_png_tool", required = False, default = "magick", type = str, help = "Desired png converter tool");	
+	subparser.set_defaults(func = LIB_DeepFace.SingleSampleDemographic);
+
 	# Transform DeepFace json into structured csv  #Monday 23 March 2026 16:54:30 GMT by MAPA
 	subparser = subparsers.add_parser("DeepFaceJSON2CSV", description = "Export a DeepFace generated json file with dataset's DeepFace-Demographics into structured csv");
 	subparser.add_argument("--jsonPath", required = False, type = str, default = "./deepface_metadata.json", help = "JSON path with DeepFace's metadata to transform");
@@ -109,6 +120,7 @@ def main():
 	print(str(Options) + "\n");
 	
 	Response = Options.func(Options);
+
 
 
 if __name__ == "__main__":

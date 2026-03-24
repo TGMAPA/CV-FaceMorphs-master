@@ -1,5 +1,6 @@
 # Import packages
 import pandas, tqdm, glob, os, random, json, cv2
+from types import SimpleNamespace
 
 # Import modules
 from deepface import DeepFace
@@ -167,8 +168,21 @@ def leafDirs(SPath):
 			Folders.append(os.path.abspath(root))
 	return Folders
 
-# Get demographic metadata from a single file with magick
-def SingleSampleDemographic(File, Options):
+# Generate png with magick command #Monday 23 March 2026 19:12:50 GMT by MAPA
+def generate_magick_png(input_path, output_path, magick_cmd):
+	try:
+		os.system("%s %s %s" %(magick_cmd, input_path, output_path) )
+	except:
+		return False
+	return True
+
+# Create embeddings with deepFace
+def Embeddings():
+	pass
+
+# ----- Single file demographic analyzer
+# Get demographic metadata from a single file with magick (Original function)
+def SingleSampleDemographic_magick(File, Options):
 	#
 	Demographics = {"File" : File.replace(Options.SPath, "") , "asian": 0, "indian": 0, "black": 0, "white": 0, "middle eastern": 0, "latino hispanic": 0, "age" : 0, "Woman" : 0, "Man" : 0};
 	#
@@ -217,7 +231,7 @@ def SingleSampleDemographic_cv2(File, Options):
         print(f"Error in {File}: {e}")
         return None
 
-    # Procesar resultados
+    # Process results
     for r in objs.get("race", {}).keys():
         Demographics[r] = float(objs["race"][r])
 
@@ -227,6 +241,79 @@ def SingleSampleDemographic_cv2(File, Options):
         Demographics[r] = float(objs["gender"][r])
 
     return Demographics
+
+
+'''
+██████   █████  ██████  ███████ ███████ ██████  
+██   ██ ██   ██ ██   ██ ██      ██      ██   ██ 
+██████  ███████ ██████  ███████ █████   ██████  
+██      ██   ██ ██   ██      ██ ██      ██   ██ 
+██      ██   ██ ██   ██ ███████ ███████ ██   ██ 
+'''
+
+# Get demographic metadata from a single file with a desired png convertor tool #Monday 23 March 2026 19:12:50 GMT by MAPA
+def SingleSampleDemographic(Options):
+	# Parameters
+	input_file = Options.input_file
+	temp_output_file = Options.temp_output_file
+	os_png_tool = Options.os_png_tool
+	remove_temp_file = Options.remove_temp_file
+	#
+	Demographics = {
+        "File": input_file,
+        "asian": 0, "indian": 0, "black": 0, "white": 0,
+        "middle eastern": 0, "latino hispanic": 0,
+        "age": 0, "Woman": 0, "Man": 0
+    }
+	#
+	try:
+		match os_png_tool:
+			case "magick":
+				# magick compression
+				success = generate_magick_png(input_file, temp_output_file, "magick")
+				if not success or not os.path.exists(temp_output_file):
+					print(f"[error] PNG conversion failed: {input_file}")
+					return None
+
+				objs = DeepFace.analyze(
+					img_path=temp_output_file,
+					actions=["age", "gender", "race"],
+					enforce_detection=False
+				)[0]
+
+				if remove_temp_file and os.path.exists(temp_output_file):
+					os.remove(temp_output_file)
+				
+			case "cv2":
+				# Opencv compression
+				img = cv2.imread(input_file)
+
+				if img is None:
+					print(f"[error] OpenCV failed: {input_file}")
+					return None
+
+				# Exec deepface analyzer
+				objs = DeepFace.analyze( img, actions = ["age", "gender", "race"] )[0];
+			case _:
+				print("Unknown png Compression...")
+				return None
+	except Exception as e:
+		print(f"[exception] {input_file} : {e}")
+		return None
+	
+	# Process results
+	obs = objs.get("race");
+	for r in obs.keys():
+		Demographics[r] = float(obs.get(r));
+	#
+	Demographics["age"] = float(objs.get("age"));
+	#
+	obs = objs.get("gender");		
+	for r in obs.keys():
+		Demographics[r] = float(obs.get(r));
+	#
+	print(Demographics)
+	return Demographics;
 
 # Get demographic meta data as json from an image directory
 def Demographics4Folder(Options):
@@ -250,16 +337,28 @@ def Demographics4Folder(Options):
 
 		# List to store demographics extracted from sampled files
 		Dem = [];
+
+		# Number of samples to process
+		N = None if Options.N == -1 else Options.N
 		
 		# Process only the first N files defined in Options.N
 		# This acts as a sampling mechanism to limit processing time
-		for File in Files[0:Options.N]:
+		for File in Files[0:N]:
+			print(f"---- Processing file: {File}")
+			
 			# Extract demographic attributes from file
-			Demographics = SingleSampleDemographic_cv2(File, Options);
+			Demographics = SingleSampleDemographic(
+				Options=SimpleNamespace(
+					input_file=File,
+					temp_output_file=f"temp_{os.path.basename(File)}.png",
+					os_png_tool=Options.os_png_tool,
+					remove_temp_file=True,
+				)
+			)
 
 			# If the function returns no result, log the issue and skip the file
 			if Demographics is None:
-				print("File : %s produced no output." %(File));
+				print("[error] File : %s produced no output." %(File));
 				continue
 
 			# Append valid demographic result to the folder list
@@ -269,7 +368,13 @@ def Demographics4Folder(Options):
 		# - folder name (relative to source path)
 		# - total number of files in the folder
 		# - demographics extracted from sampled images
-		Register.append( {"Folder" : Folder.replace(Options.SPath, ""), "Samples" : len(Files), "Demographics" : Dem} );
+		Register.append( {
+			"Folder" : Folder.replace(Options.SPath, ""), 
+			"Samples" : len(Files), 
+			"os_png_tool" : Options.os_png_tool,
+			"Demographics" : Dem
+			} 
+		);
 	
 	# Convert the collected results into a formatted JSON string
 	json_obj = json.dumps(Register, indent = 3);
@@ -279,9 +384,8 @@ def Demographics4Folder(Options):
 		fid.write(json_obj)	
 	fid.close()
 
-# Create embeddings with deepFace
-def Embeddings():
-	pass
+	print("Directory Process was completed successfully")
+	print(f"Processed: {len(Dem)} / {len(Files)}")
 
 # Export generated json file with dataset's DeepFace-Demographics into structured csv  #Monday 23 March 2026 16:54:30 GMT by MAPA
 def transform_deepFacejson2csv(Options):
@@ -325,4 +429,4 @@ def transform_deepFacejson2csv(Options):
 	DF = pandas.DataFrame(rows)
 	DF.to_csv(csvPath, index=False)
 
-	print("Dataframe exported successfully")
+	print("Dataframe was exported successfully...")
