@@ -66,21 +66,23 @@ def main():
 	subparser.add_argument("--DirProportion", type = float, default = 1.0, help = "Directory percentage to process");
 	subparser.set_defaults(func = LIB_MorphGAN.Dir_Automation_MorphFace);
 
-
+	
 
 	# -- DeepFace 	#Sun 15 March 13:25:35 GMT by MAPA
-	# 
+	# Obtain demographic metrics from metrics
 	subparser = subparsers.add_parser("MetaDemographicsVGG2", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--CSV_meta", required = True, type = str, help = "CSV meta data");
 	subparser.set_defaults(func = LIB_DeepFace.MetaDemographicsVGG2);
 
+	# Obtain demographic metrics from metrics
 	subparser = subparsers.add_parser("MetaDemographicsCELEBA", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--CSV_meta", required = True, type = str, help = "CSV meta data");
 	subparser.add_argument("--Subsample", required = False, default = 10, type = int, help = "Number of subsamples");
 	subparser.set_defaults(func = LIB_DeepFace.MetaDemographicsCELEBA);
 
+	# Insert Demographic data to existing CSV
 	subparser = subparsers.add_parser("InsertDemographics", description = "Insert Demographic data to existing CSV");
 	subparser.add_argument("--MetaDem", required = True, type = str, help = "Source path of face images train/test");
 	subparser.add_argument("--MetaSRC", required = True, type = str, help = "CSV meta data");
@@ -94,6 +96,12 @@ def main():
 	subparser.add_argument("--os_png_tool", required = False, default = "magick", type = str, help = "Default png system converter tool");	
 	subparser.set_defaults(func = LIB_DeepFace.Demographics4Folder);
 
+	# Transform DeepFace json into structured csv  #Monday 23 March 2026 16:54:30 GMT by MAPA
+	subparser = subparsers.add_parser("DeepFaceJSON2CSV", description = "Export a DeepFace generated json file with dataset's DeepFace-Demographics into structured csv");
+	subparser.add_argument("--jsonPath", required = False, type = str, default = "./deepface_metadata.json", help = "JSON path with DeepFace's metadata to transform");
+	subparser.add_argument("--csvPath", required = False, type = str, default = "./deepface_metadata_structured.csv", help = "Path of the resultant CSV file");	
+	subparser.add_argument("--sourceDataPath", required = False, type = str, default = "./data", help = "Path of the resultant CSV file");	
+	subparser.set_defaults(func = LIB_DeepFace.transform_deepFacejson2csv);
 
 
 	Options = parser.parse_args();

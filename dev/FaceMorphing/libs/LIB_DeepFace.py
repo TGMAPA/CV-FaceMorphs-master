@@ -1,7 +1,8 @@
-import datetime, pandas, tqdm, glob, os, random, json, cv2
+# Import packages
+import pandas, tqdm, glob, os, random, json, cv2
 
+# Import modules
 from deepface import DeepFace
-from pathlib import Path
 
 
 def GetRace(Files, pbar, subsample = 10):
@@ -166,7 +167,6 @@ def leafDirs(SPath):
 			Folders.append(os.path.abspath(root))
 	return Folders
 
-
 # Get demographic metadata from a single file with magick
 def SingleSampleDemographic(File, Options):
 	#
@@ -191,7 +191,6 @@ def SingleSampleDemographic(File, Options):
 	#
 	return Demographics;
 
-
 # Get demographic metadata from a single file with opencv  #Tuesday 17 March 2026 23:30:50 GMT by MAPA
 def SingleSampleDemographic_cv2(File, Options):
 
@@ -215,7 +214,7 @@ def SingleSampleDemographic_cv2(File, Options):
         )[0]
 
     except Exception as e:
-        print(f"Error en {File}: {e}")
+        print(f"Error in {File}: {e}")
         return None
 
     # Procesar resultados
@@ -228,7 +227,6 @@ def SingleSampleDemographic_cv2(File, Options):
         Demographics[r] = float(objs["gender"][r])
 
     return Demographics
-
 
 # Get demographic meta data as json from an image directory
 def Demographics4Folder(Options):
@@ -280,3 +278,51 @@ def Demographics4Folder(Options):
 	with open(Options.JSON, "w") as fid:
 		fid.write(json_obj)	
 	fid.close()
+
+# Create embeddings with deepFace
+def Embeddings():
+	pass
+
+# Export generated json file with dataset's DeepFace-Demographics into structured csv  #Monday 23 March 2026 16:54:30 GMT by MAPA
+def transform_deepFacejson2csv(Options):
+	# Read parameters
+	jsonPath = Options.jsonPath
+	csvPath = Options.csvPath
+	sourceDataPath = Options.sourceDataPath
+
+	# Load JSON
+	try:
+		with open(jsonPath, "r") as f:
+			data = json.load(f)
+	except Exception as e:
+		print(f"Error reading JSON: {e}")
+		return
+
+	print("JSON file:", jsonPath)
+	print("CSV file:", csvPath)
+
+	# DAtaframe rows
+	rows = []
+
+	for Register in data:
+		for d in Register.get("Demographics", []):
+			if d is None:
+				continue
+
+			rows.append({
+				"file": sourceDataPath + '/'+ d.get("File").split("/")[-1],
+				"Asian": d.get("asian", 0),
+				"Indian": d.get("indian", 0),
+				"African": d.get("black", 0),
+				"Caucasian": d.get("white", 0),
+				"MiddleEast": d.get("middle eastern", 0),
+				"Latino": d.get("latino hispanic", 0),
+				"Age": d.get("age", 0),
+				"Female": d.get("Man", 0),
+				"Male": d.get("Woman", 0)
+			})
+
+	DF = pandas.DataFrame(rows)
+	DF.to_csv(csvPath, index=False)
+
+	print("Dataframe exported successfully")
