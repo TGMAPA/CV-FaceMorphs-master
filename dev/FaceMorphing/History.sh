@@ -13,3 +13,6 @@ python Main.py Demographics4Folder --SPath ./DATA --JSON ./testData_metadata.jso
 
 # Exec transformation of a deepFace generated json into structured csv
 python Main.py DeepFaceJSON2CSV --jsonPath ../data/ffhq_real_demographics_meta_data.json --csvPath ../data/ffhq_real_demographics_meta_data_structured.csv --sourceDataPath ../data/FFHQ_Real
+
+# Exec create image embedding with deepface
+python Main.py SingleImageEmbeddingGeneration --input_path ./DATA/Sb1.png --model Facenet512

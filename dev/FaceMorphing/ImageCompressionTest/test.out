@@ -16,8 +16,8 @@ File size: 929762 bytes
 [CV2]
 MSE (Mean Squared Error)           | Expected: close to 0 |  : 0.0000 
 PSNR (Peak Signal-to-Noise Ratio)  | Expected: > 40 dB    |  : 361.20 dB 
-SSIM (Structural Similarity Index) | Expected: close to 1 |  : 1.0000 
-File size: 1312111 bytes
+SSIM (Structural Similarity Index) | Expected: close tofw 1 |  : 1.0000 
+File size: 1312111 bytes<
 
 --- Demographic Differences ---
 asian               : 0.0581

@@ -20,9 +20,9 @@ def main():
 	parser = argparse.ArgumentParser("Face Morphs");
 	subparsers = parser.add_subparsers();
 
-	# ----------------------
+	# =============================================================
 	# -- Delaunay MorphFace   #Sun 26 Feb 2026 11:21:45 GMT by MAPA
-	# ----------------------
+	# =============================================================
 	# Execute Delaunay Image morphing for 2 images
 	subparser = subparsers.add_parser("DelaunayImageMorph", description = "Image 2 Image morphs");
 	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one's face"),
@@ -49,9 +49,9 @@ def main():
 	subparser.set_defaults(func = LIB_FaceMorph.VideoMorph);
 
 
-	# ----------------------
+	# =============================================================
 	# -- GAN MorphFace   #Thursday 05 March 2026 11:30:50 GMT by MAPA
-	# ----------------------
+	# =============================================================
 	# Execute GAN Image morphing for 2 images
 	subparser = subparsers.add_parser("GANImageMorph", description = "Image 2 Image Delaunay morphs");
 	subparser.add_argument("--Sb1", required = False, type = str, default = "./DATA/Sb1.png", help = "Subject one's face"),
@@ -69,9 +69,9 @@ def main():
 	subparser.set_defaults(func = LIB_MorphGAN.Dir_Automation_MorphFace);
 
 	
-	# ----------------------
+	# =============================================================
 	# -- DeepFace 	#Sun 15 March 13:25:35 GMT by MAPA
-	# ----------------------
+	# =============================================================
 	# Obtain demographic metrics from metrics VGG2
 	subparser = subparsers.add_parser("MetaDemographicsVGG2", description = "Obtain demographic metrics from metrics");
 	subparser.add_argument("--SPATH", required = True, type = str, help = "Source path of face images train/test");
@@ -113,6 +113,13 @@ def main():
 	subparser.add_argument("--csvPath", required = False, type = str, default = "./deepface_metadata_structured.csv", help = "Path of the resultant CSV file");	
 	subparser.add_argument("--sourceDataPath", required = False, type = str, default = "./data", help = "Path of the resultant CSV file");	
 	subparser.set_defaults(func = LIB_DeepFace.transform_deepFacejson2csv);
+
+	# Create image embedding with deepFace  #Tuesday 24 March 2026 12:03:40 GMT by MAPA
+	subparser = subparsers.add_parser("SingleImageEmbeddingGeneration", description = "Create image embedding with deepFace methods");
+	subparser.add_argument("--input_path", required = False, type = str, default = "./DATA/Sb1.png", help = "Input image source path");
+	subparser.add_argument("--model", required = False, type = str, default = "Facenet512", help = "Pretrained face recognition model for embedding generation");
+	subparser.set_defaults(func = LIB_DeepFace.GenerateSingleEmbedding);
+
 
 
 	Options = parser.parse_args();

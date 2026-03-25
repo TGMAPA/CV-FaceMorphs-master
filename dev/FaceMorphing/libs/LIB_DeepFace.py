@@ -6,6 +6,20 @@ from types import SimpleNamespace
 from deepface import DeepFace
 
 
+DEEPFACE_MODELS = [
+		"VGG-Face", 
+		"Facenet", 
+		"Facenet512", 
+		"OpenFace", 
+		"DeepFace", 
+		"DeepID", 
+		"ArcFace", 
+		"Dlib", 
+		"SFace",
+		"GhostFaceNet",
+	]
+
+
 def GetRace(Files, pbar, subsample = 10):
 	# Some identities have 500 samples
 	random.shuffle(Files)
@@ -176,10 +190,6 @@ def generate_magick_png(input_path, output_path, magick_cmd):
 		return False
 	return True
 
-# Create embeddings with deepFace
-def Embeddings():
-	pass
-
 # ----- Single file demographic analyzer
 # Get demographic metadata from a single file with magick (Original function)
 def SingleSampleDemographic_magick(File, Options):
@@ -242,6 +252,35 @@ def SingleSampleDemographic_cv2(File, Options):
 
     return Demographics
 
+# Create embeddings with deepFace  #Tuesday 24 March 2026 11:55:40 GMT by MAPA
+def GenerateEmbeddingFromImage(input_path, model):
+	try:
+		#Generate embedding
+		embedding_objs = DeepFace.represent(
+			img_path = input_path,
+			model_name = model,
+		)
+	except:
+		return None
+
+	# Return embedding_objs with format: 
+	'''
+	[
+		{
+		'embedding': [], 
+		'facial_area': {
+			'x': 177, 
+			'y': 211, 
+			'w': 680, 
+			'h': 680, 
+			'left_eye': (629, 480), 
+			'right_eye': (375, 478)
+		}, 
+		'face_confidence': 0.93
+		}
+	]
+	'''
+	return embedding_objs
 
 '''
 ██████   █████  ██████  ███████ ███████ ██████  
@@ -430,3 +469,21 @@ def transform_deepFacejson2csv(Options):
 	DF.to_csv(csvPath, index=False)
 
 	print("Dataframe was exported successfully...")
+
+# Generate an embedding from a single image using deepFace and pretrained models
+def GenerateSingleEmbedding(Options):
+	assert Options.model in DEEPFACE_MODELS, "Invalid model, choose from: " + str(DEEPFACE_MODELS);
+	assert os.path.exists(Options.input_path), "Input Image path not found " + Options.input_path
+
+	#Generate embedding
+	embedding_objs = GenerateEmbeddingFromImage(
+						input_path=Options.input_path,
+						model=Options.model
+					)
+	
+	if embedding_objs is None: 
+		print("Embedding wasn't generated successfully...")
+		return None
+
+	print(embedding_objs)
+	print("Embedding was successfully generated...")
