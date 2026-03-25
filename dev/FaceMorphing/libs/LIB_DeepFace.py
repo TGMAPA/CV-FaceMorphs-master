@@ -470,11 +470,31 @@ def transform_deepFacejson2csv(Options):
 
 	print("Dataframe was exported successfully...")
 
-# Generate an embedding from a single image using deepFace and pretrained models
+# Generate an embedding from a single image using deepFace and pretrained models  #Tuesday 24 March 2026 21:49:40 GMT by MAPA
 def GenerateSingleEmbedding(Options):
 	assert Options.model in DEEPFACE_MODELS, "Invalid model, choose from: " + str(DEEPFACE_MODELS);
 	assert os.path.exists(Options.input_path), "Input Image path not found " + Options.input_path
 
+	#Generate embedding
+	embedding_objs = GenerateEmbeddingFromImage(
+						input_path=Options.input_path,
+						model=Options.model
+					)
+	
+	if embedding_objs is None: 
+		print("Embedding wasn't generated successfully...")
+		return None
+
+	print(embedding_objs)
+	print("Embedding was successfully generated...")
+
+# Generate embeddings into json an image directory using deepFace and pretrained models  #Tuesday 24 March 2026 21:54:40 GMT by MAPA
+def GenerateDirectoryEmbeddings(Options):
+	assert Options.model in DEEPFACE_MODELS, "Invalid model, choose from: " + str(DEEPFACE_MODELS);
+	assert os.path.exists(Options.SPath), "Source Images Directory Path not found " + Options.SPath
+
+	output_json_path = Options.JSON
+	#--------
 	#Generate embedding
 	embedding_objs = GenerateEmbeddingFromImage(
 						input_path=Options.input_path,

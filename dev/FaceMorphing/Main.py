@@ -120,6 +120,13 @@ def main():
 	subparser.add_argument("--model", required = False, type = str, default = "Facenet512", help = "Pretrained face recognition model for embedding generation");
 	subparser.set_defaults(func = LIB_DeepFace.GenerateSingleEmbedding);
 
+	# Create embeddings from image directory using DeepFace
+	subparser = subparsers.add_parser("ImageDirectoryEmbeddingGeneration", description = "Create image directory embeddings with deepFace methods");
+	subparser.add_argument("--SPath", required = True, type = str, default = "./DATA", help = "Source input image source path");
+	subparser.add_argument("--model", required = False, type = str, default = "Facenet512", help = "Pretrained face recognition model for embedding generation");
+	subparser.add_argument("--JSON", required = False, type = str, default = "./deepface_embeddings_metadata.json", help = "JSON meta data to save");
+	subparser.set_defaults(func = LIB_DeepFace.GenerateDirectoryEmbeddings);
+
 
 
 	Options = parser.parse_args();
