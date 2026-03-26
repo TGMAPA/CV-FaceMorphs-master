@@ -122,11 +122,14 @@ def main():
 
 	# Create embeddings from image directory using DeepFace
 	subparser = subparsers.add_parser("ImageDirectoryEmbeddingGeneration", description = "Create image directory embeddings with deepFace methods");
-	subparser.add_argument("--SPath", required = True, type = str, default = "./DATA", help = "Source input image source path");
+	subparser.add_argument("--SPath", required = False, type = str, default = "./DATA", help = "Source input image source path");
 	subparser.add_argument("--model", required = False, type = str, default = "Facenet512", help = "Pretrained face recognition model for embedding generation");
 	subparser.add_argument("--JSON", required = False, type = str, default = "./deepface_embeddings_metadata.json", help = "JSON meta data to save");
+	subparser.add_argument("--csv_status_file", required = False, type = str, default = "./deepface_embeddings_metadata_status.csv", help = "CSV file for process status data");
+	subparser.add_argument("--detector_backend", required = False, type = str, default = "opencv", help = "Face preDetection process. Select method. 'SKIP' Allows skipping face detection process (Assuming face existance in samples)");
+	subparser.add_argument("--gpuAcc", required = False, type = bool, default = False, help = "Activate gpu and multiproccessing acceleration");
+	subparser.add_argument("--n_processes", required = False, type = int, default = 4, help = "Activate gpu and multiproccessing acceleration with 4 processes");
 	subparser.set_defaults(func = LIB_DeepFace.GenerateDirectoryEmbeddings);
-
 
 
 	Options = parser.parse_args();

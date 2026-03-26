@@ -1,9 +1,16 @@
 # Import packages
-import pandas, tqdm, glob, os, random, json, cv2
+import pandas, tqdm, glob, os, random, json, cv2, sys
 from types import SimpleNamespace
+from multiprocessing import Pool
+import tensorflow as tf
+
+repo_path = 'libs/utils/'
+sys.path.append(repo_path)
 
 # Import modules
 from deepface import DeepFace
+
+import Utils
 
 
 DEEPFACE_MODELS = [
@@ -253,15 +260,16 @@ def SingleSampleDemographic_cv2(File, Options):
     return Demographics
 
 # Create embeddings with deepFace  #Tuesday 24 March 2026 11:55:40 GMT by MAPA
-def GenerateEmbeddingFromImage(input_path, model):
+def GenerateEmbeddingFromImage(input_path, model, detector_backend = "opencv"):
 	try:
 		#Generate embedding
 		embedding_objs = DeepFace.represent(
 			img_path = input_path,
 			model_name = model,
+			detector_backend = detector_backend,
 		)
-	except:
-		return None
+	except Exception as error:
+		return False, error
 
 	# Return embedding_objs with format: 
 	'''
@@ -280,7 +288,139 @@ def GenerateEmbeddingFromImage(input_path, model):
 		}
 	]
 	'''
-	return embedding_objs
+	return True, embedding_objs
+
+# Initialize GPU 
+def init_worker():
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+
+# Workers
+def process_file(args):
+    file, Options = args
+
+    file_path = os.path.join(Options.SPath, file)
+
+    try:
+        status, output = GenerateEmbeddingFromImage(
+            input_path=file_path,
+            model=Options.model,
+            detector_backend="skip"
+        )
+
+        if not status:
+            return (file_path, False, output, None)
+
+        # Extract embedding
+        emb = output[0]
+        emb["Model"] = Options.model
+        emb["image_path"] = file_path
+
+        return (file_path, True, "NA", emb)
+
+    except Exception as e:
+        return (file_path, False, str(e), None)
+
+# Secuential Directory embedding generation
+def secuentialDirectoryEmbeddingGeneration(
+		csv_status_file,
+		files,
+		Options
+		):
+	
+	output_obj = []
+
+	# Row id
+	id = 0
+
+	# Bad generation Counter
+	errors = 0
+
+	with open(csv_status_file, "w") as csv_file:
+		# write headers
+		Utils.writeInCsv(csv_file, ["id", "path", "wasGenerationSuccessfull", "error"])
+
+		for file in files:
+			# Complete file path
+			file_path = Options.SPath+"/" + file
+			print("Proccessing file ",id," in "+ file_path +" ...")
+
+			#Generate embedding
+			status, output = GenerateEmbeddingFromImage(
+								input_path=file_path,
+								model=Options.model,
+								detector_backend="skip"
+							)
+			
+			if not status:
+				# Write log in csv - INCOMPLETE GENERATION 
+				Utils.writeInCsv(csv_file, [id, file_path, status, output])
+
+				# Update
+				errors+=1
+				id+=1
+				continue
+
+			# write log in cs
+			Utils.writeInCsv(csv_file, [id, file_path, status, "NA"])
+
+			# Extend obj with extra meta data
+			output[0]["Model"] = Options.model
+			output[0]["image_path"] = file_path
+
+			# Append embedding in json_obj
+			output_obj.append(output[0])
+
+			# Update id
+			id+=1
+
+	# Convert the collected results into a formatted JSON string
+	json_obj = json.dumps(output_obj, indent = 3);
+
+	return json_obj, errors
+
+# GPU Accelerated Directory embedding generation
+def GPUAccDirectoryEmbeddingGeneration(
+		csv_status_file,
+		files,
+		Options
+		):
+	
+	output_obj = []
+
+	# Bad generation Counter
+	errors = 0
+	
+	# INitialize GPU Pool
+	with Pool(processes=Options.n_processes, initializer=init_worker) as p:
+
+		args = [(file, Options) for file in files]
+
+		with open(csv_status_file, "w") as csv_file:
+
+			Utils.writeInCsv(csv_file, ["id", "path", "wasGenerationSuccessfull", "error"])
+
+			for id, (file_path, status, error_msg, emb) in enumerate(
+				p.imap_unordered(process_file, args)
+			):
+
+				print(f"Processing {id} -> {file_path}", flush=True)
+
+				if not status:
+					Utils.writeInCsv(csv_file, [id, file_path, status, error_msg])
+					errors += 1
+					continue
+
+				Utils.writeInCsv(csv_file, [id, file_path, status, "NA"])
+				output_obj.append(emb)
+
+	# Convert the collected results into a formatted JSON string
+	output_obj = json.dumps(output_obj, indent = 3);
+
+	return output_obj, errors
+
 
 '''
 ██████   █████  ██████  ███████ ███████ ██████  
@@ -493,17 +633,25 @@ def GenerateDirectoryEmbeddings(Options):
 	assert Options.model in DEEPFACE_MODELS, "Invalid model, choose from: " + str(DEEPFACE_MODELS);
 	assert os.path.exists(Options.SPath), "Source Images Directory Path not found " + Options.SPath
 
-	output_json_path = Options.JSON
-	#--------
-	#Generate embedding
-	embedding_objs = GenerateEmbeddingFromImage(
-						input_path=Options.input_path,
-						model=Options.model
-					)
-	
-	if embedding_objs is None: 
-		print("Embedding wasn't generated successfully...")
-		return None
+	# Csv for keeping generation control
+	csv_status_file = Options.csv_status_file.split("/")[-1].split(".")[0] +"_"+ Options.model + ".csv"
 
-	print(embedding_objs)
-	print("Embedding was successfully generated...")
+	# Json that stores every generated embedding
+	output_json_path = Options.JSON.split("/")[-1].split(".")[0] +"_"+ Options.model + ".json"
+	
+	# Read directory
+	all_files_path = sorted(os.listdir(Options.SPath))
+
+	if not Options.gpuAcc:
+		# Execute process - secuential
+		output_obj, errors = secuentialDirectoryEmbeddingGeneration(csv_status_file, all_files_path, Options)
+	else:
+		# Execute process - gpuAcc
+		output_obj, errors = GPUAccDirectoryEmbeddingGeneration(csv_status_file, all_files_path, Options)
+
+	# Dump data in json
+	with open(output_json_path, "w") as file:
+		file.write(output_obj)
+
+	print(f"Embeddings generated. Errors: {errors}")
+	print("Embeddings were successfully generated...")

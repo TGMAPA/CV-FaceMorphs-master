@@ -16,3 +16,7 @@ python Main.py DeepFaceJSON2CSV --jsonPath ../data/ffhq_real_demographics_meta_d
 
 # Exec create image embedding with deepface
 python Main.py SingleImageEmbeddingGeneration --input_path ./DATA/Sb1.png --model Facenet512
+
+# Exec create image directory embeddings with deepface
+python Main.py ImageDirectoryEmbeddingGeneration --SPath ../data/FFHQ_Real --model Facenet512 --JSON ./ffhq_real_deepface_embeddings_metadata.json --csv_status_file ./deepface_embeddings_metadata_status.csv --detector_backend skip --gpuAcc True --n_processes 4 > ./deepface_embeddings_generation.out
+python Main.py ImageDirectoryEmbeddingGeneration --model Facenet512 --JSON ../data/Test_deepface_embeddings_metadata.json --csv_status_file ../data/Test_deepface_embeddings_metadata_status.csv --detector_backend skip 
