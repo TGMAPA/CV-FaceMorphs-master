@@ -1,0 +1,23 @@
+
+[0;34m[start] 2026-03-25 22:29:17.873801[0m
+
+Embeddings were successfully generated...
+Comparing Facenet512 vs ArcFace:
+  Cosine Similarity: -0.0029
+  Euclidean Distance: 23.1439
+  Manhattan Distance: 425.2142
+
+Comparing Facenet512 vs GhostFaceNet:
+  Cosine Similarity: -0.0355
+  Euclidean Distance: 35.8429
+  Manhattan Distance: 638.7079
+
+Comparing ArcFace vs GhostFaceNet:
+  Cosine Similarity: -0.0116
+  Euclidean Distance: 27.0250
+  Manhattan Distance: 483.8209
+
+
+[0;34m[end] 2026-03-25 22:29:21.884448[0m
+
+Exectime:  4.010647
