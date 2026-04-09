@@ -8,11 +8,11 @@ python Main.py Demographics4SingleFile --os_png_tool cv2
 python Main.py Demographics4SingleFile --os_png_tool magick
 
 # Exec deepFace analyzer for image directory
-python Main.py Demographics4Folder --SPath ../data/FFHQ_Real --JSON ../data/ffhq_real_demographics_meta_data.json 
-python Main.py Demographics4Folder --SPath ./DATA --JSON ./testData_metadata.json --os_png_tool cv2
+python Main.py Demographics4Folder --SPath ../data/FFHQ_Real --JSON ./ffhq_real_demographics_meta_data.json --os_png_tool cv2 > ./ffhq_deepface_demographics_log.out
+python Main.py Demographics4Folder --SPath ./DATA --JSON ./testData_metadata.json --os_png_tool cv2 > ./testData_deepface_demographics_log.out
 
 # Exec transformation of a deepFace generated json into structured csv
-python Main.py DeepFaceJSON2CSV --jsonPath ../data/ffhq_real_demographics_meta_data.json --csvPath ../data/ffhq_real_demographics_meta_data_structured.csv --sourceDataPath ../data/FFHQ_Real
+python Main.py DeepFaceJSON2CSV --jsonPath ../data/Demographics/ffhq_real_demographics_meta_data.json --csvPath ../data/Demographics/ffhq_real_demographics_meta_data_structured.csv --sourceDataPath ../data/FFHQ_Real
 
 # Exec create image embedding with deepface
 python Main.py SingleImageEmbeddingGeneration --input_path ./DATA/Sb1.png --model Facenet512

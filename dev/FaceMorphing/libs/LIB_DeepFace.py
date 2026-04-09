@@ -1,7 +1,7 @@
 # Import packages
 import pandas, tqdm, glob, os, random, json, cv2, sys
 from types import SimpleNamespace
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 import tensorflow as tf
 
 repo_path = 'libs/utils/'
@@ -472,7 +472,7 @@ def SingleSampleDemographic(Options):
 					return None
 
 				# Exec deepface analyzer
-				objs = DeepFace.analyze( img, actions = ["age", "gender", "race"] )[0];
+				objs = DeepFace.analyze( img, actions = ["age", "gender", "race"], enforce_detection=False )[0];
 			case _:
 				print("Unknown png Compression...")
 				return None
@@ -491,7 +491,7 @@ def SingleSampleDemographic(Options):
 	for r in obs.keys():
 		Demographics[r] = float(obs.get(r));
 	#
-	print(Demographics)
+	#print(Demographics)
 	return Demographics;
 
 # Get demographic meta data as json from an image directory
@@ -519,11 +519,13 @@ def Demographics4Folder(Options):
 
 		# Number of samples to process
 		N = None if Options.N == -1 else Options.N
+
+		count = 0
 		
 		# Process only the first N files defined in Options.N
 		# This acts as a sampling mechanism to limit processing time
 		for File in Files[0:N]:
-			print(f"---- Processing file: {File}")
+			print(f" Processing file: {count} {File}")
 			
 			# Extract demographic attributes from file
 			Demographics = SingleSampleDemographic(
@@ -542,6 +544,8 @@ def Demographics4Folder(Options):
 
 			# Append valid demographic result to the folder list
 			Dem.append(Demographics)
+
+			count +=1
 
 		# Store folder-level results including:
 		# - folder name (relative to source path)

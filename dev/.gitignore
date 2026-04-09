@@ -37,6 +37,7 @@ cmd.txt
 # Video files too large
 output/
 
+*.csv
 
 # Images Dataset
 data/*
