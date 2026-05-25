@@ -6,7 +6,7 @@ Comparing Facenet512 vs ArcFace:
   Cosine Similarity: -0.0029
   Euclidean Distance: 23.1439
   Manhattan Distance: 425.2142
-
+  
 Comparing Facenet512 vs GhostFaceNet:
   Cosine Similarity: -0.0355
   Euclidean Distance: 35.8429

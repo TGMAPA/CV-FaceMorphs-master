@@ -1,0 +1,1234 @@
+
+[0;34m[start] 2026-04-29 09:55:49.309878[0m
+
+Reading pairs from: ../data/ControlledMorphGeneration_MorphPairs/morph_pairs_DENSE_SIMILAR.csv
+Starting composite morphing process for 100 pairs...
+
+Alignining ../data/FFHQ_Real/35438.png
+Computing landmarks ../data/FFHQ_Real/35438.png
+Alignining ../data/FFHQ_Real/50458.png
+Computing landmarks ../data/FFHQ_Real/50458.png
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/03897.png
+Computing landmarks ../data/FFHQ_Real/03897.png
+Alignining ../data/FFHQ_Real/08688.png
+Computing landmarks ../data/FFHQ_Real/08688.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/16688.png
+Computing landmarks ../data/FFHQ_Real/16688.png
+Alignining ../data/FFHQ_Real/55886.png
+Computing landmarks ../data/FFHQ_Real/55886.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/34229.png
+Computing landmarks ../data/FFHQ_Real/34229.png
+Alignining ../data/FFHQ_Real/42410.png
+Computing landmarks ../data/FFHQ_Real/42410.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/58230.png
+Computing landmarks ../data/FFHQ_Real/58230.png
+Alignining ../data/FFHQ_Real/05003.png
+Computing landmarks ../data/FFHQ_Real/05003.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/41248.png
+Computing landmarks ../data/FFHQ_Real/41248.png
+Alignining ../data/FFHQ_Real/03778.png
+Computing landmarks ../data/FFHQ_Real/03778.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/22361.png
+Computing landmarks ../data/FFHQ_Real/22361.png
+Alignining ../data/FFHQ_Real/24853.png
+Computing landmarks ../data/FFHQ_Real/24853.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/21068.png
+Computing landmarks ../data/FFHQ_Real/21068.png
+Alignining ../data/FFHQ_Real/27796.png
+Computing landmarks ../data/FFHQ_Real/27796.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/52236.png
+Computing landmarks ../data/FFHQ_Real/52236.png
+Alignining ../data/FFHQ_Real/40991.png
+Computing landmarks ../data/FFHQ_Real/40991.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/49581.png
+Computing landmarks ../data/FFHQ_Real/49581.png
+Alignining ../data/FFHQ_Real/35533.png
+Computing landmarks ../data/FFHQ_Real/35533.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_9.png ... 
+
+Progress: [10/100] composites created...
+Alignining ../data/FFHQ_Real/55984.png
+Computing landmarks ../data/FFHQ_Real/55984.png
+Alignining ../data/FFHQ_Real/33514.png
+Computing landmarks ../data/FFHQ_Real/33514.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_10.png ... 
+
+Alignining ../data/FFHQ_Real/28318.png
+Computing landmarks ../data/FFHQ_Real/28318.png
+Alignining ../data/FFHQ_Real/46537.png
+Computing landmarks ../data/FFHQ_Real/46537.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_11.png ... 
+
+Alignining ../data/FFHQ_Real/55443.png
+Computing landmarks ../data/FFHQ_Real/55443.png
+Alignining ../data/FFHQ_Real/16300.png
+Computing landmarks ../data/FFHQ_Real/16300.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_12.png ... 
+
+Alignining ../data/FFHQ_Real/53575.png
+Computing landmarks ../data/FFHQ_Real/53575.png
+Alignining ../data/FFHQ_Real/36106.png
+Computing landmarks ../data/FFHQ_Real/36106.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_13.png ... 
+
+Alignining ../data/FFHQ_Real/18963.png
+Computing landmarks ../data/FFHQ_Real/18963.png
+Alignining ../data/FFHQ_Real/07745.png
+Computing landmarks ../data/FFHQ_Real/07745.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_14.png ... 
+
+Alignining ../data/FFHQ_Real/45276.png
+Computing landmarks ../data/FFHQ_Real/45276.png
+Alignining ../data/FFHQ_Real/56955.png
+Computing landmarks ../data/FFHQ_Real/56955.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_15.png ... 
+
+Alignining ../data/FFHQ_Real/12438.png
+Computing landmarks ../data/FFHQ_Real/12438.png
+Alignining ../data/FFHQ_Real/07344.png
+Computing landmarks ../data/FFHQ_Real/07344.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_16.png ... 
+
+Alignining ../data/FFHQ_Real/67413.png
+Computing landmarks ../data/FFHQ_Real/67413.png
+Alignining ../data/FFHQ_Real/48802.png
+Computing landmarks ../data/FFHQ_Real/48802.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_17.png ... 
+
+Alignining ../data/FFHQ_Real/40576.png
+Computing landmarks ../data/FFHQ_Real/40576.png
+Alignining ../data/FFHQ_Real/18722.png
+Computing landmarks ../data/FFHQ_Real/18722.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_18.png ... 
+
+Alignining ../data/FFHQ_Real/31242.png
+Computing landmarks ../data/FFHQ_Real/31242.png
+Alignining ../data/FFHQ_Real/35583.png
+Computing landmarks ../data/FFHQ_Real/35583.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_19.png ... 
+
+Progress: [20/100] composites created...
+Alignining ../data/FFHQ_Real/10219.png
+Computing landmarks ../data/FFHQ_Real/10219.png
+Alignining ../data/FFHQ_Real/66262.png
+Computing landmarks ../data/FFHQ_Real/66262.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_20.png ... 
+
+Alignining ../data/FFHQ_Real/45333.png
+Computing landmarks ../data/FFHQ_Real/45333.png
+Alignining ../data/FFHQ_Real/57017.png
+Computing landmarks ../data/FFHQ_Real/57017.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_21.png ... 
+
+Alignining ../data/FFHQ_Real/28254.png
+Computing landmarks ../data/FFHQ_Real/28254.png
+Alignining ../data/FFHQ_Real/10506.png
+Computing landmarks ../data/FFHQ_Real/10506.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_22.png ... 
+
+Alignining ../data/FFHQ_Real/49533.png
+Computing landmarks ../data/FFHQ_Real/49533.png
+Alignining ../data/FFHQ_Real/61753.png
+Computing landmarks ../data/FFHQ_Real/61753.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_23.png ... 
+
+Alignining ../data/FFHQ_Real/52860.png
+Computing landmarks ../data/FFHQ_Real/52860.png
+Alignining ../data/FFHQ_Real/48205.png
+Computing landmarks ../data/FFHQ_Real/48205.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_24.png ... 
+
+Alignining ../data/FFHQ_Real/37779.png
+Computing landmarks ../data/FFHQ_Real/37779.png
+Alignining ../data/FFHQ_Real/49467.png
+Computing landmarks ../data/FFHQ_Real/49467.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_25.png ... 
+
+Alignining ../data/FFHQ_Real/16566.png
+Computing landmarks ../data/FFHQ_Real/16566.png
+Alignining ../data/FFHQ_Real/37697.png
+Computing landmarks ../data/FFHQ_Real/37697.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_26.png ... 
+
+Alignining ../data/FFHQ_Real/55988.png
+Computing landmarks ../data/FFHQ_Real/55988.png
+Alignining ../data/FFHQ_Real/29956.png
+Computing landmarks ../data/FFHQ_Real/29956.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_27.png ... 
+
+Alignining ../data/FFHQ_Real/59302.png
+Computing landmarks ../data/FFHQ_Real/59302.png
+Alignining ../data/FFHQ_Real/30608.png
+Computing landmarks ../data/FFHQ_Real/30608.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_28.png ... 
+
+Alignining ../data/FFHQ_Real/56981.png
+Computing landmarks ../data/FFHQ_Real/56981.png
+Alignining ../data/FFHQ_Real/12476.png
+Computing landmarks ../data/FFHQ_Real/12476.png
+Error processing pair 29: [Errno 2] No such file or directory: './temp_1.png'
+Alignining ../data/FFHQ_Real/64682.png
+Computing landmarks ../data/FFHQ_Real/64682.png
+Alignining ../data/FFHQ_Real/16782.png
+Computing landmarks ../data/FFHQ_Real/16782.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_30.png ... 
+
+Alignining ../data/FFHQ_Real/48647.png
+Computing landmarks ../data/FFHQ_Real/48647.png
+Alignining ../data/FFHQ_Real/14309.png
+Computing landmarks ../data/FFHQ_Real/14309.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_31.png ... 
+
+Alignining ../data/FFHQ_Real/60104.png
+Computing landmarks ../data/FFHQ_Real/60104.png
+Alignining ../data/FFHQ_Real/23481.png
+Computing landmarks ../data/FFHQ_Real/23481.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_32.png ... 
+
+Alignining ../data/FFHQ_Real/07017.png
+Computing landmarks ../data/FFHQ_Real/07017.png
+Alignining ../data/FFHQ_Real/26050.png
+Computing landmarks ../data/FFHQ_Real/26050.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_33.png ... 
+
+Alignining ../data/FFHQ_Real/39244.png
+Computing landmarks ../data/FFHQ_Real/39244.png
+Alignining ../data/FFHQ_Real/54866.png
+Computing landmarks ../data/FFHQ_Real/54866.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_34.png ... 
+
+Alignining ../data/FFHQ_Real/49266.png
+Computing landmarks ../data/FFHQ_Real/49266.png
+Alignining ../data/FFHQ_Real/08699.png
+Computing landmarks ../data/FFHQ_Real/08699.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_35.png ... 
+
+Alignining ../data/FFHQ_Real/24526.png
+Computing landmarks ../data/FFHQ_Real/24526.png
+Alignining ../data/FFHQ_Real/51822.png
+Computing landmarks ../data/FFHQ_Real/51822.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_36.png ... 
+
+Alignining ../data/FFHQ_Real/09155.png
+Computing landmarks ../data/FFHQ_Real/09155.png
+Alignining ../data/FFHQ_Real/40293.png
+Computing landmarks ../data/FFHQ_Real/40293.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_37.png ... 
+
+Alignining ../data/FFHQ_Real/27093.png
+Computing landmarks ../data/FFHQ_Real/27093.png
+Alignining ../data/FFHQ_Real/06447.png
+Computing landmarks ../data/FFHQ_Real/06447.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_38.png ... 
+
+Alignining ../data/FFHQ_Real/62055.png
+Computing landmarks ../data/FFHQ_Real/62055.png
+Alignining ../data/FFHQ_Real/56164.png
+Computing landmarks ../data/FFHQ_Real/56164.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_39.png ... 
+
+Progress: [40/100] composites created...
+Alignining ../data/FFHQ_Real/16560.png
+Computing landmarks ../data/FFHQ_Real/16560.png
+Alignining ../data/FFHQ_Real/12492.png
+Computing landmarks ../data/FFHQ_Real/12492.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_40.png ... 
+
+Alignining ../data/FFHQ_Real/55801.png
+Computing landmarks ../data/FFHQ_Real/55801.png
+Alignining ../data/FFHQ_Real/58360.png
+Computing landmarks ../data/FFHQ_Real/58360.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_41.png ... 
+
+Alignining ../data/FFHQ_Real/69327.png
+Computing landmarks ../data/FFHQ_Real/69327.png
+Alignining ../data/FFHQ_Real/50990.png
+Computing landmarks ../data/FFHQ_Real/50990.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_42.png ... 
+
+Alignining ../data/FFHQ_Real/20286.png
+Computing landmarks ../data/FFHQ_Real/20286.png
+Alignining ../data/FFHQ_Real/06101.png
+Computing landmarks ../data/FFHQ_Real/06101.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_43.png ... 
+
+Alignining ../data/FFHQ_Real/39846.png
+Computing landmarks ../data/FFHQ_Real/39846.png
+Alignining ../data/FFHQ_Real/39827.png
+Computing landmarks ../data/FFHQ_Real/39827.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_44.png ... 
+
+Alignining ../data/FFHQ_Real/06821.png
+Computing landmarks ../data/FFHQ_Real/06821.png
+Alignining ../data/FFHQ_Real/03503.png
+Computing landmarks ../data/FFHQ_Real/03503.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_45.png ... 
+
+Alignining ../data/FFHQ_Real/29522.png
+Computing landmarks ../data/FFHQ_Real/29522.png
+Alignining ../data/FFHQ_Real/54907.png
+Computing landmarks ../data/FFHQ_Real/54907.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_46.png ... 
+
+Alignining ../data/FFHQ_Real/09208.png
+Computing landmarks ../data/FFHQ_Real/09208.png
+Alignining ../data/FFHQ_Real/13501.png
+Computing landmarks ../data/FFHQ_Real/13501.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_47.png ... 
+
+Alignining ../data/FFHQ_Real/63129.png
+Computing landmarks ../data/FFHQ_Real/63129.png
+Alignining ../data/FFHQ_Real/64826.png
+Computing landmarks ../data/FFHQ_Real/64826.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_48.png ... 
+
+Alignining ../data/FFHQ_Real/43971.png
+Computing landmarks ../data/FFHQ_Real/43971.png
+Alignining ../data/FFHQ_Real/64885.png
+Computing landmarks ../data/FFHQ_Real/64885.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_49.png ... 
+
+Progress: [50/100] composites created...
+Alignining ../data/FFHQ_Real/35650.png
+Computing landmarks ../data/FFHQ_Real/35650.png
+Alignining ../data/FFHQ_Real/36007.png
+Computing landmarks ../data/FFHQ_Real/36007.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_50.png ... 
+
+Alignining ../data/FFHQ_Real/03428.png
+Computing landmarks ../data/FFHQ_Real/03428.png
+Alignining ../data/FFHQ_Real/58941.png
+Computing landmarks ../data/FFHQ_Real/58941.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_51.png ... 
+
+Alignining ../data/FFHQ_Real/03472.png
+Computing landmarks ../data/FFHQ_Real/03472.png
+Alignining ../data/FFHQ_Real/28884.png
+Computing landmarks ../data/FFHQ_Real/28884.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_52.png ... 
+
+Alignining ../data/FFHQ_Real/11297.png
+Computing landmarks ../data/FFHQ_Real/11297.png
+Alignining ../data/FFHQ_Real/29681.png
+Computing landmarks ../data/FFHQ_Real/29681.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_53.png ... 
+
+Alignining ../data/FFHQ_Real/10077.png
+Computing landmarks ../data/FFHQ_Real/10077.png
+Alignining ../data/FFHQ_Real/10975.png
+Computing landmarks ../data/FFHQ_Real/10975.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_54.png ... 
+
+Alignining ../data/FFHQ_Real/00843.png
+Computing landmarks ../data/FFHQ_Real/00843.png
+Alignining ../data/FFHQ_Real/09969.png
+Computing landmarks ../data/FFHQ_Real/09969.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_55.png ... 
+
+Alignining ../data/FFHQ_Real/67858.png
+Computing landmarks ../data/FFHQ_Real/67858.png
+Alignining ../data/FFHQ_Real/20895.png
+Computing landmarks ../data/FFHQ_Real/20895.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_56.png ... 
+
+Alignining ../data/FFHQ_Real/03151.png
+Computing landmarks ../data/FFHQ_Real/03151.png
+Alignining ../data/FFHQ_Real/55756.png
+Computing landmarks ../data/FFHQ_Real/55756.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_57.png ... 
+
+Alignining ../data/FFHQ_Real/04057.png
+Computing landmarks ../data/FFHQ_Real/04057.png
+Alignining ../data/FFHQ_Real/21436.png
+Computing landmarks ../data/FFHQ_Real/21436.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_58.png ... 
+
+Alignining ../data/FFHQ_Real/06220.png
+Computing landmarks ../data/FFHQ_Real/06220.png
+Alignining ../data/FFHQ_Real/32181.png
+Computing landmarks ../data/FFHQ_Real/32181.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_59.png ... 
+
+Progress: [60/100] composites created...
+Alignining ../data/FFHQ_Real/36254.png
+Computing landmarks ../data/FFHQ_Real/36254.png
+Alignining ../data/FFHQ_Real/59328.png
+Computing landmarks ../data/FFHQ_Real/59328.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_60.png ... 
+
+Alignining ../data/FFHQ_Real/48282.png
+Computing landmarks ../data/FFHQ_Real/48282.png
+Alignining ../data/FFHQ_Real/25751.png
+Computing landmarks ../data/FFHQ_Real/25751.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_61.png ... 
+
+Alignining ../data/FFHQ_Real/12469.png
+Computing landmarks ../data/FFHQ_Real/12469.png
+Alignining ../data/FFHQ_Real/00102.png
+Computing landmarks ../data/FFHQ_Real/00102.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_62.png ... 
+
+Alignining ../data/FFHQ_Real/57620.png
+Computing landmarks ../data/FFHQ_Real/57620.png
+Alignining ../data/FFHQ_Real/36089.png
+Computing landmarks ../data/FFHQ_Real/36089.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_63.png ... 
+
+Alignining ../data/FFHQ_Real/42734.png
+Computing landmarks ../data/FFHQ_Real/42734.png
+Alignining ../data/FFHQ_Real/01119.png
+Computing landmarks ../data/FFHQ_Real/01119.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_64.png ... 
+
+Alignining ../data/FFHQ_Real/39829.png
+Computing landmarks ../data/FFHQ_Real/39829.png
+Alignining ../data/FFHQ_Real/33155.png
+Computing landmarks ../data/FFHQ_Real/33155.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_65.png ... 
+
+Alignining ../data/FFHQ_Real/56370.png
+Computing landmarks ../data/FFHQ_Real/56370.png
+Alignining ../data/FFHQ_Real/28321.png
+Computing landmarks ../data/FFHQ_Real/28321.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_66.png ... 
+
+Alignining ../data/FFHQ_Real/38511.png
+Computing landmarks ../data/FFHQ_Real/38511.png
+Alignining ../data/FFHQ_Real/31633.png
+Computing landmarks ../data/FFHQ_Real/31633.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_67.png ... 
+
+Alignining ../data/FFHQ_Real/22196.png
+Computing landmarks ../data/FFHQ_Real/22196.png
+Alignining ../data/FFHQ_Real/53586.png
+Computing landmarks ../data/FFHQ_Real/53586.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_68.png ... 
+
+Alignining ../data/FFHQ_Real/19334.png
+Computing landmarks ../data/FFHQ_Real/19334.png
+Alignining ../data/FFHQ_Real/23805.png
+Computing landmarks ../data/FFHQ_Real/23805.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_69.png ... 
+
+Progress: [70/100] composites created...
+Alignining ../data/FFHQ_Real/27332.png
+Computing landmarks ../data/FFHQ_Real/27332.png
+Alignining ../data/FFHQ_Real/64645.png
+Computing landmarks ../data/FFHQ_Real/64645.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_70.png ... 
+
+Alignining ../data/FFHQ_Real/53148.png
+Computing landmarks ../data/FFHQ_Real/53148.png
+Alignining ../data/FFHQ_Real/51217.png
+Computing landmarks ../data/FFHQ_Real/51217.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_71.png ... 
+
+Alignining ../data/FFHQ_Real/31333.png
+Computing landmarks ../data/FFHQ_Real/31333.png
+Alignining ../data/FFHQ_Real/13661.png
+Computing landmarks ../data/FFHQ_Real/13661.png
+Error processing pair 72: [Errno 2] No such file or directory: './temp_1.png'
+Alignining ../data/FFHQ_Real/31173.png
+Computing landmarks ../data/FFHQ_Real/31173.png
+Alignining ../data/FFHQ_Real/09019.png
+Computing landmarks ../data/FFHQ_Real/09019.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_73.png ... 
+
+Alignining ../data/FFHQ_Real/62067.png
+Computing landmarks ../data/FFHQ_Real/62067.png
+Alignining ../data/FFHQ_Real/27230.png
+Computing landmarks ../data/FFHQ_Real/27230.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_74.png ... 
+
+Alignining ../data/FFHQ_Real/08835.png
+Computing landmarks ../data/FFHQ_Real/08835.png
+Alignining ../data/FFHQ_Real/60259.png
+Computing landmarks ../data/FFHQ_Real/60259.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_75.png ... 
+
+Alignining ../data/FFHQ_Real/00026.png
+Computing landmarks ../data/FFHQ_Real/00026.png
+Alignining ../data/FFHQ_Real/59006.png
+Computing landmarks ../data/FFHQ_Real/59006.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_76.png ... 
+
+Alignining ../data/FFHQ_Real/51248.png
+Computing landmarks ../data/FFHQ_Real/51248.png
+Alignining ../data/FFHQ_Real/44498.png
+Computing landmarks ../data/FFHQ_Real/44498.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_77.png ... 
+
+Alignining ../data/FFHQ_Real/46314.png
+Computing landmarks ../data/FFHQ_Real/46314.png
+Alignining ../data/FFHQ_Real/09840.png
+Computing landmarks ../data/FFHQ_Real/09840.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_78.png ... 
+
+Alignining ../data/FFHQ_Real/28697.png
+Computing landmarks ../data/FFHQ_Real/28697.png
+Alignining ../data/FFHQ_Real/37821.png
+Computing landmarks ../data/FFHQ_Real/37821.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_79.png ... 
+
+Progress: [80/100] composites created...
+Alignining ../data/FFHQ_Real/29263.png
+Computing landmarks ../data/FFHQ_Real/29263.png
+Alignining ../data/FFHQ_Real/05998.png
+Computing landmarks ../data/FFHQ_Real/05998.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_80.png ... 
+
+Alignining ../data/FFHQ_Real/53999.png
+Computing landmarks ../data/FFHQ_Real/53999.png
+Alignining ../data/FFHQ_Real/27050.png
+Computing landmarks ../data/FFHQ_Real/27050.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_81.png ... 
+
+Alignining ../data/FFHQ_Real/65609.png
+Computing landmarks ../data/FFHQ_Real/65609.png
+Alignining ../data/FFHQ_Real/49330.png
+Computing landmarks ../data/FFHQ_Real/49330.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_82.png ... 
+
+Alignining ../data/FFHQ_Real/26477.png
+Computing landmarks ../data/FFHQ_Real/26477.png
+Alignining ../data/FFHQ_Real/06704.png
+Computing landmarks ../data/FFHQ_Real/06704.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_83.png ... 
+
+Alignining ../data/FFHQ_Real/29700.png
+Computing landmarks ../data/FFHQ_Real/29700.png
+Alignining ../data/FFHQ_Real/19222.png
+Computing landmarks ../data/FFHQ_Real/19222.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_84.png ... 
+
+Alignining ../data/FFHQ_Real/60043.png
+Computing landmarks ../data/FFHQ_Real/60043.png
+Alignining ../data/FFHQ_Real/50110.png
+Computing landmarks ../data/FFHQ_Real/50110.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_85.png ... 
+
+Alignining ../data/FFHQ_Real/61248.png
+Computing landmarks ../data/FFHQ_Real/61248.png
+Alignining ../data/FFHQ_Real/42084.png
+Computing landmarks ../data/FFHQ_Real/42084.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_86.png ... 
+
+Alignining ../data/FFHQ_Real/19492.png
+Computing landmarks ../data/FFHQ_Real/19492.png
+Alignining ../data/FFHQ_Real/28633.png
+Computing landmarks ../data/FFHQ_Real/28633.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_87.png ... 
+
+Alignining ../data/FFHQ_Real/12433.png
+Computing landmarks ../data/FFHQ_Real/12433.png
+Alignining ../data/FFHQ_Real/58210.png
+Computing landmarks ../data/FFHQ_Real/58210.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_88.png ... 
+
+Alignining ../data/FFHQ_Real/45602.png
+Computing landmarks ../data/FFHQ_Real/45602.png
+Alignining ../data/FFHQ_Real/11324.png
+Computing landmarks ../data/FFHQ_Real/11324.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_89.png ... 
+
+Progress: [90/100] composites created...
+Alignining ../data/FFHQ_Real/23427.png
+Computing landmarks ../data/FFHQ_Real/23427.png
+Alignining ../data/FFHQ_Real/64877.png
+Computing landmarks ../data/FFHQ_Real/64877.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_90.png ... 
+
+Alignining ../data/FFHQ_Real/13463.png
+Computing landmarks ../data/FFHQ_Real/13463.png
+Alignining ../data/FFHQ_Real/07618.png
+Computing landmarks ../data/FFHQ_Real/07618.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_91.png ... 
+
+Alignining ../data/FFHQ_Real/12151.png
+Computing landmarks ../data/FFHQ_Real/12151.png
+Alignining ../data/FFHQ_Real/45363.png
+Computing landmarks ../data/FFHQ_Real/45363.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_92.png ... 
+
+Alignining ../data/FFHQ_Real/26651.png
+Computing landmarks ../data/FFHQ_Real/26651.png
+Alignining ../data/FFHQ_Real/00869.png
+Computing landmarks ../data/FFHQ_Real/00869.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_93.png ... 
+
+Alignining ../data/FFHQ_Real/23814.png
+Computing landmarks ../data/FFHQ_Real/23814.png
+Alignining ../data/FFHQ_Real/41595.png
+Computing landmarks ../data/FFHQ_Real/41595.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_94.png ... 
+
+Alignining ../data/FFHQ_Real/18657.png
+Computing landmarks ../data/FFHQ_Real/18657.png
+Alignining ../data/FFHQ_Real/60522.png
+Computing landmarks ../data/FFHQ_Real/60522.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_95.png ... 
+
+Alignining ../data/FFHQ_Real/07828.png
+Computing landmarks ../data/FFHQ_Real/07828.png
+Alignining ../data/FFHQ_Real/33721.png
+Computing landmarks ../data/FFHQ_Real/33721.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_96.png ... 
+
+Alignining ../data/FFHQ_Real/14944.png
+Computing landmarks ../data/FFHQ_Real/14944.png
+Alignining ../data/FFHQ_Real/02965.png
+Computing landmarks ../data/FFHQ_Real/02965.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_97.png ... 
+
+Alignining ../data/FFHQ_Real/37731.png
+Computing landmarks ../data/FFHQ_Real/37731.png
+Alignining ../data/FFHQ_Real/25009.png
+Computing landmarks ../data/FFHQ_Real/25009.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_98.png ... 
+
+Alignining ../data/FFHQ_Real/03302.png
+Computing landmarks ../data/FFHQ_Real/03302.png
+Alignining ../data/FFHQ_Real/36132.png
+Computing landmarks ../data/FFHQ_Real/36132.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_dense/temp_99.png ... 
+
+Progress: [100/100] composites created...
+
+Successfully generated composite plates in: ./ControlledMorphGeneration/results/morphed_faces_dense/
+Reading pairs from: ../data/ControlledMorphGeneration_MorphPairs/morph_pairs_EXTREME_DISTANT.csv
+Starting composite morphing process for 100 pairs...
+
+Alignining ../data/FFHQ_Real/23597.png
+Computing landmarks ../data/FFHQ_Real/23597.png
+Alignining ../data/FFHQ_Real/16664.png
+Computing landmarks ../data/FFHQ_Real/16664.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/59406.png
+Computing landmarks ../data/FFHQ_Real/59406.png
+Alignining ../data/FFHQ_Real/28340.png
+Computing landmarks ../data/FFHQ_Real/28340.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/52894.png
+Computing landmarks ../data/FFHQ_Real/52894.png
+Alignining ../data/FFHQ_Real/36193.png
+Computing landmarks ../data/FFHQ_Real/36193.png
+Error processing pair 2: [Errno 2] No such file or directory: './temp_0.png'
+Alignining ../data/FFHQ_Real/26273.png
+Computing landmarks ../data/FFHQ_Real/26273.png
+Alignining ../data/FFHQ_Real/31121.png
+Computing landmarks ../data/FFHQ_Real/31121.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/42601.png
+Computing landmarks ../data/FFHQ_Real/42601.png
+Alignining ../data/FFHQ_Real/53107.png
+Computing landmarks ../data/FFHQ_Real/53107.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/29442.png
+Computing landmarks ../data/FFHQ_Real/29442.png
+Alignining ../data/FFHQ_Real/06819.png
+Computing landmarks ../data/FFHQ_Real/06819.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/34505.png
+Computing landmarks ../data/FFHQ_Real/34505.png
+Alignining ../data/FFHQ_Real/35073.png
+Computing landmarks ../data/FFHQ_Real/35073.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/09747.png
+Computing landmarks ../data/FFHQ_Real/09747.png
+Alignining ../data/FFHQ_Real/33845.png
+Computing landmarks ../data/FFHQ_Real/33845.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/17484.png
+Computing landmarks ../data/FFHQ_Real/17484.png
+Alignining ../data/FFHQ_Real/45309.png
+Computing landmarks ../data/FFHQ_Real/45309.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/68044.png
+Computing landmarks ../data/FFHQ_Real/68044.png
+Alignining ../data/FFHQ_Real/40056.png
+Computing landmarks ../data/FFHQ_Real/40056.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_9.png ... 
+
+Progress: [10/100] composites created...
+Alignining ../data/FFHQ_Real/20752.png
+Computing landmarks ../data/FFHQ_Real/20752.png
+Alignining ../data/FFHQ_Real/03589.png
+Computing landmarks ../data/FFHQ_Real/03589.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_10.png ... 
+
+Alignining ../data/FFHQ_Real/38547.png
+Computing landmarks ../data/FFHQ_Real/38547.png
+Alignining ../data/FFHQ_Real/42598.png
+Computing landmarks ../data/FFHQ_Real/42598.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_11.png ... 
+
+Alignining ../data/FFHQ_Real/53996.png
+Computing landmarks ../data/FFHQ_Real/53996.png
+Alignining ../data/FFHQ_Real/55170.png
+Computing landmarks ../data/FFHQ_Real/55170.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_12.png ... 
+
+Alignining ../data/FFHQ_Real/25604.png
+Computing landmarks ../data/FFHQ_Real/25604.png
+Alignining ../data/FFHQ_Real/00554.png
+Computing landmarks ../data/FFHQ_Real/00554.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_13.png ... 
+
+Alignining ../data/FFHQ_Real/07890.png
+Computing landmarks ../data/FFHQ_Real/07890.png
+Alignining ../data/FFHQ_Real/07090.png
+Computing landmarks ../data/FFHQ_Real/07090.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_14.png ... 
+
+Alignining ../data/FFHQ_Real/45012.png
+Computing landmarks ../data/FFHQ_Real/45012.png
+Alignining ../data/FFHQ_Real/53713.png
+Computing landmarks ../data/FFHQ_Real/53713.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_15.png ... 
+
+Alignining ../data/FFHQ_Real/18096.png
+Computing landmarks ../data/FFHQ_Real/18096.png
+Alignining ../data/FFHQ_Real/16943.png
+Computing landmarks ../data/FFHQ_Real/16943.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_16.png ... 
+
+Alignining ../data/FFHQ_Real/31596.png
+Computing landmarks ../data/FFHQ_Real/31596.png
+Alignining ../data/FFHQ_Real/12977.png
+Computing landmarks ../data/FFHQ_Real/12977.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_17.png ... 
+
+Alignining ../data/FFHQ_Real/42292.png
+Computing landmarks ../data/FFHQ_Real/42292.png
+Alignining ../data/FFHQ_Real/52699.png
+Computing landmarks ../data/FFHQ_Real/52699.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_18.png ... 
+
+Alignining ../data/FFHQ_Real/32366.png
+Computing landmarks ../data/FFHQ_Real/32366.png
+Alignining ../data/FFHQ_Real/10438.png
+Computing landmarks ../data/FFHQ_Real/10438.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_19.png ... 
+
+Progress: [20/100] composites created...
+Alignining ../data/FFHQ_Real/47344.png
+Computing landmarks ../data/FFHQ_Real/47344.png
+Alignining ../data/FFHQ_Real/05730.png
+Computing landmarks ../data/FFHQ_Real/05730.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_20.png ... 
+
+Alignining ../data/FFHQ_Real/14983.png
+Computing landmarks ../data/FFHQ_Real/14983.png
+Alignining ../data/FFHQ_Real/41329.png
+Computing landmarks ../data/FFHQ_Real/41329.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_21.png ... 
+
+Alignining ../data/FFHQ_Real/63635.png
+Computing landmarks ../data/FFHQ_Real/63635.png
+Alignining ../data/FFHQ_Real/52460.png
+Computing landmarks ../data/FFHQ_Real/52460.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_22.png ... 
+
+Alignining ../data/FFHQ_Real/48488.png
+Computing landmarks ../data/FFHQ_Real/48488.png
+Alignining ../data/FFHQ_Real/15912.png
+Computing landmarks ../data/FFHQ_Real/15912.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_23.png ... 
+
+Alignining ../data/FFHQ_Real/31644.png
+Computing landmarks ../data/FFHQ_Real/31644.png
+Alignining ../data/FFHQ_Real/31880.png
+Computing landmarks ../data/FFHQ_Real/31880.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_24.png ... 
+
+Alignining ../data/FFHQ_Real/46963.png
+Computing landmarks ../data/FFHQ_Real/46963.png
+Alignining ../data/FFHQ_Real/15091.png
+Computing landmarks ../data/FFHQ_Real/15091.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_25.png ... 
+
+Alignining ../data/FFHQ_Real/34397.png
+Computing landmarks ../data/FFHQ_Real/34397.png
+Alignining ../data/FFHQ_Real/53121.png
+Computing landmarks ../data/FFHQ_Real/53121.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_26.png ... 
+
+Alignining ../data/FFHQ_Real/21606.png
+Computing landmarks ../data/FFHQ_Real/21606.png
+Alignining ../data/FFHQ_Real/31276.png
+Computing landmarks ../data/FFHQ_Real/31276.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_27.png ... 
+
+Alignining ../data/FFHQ_Real/19096.png
+Computing landmarks ../data/FFHQ_Real/19096.png
+Alignining ../data/FFHQ_Real/56295.png
+Computing landmarks ../data/FFHQ_Real/56295.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_28.png ... 
+
+Alignining ../data/FFHQ_Real/30597.png
+Computing landmarks ../data/FFHQ_Real/30597.png
+Alignining ../data/FFHQ_Real/18503.png
+Computing landmarks ../data/FFHQ_Real/18503.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_29.png ... 
+
+Progress: [30/100] composites created...
+Alignining ../data/FFHQ_Real/00327.png
+Computing landmarks ../data/FFHQ_Real/00327.png
+Alignining ../data/FFHQ_Real/59905.png
+Computing landmarks ../data/FFHQ_Real/59905.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_30.png ... 
+
+Alignining ../data/FFHQ_Real/63376.png
+Computing landmarks ../data/FFHQ_Real/63376.png
+Alignining ../data/FFHQ_Real/38718.png
+Computing landmarks ../data/FFHQ_Real/38718.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_31.png ... 
+
+Alignining ../data/FFHQ_Real/22997.png
+Computing landmarks ../data/FFHQ_Real/22997.png
+Alignining ../data/FFHQ_Real/19116.png
+Computing landmarks ../data/FFHQ_Real/19116.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_32.png ... 
+
+Alignining ../data/FFHQ_Real/40086.png
+Computing landmarks ../data/FFHQ_Real/40086.png
+Alignining ../data/FFHQ_Real/15957.png
+Computing landmarks ../data/FFHQ_Real/15957.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_33.png ... 
+
+Alignining ../data/FFHQ_Real/51644.png
+Computing landmarks ../data/FFHQ_Real/51644.png
+Alignining ../data/FFHQ_Real/02494.png
+Computing landmarks ../data/FFHQ_Real/02494.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_34.png ... 
+
+Alignining ../data/FFHQ_Real/22850.png
+Computing landmarks ../data/FFHQ_Real/22850.png
+Alignining ../data/FFHQ_Real/58021.png
+Computing landmarks ../data/FFHQ_Real/58021.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_35.png ... 
+
+Alignining ../data/FFHQ_Real/43204.png
+Computing landmarks ../data/FFHQ_Real/43204.png
+Alignining ../data/FFHQ_Real/37969.png
+Computing landmarks ../data/FFHQ_Real/37969.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_36.png ... 
+
+Alignining ../data/FFHQ_Real/28053.png
+Computing landmarks ../data/FFHQ_Real/28053.png
+Alignining ../data/FFHQ_Real/09799.png
+Computing landmarks ../data/FFHQ_Real/09799.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_37.png ... 
+
+Alignining ../data/FFHQ_Real/39478.png
+Computing landmarks ../data/FFHQ_Real/39478.png
+Alignining ../data/FFHQ_Real/10322.png
+Computing landmarks ../data/FFHQ_Real/10322.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_38.png ... 
+
+Alignining ../data/FFHQ_Real/44185.png
+Computing landmarks ../data/FFHQ_Real/44185.png
+Alignining ../data/FFHQ_Real/07201.png
+Computing landmarks ../data/FFHQ_Real/07201.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_39.png ... 
+
+Progress: [40/100] composites created...
+Alignining ../data/FFHQ_Real/10780.png
+Computing landmarks ../data/FFHQ_Real/10780.png
+Alignining ../data/FFHQ_Real/21699.png
+Computing landmarks ../data/FFHQ_Real/21699.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_40.png ... 
+
+Alignining ../data/FFHQ_Real/60819.png
+Computing landmarks ../data/FFHQ_Real/60819.png
+Alignining ../data/FFHQ_Real/23017.png
+Computing landmarks ../data/FFHQ_Real/23017.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_41.png ... 
+
+Alignining ../data/FFHQ_Real/04019.png
+Computing landmarks ../data/FFHQ_Real/04019.png
+Alignining ../data/FFHQ_Real/47745.png
+Computing landmarks ../data/FFHQ_Real/47745.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_42.png ... 
+
+Alignining ../data/FFHQ_Real/48817.png
+Computing landmarks ../data/FFHQ_Real/48817.png
+Alignining ../data/FFHQ_Real/34202.png
+Computing landmarks ../data/FFHQ_Real/34202.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_43.png ... 
+
+Alignining ../data/FFHQ_Real/18850.png
+Computing landmarks ../data/FFHQ_Real/18850.png
+Alignining ../data/FFHQ_Real/59754.png
+Computing landmarks ../data/FFHQ_Real/59754.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_44.png ... 
+
+Alignining ../data/FFHQ_Real/17028.png
+Computing landmarks ../data/FFHQ_Real/17028.png
+Alignining ../data/FFHQ_Real/45225.png
+Computing landmarks ../data/FFHQ_Real/45225.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_45.png ... 
+
+Alignining ../data/FFHQ_Real/22284.png
+Computing landmarks ../data/FFHQ_Real/22284.png
+Alignining ../data/FFHQ_Real/15494.png
+Computing landmarks ../data/FFHQ_Real/15494.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_46.png ... 
+
+Alignining ../data/FFHQ_Real/23356.png
+Computing landmarks ../data/FFHQ_Real/23356.png
+Alignining ../data/FFHQ_Real/19993.png
+Computing landmarks ../data/FFHQ_Real/19993.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_47.png ... 
+
+Alignining ../data/FFHQ_Real/00179.png
+Computing landmarks ../data/FFHQ_Real/00179.png
+Alignining ../data/FFHQ_Real/20810.png
+Computing landmarks ../data/FFHQ_Real/20810.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_48.png ... 
+
+Alignining ../data/FFHQ_Real/40668.png
+Computing landmarks ../data/FFHQ_Real/40668.png
+Alignining ../data/FFHQ_Real/25819.png
+Computing landmarks ../data/FFHQ_Real/25819.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_49.png ... 
+
+Progress: [50/100] composites created...
+Alignining ../data/FFHQ_Real/66999.png
+Computing landmarks ../data/FFHQ_Real/66999.png
+Alignining ../data/FFHQ_Real/29367.png
+Computing landmarks ../data/FFHQ_Real/29367.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_50.png ... 
+
+Alignining ../data/FFHQ_Real/46209.png
+Computing landmarks ../data/FFHQ_Real/46209.png
+Alignining ../data/FFHQ_Real/21320.png
+Computing landmarks ../data/FFHQ_Real/21320.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_51.png ... 
+
+Alignining ../data/FFHQ_Real/65290.png
+Computing landmarks ../data/FFHQ_Real/65290.png
+Alignining ../data/FFHQ_Real/47326.png
+Computing landmarks ../data/FFHQ_Real/47326.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_52.png ... 
+
+Alignining ../data/FFHQ_Real/38907.png
+Computing landmarks ../data/FFHQ_Real/38907.png
+Alignining ../data/FFHQ_Real/08154.png
+Computing landmarks ../data/FFHQ_Real/08154.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_53.png ... 
+
+Alignining ../data/FFHQ_Real/33169.png
+Computing landmarks ../data/FFHQ_Real/33169.png
+Alignining ../data/FFHQ_Real/10774.png
+Computing landmarks ../data/FFHQ_Real/10774.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_54.png ... 
+
+Alignining ../data/FFHQ_Real/45352.png
+Computing landmarks ../data/FFHQ_Real/45352.png
+Alignining ../data/FFHQ_Real/33753.png
+Computing landmarks ../data/FFHQ_Real/33753.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_55.png ... 
+
+Alignining ../data/FFHQ_Real/06662.png
+Computing landmarks ../data/FFHQ_Real/06662.png
+Alignining ../data/FFHQ_Real/30734.png
+Computing landmarks ../data/FFHQ_Real/30734.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_56.png ... 
+
+Alignining ../data/FFHQ_Real/06012.png
+Computing landmarks ../data/FFHQ_Real/06012.png
+Alignining ../data/FFHQ_Real/51522.png
+Computing landmarks ../data/FFHQ_Real/51522.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_57.png ... 
+
+Alignining ../data/FFHQ_Real/24705.png
+Computing landmarks ../data/FFHQ_Real/24705.png
+Alignining ../data/FFHQ_Real/54202.png
+Computing landmarks ../data/FFHQ_Real/54202.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_58.png ... 
+
+Alignining ../data/FFHQ_Real/39364.png
+Computing landmarks ../data/FFHQ_Real/39364.png
+Alignining ../data/FFHQ_Real/30218.png
+Computing landmarks ../data/FFHQ_Real/30218.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_59.png ... 
+
+Progress: [60/100] composites created...
+Alignining ../data/FFHQ_Real/56584.png
+Computing landmarks ../data/FFHQ_Real/56584.png
+Alignining ../data/FFHQ_Real/48840.png
+Computing landmarks ../data/FFHQ_Real/48840.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_60.png ... 
+
+Alignining ../data/FFHQ_Real/51275.png
+Computing landmarks ../data/FFHQ_Real/51275.png
+Alignining ../data/FFHQ_Real/32299.png
+Computing landmarks ../data/FFHQ_Real/32299.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_61.png ... 
+
+Alignining ../data/FFHQ_Real/29905.png
+Computing landmarks ../data/FFHQ_Real/29905.png
+Alignining ../data/FFHQ_Real/35882.png
+Computing landmarks ../data/FFHQ_Real/35882.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_62.png ... 
+
+Alignining ../data/FFHQ_Real/07005.png
+Computing landmarks ../data/FFHQ_Real/07005.png
+Alignining ../data/FFHQ_Real/35800.png
+Computing landmarks ../data/FFHQ_Real/35800.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_63.png ... 
+
+Alignining ../data/FFHQ_Real/58080.png
+Computing landmarks ../data/FFHQ_Real/58080.png
+Alignining ../data/FFHQ_Real/01779.png
+Computing landmarks ../data/FFHQ_Real/01779.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_64.png ... 
+
+Alignining ../data/FFHQ_Real/17574.png
+Computing landmarks ../data/FFHQ_Real/17574.png
+Alignining ../data/FFHQ_Real/39790.png
+Computing landmarks ../data/FFHQ_Real/39790.png
+Error processing pair 65: [Errno 2] No such file or directory: './temp_0.png'
+Alignining ../data/FFHQ_Real/29999.png
+Computing landmarks ../data/FFHQ_Real/29999.png
+Alignining ../data/FFHQ_Real/42455.png
+Computing landmarks ../data/FFHQ_Real/42455.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_66.png ... 
+
+Alignining ../data/FFHQ_Real/69198.png
+Computing landmarks ../data/FFHQ_Real/69198.png
+Alignining ../data/FFHQ_Real/02784.png
+Computing landmarks ../data/FFHQ_Real/02784.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_67.png ... 
+
+Alignining ../data/FFHQ_Real/02127.png
+Computing landmarks ../data/FFHQ_Real/02127.png
+Alignining ../data/FFHQ_Real/69086.png
+Computing landmarks ../data/FFHQ_Real/69086.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_68.png ... 
+
+Alignining ../data/FFHQ_Real/45346.png
+Computing landmarks ../data/FFHQ_Real/45346.png
+Alignining ../data/FFHQ_Real/36610.png
+Computing landmarks ../data/FFHQ_Real/36610.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_69.png ... 
+
+Progress: [70/100] composites created...
+Alignining ../data/FFHQ_Real/25235.png
+Computing landmarks ../data/FFHQ_Real/25235.png
+Alignining ../data/FFHQ_Real/33231.png
+Computing landmarks ../data/FFHQ_Real/33231.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_70.png ... 
+
+Alignining ../data/FFHQ_Real/20345.png
+Computing landmarks ../data/FFHQ_Real/20345.png
+Alignining ../data/FFHQ_Real/11803.png
+Computing landmarks ../data/FFHQ_Real/11803.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_71.png ... 
+
+Alignining ../data/FFHQ_Real/59144.png
+Computing landmarks ../data/FFHQ_Real/59144.png
+Alignining ../data/FFHQ_Real/00299.png
+Computing landmarks ../data/FFHQ_Real/00299.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_72.png ... 
+
+Alignining ../data/FFHQ_Real/24790.png
+Computing landmarks ../data/FFHQ_Real/24790.png
+Alignining ../data/FFHQ_Real/53411.png
+Computing landmarks ../data/FFHQ_Real/53411.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_73.png ... 
+
+Alignining ../data/FFHQ_Real/24924.png
+Computing landmarks ../data/FFHQ_Real/24924.png
+Alignining ../data/FFHQ_Real/32540.png
+Computing landmarks ../data/FFHQ_Real/32540.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_74.png ... 
+
+Alignining ../data/FFHQ_Real/03022.png
+Computing landmarks ../data/FFHQ_Real/03022.png
+Alignining ../data/FFHQ_Real/34206.png
+Computing landmarks ../data/FFHQ_Real/34206.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_75.png ... 
+
+Alignining ../data/FFHQ_Real/47082.png
+Computing landmarks ../data/FFHQ_Real/47082.png
+Alignining ../data/FFHQ_Real/66153.png
+Computing landmarks ../data/FFHQ_Real/66153.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_76.png ... 
+
+Alignining ../data/FFHQ_Real/69007.png
+Computing landmarks ../data/FFHQ_Real/69007.png
+Alignining ../data/FFHQ_Real/56960.png
+Computing landmarks ../data/FFHQ_Real/56960.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_77.png ... 
+
+Alignining ../data/FFHQ_Real/12147.png
+Computing landmarks ../data/FFHQ_Real/12147.png
+Alignining ../data/FFHQ_Real/54222.png
+Computing landmarks ../data/FFHQ_Real/54222.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_78.png ... 
+
+Alignining ../data/FFHQ_Real/40768.png
+Computing landmarks ../data/FFHQ_Real/40768.png
+Alignining ../data/FFHQ_Real/20842.png
+Computing landmarks ../data/FFHQ_Real/20842.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_79.png ... 
+
+Progress: [80/100] composites created...
+Alignining ../data/FFHQ_Real/65253.png
+Computing landmarks ../data/FFHQ_Real/65253.png
+Alignining ../data/FFHQ_Real/68102.png
+Computing landmarks ../data/FFHQ_Real/68102.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_80.png ... 
+
+Alignining ../data/FFHQ_Real/49311.png
+Computing landmarks ../data/FFHQ_Real/49311.png
+Alignining ../data/FFHQ_Real/36232.png
+Computing landmarks ../data/FFHQ_Real/36232.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_81.png ... 
+
+Alignining ../data/FFHQ_Real/41674.png
+Computing landmarks ../data/FFHQ_Real/41674.png
+Alignining ../data/FFHQ_Real/49068.png
+Computing landmarks ../data/FFHQ_Real/49068.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_82.png ... 
+
+Alignining ../data/FFHQ_Real/56852.png
+Computing landmarks ../data/FFHQ_Real/56852.png
+Alignining ../data/FFHQ_Real/48743.png
+Computing landmarks ../data/FFHQ_Real/48743.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_83.png ... 
+
+Alignining ../data/FFHQ_Real/54579.png
+Computing landmarks ../data/FFHQ_Real/54579.png
+Alignining ../data/FFHQ_Real/34948.png
+Computing landmarks ../data/FFHQ_Real/34948.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_84.png ... 
+
+Alignining ../data/FFHQ_Real/03243.png
+Computing landmarks ../data/FFHQ_Real/03243.png
+Alignining ../data/FFHQ_Real/44148.png
+Computing landmarks ../data/FFHQ_Real/44148.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_85.png ... 
+
+Alignining ../data/FFHQ_Real/59299.png
+Computing landmarks ../data/FFHQ_Real/59299.png
+Alignining ../data/FFHQ_Real/57015.png
+Computing landmarks ../data/FFHQ_Real/57015.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_86.png ... 
+
+Alignining ../data/FFHQ_Real/46192.png
+Computing landmarks ../data/FFHQ_Real/46192.png
+Alignining ../data/FFHQ_Real/09215.png
+Computing landmarks ../data/FFHQ_Real/09215.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_87.png ... 
+
+Alignining ../data/FFHQ_Real/19550.png
+Computing landmarks ../data/FFHQ_Real/19550.png
+Alignining ../data/FFHQ_Real/31230.png
+Computing landmarks ../data/FFHQ_Real/31230.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_88.png ... 
+
+Alignining ../data/FFHQ_Real/36855.png
+Computing landmarks ../data/FFHQ_Real/36855.png
+Alignining ../data/FFHQ_Real/37450.png
+Computing landmarks ../data/FFHQ_Real/37450.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_89.png ... 
+
+Progress: [90/100] composites created...
+Alignining ../data/FFHQ_Real/27523.png
+Computing landmarks ../data/FFHQ_Real/27523.png
+Alignining ../data/FFHQ_Real/49370.png
+Computing landmarks ../data/FFHQ_Real/49370.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_90.png ... 
+
+Alignining ../data/FFHQ_Real/29158.png
+Computing landmarks ../data/FFHQ_Real/29158.png
+Alignining ../data/FFHQ_Real/68985.png
+Computing landmarks ../data/FFHQ_Real/68985.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_91.png ... 
+
+Alignining ../data/FFHQ_Real/24458.png
+Computing landmarks ../data/FFHQ_Real/24458.png
+Alignining ../data/FFHQ_Real/51289.png
+Computing landmarks ../data/FFHQ_Real/51289.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_92.png ... 
+
+Alignining ../data/FFHQ_Real/65805.png
+Computing landmarks ../data/FFHQ_Real/65805.png
+Alignining ../data/FFHQ_Real/58389.png
+Computing landmarks ../data/FFHQ_Real/58389.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_93.png ... 
+
+Alignining ../data/FFHQ_Real/29192.png
+Computing landmarks ../data/FFHQ_Real/29192.png
+Alignining ../data/FFHQ_Real/47246.png
+Computing landmarks ../data/FFHQ_Real/47246.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_94.png ... 
+
+Alignining ../data/FFHQ_Real/52185.png
+Computing landmarks ../data/FFHQ_Real/52185.png
+Alignining ../data/FFHQ_Real/17356.png
+Computing landmarks ../data/FFHQ_Real/17356.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_95.png ... 
+
+Alignining ../data/FFHQ_Real/00202.png
+Computing landmarks ../data/FFHQ_Real/00202.png
+Alignining ../data/FFHQ_Real/02976.png
+Computing landmarks ../data/FFHQ_Real/02976.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_96.png ... 
+
+Alignining ../data/FFHQ_Real/60163.png
+Computing landmarks ../data/FFHQ_Real/60163.png
+Alignining ../data/FFHQ_Real/45383.png
+Computing landmarks ../data/FFHQ_Real/45383.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_97.png ... 
+
+Alignining ../data/FFHQ_Real/57728.png
+Computing landmarks ../data/FFHQ_Real/57728.png
+Alignining ../data/FFHQ_Real/53020.png
+Computing landmarks ../data/FFHQ_Real/53020.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_98.png ... 
+
+Alignining ../data/FFHQ_Real/05817.png
+Computing landmarks ../data/FFHQ_Real/05817.png
+Alignining ../data/FFHQ_Real/21479.png
+Computing landmarks ../data/FFHQ_Real/21479.png
+Writting morphed face : ./ControlledMorphGeneration/results/morphed_faces_extreme/temp_99.png ... 
+
+Progress: [100/100] composites created...
+
+Successfully generated composite plates in: ./ControlledMorphGeneration/results/morphed_faces_extreme/
+
+[0;34m[end] 2026-04-29 10:07:48.045735[0m
+
+Total Execution Time: 718.74 seconds

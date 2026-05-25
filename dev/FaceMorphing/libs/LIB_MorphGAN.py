@@ -148,7 +148,7 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 
     if torch.cuda.is_available():
         device = torch.device("cuda")
-        print("Device: ", device)
+        # print("Device: ", device)
     else:
         device = torch.device("cpu")
 
@@ -189,7 +189,7 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     img1 = img1.permute(0, 2, 3, 1).clamp(0, sz_im).to(torch.uint8)[0].cpu().numpy()
 
     img1 = Image.fromarray(img1, 'RGB')
-    img1.save("temp_1.png")
+    # img1.save("temp_1.png")
 
     img2 = G.synthesis(w2, noise_mode='const', force_fp32=True)
 
@@ -197,7 +197,7 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     img2 = img2.permute(0, 2, 3, 1).clamp(0, sz_im).to(torch.uint8)[0].cpu().numpy()
 
     img2 = Image.fromarray(img2, 'RGB')
-    img2.save("temp_2.png")
+    # img2.save("temp_2.png")
 
     # linear interpolation between w1 and w2
     num_interpolations = 10
@@ -220,7 +220,7 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     morph = Image.fromarray(morph, 'RGB')
     morph = morph.resize((1024, 1024))
 
-    print("\nWritting morphed face : %s ... \n" %(Options.Morph));	
+    print("Writting morphed face : %s ... \n" %(Options.Morph));	
     morph.save(Options.Morph, "PNG");
 
     #CropFace(morphed_frame, img1, Options.Morph.replace(".png" , "_crop.png"), points)
@@ -260,7 +260,7 @@ def morph_2_faces_process(file1_path, file2_path, alpha, Morph_Results, temp_dir
     face1_array = numpy.array(face1)
     face2_array = numpy.array(face2)
 
-    face1_tensor = torch.tensor(face1_array, dtype=torch.float32)  # Change dtype as needed
+    face1_tensor = torch.tensor(face1_array, dtype=torch.float32)  
     face2_tensor = torch.tensor(face2_array, dtype=torch.float32)
 
     face1_tensor = face1_tensor.squeeze()

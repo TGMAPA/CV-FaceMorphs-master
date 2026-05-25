@@ -7,6 +7,8 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE, Isomap, LocallyLinearEmbedding
 
 
+#Tue 07 April 13:25:35 GMT by MAPA
+
 def string_to_array(text):
     return np.array(json.loads(text))
 
@@ -57,7 +59,7 @@ def createDataset(
     # New Column = Dominant Gender
     dominant_gender = []
 
-    # Get each sample's dominant race
+    # Get each sample's dominant race and gender
     for i in range(DF_len):
         # -- Row
         # Extract race's probs
@@ -134,8 +136,8 @@ def main():
     dataset = createDataset(
         demographic_csv_path, 
         embeddings_json_path, 
-        create_csv=False, 
-        dataset_csv_path='ffhq_real_embeddings_and_demographics.csv'
+        create_csv=True, 
+        dataset_csv_path='../../data/Embeddings_Demographics/ffhq_real_embeddings_and_demographics.csv'
         )
     
     # Split dataset

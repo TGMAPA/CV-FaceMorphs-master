@@ -1,0 +1,17 @@
+
+[0;34m[start] 2026-04-28 20:20:10.348473[0m
+
+Loading dataset...
+-- Executing t-SNE...
+-- Creating Dense Pairs (Similar faces)...
+-- Creating Extreme Pairs (Opposite faces)...
+
+==================================================
+DONE: Generated 100 pairs for both scenarios.
+Mean t-SNE distance (Dense): 0.3021
+Mean t-SNE distance (Extreme): 90.0748
+==================================================
+
+[0;34m[end] 2026-04-28 20:30:44.324231[0m
+
+Exectime:  633.975758
