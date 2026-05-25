@@ -1,0 +1,17 @@
+
+[0;34m[start] 2026-05-24 22:59:46.574866[0m
+
+Loading dataset...
+-- Executing t-SNE...
+-- Executing HDBSCAN clustering...
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+-- Computing cluster Wasserstein distances...
+
+[0;34m[end] 2026-05-24 23:03:04.435080[0m
+
+Exectime:  197.860214

@@ -1,17 +1,29 @@
+# Libraries
 import pandas as pd
 import numpy as np
 import json
 import datetime
+
+# Plots
 import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
+import seaborn as sns
+
+# SKlearn tools
 from sklearn.neighbors import NearestNeighbors
 from sklearn.manifold import TSNE
 from scipy.spatial.distance import cdist
+
+# Clustering
 import hdbscan
 
+# wasserstein distance
+from scipy.stats import wasserstein_distance
+import itertools
 
-#Wed 13 May 22:26:55 GMT by MAPA
 
-
+#Wed 13 May 22:26:55 GMT by MAPA  -- template - missing overwrite for actual pipeline
 def create_morph_pairs(X_subset, df_subset, mode='dense'):
     """
     Takes a subset of images and pairs them up.
@@ -63,6 +75,7 @@ def create_morph_pairs(X_subset, df_subset, mode='dense'):
         
     return pd.DataFrame(pairs)
 
+#Wed 13 May 22:26:55 GMT by MAPA    -- template - missing overwrite for actual pipeline
 def get_candidates_and_pair(X_tsne, df_original, n_samples=200, mode='dense'):
     """
     Identifies the candidate pool and returns a DataFrame of 100 pairs.
@@ -89,6 +102,9 @@ def get_candidates_and_pair(X_tsne, df_original, n_samples=200, mode='dense'):
     paired_df = create_morph_pairs(X_subset, df_subset, mode=mode)
     return paired_df, selected_indices
 
+
+
+#Wed 13 May 22:26:55 GMT by MAPA
 def plot_comparison_regions(X_tsne, dense_idx, extreme_idx):
     plt.figure(figsize=(14, 9))
     plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c='lightgrey', s=5, label='Full Dataset', alpha=0.4)
@@ -101,6 +117,7 @@ def plot_comparison_regions(X_tsne, dense_idx, extreme_idx):
     plt.savefig("./ControlledMorphGeneration/morphing_pairing_visualization.png", dpi=300)
     plt.show()
 
+#Wed 13 May 22:26:55 GMT by MAPA
 def plot_hdbscan_clusters(X_tsne, cluster_labels):
     plt.figure(figsize=(12,10))
 
@@ -120,7 +137,316 @@ def plot_hdbscan_clusters(X_tsne, cluster_labels):
     plt.savefig("./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_clusters_visualization.png", dpi=300)
     plt.show()
 
+#Sun 24 May 20:47:30 GMT by MAPA
+# Plot HDBSCAN clusters with demographic data
+def plot_interactive_hdbscan(dataset):
+
+    fig = px.scatter(
+        dataset,
+        x='tsne_x',
+        y='tsne_y',
+
+        color='cluster',
+
+        hover_data=[
+            'file',
+            'Dominant_Race',
+            'Dominant_Gender',
+            'Age',
+            'cluster_prob'
+        ],
+
+        title='t-SNE - HDBSCAN Demographic Manifold',
+
+        opacity=0.8,
+
+        width=1200,
+        height=900
+    )
+
+    fig.update_traces(
+        marker=dict(size=6)
+    )
+
+    fig.show()
+
+#Sun 24 May 20:47:30 GMT by MAPA
+# Plot HDBSCAN clusters by demographic data
+def plot_by_demographic(dataset, demographic_col):
+
+    fig = px.scatter(
+        dataset,
+        x='tsne_x',
+        y='tsne_y',
+
+        color=demographic_col,
+
+        hover_data=[
+            'cluster',
+            'file',
+            'cluster_prob'
+        ],
+
+        title=f't-SNE colored by {demographic_col}',
+
+        width=1200,
+        height=900
+    )
+
+    fig.show()
+
+#Sun 24 May 21:54:40 GMT by MAPA
+# Execute Wasserstein distance with HDBSCAN clusters
+def compute_cluster_wasserstein(dataset):
+
+    clusters = sorted(dataset['cluster'].unique())
+
+    # Remove outliers
+    clusters = [c for c in clusters if c != -1]
+
+    results = []
+
+    for c1, c2 in itertools.combinations(clusters, 2):
+
+        data1 = dataset[dataset['cluster'] == c1]
+        data2 = dataset[dataset['cluster'] == c2]
+
+        # Wasserstein in X
+        wx = wasserstein_distance(
+            data1['tsne_x'],
+            data2['tsne_x']
+        )
+
+        # Wasserstein in Y
+        wy = wasserstein_distance(
+            data1['tsne_y'],
+            data2['tsne_y']
+        )
+
+        # Combined score
+        w_total = np.sqrt(wx**2 + wy**2)
+
+        results.append({
+            'cluster_a': c1,
+            'cluster_b': c2,
+            'wasserstein_x': wx,
+            'wasserstein_y': wy,
+            'wasserstein_total': w_total,
+
+            'size_a': len(data1),
+            'size_b': len(data2)
+        })
+
+    return pd.DataFrame(results)
+
+#Sun 24 May 21:54:40 GMT by MAPA
+# Plot clusters W Distance with a heatmap
+def plot_cluster_wasserstein_heatmap(df_w):
+
+    clusters = sorted(
+        list(
+            set(df_w['cluster_a']).union(
+                set(df_w['cluster_b'])
+            )
+        )
+    )
+
+    matrix = pd.DataFrame(
+        np.nan,
+        index=clusters,
+        columns=clusters
+    )
+
+    for _, row in df_w.iterrows():
+
+        a = row['cluster_a']
+        b = row['cluster_b']
+        w = row['wasserstein_total']
+
+        matrix.loc[a,b] = w
+        matrix.loc[b,a] = w
+
+    np.fill_diagonal(matrix.values, 0)
+
+    fig = px.imshow(
+        matrix,
+
+        text_auto='.2f',
+
+        color_continuous_scale='Viridis',
+
+        title='Cluster-to-Cluster Wasserstein Distance'
+    )
+
+    fig.update_layout(
+        width=1000,
+        height=900
+    )
+
+    fig.show()
+
+#Sun 24 May 22:07:40 GMT by MAPA
+# SHow clusters summary
+def plot_cluster_summary(dataset):
+
+    summaries = []
+
+    for cluster_id in sorted(dataset['cluster'].unique()):
+
+        if cluster_id == -1:
+            continue
+
+        subset = dataset[
+            dataset['cluster'] == cluster_id
+        ]
+
+        # Race Stats
+        race_counts = (
+            subset['Dominant_Race']
+            .value_counts(normalize=True)
+        )
+
+        dominant_race = race_counts.idxmax()
+
+        race_purity = race_counts.max()
+
+        # Gender Stats
+        gender_counts = (
+            subset['Dominant_Gender']
+            .value_counts(normalize=True)
+        )
+
+        dominant_gender = gender_counts.idxmax()
+
+        gender_purity = gender_counts.max()
+
+        # Age Stats
+        mean_age = subset['Age'].mean()
+
+        std_age = subset['Age'].std()
+
+        min_age = subset['Age'].min()
+
+        max_age = subset['Age'].max()
+
+        summaries.append({
+
+            'cluster': cluster_id,
+
+            'cluster_size': len(subset),
+
+            'dominant_race': dominant_race,
+
+            'race_purity': race_purity,
+
+            'dominant_gender': dominant_gender,
+
+            'gender_purity': gender_purity,
+
+            'mean_age': mean_age,
+
+            'std_age': std_age,
+
+            'age_range':
+                f"{min_age} - {max_age}",
+
+            'race_distribution':
+                "<br>".join([
+                    f"{k}: {v:.2f}"
+                    for k,v in race_counts.items()
+                ]),
+
+            'gender_distribution':
+                "<br>".join([
+                    f"{k}: {v:.2f}"
+                    for k,v in gender_counts.items()
+                ])
+        })
+
+    df_summary = pd.DataFrame(summaries)
+
+    # Interactive Plot====
+    fig = px.scatter(
+
+        df_summary,
+
+        x='cluster',
+
+        y='race_purity',
+
+        size='cluster_size',
+
+        color='mean_age',
+
+        symbol='dominant_gender',
+
+        hover_data={
+
+            'cluster_size': True,
+
+            'dominant_race': True,
+
+            'dominant_gender': True,
+
+            'gender_purity': ':.2f',
+
+            'mean_age': ':.2f',
+
+            'std_age': ':.2f',
+
+            'age_range': True,
+
+            'race_distribution': True,
+
+            'gender_distribution': True
+        },
+
+        title='HDBSCAN Cluster Demographic Composition',
+
+        labels={
+
+            'race_purity': 'Race Purity',
+
+            'cluster': 'Cluster ID',
+
+            'mean_age': 'Mean Age'
+        },
+
+        width=1900,
+
+        height=850,
+
+        color_continuous_scale='Turbo'
+    )
+
+    fig.update_traces(
+
+        marker=dict(
+
+            sizemode='area',
+
+            opacity=0.85,
+
+            line=dict(
+                width=1,
+                color='black'
+            )
+        )
+    )
+
+    fig.update_layout(
+
+        template='plotly_white'
+    )
+
+    fig.show()
+
+    return df_summary
+
+
 def main():
+
+    #Wed 13 May 22:26:55 GMT by MAPA
     print("Loading dataset...") 
     dataset = pd.read_csv('../data/Embeddings_Demographics/ffhq_real_embeddings_and_demographics.csv', converters={'embedding': json.loads})
     X = np.stack(dataset['embedding'].values)
@@ -132,7 +458,7 @@ def main():
     dataset['tsne_x'] = X_tsne[:,0]
     dataset['tsne_y'] = X_tsne[:,1]
 
-    # HDBSCAN
+    # --- HDBSCAN
     print("-- Executing HDBSCAN clustering...")
 
     clusterer = hdbscan.HDBSCAN(
@@ -148,39 +474,37 @@ def main():
     # hdbscan cluster asignment confidence 
     dataset['cluster_prob'] = clusterer.probabilities_
 
-    print(dataset['cluster'].value_counts())
+    #print(dataset['cluster'].value_counts())
 
+    #Sun 24 May 20:47:30 GMT by MAPA
     # Plot clusters
     plot_hdbscan_clusters(X_tsne, cluster_labels)
 
+    # Plot interactive clusters viualization
+    plot_interactive_hdbscan(dataset)
 
-    # KDE Density
-    print("-- Computing local densities...")
+    # Plot interactive clusters visualization by demographic features
+    plot_by_demographic(dataset, demographic_col="Age")
+    plot_by_demographic(dataset, demographic_col="Dominant_Race")
+    plot_by_demographic(dataset, demographic_col="Dominant_Gender")
+
+    # SHow clusters summary for manual selection
+    df_cluster_summary = plot_cluster_summary(dataset)
+
+
+    #Sun 24 May 20:47:30 GMT by MAPA
+
+    # --- Distributional Similarity Analysis (distributional compatibility between manifold regions W(Ci​,Cj​))
+    print("-- Computing cluster Wasserstein distances...")
+
+    df_cluster_w = compute_cluster_wasserstein(dataset)
+
+    # Plot heatmap
+    plot_cluster_wasserstein_heatmap(df_cluster_w)
+
     
 
 
-
-
-
-    # Generate Pairs
-    # print("-- Creating Dense Pairs (Similar faces)...")
-    # df_dense_pairs, dense_idx = get_candidates_and_pair(X_tsne, dataset, n_samples=200, mode='dense')
-    
-    # print("-- Creating Extreme Pairs (Opposite faces)...")
-    # df_extreme_pairs, extreme_idx = get_candidates_and_pair(X_tsne, dataset, n_samples=200, mode='extreme')
-
-    # Visuals
-    # plot_comparison_regions(X_tsne, dense_idx, extreme_idx)
-
-    # # Save to CSV
-    # df_dense_pairs.to_csv("../data/ControlledMorphGeneration_MorphPairs/morph_pairs_DENSE_SIMILAR.csv", index=False)
-    # df_extreme_pairs.to_csv("../data/ControlledMorphGeneration_MorphPairs/morph_pairs_EXTREME_DISTANT.csv", index=False)
-    
-    # print("\n" + "="*50)
-    # print(f"DONE: Generated 100 pairs for both scenarios.")
-    # print(f"Mean t-SNE distance (Dense): {df_dense_pairs['tsne_dist'].mean():.4f}")
-    # print(f"Mean t-SNE distance (Extreme): {df_extreme_pairs['tsne_dist'].mean():.4f}")
-    # print("="*50)
 
 if __name__ == "__main__":
     start = datetime.datetime.now()
