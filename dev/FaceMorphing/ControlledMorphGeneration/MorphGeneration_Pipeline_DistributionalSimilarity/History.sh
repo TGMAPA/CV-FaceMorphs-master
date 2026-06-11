@@ -1,5 +1,7 @@
-# Execute pair csv generation
-python -m ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.t_sne_sample_set_extraction > ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/t_sne_sample_set_extraction.out
+# Execute using FaceMophing as root
+
+# Execute manifold analysis and export cluster's dataset
+python -m ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.manifold_pipeline > ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/manifold_pipeline.out
 
 # Execute morph generation with csv
-python -m ControlledMorphGeneration.ControlledMorphGeneration > ControlledMorphGeneration/ControlledMorphGeneration.out
+python -m ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.ControlledMorphGeneration > ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/ControlledMorphGeneration.out

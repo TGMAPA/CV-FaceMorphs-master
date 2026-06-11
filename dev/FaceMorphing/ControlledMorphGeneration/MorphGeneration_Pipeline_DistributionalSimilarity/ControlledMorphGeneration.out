@@ -1,0 +1,350 @@
+
+[0;34m[start] 2026-06-11 17:09:44.010509[0m
+
+
+[0;34m[Loading manifold clustered dataset...] 2026-06-11 17:09:44.010509[0m
+Loaded 69998 samples
+
+[0;34m[Extracting top Clusters...] 2026-06-11 17:09:44.010509[0m
+Selected clusters: [393, 92, 118, 40, 280]
+
+[0;34m[Cleaning Top Clusters...] 2026-06-11 17:09:44.010509[0m
+
+Processing cluster 393
+Clean samples: 918
+
+Generating cluster summary for cluster 393
+Alignining ../data/FFHQ_Real/57261.png
+Computing landmarks ../data/FFHQ_Real/57261.png
+Alignining ../data/FFHQ_Real/08709.png
+Computing landmarks ../data/FFHQ_Real/08709.png
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+Writting morphed face : ./results/cluster_393_temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/36201.png
+Computing landmarks ../data/FFHQ_Real/36201.png
+Alignining ../data/FFHQ_Real/39294.png
+Computing landmarks ../data/FFHQ_Real/39294.png
+Writting morphed face : ./results/cluster_393_temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/03003.png
+Computing landmarks ../data/FFHQ_Real/03003.png
+Alignining ../data/FFHQ_Real/51336.png
+Computing landmarks ../data/FFHQ_Real/51336.png
+Writting morphed face : ./results/cluster_393_temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/29012.png
+Computing landmarks ../data/FFHQ_Real/29012.png
+Alignining ../data/FFHQ_Real/11299.png
+Computing landmarks ../data/FFHQ_Real/11299.png
+Writting morphed face : ./results/cluster_393_temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/28311.png
+Computing landmarks ../data/FFHQ_Real/28311.png
+Alignining ../data/FFHQ_Real/35557.png
+Computing landmarks ../data/FFHQ_Real/35557.png
+Writting morphed face : ./results/cluster_393_temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/48000.png
+Computing landmarks ../data/FFHQ_Real/48000.png
+Alignining ../data/FFHQ_Real/14518.png
+Computing landmarks ../data/FFHQ_Real/14518.png
+Writting morphed face : ./results/cluster_393_temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/39294.png
+Computing landmarks ../data/FFHQ_Real/39294.png
+Alignining ../data/FFHQ_Real/47283.png
+Computing landmarks ../data/FFHQ_Real/47283.png
+Writting morphed face : ./results/cluster_393_temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/14213.png
+Computing landmarks ../data/FFHQ_Real/14213.png
+Alignining ../data/FFHQ_Real/36201.png
+Computing landmarks ../data/FFHQ_Real/36201.png
+Writting morphed face : ./results/cluster_393_temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/25559.png
+Computing landmarks ../data/FFHQ_Real/25559.png
+Alignining ../data/FFHQ_Real/49074.png
+Computing landmarks ../data/FFHQ_Real/49074.png
+Writting morphed face : ./results/cluster_393_temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/05381.png
+Computing landmarks ../data/FFHQ_Real/05381.png
+Alignining ../data/FFHQ_Real/38570.png
+Computing landmarks ../data/FFHQ_Real/38570.png
+Writting morphed face : ./results/cluster_393_temp_9.png ... 
+
+Saved cluster summary: ./results/cluster_393_summary.png
+
+Processing cluster 92
+Clean samples: 1186
+
+Generating cluster summary for cluster 92
+Alignining ../data/FFHQ_Real/67195.png
+Computing landmarks ../data/FFHQ_Real/67195.png
+Alignining ../data/FFHQ_Real/27581.png
+Computing landmarks ../data/FFHQ_Real/27581.png
+Writting morphed face : ./results/cluster_92_temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/20324.png
+Computing landmarks ../data/FFHQ_Real/20324.png
+Alignining ../data/FFHQ_Real/07822.png
+Computing landmarks ../data/FFHQ_Real/07822.png
+Writting morphed face : ./results/cluster_92_temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/19279.png
+Computing landmarks ../data/FFHQ_Real/19279.png
+Alignining ../data/FFHQ_Real/63720.png
+Computing landmarks ../data/FFHQ_Real/63720.png
+Writting morphed face : ./results/cluster_92_temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/44412.png
+Computing landmarks ../data/FFHQ_Real/44412.png
+Alignining ../data/FFHQ_Real/67011.png
+Computing landmarks ../data/FFHQ_Real/67011.png
+Writting morphed face : ./results/cluster_92_temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/40288.png
+Computing landmarks ../data/FFHQ_Real/40288.png
+Alignining ../data/FFHQ_Real/66706.png
+Computing landmarks ../data/FFHQ_Real/66706.png
+Writting morphed face : ./results/cluster_92_temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/67130.png
+Computing landmarks ../data/FFHQ_Real/67130.png
+Alignining ../data/FFHQ_Real/27121.png
+Computing landmarks ../data/FFHQ_Real/27121.png
+Writting morphed face : ./results/cluster_92_temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/55398.png
+Computing landmarks ../data/FFHQ_Real/55398.png
+Alignining ../data/FFHQ_Real/08173.png
+Computing landmarks ../data/FFHQ_Real/08173.png
+Writting morphed face : ./results/cluster_92_temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/68885.png
+Computing landmarks ../data/FFHQ_Real/68885.png
+Alignining ../data/FFHQ_Real/00884.png
+Computing landmarks ../data/FFHQ_Real/00884.png
+Writting morphed face : ./results/cluster_92_temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/09186.png
+Computing landmarks ../data/FFHQ_Real/09186.png
+Alignining ../data/FFHQ_Real/43394.png
+Computing landmarks ../data/FFHQ_Real/43394.png
+Writting morphed face : ./results/cluster_92_temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/36813.png
+Computing landmarks ../data/FFHQ_Real/36813.png
+Alignining ../data/FFHQ_Real/54589.png
+Computing landmarks ../data/FFHQ_Real/54589.png
+Writting morphed face : ./results/cluster_92_temp_9.png ... 
+
+Saved cluster summary: ./results/cluster_92_summary.png
+
+Processing cluster 118
+Clean samples: 717
+
+Generating cluster summary for cluster 118
+Alignining ../data/FFHQ_Real/14941.png
+Computing landmarks ../data/FFHQ_Real/14941.png
+Alignining ../data/FFHQ_Real/09353.png
+Computing landmarks ../data/FFHQ_Real/09353.png
+Writting morphed face : ./results/cluster_118_temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/26521.png
+Computing landmarks ../data/FFHQ_Real/26521.png
+Alignining ../data/FFHQ_Real/30555.png
+Computing landmarks ../data/FFHQ_Real/30555.png
+Writting morphed face : ./results/cluster_118_temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/50784.png
+Computing landmarks ../data/FFHQ_Real/50784.png
+Alignining ../data/FFHQ_Real/67412.png
+Computing landmarks ../data/FFHQ_Real/67412.png
+Writting morphed face : ./results/cluster_118_temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/64366.png
+Computing landmarks ../data/FFHQ_Real/64366.png
+Alignining ../data/FFHQ_Real/65596.png
+Computing landmarks ../data/FFHQ_Real/65596.png
+Writting morphed face : ./results/cluster_118_temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/48817.png
+Computing landmarks ../data/FFHQ_Real/48817.png
+Alignining ../data/FFHQ_Real/17028.png
+Computing landmarks ../data/FFHQ_Real/17028.png
+Writting morphed face : ./results/cluster_118_temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/47177.png
+Computing landmarks ../data/FFHQ_Real/47177.png
+Alignining ../data/FFHQ_Real/55888.png
+Computing landmarks ../data/FFHQ_Real/55888.png
+Writting morphed face : ./results/cluster_118_temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/39572.png
+Computing landmarks ../data/FFHQ_Real/39572.png
+Alignining ../data/FFHQ_Real/08331.png
+Computing landmarks ../data/FFHQ_Real/08331.png
+Writting morphed face : ./results/cluster_118_temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/64736.png
+Computing landmarks ../data/FFHQ_Real/64736.png
+Alignining ../data/FFHQ_Real/22708.png
+Computing landmarks ../data/FFHQ_Real/22708.png
+Writting morphed face : ./results/cluster_118_temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/28253.png
+Computing landmarks ../data/FFHQ_Real/28253.png
+Alignining ../data/FFHQ_Real/17670.png
+Computing landmarks ../data/FFHQ_Real/17670.png
+Writting morphed face : ./results/cluster_118_temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/06324.png
+Computing landmarks ../data/FFHQ_Real/06324.png
+Alignining ../data/FFHQ_Real/65596.png
+Computing landmarks ../data/FFHQ_Real/65596.png
+Writting morphed face : ./results/cluster_118_temp_9.png ... 
+
+Saved cluster summary: ./results/cluster_118_summary.png
+
+Processing cluster 40
+Clean samples: 835
+
+Generating cluster summary for cluster 40
+Alignining ../data/FFHQ_Real/24346.png
+Computing landmarks ../data/FFHQ_Real/24346.png
+Alignining ../data/FFHQ_Real/13767.png
+Computing landmarks ../data/FFHQ_Real/13767.png
+Writting morphed face : ./results/cluster_40_temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/47871.png
+Computing landmarks ../data/FFHQ_Real/47871.png
+Alignining ../data/FFHQ_Real/06282.png
+Computing landmarks ../data/FFHQ_Real/06282.png
+Writting morphed face : ./results/cluster_40_temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/65175.png
+Computing landmarks ../data/FFHQ_Real/65175.png
+Alignining ../data/FFHQ_Real/56919.png
+Computing landmarks ../data/FFHQ_Real/56919.png
+Writting morphed face : ./results/cluster_40_temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/40127.png
+Computing landmarks ../data/FFHQ_Real/40127.png
+Alignining ../data/FFHQ_Real/32948.png
+Computing landmarks ../data/FFHQ_Real/32948.png
+Writting morphed face : ./results/cluster_40_temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/33302.png
+Computing landmarks ../data/FFHQ_Real/33302.png
+Alignining ../data/FFHQ_Real/05589.png
+Computing landmarks ../data/FFHQ_Real/05589.png
+Writting morphed face : ./results/cluster_40_temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/22937.png
+Computing landmarks ../data/FFHQ_Real/22937.png
+Alignining ../data/FFHQ_Real/20369.png
+Computing landmarks ../data/FFHQ_Real/20369.png
+Writting morphed face : ./results/cluster_40_temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/13009.png
+Computing landmarks ../data/FFHQ_Real/13009.png
+Alignining ../data/FFHQ_Real/56503.png
+Computing landmarks ../data/FFHQ_Real/56503.png
+Writting morphed face : ./results/cluster_40_temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/05564.png
+Computing landmarks ../data/FFHQ_Real/05564.png
+Alignining ../data/FFHQ_Real/14338.png
+Computing landmarks ../data/FFHQ_Real/14338.png
+Error generating morph for pair 7: [Errno 2] No such file or directory: './temp_1.png'
+Alignining ../data/FFHQ_Real/05395.png
+Computing landmarks ../data/FFHQ_Real/05395.png
+Alignining ../data/FFHQ_Real/08309.png
+Computing landmarks ../data/FFHQ_Real/08309.png
+Writting morphed face : ./results/cluster_40_temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/68545.png
+Computing landmarks ../data/FFHQ_Real/68545.png
+Alignining ../data/FFHQ_Real/63492.png
+Computing landmarks ../data/FFHQ_Real/63492.png
+Writting morphed face : ./results/cluster_40_temp_9.png ... 
+
+Saved cluster summary: ./results/cluster_40_summary.png
+
+Processing cluster 280
+Clean samples: 405
+
+Generating cluster summary for cluster 280
+Alignining ../data/FFHQ_Real/07965.png
+Computing landmarks ../data/FFHQ_Real/07965.png
+Alignining ../data/FFHQ_Real/25789.png
+Computing landmarks ../data/FFHQ_Real/25789.png
+Writting morphed face : ./results/cluster_280_temp_0.png ... 
+
+Alignining ../data/FFHQ_Real/10355.png
+Computing landmarks ../data/FFHQ_Real/10355.png
+Alignining ../data/FFHQ_Real/16011.png
+Computing landmarks ../data/FFHQ_Real/16011.png
+Writting morphed face : ./results/cluster_280_temp_1.png ... 
+
+Alignining ../data/FFHQ_Real/15235.png
+Computing landmarks ../data/FFHQ_Real/15235.png
+Alignining ../data/FFHQ_Real/30998.png
+Computing landmarks ../data/FFHQ_Real/30998.png
+Writting morphed face : ./results/cluster_280_temp_2.png ... 
+
+Alignining ../data/FFHQ_Real/29258.png
+Computing landmarks ../data/FFHQ_Real/29258.png
+Alignining ../data/FFHQ_Real/23204.png
+Computing landmarks ../data/FFHQ_Real/23204.png
+Writting morphed face : ./results/cluster_280_temp_3.png ... 
+
+Alignining ../data/FFHQ_Real/35369.png
+Computing landmarks ../data/FFHQ_Real/35369.png
+Alignining ../data/FFHQ_Real/12347.png
+Computing landmarks ../data/FFHQ_Real/12347.png
+Writting morphed face : ./results/cluster_280_temp_4.png ... 
+
+Alignining ../data/FFHQ_Real/50327.png
+Computing landmarks ../data/FFHQ_Real/50327.png
+Alignining ../data/FFHQ_Real/30610.png
+Computing landmarks ../data/FFHQ_Real/30610.png
+Writting morphed face : ./results/cluster_280_temp_5.png ... 
+
+Alignining ../data/FFHQ_Real/37983.png
+Computing landmarks ../data/FFHQ_Real/37983.png
+Alignining ../data/FFHQ_Real/27699.png
+Computing landmarks ../data/FFHQ_Real/27699.png
+Writting morphed face : ./results/cluster_280_temp_6.png ... 
+
+Alignining ../data/FFHQ_Real/31116.png
+Computing landmarks ../data/FFHQ_Real/31116.png
+Alignining ../data/FFHQ_Real/26659.png
+Computing landmarks ../data/FFHQ_Real/26659.png
+Writting morphed face : ./results/cluster_280_temp_7.png ... 
+
+Alignining ../data/FFHQ_Real/02108.png
+Computing landmarks ../data/FFHQ_Real/02108.png
+Alignining ../data/FFHQ_Real/38654.png
+Computing landmarks ../data/FFHQ_Real/38654.png
+Writting morphed face : ./results/cluster_280_temp_8.png ... 
+
+Alignining ../data/FFHQ_Real/25016.png
+Computing landmarks ../data/FFHQ_Real/25016.png
+Alignining ../data/FFHQ_Real/58987.png
+Computing landmarks ../data/FFHQ_Real/58987.png
+Writting morphed face : ./results/cluster_280_temp_9.png ... 
+
+Saved cluster summary: ./results/cluster_280_summary.png
+
+Generated 50 pairs.
+
+[0;34m[Starting morph generation...] 2026-06-11 17:09:44.010509[0m
+
+[0;34m[end] 2026-06-11 17:14:05.351280[0m
+
+Total Execution Time: 261.34 seconds

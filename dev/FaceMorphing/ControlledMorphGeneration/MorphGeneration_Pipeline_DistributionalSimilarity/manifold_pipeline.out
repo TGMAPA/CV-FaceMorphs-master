@@ -1,0 +1,29 @@
+
+[0;34m[start] 2026-06-11 15:45:15.683311[0m
+
+
+[0;34m[Building manifold...] 2026-06-11 15:45:15.683311[0m
+No data found, starting manifold execution...
+Loading dataset...
+-- Executing t-SNE...
+-- Executing HDBSCAN clustering...
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Opening in existing browser session.
+Saved: ../data/ManifoldAnalysis/manifold_dataset.csv
+
+[0;34m[Ploting Manifold...] 2026-06-11 15:45:15.683311[0m
+Interactive plot saved in : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/interactive_hdbscan_manifold.html
+Interactive plot for demographic_feature: (Age) saved in: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_by_Age.html
+Interactive plot for demographic_feature: (Dominant_Race) saved in: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_by_Dominant_Race.html
+Interactive plot for demographic_feature: (Dominant_Gender) saved in: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_by_Dominant_Gender.html
+
+[0;34m[Executing Cluster Analysis...] 2026-06-11 15:45:15.683311[0m
+Interactive Cluster Summary Plot saved in : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/cluster_demographic_summary.html
+
+[0;34m[end] 2026-06-11 15:49:06.674881[0m
+
+Exectime:  230.99157

@@ -12,6 +12,18 @@ The manifold is analyzed using neighborhood and density-based methods to identif
 
 Demographic regions within the manifold are compared using a distribution-based metric in order to measure compatibility, separation, and transitions between demographic populations at a distributional level rather than through simple pairwise distances. (**Wasserstein Distance**)
 
+
+
+### Select some of the generated clusters - Wed 11 June 14:08:13 GMT by MAPA
+
+First, we filter the cluster's samples that don't belong to the dominant race or gender of the cluster. This behaviour could be originated due to deepface model's limitations in demographic detection tasks.
+
+Then, we select around 25 samples from each cluster and morphs are generated between them.
+
+
+
+-----------
+
 ### 1. Highly Compatible Regions
 
 Clusters:

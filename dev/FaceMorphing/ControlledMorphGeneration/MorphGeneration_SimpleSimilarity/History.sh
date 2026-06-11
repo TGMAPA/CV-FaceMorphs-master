@@ -1,5 +1,5 @@
 # Execute pair csv generation
-python -m ControlledMorphGeneration.t_sne_sample_set_extraction > ControlledMorphGeneration/t_sne_sample_set_extraction.out
+python -m ControlledMorphGeneration.MorphGeneration_SimpleSimilarity.t_sne_sample_set_extraction > ControlledMorphGeneration/MorphGeneration_SimpleSimilarity/t_sne_sample_set_extraction.out
 
 # Execute morph generation with csv
-python -m ControlledMorphGeneration.ControlledMorphGeneration > ControlledMorphGeneration/ControlledMorphGeneration.out
+python -m ControlledMorphGeneration.MorphGeneration_SimpleSimilarity.ControlledMorphGeneration > ControlledMorphGeneration/MorphGeneration_SimpleSimilarity/ControlledMorphGeneration.out

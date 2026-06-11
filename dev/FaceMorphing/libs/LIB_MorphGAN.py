@@ -229,7 +229,6 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     os.system("rm %s" %(Options.Sb2));	
 
 
-
 def morph_2_faces_process(file1_path, file2_path, alpha, Morph_Results, temp_dir_path, device, model, log = False): #Sun 26 Feb 2026 11:21:45 GMT by MAPA
     # ---- Face align process
     # -- Align face 1

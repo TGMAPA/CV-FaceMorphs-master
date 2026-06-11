@@ -89,19 +89,19 @@ def process_controlled_generation(csv_path, output_dir_path="./results/morphed_f
 
 def main():
     # Base path where your pair CSVs are stored
-    DATA_BASE_PATH = "../data/ControlledMorphGeneration_MorphPairs/"
+    DATA_BASE_PATH = "../data/Simple_ControlledMorphGeneration_MorphPairs/"
 
     # Execute controlled generation process for DENSE (Similar) pairs
     # This generates the "High Risk" samples
     process_controlled_generation(
         csv_path = DATA_BASE_PATH + "morph_pairs_DENSE_SIMILAR.csv", 
-        output_dir_path = "./ControlledMorphGeneration/results/morphed_faces_dense/", 
+        output_dir_path = "./ControlledMorphGeneration/MorphGeneration_SimpleSimilarity/results/morphed_faces_dense/", 
         alpha = 0.5
     )
 
     process_controlled_generation(
         csv_path = DATA_BASE_PATH + "morph_pairs_EXTREME_DISTANT.csv", 
-        output_dir_path = "./ControlledMorphGeneration/results/morphed_faces_extreme/", 
+        output_dir_path = "./ControlledMorphGeneration/MorphGeneration_SimpleSimilarity/results/morphed_faces_extreme/", 
         alpha = 0.5
     )
     
