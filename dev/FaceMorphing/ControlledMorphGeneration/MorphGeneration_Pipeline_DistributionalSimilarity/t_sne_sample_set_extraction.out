@@ -1,5 +1,5 @@
 
-[0;34m[start] 2026-05-24 22:59:46.574866[0m
+[0;34m[start] 2026-05-26 11:53:40.920014[0m
 
 Loading dataset...
 -- Executing t-SNE...
@@ -12,6 +12,6 @@ Opening in existing browser session.
 Opening in existing browser session.
 -- Computing cluster Wasserstein distances...
 
-[0;34m[end] 2026-05-24 23:03:04.435080[0m
+[0;34m[end] 2026-05-26 11:56:41.520261[0m
 
-Exectime:  197.860214
+Exectime:  180.600247

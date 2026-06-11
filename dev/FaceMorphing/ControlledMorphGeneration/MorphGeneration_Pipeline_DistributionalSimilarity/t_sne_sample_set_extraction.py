@@ -474,8 +474,6 @@ def main():
     # hdbscan cluster asignment confidence 
     dataset['cluster_prob'] = clusterer.probabilities_
 
-    #print(dataset['cluster'].value_counts())
-
     #Sun 24 May 20:47:30 GMT by MAPA
     # Plot clusters
     plot_hdbscan_clusters(X_tsne, cluster_labels)
