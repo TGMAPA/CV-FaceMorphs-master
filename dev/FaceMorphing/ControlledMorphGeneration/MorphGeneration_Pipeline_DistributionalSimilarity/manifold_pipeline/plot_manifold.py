@@ -19,7 +19,7 @@ def plot_hdbscan_clusters(X_tsne, cluster_labels):
     plt.ylabel("t-SNE 2")
 
     plt.colorbar(scatter)
-    plt.savefig("./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_clusters_visualization.png", dpi=300)
+    plt.savefig("./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_PercentileThreshold/hdbscan_clusters_visualization.png", dpi=300)
     plt.show()
 
 #Sun 24 May 20:47:30 GMT by MAPA
@@ -54,7 +54,7 @@ def plot_interactive_hdbscan(dataset):
     )
 
     # Save plot as html
-    output_path = "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/interactive_hdbscan_manifold.html"
+    output_path = "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_PercentileThreshold/interactive_hdbscan_manifold.html"
     fig.write_html(output_path)
     print(f"Interactive plot saved in : {output_path}")
 
@@ -83,7 +83,7 @@ def plot_by_demographic(dataset, demographic_col):
         height=900
     )
 
-    output_path = f"./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/hdbscan_by_{demographic_col}.html"
+    output_path = f"./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_PercentileThreshold/hdbscan_by_{demographic_col}.html"
     fig.write_html(output_path)
     print(f"Interactive plot for demographic_feature: ({demographic_col}) saved in: {output_path}")
 

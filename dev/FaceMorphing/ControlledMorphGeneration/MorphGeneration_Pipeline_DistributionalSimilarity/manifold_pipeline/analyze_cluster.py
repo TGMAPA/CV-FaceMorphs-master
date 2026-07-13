@@ -252,7 +252,7 @@ def plot_cluster_summary(dataset):
         template='plotly_white'
     )
 
-    output_path = "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/cluster_demographic_summary.html"
+    output_path = "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_PercentileThreshold/cluster_demographic_summary.html"
     fig.write_html(output_path)
     print(f"Interactive Cluster Summary Plot saved in : {output_path}")
 

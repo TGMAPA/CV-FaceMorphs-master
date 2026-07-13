@@ -1,7 +1,0 @@
-# Execute using FaceMophing as root
-
-# Execute manifold analysis and export cluster's dataset
-python -m ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.manifold_pipeline > ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/manifold_pipeline.out
-
-# Execute morph generation with csv
-python -m ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.ControlledMorphGeneration > ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/ControlledMorphGeneration.out

@@ -513,7 +513,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     dataset = load_manifold_dataset(manifold_dataset_clustered_path)
 
     print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(start) + "\033[0m")
-    # Get top populated clusters
+    # Get top populated HDBSCAN clusters
     top_clusters = get_top_clusters(dataset, n_clusters=5)
 
     print("Selected clusters:",top_clusters)
@@ -524,25 +524,27 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     # Controlled Morph generation dir base path
     controlled_morph_generation_dir_base_path = "../data/DistributionalSim_ControlledMorphGeneration_MorphPairs"
 
-    print("\n" + "\033[0;34m" + "[Cleaning Top Clusters...] " + str(start) + "\033[0m")
-    # Clean top cluters
+    # Proccess n selected clusters
+    print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(start) + "\033[0m")
     for cluster_id in top_clusters:
 
-        print(f"\nProcessing cluster {cluster_id}")
+        print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(start) + "\033[0m")
 
         # Remove low-confidence samples and demographic inconsistencies
-        cluster_df = get_clean_cluster(
-            dataset,
-            cluster_id,
-            min_prob=0.80
-        )
-
+        print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(start) + "\033[0m")
+        cluster_df = get_clean_cluster(dataset, cluster_id, min_prob=0.80)
         print(f"Clean samples: {len(cluster_df)}")
 
         # Skip clusters with insufficient samples
         if len(cluster_df) < 20:
             print("Skipping cluster")
             continue
+
+        # 1. Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
+        # 2. Fit some distribution types (χ², Gamma, Weibull y Lognormal) and compare
+        # 3. Determine trust regions based on the distribution kind (Chi2, etc.)
+        # 4. Save histogram with its distribution fit and the resultant trust region
+        # 5. Generate a global trust region based on each cluster’s trust parameters
         
         # Estimate adaptive t-SNE distance threshold
         percentile = 50
@@ -579,7 +581,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         neighbor_pairs = analyze_neighbor_pairs(cluster_df)
 
         # Visualize nearest-neighbor distance distribution
-        create_cluster_histogram(neighbor_pairs, min_distance, "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/results" + f"/cluster_{cluster_id}_histogram.png", percentile)
+        create_cluster_histogram(neighbor_pairs, min_distance, "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_TrustRegions/results" + f"/cluster_{cluster_id}_histogram.png", percentile)
 
         # Save cluster pairs into csv
         cluster_pairs.to_csv(controlled_morph_generation_dir_base_path + f"/cluster_{cluster_id}_pairs.csv",index=False)
@@ -591,7 +593,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         process_cluster_generation(
             cluster_pairs_df=cluster_pairs,
             cluster_id=cluster_id,
-            output_dir_path="./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/results",
+            output_dir_path="./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_TrustRegions/results",
             alpha=0.5
         )
 
