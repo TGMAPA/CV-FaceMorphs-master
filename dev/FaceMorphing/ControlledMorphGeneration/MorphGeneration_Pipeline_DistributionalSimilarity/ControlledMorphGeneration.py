@@ -9,84 +9,8 @@ from argparse import Namespace
 from scipy.spatial.distance import cdist
 from libs import LIB_FaceMorph, LIB_MorphGAN
 from PIL import Image
+from sklearn.neighbors import NearestNeighbors
 
-#Wed 11 June 14:08:13 GMT by MAPA
-# def process_controlled_generation(df_pairs, output_dir_path="./results/DistributionalSim_ControlledMorphGeneration_MorphPairs", alpha=0.5):
-#     # Create output directory if it doesn't exist
-#     if not os.path.exists(output_dir_path):
-#         os.makedirs(output_dir_path)
-#         print(f"Created directory: {output_dir_path}")
-
-#     # Iteration
-#     total_pairs = len(df_pairs) 
-#     print(f"Starting composite morphing process for {total_pairs} pairs...\n")
-
-#     for index, row in df_pairs.iterrows():
-#         # Temporary path for the standalone morph before composting
-#         temp_morph_path = os.path.join(output_dir_path, f"temp_{index}.png")
-#         # Final path for the composite figure
-#         final_composite_path = os.path.join(
-#             output_dir_path,
-#             f"cluster_{row['cluster']}_"
-#             f"{row['pair_type']}_"
-#             f"{index:03d}.png"
-#         )
-#         # Prepare parameters for the GAN library
-#         params = Namespace(
-#             Sb1 = row['file_1'], 
-#             Sb2 = row['file_2'], 
-#             Morph = temp_morph_path,
-#             Alpha = alpha
-#         )
-
-#         try:
-#             # Generate the morph image using your library
-#             LIB_MorphGAN.MorphFace(params)
-            
-#             # Create the composite figure (Original 1 | Original 2 | Result)
-#             fig, axes = plt.subplots(1, 3, figsize=(15, 6))
-            
-#             # Load images
-#             img1 = mpimg.imread(row['file_1'])
-#             img2 = mpimg.imread(row['file_2'])
-#             morph_img = mpimg.imread(temp_morph_path)
-            
-#             # Plot Image 1
-#             axes[0].imshow(img1)
-#             axes[0].set_title(f"Source 1\n({row['Race_1']} {row['Gender_1']})\nPath: {row['file_1']}")
-#             axes[0].axis('off')
-            
-#             # Plot Image 2
-#             axes[1].imshow(img2)
-#             axes[1].set_title(f"Source 2\n({row['Race_2']} {row['Gender_2']})\nPath: {row['file_2']}")
-#             axes[1].axis('off')
-            
-#             # Plot the resulting Morph
-#             axes[2].imshow(morph_img)
-#             axes[2].set_title(f"Morphed Result\n(Alpha: {alpha})")
-#             axes[2].axis('off')
-            
-#             # Adjust manually to give room for titles
-#             plt.subplots_adjust(top=0.85, bottom=0.1, wspace=0.2)
-            
-#             # General title to the whole figure
-#             fig.suptitle(f"Morphing Analysis - Pair {index:03d}\nt-SNE Dist: {row['tsne_dist']:.4f}", fontsize=12)
-            
-#             # Save the full figure and close it to free memory
-#             plt.savefig(final_composite_path, dpi=150, bbox_inches='tight')
-#             plt.close(fig) 
-            
-#             # Clean up the temporary standalone morph file
-#             if os.path.exists(temp_morph_path):
-#                 os.remove(temp_morph_path)
-
-#             if (index + 1) % 10 == 0:
-#                 print(f"Progress: [{index + 1}/{total_pairs}] composites created...")
-        
-#         except Exception as e:
-#             print(f"Error processing pair {index}: {e}")
-
-#     print(f"\nSuccessfully generated composite plates in: {output_dir_path}")
 
 # Wed 11 June 2026 by MAPA
 def process_cluster_generation(
@@ -401,11 +325,83 @@ def get_clean_cluster(
 
     return subset
 
+#Tue 30 June 19:02:45 GMT by MAPA
+def analyze_neighbor_pairs(cluster_df):
+    # Extract 2D t-SNE coordinates
+    points = cluster_df[["tsne_x","tsne_y"]].values
+
+    # Fit Nearest Neighbor model using 2 neighbors in order to get only 
+    # each point related with it's nearest neighbor
+    nn = NearestNeighbors(n_neighbors=2, metric="euclidean")
+    nn.fit(points)
+
+    # Compute nearest neighbor distances
+    distances, indices = nn.kneighbors(points)
+
+    rows = []
+
+    # Store nearest neighbor information
+    for i in range(len(cluster_df)):
+
+        j = indices[i,1]
+
+        rows.append({
+            "idx1": i,
+            "idx2": j,
+            "distance": distances[i,1]
+        })
+
+    return pd.DataFrame(rows)
+
+#Tue 30 June 19:02:45 GMT by MAPA
+def estimate_min_tsne_distance(cluster_df, percentile):
+    # Compute all nearest neighbor distances
+    neighbor_pairs = analyze_neighbor_pairs(cluster_df)
+
+    # Estimate minimum valid t-SNE distance based on specified percentile from neighbor_pairs distance distribution
+    threshold = np.percentile(neighbor_pairs["distance"], percentile)
+
+    print(f"Automatic minimum t-SNE distance: {threshold:.4f}")
+
+    return threshold, neighbor_pairs
+
+#Tue 30 June 19:02:45 GMT by MAPA
+def create_cluster_histogram(pairs, threshold, filepath, percentile):
+    # Create histogram figure
+    plt.figure(figsize=(10,6))
+
+    # Plot nearest neighbor distance distribution
+    plt.hist(
+        pairs["distance"],
+        bins=40,
+        edgecolor="black"
+    )
+
+    # Display selected percentile threshold
+    plt.axvline(
+        threshold,
+        color="red",
+        linewidth=3,
+        label=f"{percentile}th percentile = {threshold:.4f}"
+    )
+
+    # Configure plot labels
+    plt.xlabel("Nearest Neighbor t-SNE Distance")
+    plt.ylabel("Frequency")
+    plt.title(f"Distribution of Nearest Neighbor Distances. Saved in: {filepath}")
+    plt.legend()
+
+    # Save histogram
+    plt.savefig(filepath)
+
+    #plt.show()
+
 #Wed 11 June 14:08:13 GMT by MAPA
 def generate_cluster_pairs(
         cluster_df,
         n_pairs=5,
-        mode="closest"
+        mode="closest",
+        min_tsne_distance=0
     ):
 
     points = cluster_df[
@@ -428,23 +424,28 @@ def generate_cluster_pairs(
     for i in range(len(cluster_df)):
         for j in range(i+1, len(cluster_df)):
 
-            candidate_pairs.append(
+            d = dist_matrix[i, j]
 
-                (
-                    i,
-                    j,
-                    dist_matrix[i,j]
-                )
+            # Avoid "identic" samples
+            if mode == "closest":
+
+                if d < min_tsne_distance:
+                    continue
+
+            # age_diff = abs(
+            #     cluster_df.iloc[i]["Age"] -
+            #     cluster_df.iloc[j]["Age"]
+            # )
+
+            candidate_pairs.append((i,j, d)
             )
 
     if mode == "closest":
-
         candidate_pairs.sort(
             key=lambda x:x[2]
         )
 
     else:
-
         candidate_pairs.sort(
             key=lambda x:x[2],
             reverse=True
@@ -508,7 +509,7 @@ def generate_cluster_pairs(
 #Wed 11 June 14:08:13 GMT by MAPA
 def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv"):
     print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(start) + "\033[0m")
-    # Load manifold dataset
+    # Load clustered manifold dataset
     dataset = load_manifold_dataset(manifold_dataset_clustered_path)
 
     print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(start) + "\033[0m")
@@ -517,7 +518,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
     print("Selected clusters:",top_clusters)
 
-    # Extract pairs
+    # Store generated pairs from clusters
     all_pairs = []
 
     # Controlled Morph generation dir base path
@@ -529,7 +530,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
         print(f"\nProcessing cluster {cluster_id}")
 
-        # Clean cluster from outlier samples
+        # Remove low-confidence samples and demographic inconsistencies
         cluster_df = get_clean_cluster(
             dataset,
             cluster_id,
@@ -538,23 +539,31 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
         print(f"Clean samples: {len(cluster_df)}")
 
-        # Validate cluster length
+        # Skip clusters with insufficient samples
         if len(cluster_df) < 20:
             print("Skipping cluster")
             continue
+        
+        # Estimate adaptive t-SNE distance threshold
+        percentile = 50
+        
+        # Compute distance threshold for image filtering 
+        min_distance, neighbor_pairs = estimate_min_tsne_distance(cluster_df, percentile)
         
         # Get closest pairs in cluster
         closest_pairs = generate_cluster_pairs(
             cluster_df,
             n_pairs=5,
-            mode="closest"
+            mode="closest",
+            min_tsne_distance= min_distance
         )
 
         # Get farthest pairs in cluster
         farthest_pairs = generate_cluster_pairs(
             cluster_df,
             n_pairs=5,
-            mode="farthest"
+            mode="farthest",
+            min_tsne_distance= min_distance
         )
 
         # Get final cluster pairs
@@ -566,12 +575,19 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
             ignore_index=True
         )
 
+        # Analyze cluster pairs
+        neighbor_pairs = analyze_neighbor_pairs(cluster_df)
+
+        # Visualize nearest-neighbor distance distribution
+        create_cluster_histogram(neighbor_pairs, min_distance, "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/results" + f"/cluster_{cluster_id}_histogram.png", percentile)
+
         # Save cluster pairs into csv
         cluster_pairs.to_csv(controlled_morph_generation_dir_base_path + f"/cluster_{cluster_id}_pairs.csv",index=False)
 
-        # Store pairs in global array
+        # Store cluster pairs for final export
         all_pairs.append(cluster_pairs)
 
+        # Generate morph images and summary visualization
         process_cluster_generation(
             cluster_pairs_df=cluster_pairs,
             cluster_id=cluster_id,
@@ -593,16 +609,6 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
     print(f"\nGenerated {len(final_df)} pairs.")
 
-
-    print("\n" + "\033[0;34m" + "[Starting morph generation...] " + str(start) + "\033[0m")
-    # morph_output_dir = ("./results")
-
-    # process_controlled_generation(
-    #     final_df,
-    #     output_dir_path=morph_output_dir,
-    #     alpha=0.5
-    # )
-
     return final_df
 
 
@@ -610,6 +616,7 @@ if __name__ == "__main__":
     start = datetime.datetime.now()
     print("\n" + "\033[0;34m" + "[start] " + str(start) + "\033[0m" + "\n")
     
+    # Run controlled morph generation pipeline
     ControlledMorphGeneration("../data/ManifoldAnalysis/manifold_dataset.csv")
     
     end = datetime.datetime.now()
