@@ -10,6 +10,7 @@ from scipy.spatial.distance import cdist
 from libs import LIB_FaceMorph, LIB_MorphGAN
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
+from scipy import stats
 
 
 # Wed 11 June 2026 by MAPA
@@ -365,36 +366,117 @@ def estimate_min_tsne_distance(cluster_df, percentile):
 
     return threshold, neighbor_pairs
 
-#Tue 30 June 19:02:45 GMT by MAPA
-def create_cluster_histogram(pairs, threshold, filepath, percentile):
-    # Create histogram figure
+#Wed 15 July 17:48:50 GMT by MAPA 
+def plot_fitted_distribution(
+        values,
+        best_distribution,
+        trust_region,
+        filepath,
+        title
+    ):
+
+    # Recover scipy distribution
+    distribution = best_distribution["distribution"]
+
+    # Recover estimated parameters
+    params = best_distribution["params"]
+
+    # Generate x-axis values
+    x = np.linspace(
+        np.min(values),
+        np.max(values),
+        500
+    )
+
+    # Evaluate fitted PDF
+    pdf = distribution.pdf(x,*params)
+
+    # Create figure
     plt.figure(figsize=(10,6))
 
-    # Plot nearest neighbor distance distribution
+    # Histogram (normalized)
     plt.hist(
-        pairs["distance"],
-        bins=40,
-        edgecolor="black"
+        values,
+        bins=30,
+        density=True,
+        alpha=0.6,
+        edgecolor="black",
+        label="Observed distances"
     )
 
-    # Display selected percentile threshold
-    plt.axvline(
-        threshold,
-        color="red",
+    # Plot fitted PDF
+    plt.plot(
+        x,
+        pdf,
         linewidth=3,
-        label=f"{percentile}th percentile = {threshold:.4f}"
+        label=f"{best_distribution['name']} fit"
     )
 
-    # Configure plot labels
-    plt.xlabel("Nearest Neighbor t-SNE Distance")
-    plt.ylabel("Frequency")
-    plt.title(f"Distribution of Nearest Neighbor Distances. Saved in: {filepath}")
+    text = (
+        f"{best_distribution['name']}\n"
+        f"KS = {best_distribution['ks_statistic']:.4f}\n"
+        f"p = {best_distribution['p_value']:.4f}\n"
+        f"AIC = {best_distribution['AIC']:.2f}"
+    )
+
+    plt.text(
+        0.98,
+        0.98,
+        text,
+        transform=plt.gca().transAxes,
+        fontsize=9,
+        verticalalignment="top",
+        horizontalalignment="right",
+        bbox=dict(
+            facecolor="white",
+            alpha=0.9
+        )
+    )
+
+    # Trust region
+    lower = trust_region["lower"]
+    upper = trust_region["upper"]
+
+    mask = (x >= lower) & (x <= upper)
+
+    plt.fill_between(
+        x[mask],
+        pdf[mask],
+        alpha=0.3,
+        label=f"{trust_region['confidence']*100:.0f}% Trust Region"
+    )
+
+    # Vertical lines
+    plt.axvline(
+        lower,
+        linestyle="--",
+        linewidth=2,
+        label=f"Lower = {lower:.4f}"
+    )
+
+    plt.axvline(
+        upper,
+        linestyle="--",
+        linewidth=2,
+        label=f"Upper = {upper:.4f}"
+    )
+
+    plt.xlabel("Nearest Neighbor Distance")
+
+    plt.ylabel("Density")
+
+    plt.title(title)
+
     plt.legend()
 
-    # Save histogram
-    plt.savefig(filepath)
+    plt.tight_layout()
 
-    #plt.show()
+    plt.savefig(
+        filepath,
+        dpi=250
+    )
+
+    plt.close()
 
 #Wed 11 June 14:08:13 GMT by MAPA
 def generate_cluster_pairs(
@@ -506,7 +588,70 @@ def generate_cluster_pairs(
 
     return pd.DataFrame(pairs)
 
-#Wed 11 June 14:08:13 GMT by MAPA
+#Mon 13 July 17:48:50 GMT by MAPA 
+def fit_candidate_distributions(values, candidate_distributions_dict):
+    # Store every distribution type 
+    fitted_distributions = []
+
+    # Estimate distribution parameters with scipy (max likelihood)
+    for key, distribution in candidate_distributions_dict.items():
+        # Get fitted params for each distribution candidate
+        params = distribution.fit(values)
+        
+        # Evaluate Kolmogorov-Smirnov and p-value
+        ks_statistic, p_value = stats.kstest(
+            values,
+            distribution.cdf,
+            args=params
+        )
+
+        # Compute log likelihood
+        log_likelihood = np.sum(distribution.logpdf(values, *params))
+
+        # Compute AIC (Akaike Information Criterion)
+        # Evaluates which distribution provides the best balance between model fit and simplicity, penalizing overly complex distributions to prevent overfitting.
+        k = len(params)
+        aic = 2 * k - 2 * log_likelihood
+
+        # Store fitted model information
+        fitted_distributions.append({
+                "name":key,
+                "distribution": distribution,
+                "params": params,
+                "ks_statistic": ks_statistic,
+                "p_value": p_value,
+                "log_likelihood": log_likelihood,
+                "AIC": aic
+            }
+        )
+    
+    return pd.DataFrame(fitted_distributions)
+
+#Wed 15 July 17:48:50 GMT by MAPA 
+def compute_trust_region(best_distribution, confidence=0.95):
+    # Recover fitted scipy distribution
+    distribution = best_distribution["distribution"]
+
+    # Recover estimated parameters
+    params = best_distribution["params"]
+
+    # Tail probability
+    alpha = 1 - confidence
+
+    # Lower confidence bound - Get the value where the desired acum probability ends
+    lower = distribution.ppf(alpha / 2, *params)
+
+    # Upper confidence bound - Get the value where the desired acum probability ends
+    upper = distribution.ppf(1 - alpha / 2, *params)
+
+    return {
+        "distribution": best_distribution["name"],
+        "confidence": confidence,
+        "lower": lower,
+        "upper": upper
+    }
+
+#Wed 11 June 14:08:13 GMT by MAPA       Modified: Mon 13 July 17:48:50 GMT by MAPA 
 def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv"):
     print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(start) + "\033[0m")
     # Load clustered manifold dataset
@@ -522,7 +667,14 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     all_pairs = []
 
     # Controlled Morph generation dir base path
-    controlled_morph_generation_dir_base_path = "../data/DistributionalSim_ControlledMorphGeneration_MorphPairs"
+    controlled_morph_generation_dir_base_path = "../data/DistributionalSim_ControlledMorphGeneration_MorphPairs/TrustRegions"
+
+    # Controlled morph generation results directory
+    controlled_morph_gen_results_dir_path = "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results"
+
+    # Create the directory safely 
+    os.makedirs(controlled_morph_generation_dir_base_path, exist_ok=True)   
+    os.makedirs(controlled_morph_gen_results_dir_path, exist_ok=True) 
 
     # Proccess n selected clusters
     print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(start) + "\033[0m")
@@ -530,7 +682,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
         print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(start) + "\033[0m")
 
-        # Remove low-confidence samples and demographic inconsistencies
+        # - Remove low-confidence samples and demographic inconsistencies
         print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(start) + "\033[0m")
         cluster_df = get_clean_cluster(dataset, cluster_id, min_prob=0.80)
         print(f"Clean samples: {len(cluster_df)}")
@@ -540,78 +692,98 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
             print("Skipping cluster")
             continue
 
-        # 1. Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
-        # 2. Fit some distribution types (χ², Gamma, Weibull y Lognormal) and compare
-        # 3. Determine trust regions based on the distribution kind (Chi2, etc.)
-        # 4. Save histogram with its distribution fit and the resultant trust region
-        # 5. Generate a global trust region based on each cluster’s trust parameters
-        
-        # Estimate adaptive t-SNE distance threshold
-        percentile = 50
-        
-        # Compute distance threshold for image filtering 
-        min_distance, neighbor_pairs = estimate_min_tsne_distance(cluster_df, percentile)
-        
-        # Get closest pairs in cluster
-        closest_pairs = generate_cluster_pairs(
-            cluster_df,
-            n_pairs=5,
-            mode="closest",
-            min_tsne_distance= min_distance
-        )
-
-        # Get farthest pairs in cluster
-        farthest_pairs = generate_cluster_pairs(
-            cluster_df,
-            n_pairs=5,
-            mode="farthest",
-            min_tsne_distance= min_distance
-        )
-
-        # Get final cluster pairs
-        cluster_pairs = pd.concat(
-            [
-                closest_pairs,
-                farthest_pairs
-            ],
-            ignore_index=True
-        )
-
-        # Analyze cluster pairs
+        # - Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
         neighbor_pairs = analyze_neighbor_pairs(cluster_df)
 
-        # Visualize nearest-neighbor distance distribution
-        create_cluster_histogram(neighbor_pairs, min_distance, "./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_TrustRegions/results" + f"/cluster_{cluster_id}_histogram.png", percentile)
+        # - Fit some distribution types (χ², Gamma, Weibull y Lognormal) and compare
+        # Extract distances values for distribution analysis
+        distances = neighbor_pairs["distance"].values
 
-        # Save cluster pairs into csv
-        cluster_pairs.to_csv(controlled_morph_generation_dir_base_path + f"/cluster_{cluster_id}_pairs.csv",index=False)
+        # Define candidate distributions to fit
+        candidate_distributions = {
+            "Chi-Square": stats.chi2,
+            "Gamma": stats.gamma,
+            "Weibull": stats.weibull_min,
+            "Lognormal": stats.lognorm
+        }
 
-        # Store cluster pairs for final export
-        all_pairs.append(cluster_pairs)
-
-        # Generate morph images and summary visualization
-        process_cluster_generation(
-            cluster_pairs_df=cluster_pairs,
-            cluster_id=cluster_id,
-            output_dir_path="./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity_TrustRegions/results",
-            alpha=0.5
+        # Fit data to candidate distributions
+        fitted_results = fit_candidate_distributions(distances, candidate_distributions)
+        
+        # Sort values by its ks in order to know the best fitted distribution model
+        fitted_results = fitted_results.sort_values(
+            by=["ks_statistic", "AIC"],
+            ascending=[True, True]
         )
 
-    # Concat pairs to generate
-    final_df = pd.concat(
-        all_pairs,
-        ignore_index=True
-    )
+        # Select the best model
+        print("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(start) + "\033[0m")
+        best_distribution = fitted_results.iloc[0]
+        print("Best fitted distributed: ", best_distribution["name"])
+        print(best_distribution)
+        
+        # Save results
+        fitted_results.to_csv( controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
+        
+        # - Determine trust region
+        trust_region = compute_trust_region(best_distribution, confidence = 0.90)
+        print(
+            f"Trust Region ({trust_region['confidence']*100:.1f}%): "
+            f"[{trust_region['lower']:.4f}, {trust_region['upper']:.4f}]"
+        )
 
-    # Save final sample pairs for generation
-    final_df.to_csv(
-        controlled_morph_generation_dir_base_path + f"/all_morph_pairs.csv",
-        index=False
-    )
+        # - Save histogram with its distribution fit and the resultant trust region
+        plot_fitted_distribution(
+            values=distances,
+            best_distribution=best_distribution,
+            trust_region=trust_region,
+            filepath=controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit_{best_distribution['name']}.png",
+            title=f"Cluster {cluster_id}: Neighbor Distances Distribution Fit ({best_distribution['name']})"
+        )
 
-    print(f"\nGenerated {len(final_df)} pairs.")
+        # | Should we generate morphs with each confidence variant trying to maximize morph quality? |
+        # | Morph quality score could be its embedding distance from parent samples |
 
-    return final_df
+        # - Generate a global trust region based on each cluster’s trust parameters
+        
+        
+
+
+
+        # Save cluster pairs into csv
+        #cluster_pairs.to_csv(controlled_morph_generation_dir_base_path + f"/cluster_{cluster_id}_pairs.csv",index=False)
+
+        # Store cluster pairs for final export
+        #all_pairs.append(cluster_pairs)
+
+
+
+        # - Generate morphs
+
+        # Generate morph images and summary visualization
+        # process_cluster_generation(
+        #     cluster_pairs_df=cluster_pairs,
+        #     cluster_id=cluster_id,
+        #     output_dir_path=controlled_morph_gen_results_dir_path,
+        #     alpha=0.5
+        # )
+
+    # # Concat pairs to generate
+    # final_df = pd.concat(
+    #     all_pairs,
+    #     ignore_index=True
+    # )
+
+    # # Save final sample pairs for generation
+    # final_df.to_csv(
+    #     controlled_morph_generation_dir_base_path + f"/all_morph_pairs.csv",
+    #     index=False
+    # )
+
+    # print(f"\nGenerated {len(final_df)} pairs.")
+
+    #return final_df
+    return
 
 
 if __name__ == "__main__":

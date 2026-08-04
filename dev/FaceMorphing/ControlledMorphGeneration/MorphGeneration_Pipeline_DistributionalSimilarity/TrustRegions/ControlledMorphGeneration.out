@@ -1,0 +1,100 @@
+
+[0;34m[start] 2026-07-15 21:35:40.306988[0m
+
+
+[0;34m[Loading manifold clustered dataset...] 2026-07-15 21:35:40.306988[0m
+Loaded 69998 samples
+
+[0;34m[Extracting top Clusters...] 2026-07-15 21:35:40.306988[0m
+Selected clusters: [393, 92, 118, 40, 280]
+
+[0;34m[Starting Cluser Processing...] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Processing cluster 393] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Cleaning Cluster 393] 2026-07-15 21:35:40.306988[0m
+Clean samples: 918
+
+[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+Best fitted distributed:  Gamma
+name                                                          Gamma
+distribution      <scipy.stats._continuous_distns.gamma_gen obje...
+params            (1.7520804112390536, -0.0012685014765868505, 0...
+ks_statistic                                               0.027852
+p_value                                                    0.466355
+log_likelihood                                           497.833679
+AIC                                                     -989.667357
+Name: 1, dtype: object
+Trust Region (90.0%): [0.0332, 0.5721]
+
+[0;34m[Processing cluster 92] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Cleaning Cluster 92] 2026-07-15 21:35:40.306988[0m
+Clean samples: 1186
+
+[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (1.297796270850593, 0.0024434311703719013, 0.2...
+ks_statistic                                                0.01692
+p_value                                                    0.880436
+log_likelihood                                           770.887483
+AIC                                                    -1535.774965
+Name: 2, dtype: object
+Trust Region (90.0%): [0.0246, 0.5105]
+
+[0;34m[Processing cluster 118] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Cleaning Cluster 118] 2026-07-15 21:35:40.306988[0m
+Clean samples: 717
+
+[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (1.3105554554608434, 0.009209937749295578, 0.2...
+ks_statistic                                               0.032209
+p_value                                                     0.43751
+log_likelihood                                           485.196793
+AIC                                                     -964.393585
+Name: 2, dtype: object
+Trust Region (90.0%): [0.0314, 0.5034]
+
+[0;34m[Processing cluster 40] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Cleaning Cluster 40] 2026-07-15 21:35:40.306988[0m
+Clean samples: 835
+
+[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (1.2043116325221512, 0.0017522412239188046, 0....
+ks_statistic                                               0.030714
+p_value                                                    0.402121
+log_likelihood                                           623.369868
+AIC                                                    -1240.739737
+Name: 2, dtype: object
+Trust Region (90.0%): [0.0179, 0.4757]
+
+[0;34m[Processing cluster 280] 2026-07-15 21:35:40.306988[0m
+
+[0;34m[Cleaning Cluster 280] 2026-07-15 21:35:40.306988[0m
+Clean samples: 405
+
+[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (1.3395134731007396, 0.008748302961089624, 0.3...
+ks_statistic                                               0.024517
+p_value                                                    0.963066
+log_likelihood                                           112.871467
+AIC                                                     -219.742934
+Name: 2, dtype: object
+Trust Region (90.0%): [0.0438, 0.7392]
+
+[0;34m[end] 2026-07-15 21:35:44.701980[0m
+
+Total Execution Time: 4.39 seconds
