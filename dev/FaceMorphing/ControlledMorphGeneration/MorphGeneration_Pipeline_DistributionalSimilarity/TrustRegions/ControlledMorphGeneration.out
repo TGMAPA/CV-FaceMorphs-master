@@ -1,21 +1,21 @@
 
-[0;34m[start] 2026-07-15 21:35:40.306988[0m
+[0;34m[start] 2026-08-04 21:11:58.288526[0m
 
 
-[0;34m[Loading manifold clustered dataset...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Loading manifold clustered dataset...] 2026-08-04 21:11:58.288526[0m
 Loaded 69998 samples
 
-[0;34m[Extracting top Clusters...] 2026-07-15 21:35:40.306988[0m
-Selected clusters: [393, 92, 118, 40, 280]
+[0;34m[Extracting top Clusters...] 2026-08-04 21:11:58.288526[0m
+Selected clusters: [393, 92, 118, 40, 280, 133, 194, 129, 340, 277, 423, 311, 513, 270, 348]
 
-[0;34m[Starting Cluser Processing...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Starting Cluser Processing...] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Processing cluster 393] 2026-07-15 21:35:40.306988[0m
+[0;34m[Processing cluster 393] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Cleaning Cluster 393] 2026-07-15 21:35:40.306988[0m
+[0;34m[Cleaning Cluster 393] 2026-08-04 21:11:58.288526[0m
 Clean samples: 918
 
-[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -25,14 +25,136 @@ p_value                                                    0.466355
 log_likelihood                                           497.833679
 AIC                                                     -989.667357
 Name: 1, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
 Trust Region (90.0%): [0.0332, 0.5721]
 
-[0;34m[Processing cluster 92] 2026-07-15 21:35:40.306988[0m
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Cleaning Cluster 92] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/07938.png
+Computing landmarks ../data/FFHQ_Real/07938.png
+Alignining ../data/FFHQ_Real/09003.png
+Computing landmarks ../data/FFHQ_Real/09003.png
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/29199.png
+Computing landmarks ../data/FFHQ_Real/29199.png
+Alignining ../data/FFHQ_Real/49365.png
+Computing landmarks ../data/FFHQ_Real/49365.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/44630.png
+Computing landmarks ../data/FFHQ_Real/44630.png
+Alignining ../data/FFHQ_Real/64248.png
+Computing landmarks ../data/FFHQ_Real/64248.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/45181.png
+Computing landmarks ../data/FFHQ_Real/45181.png
+Alignining ../data/FFHQ_Real/19358.png
+Computing landmarks ../data/FFHQ_Real/19358.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/22994.png
+Computing landmarks ../data/FFHQ_Real/22994.png
+Alignining ../data/FFHQ_Real/48169.png
+Computing landmarks ../data/FFHQ_Real/48169.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/57353.png
+Computing landmarks ../data/FFHQ_Real/57353.png
+Alignining ../data/FFHQ_Real/37381.png
+Computing landmarks ../data/FFHQ_Real/37381.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/46019.png
+Computing landmarks ../data/FFHQ_Real/46019.png
+Alignining ../data/FFHQ_Real/16196.png
+Computing landmarks ../data/FFHQ_Real/16196.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/30310.png
+Computing landmarks ../data/FFHQ_Real/30310.png
+Alignining ../data/FFHQ_Real/29793.png
+Computing landmarks ../data/FFHQ_Real/29793.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/57764.png
+Computing landmarks ../data/FFHQ_Real/57764.png
+Alignining ../data/FFHQ_Real/23927.png
+Computing landmarks ../data/FFHQ_Real/23927.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/11768.png
+Computing landmarks ../data/FFHQ_Real/11768.png
+Alignining ../data/FFHQ_Real/20662.png
+Computing landmarks ../data/FFHQ_Real/20662.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/28479.png
+Computing landmarks ../data/FFHQ_Real/28479.png
+Alignining ../data/FFHQ_Real/32979.png
+Computing landmarks ../data/FFHQ_Real/32979.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/11468.png
+Computing landmarks ../data/FFHQ_Real/11468.png
+Alignining ../data/FFHQ_Real/02561.png
+Computing landmarks ../data/FFHQ_Real/02561.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/40786.png
+Computing landmarks ../data/FFHQ_Real/40786.png
+Alignining ../data/FFHQ_Real/07592.png
+Computing landmarks ../data/FFHQ_Real/07592.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/57703.png
+Computing landmarks ../data/FFHQ_Real/57703.png
+Alignining ../data/FFHQ_Real/42103.png
+Computing landmarks ../data/FFHQ_Real/42103.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/37488.png
+Computing landmarks ../data/FFHQ_Real/37488.png
+Alignining ../data/FFHQ_Real/58708.png
+Computing landmarks ../data/FFHQ_Real/58708.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/11762.png
+Computing landmarks ../data/FFHQ_Real/11762.png
+Alignining ../data/FFHQ_Real/19884.png
+Computing landmarks ../data/FFHQ_Real/19884.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/36905.png
+Computing landmarks ../data/FFHQ_Real/36905.png
+Alignining ../data/FFHQ_Real/56549.png
+Computing landmarks ../data/FFHQ_Real/56549.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/23135.png
+Computing landmarks ../data/FFHQ_Real/23135.png
+Alignining ../data/FFHQ_Real/41727.png
+Computing landmarks ../data/FFHQ_Real/41727.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/morphs/cluster_393_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/cluster_393_percentile_summary.png
+
+[0;34m[Processing cluster 92] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 92] 2026-08-04 21:11:58.288526[0m
 Clean samples: 1186
 
-[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -42,14 +164,134 @@ p_value                                                    0.880436
 log_likelihood                                           770.887483
 AIC                                                    -1535.774965
 Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
 Trust Region (90.0%): [0.0246, 0.5105]
 
-[0;34m[Processing cluster 118] 2026-07-15 21:35:40.306988[0m
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Cleaning Cluster 118] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/40567.png
+Computing landmarks ../data/FFHQ_Real/40567.png
+Alignining ../data/FFHQ_Real/38693.png
+Computing landmarks ../data/FFHQ_Real/38693.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/13521.png
+Computing landmarks ../data/FFHQ_Real/13521.png
+Alignining ../data/FFHQ_Real/66282.png
+Computing landmarks ../data/FFHQ_Real/66282.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/01000.png
+Computing landmarks ../data/FFHQ_Real/01000.png
+Alignining ../data/FFHQ_Real/58000.png
+Computing landmarks ../data/FFHQ_Real/58000.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/32306.png
+Computing landmarks ../data/FFHQ_Real/32306.png
+Alignining ../data/FFHQ_Real/11676.png
+Computing landmarks ../data/FFHQ_Real/11676.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/60366.png
+Computing landmarks ../data/FFHQ_Real/60366.png
+Alignining ../data/FFHQ_Real/33049.png
+Computing landmarks ../data/FFHQ_Real/33049.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/08173.png
+Computing landmarks ../data/FFHQ_Real/08173.png
+Alignining ../data/FFHQ_Real/00884.png
+Computing landmarks ../data/FFHQ_Real/00884.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/19796.png
+Computing landmarks ../data/FFHQ_Real/19796.png
+Alignining ../data/FFHQ_Real/32780.png
+Computing landmarks ../data/FFHQ_Real/32780.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/06993.png
+Computing landmarks ../data/FFHQ_Real/06993.png
+Alignining ../data/FFHQ_Real/57518.png
+Computing landmarks ../data/FFHQ_Real/57518.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/22853.png
+Computing landmarks ../data/FFHQ_Real/22853.png
+Alignining ../data/FFHQ_Real/56026.png
+Computing landmarks ../data/FFHQ_Real/56026.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/38639.png
+Computing landmarks ../data/FFHQ_Real/38639.png
+Alignining ../data/FFHQ_Real/62884.png
+Computing landmarks ../data/FFHQ_Real/62884.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/05002.png
+Computing landmarks ../data/FFHQ_Real/05002.png
+Alignining ../data/FFHQ_Real/46546.png
+Computing landmarks ../data/FFHQ_Real/46546.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/55673.png
+Computing landmarks ../data/FFHQ_Real/55673.png
+Alignining ../data/FFHQ_Real/64395.png
+Computing landmarks ../data/FFHQ_Real/64395.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/65383.png
+Computing landmarks ../data/FFHQ_Real/65383.png
+Alignining ../data/FFHQ_Real/37739.png
+Computing landmarks ../data/FFHQ_Real/37739.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/19535.png
+Computing landmarks ../data/FFHQ_Real/19535.png
+Alignining ../data/FFHQ_Real/61617.png
+Computing landmarks ../data/FFHQ_Real/61617.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/54664.png
+Computing landmarks ../data/FFHQ_Real/54664.png
+Alignining ../data/FFHQ_Real/44759.png
+Computing landmarks ../data/FFHQ_Real/44759.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/24095.png
+Computing landmarks ../data/FFHQ_Real/24095.png
+Alignining ../data/FFHQ_Real/12943.png
+Computing landmarks ../data/FFHQ_Real/12943.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/20865.png
+Computing landmarks ../data/FFHQ_Real/20865.png
+Alignining ../data/FFHQ_Real/67924.png
+Computing landmarks ../data/FFHQ_Real/67924.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/48328.png
+Computing landmarks ../data/FFHQ_Real/48328.png
+Alignining ../data/FFHQ_Real/58270.png
+Computing landmarks ../data/FFHQ_Real/58270.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/morphs/cluster_92_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/cluster_92_percentile_summary.png
+
+[0;34m[Processing cluster 118] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 118] 2026-08-04 21:11:58.288526[0m
 Clean samples: 717
 
-[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -59,14 +301,134 @@ p_value                                                     0.43751
 log_likelihood                                           485.196793
 AIC                                                     -964.393585
 Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
 Trust Region (90.0%): [0.0314, 0.5034]
 
-[0;34m[Processing cluster 40] 2026-07-15 21:35:40.306988[0m
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Cleaning Cluster 40] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/10910.png
+Computing landmarks ../data/FFHQ_Real/10910.png
+Alignining ../data/FFHQ_Real/35917.png
+Computing landmarks ../data/FFHQ_Real/35917.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/32501.png
+Computing landmarks ../data/FFHQ_Real/32501.png
+Alignining ../data/FFHQ_Real/68716.png
+Computing landmarks ../data/FFHQ_Real/68716.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/41636.png
+Computing landmarks ../data/FFHQ_Real/41636.png
+Alignining ../data/FFHQ_Real/13360.png
+Computing landmarks ../data/FFHQ_Real/13360.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/05967.png
+Computing landmarks ../data/FFHQ_Real/05967.png
+Alignining ../data/FFHQ_Real/31902.png
+Computing landmarks ../data/FFHQ_Real/31902.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/24410.png
+Computing landmarks ../data/FFHQ_Real/24410.png
+Alignining ../data/FFHQ_Real/10647.png
+Computing landmarks ../data/FFHQ_Real/10647.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/57727.png
+Computing landmarks ../data/FFHQ_Real/57727.png
+Alignining ../data/FFHQ_Real/10583.png
+Computing landmarks ../data/FFHQ_Real/10583.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/24786.png
+Computing landmarks ../data/FFHQ_Real/24786.png
+Alignining ../data/FFHQ_Real/26953.png
+Computing landmarks ../data/FFHQ_Real/26953.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/23978.png
+Computing landmarks ../data/FFHQ_Real/23978.png
+Alignining ../data/FFHQ_Real/50998.png
+Computing landmarks ../data/FFHQ_Real/50998.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/45045.png
+Computing landmarks ../data/FFHQ_Real/45045.png
+Alignining ../data/FFHQ_Real/35761.png
+Computing landmarks ../data/FFHQ_Real/35761.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/10967.png
+Computing landmarks ../data/FFHQ_Real/10967.png
+Alignining ../data/FFHQ_Real/11898.png
+Computing landmarks ../data/FFHQ_Real/11898.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/45684.png
+Computing landmarks ../data/FFHQ_Real/45684.png
+Alignining ../data/FFHQ_Real/30213.png
+Computing landmarks ../data/FFHQ_Real/30213.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/01763.png
+Computing landmarks ../data/FFHQ_Real/01763.png
+Alignining ../data/FFHQ_Real/25222.png
+Computing landmarks ../data/FFHQ_Real/25222.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/44156.png
+Computing landmarks ../data/FFHQ_Real/44156.png
+Alignining ../data/FFHQ_Real/18415.png
+Computing landmarks ../data/FFHQ_Real/18415.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/15277.png
+Computing landmarks ../data/FFHQ_Real/15277.png
+Alignining ../data/FFHQ_Real/57676.png
+Computing landmarks ../data/FFHQ_Real/57676.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/04064.png
+Computing landmarks ../data/FFHQ_Real/04064.png
+Alignining ../data/FFHQ_Real/18785.png
+Computing landmarks ../data/FFHQ_Real/18785.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/17670.png
+Computing landmarks ../data/FFHQ_Real/17670.png
+Alignining ../data/FFHQ_Real/06324.png
+Computing landmarks ../data/FFHQ_Real/06324.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/03774.png
+Computing landmarks ../data/FFHQ_Real/03774.png
+Alignining ../data/FFHQ_Real/44254.png
+Computing landmarks ../data/FFHQ_Real/44254.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/50092.png
+Computing landmarks ../data/FFHQ_Real/50092.png
+Alignining ../data/FFHQ_Real/57602.png
+Computing landmarks ../data/FFHQ_Real/57602.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/morphs/cluster_118_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/cluster_118_percentile_summary.png
+
+[0;34m[Processing cluster 40] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 40] 2026-08-04 21:11:58.288526[0m
 Clean samples: 835
 
-[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -76,14 +438,134 @@ p_value                                                    0.402121
 log_likelihood                                           623.369868
 AIC                                                    -1240.739737
 Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
 Trust Region (90.0%): [0.0179, 0.4757]
 
-[0;34m[Processing cluster 280] 2026-07-15 21:35:40.306988[0m
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
 
-[0;34m[Cleaning Cluster 280] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/60883.png
+Computing landmarks ../data/FFHQ_Real/60883.png
+Alignining ../data/FFHQ_Real/63937.png
+Computing landmarks ../data/FFHQ_Real/63937.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/36477.png
+Computing landmarks ../data/FFHQ_Real/36477.png
+Alignining ../data/FFHQ_Real/63168.png
+Computing landmarks ../data/FFHQ_Real/63168.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/19227.png
+Computing landmarks ../data/FFHQ_Real/19227.png
+Alignining ../data/FFHQ_Real/44312.png
+Computing landmarks ../data/FFHQ_Real/44312.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/67770.png
+Computing landmarks ../data/FFHQ_Real/67770.png
+Alignining ../data/FFHQ_Real/56919.png
+Computing landmarks ../data/FFHQ_Real/56919.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/29461.png
+Computing landmarks ../data/FFHQ_Real/29461.png
+Alignining ../data/FFHQ_Real/02676.png
+Computing landmarks ../data/FFHQ_Real/02676.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/23488.png
+Computing landmarks ../data/FFHQ_Real/23488.png
+Alignining ../data/FFHQ_Real/01059.png
+Computing landmarks ../data/FFHQ_Real/01059.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/60214.png
+Computing landmarks ../data/FFHQ_Real/60214.png
+Alignining ../data/FFHQ_Real/05135.png
+Computing landmarks ../data/FFHQ_Real/05135.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/48119.png
+Computing landmarks ../data/FFHQ_Real/48119.png
+Alignining ../data/FFHQ_Real/57636.png
+Computing landmarks ../data/FFHQ_Real/57636.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/04667.png
+Computing landmarks ../data/FFHQ_Real/04667.png
+Alignining ../data/FFHQ_Real/06294.png
+Computing landmarks ../data/FFHQ_Real/06294.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/25488.png
+Computing landmarks ../data/FFHQ_Real/25488.png
+Alignining ../data/FFHQ_Real/43968.png
+Computing landmarks ../data/FFHQ_Real/43968.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/03468.png
+Computing landmarks ../data/FFHQ_Real/03468.png
+Alignining ../data/FFHQ_Real/03453.png
+Computing landmarks ../data/FFHQ_Real/03453.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/36574.png
+Computing landmarks ../data/FFHQ_Real/36574.png
+Alignining ../data/FFHQ_Real/51764.png
+Computing landmarks ../data/FFHQ_Real/51764.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/40314.png
+Computing landmarks ../data/FFHQ_Real/40314.png
+Alignining ../data/FFHQ_Real/45101.png
+Computing landmarks ../data/FFHQ_Real/45101.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/02011.png
+Computing landmarks ../data/FFHQ_Real/02011.png
+Alignining ../data/FFHQ_Real/59163.png
+Computing landmarks ../data/FFHQ_Real/59163.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/19613.png
+Computing landmarks ../data/FFHQ_Real/19613.png
+Alignining ../data/FFHQ_Real/38544.png
+Computing landmarks ../data/FFHQ_Real/38544.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/46947.png
+Computing landmarks ../data/FFHQ_Real/46947.png
+Alignining ../data/FFHQ_Real/39225.png
+Computing landmarks ../data/FFHQ_Real/39225.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/40788.png
+Computing landmarks ../data/FFHQ_Real/40788.png
+Alignining ../data/FFHQ_Real/51764.png
+Computing landmarks ../data/FFHQ_Real/51764.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/26839.png
+Computing landmarks ../data/FFHQ_Real/26839.png
+Alignining ../data/FFHQ_Real/69729.png
+Computing landmarks ../data/FFHQ_Real/69729.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/morphs/cluster_40_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/cluster_40_percentile_summary.png
+
+[0;34m[Processing cluster 280] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 280] 2026-08-04 21:11:58.288526[0m
 Clean samples: 405
 
-[0;34m[Selecting the best distribution model...] 2026-07-15 21:35:40.306988[0m
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -93,8 +575,1499 @@ p_value                                                    0.963066
 log_likelihood                                           112.871467
 AIC                                                     -219.742934
 Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
 Trust Region (90.0%): [0.0438, 0.7392]
 
-[0;34m[end] 2026-07-15 21:35:44.701980[0m
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
 
-Total Execution Time: 4.39 seconds
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/07929.png
+Computing landmarks ../data/FFHQ_Real/07929.png
+Alignining ../data/FFHQ_Real/01744.png
+Computing landmarks ../data/FFHQ_Real/01744.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/40589.png
+Computing landmarks ../data/FFHQ_Real/40589.png
+Alignining ../data/FFHQ_Real/27182.png
+Computing landmarks ../data/FFHQ_Real/27182.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/41262.png
+Computing landmarks ../data/FFHQ_Real/41262.png
+Alignining ../data/FFHQ_Real/34824.png
+Computing landmarks ../data/FFHQ_Real/34824.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/23175.png
+Computing landmarks ../data/FFHQ_Real/23175.png
+Alignining ../data/FFHQ_Real/69252.png
+Computing landmarks ../data/FFHQ_Real/69252.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/51711.png
+Computing landmarks ../data/FFHQ_Real/51711.png
+Alignining ../data/FFHQ_Real/36637.png
+Computing landmarks ../data/FFHQ_Real/36637.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/57303.png
+Computing landmarks ../data/FFHQ_Real/57303.png
+Alignining ../data/FFHQ_Real/69475.png
+Computing landmarks ../data/FFHQ_Real/69475.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/26154.png
+Computing landmarks ../data/FFHQ_Real/26154.png
+Alignining ../data/FFHQ_Real/32436.png
+Computing landmarks ../data/FFHQ_Real/32436.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/46378.png
+Computing landmarks ../data/FFHQ_Real/46378.png
+Alignining ../data/FFHQ_Real/49373.png
+Computing landmarks ../data/FFHQ_Real/49373.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/46285.png
+Computing landmarks ../data/FFHQ_Real/46285.png
+Alignining ../data/FFHQ_Real/08062.png
+Computing landmarks ../data/FFHQ_Real/08062.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/36329.png
+Computing landmarks ../data/FFHQ_Real/36329.png
+Alignining ../data/FFHQ_Real/07929.png
+Computing landmarks ../data/FFHQ_Real/07929.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/00262.png
+Computing landmarks ../data/FFHQ_Real/00262.png
+Alignining ../data/FFHQ_Real/20794.png
+Computing landmarks ../data/FFHQ_Real/20794.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/14573.png
+Computing landmarks ../data/FFHQ_Real/14573.png
+Alignining ../data/FFHQ_Real/30478.png
+Computing landmarks ../data/FFHQ_Real/30478.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/31935.png
+Computing landmarks ../data/FFHQ_Real/31935.png
+Alignining ../data/FFHQ_Real/59316.png
+Computing landmarks ../data/FFHQ_Real/59316.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/46551.png
+Computing landmarks ../data/FFHQ_Real/46551.png
+Alignining ../data/FFHQ_Real/18409.png
+Computing landmarks ../data/FFHQ_Real/18409.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/18121.png
+Computing landmarks ../data/FFHQ_Real/18121.png
+Alignining ../data/FFHQ_Real/28621.png
+Computing landmarks ../data/FFHQ_Real/28621.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/11214.png
+Computing landmarks ../data/FFHQ_Real/11214.png
+Alignining ../data/FFHQ_Real/16184.png
+Computing landmarks ../data/FFHQ_Real/16184.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/61115.png
+Computing landmarks ../data/FFHQ_Real/61115.png
+Alignining ../data/FFHQ_Real/59434.png
+Computing landmarks ../data/FFHQ_Real/59434.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/25016.png
+Computing landmarks ../data/FFHQ_Real/25016.png
+Alignining ../data/FFHQ_Real/49020.png
+Computing landmarks ../data/FFHQ_Real/49020.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/morphs/cluster_280_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/cluster_280_percentile_summary.png
+
+[0;34m[Processing cluster 133] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 133] 2026-08-04 21:11:58.288526[0m
+Clean samples: 537
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Gamma
+name                                                          Gamma
+distribution      <scipy.stats._continuous_distns.gamma_gen obje...
+params            (2.026705652387922, -0.0006557747820371304, 0....
+ks_statistic                                               0.035186
+p_value                                                    0.508057
+log_likelihood                                           291.028613
+AIC                                                     -576.057225
+Name: 1, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0429, 0.5691]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/59956.png
+Computing landmarks ../data/FFHQ_Real/59956.png
+Alignining ../data/FFHQ_Real/36011.png
+Computing landmarks ../data/FFHQ_Real/36011.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/35875.png
+Computing landmarks ../data/FFHQ_Real/35875.png
+Alignining ../data/FFHQ_Real/15930.png
+Computing landmarks ../data/FFHQ_Real/15930.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/50908.png
+Computing landmarks ../data/FFHQ_Real/50908.png
+Alignining ../data/FFHQ_Real/67143.png
+Computing landmarks ../data/FFHQ_Real/67143.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/24065.png
+Computing landmarks ../data/FFHQ_Real/24065.png
+Alignining ../data/FFHQ_Real/50468.png
+Computing landmarks ../data/FFHQ_Real/50468.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/11096.png
+Computing landmarks ../data/FFHQ_Real/11096.png
+Alignining ../data/FFHQ_Real/12806.png
+Computing landmarks ../data/FFHQ_Real/12806.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/33415.png
+Computing landmarks ../data/FFHQ_Real/33415.png
+Alignining ../data/FFHQ_Real/62169.png
+Computing landmarks ../data/FFHQ_Real/62169.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/20602.png
+Computing landmarks ../data/FFHQ_Real/20602.png
+Alignining ../data/FFHQ_Real/13322.png
+Computing landmarks ../data/FFHQ_Real/13322.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/56519.png
+Computing landmarks ../data/FFHQ_Real/56519.png
+Alignining ../data/FFHQ_Real/64494.png
+Computing landmarks ../data/FFHQ_Real/64494.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/18590.png
+Computing landmarks ../data/FFHQ_Real/18590.png
+Alignining ../data/FFHQ_Real/30955.png
+Computing landmarks ../data/FFHQ_Real/30955.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/18808.png
+Computing landmarks ../data/FFHQ_Real/18808.png
+Alignining ../data/FFHQ_Real/57515.png
+Computing landmarks ../data/FFHQ_Real/57515.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/10656.png
+Computing landmarks ../data/FFHQ_Real/10656.png
+Alignining ../data/FFHQ_Real/67585.png
+Computing landmarks ../data/FFHQ_Real/67585.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/50213.png
+Computing landmarks ../data/FFHQ_Real/50213.png
+Alignining ../data/FFHQ_Real/40698.png
+Computing landmarks ../data/FFHQ_Real/40698.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/60660.png
+Computing landmarks ../data/FFHQ_Real/60660.png
+Alignining ../data/FFHQ_Real/55079.png
+Computing landmarks ../data/FFHQ_Real/55079.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/48121.png
+Computing landmarks ../data/FFHQ_Real/48121.png
+Alignining ../data/FFHQ_Real/10086.png
+Computing landmarks ../data/FFHQ_Real/10086.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/29896.png
+Computing landmarks ../data/FFHQ_Real/29896.png
+Alignining ../data/FFHQ_Real/19332.png
+Computing landmarks ../data/FFHQ_Real/19332.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/40190.png
+Computing landmarks ../data/FFHQ_Real/40190.png
+Alignining ../data/FFHQ_Real/27188.png
+Computing landmarks ../data/FFHQ_Real/27188.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/34603.png
+Computing landmarks ../data/FFHQ_Real/34603.png
+Alignining ../data/FFHQ_Real/37395.png
+Computing landmarks ../data/FFHQ_Real/37395.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/16148.png
+Computing landmarks ../data/FFHQ_Real/16148.png
+Alignining ../data/FFHQ_Real/19332.png
+Computing landmarks ../data/FFHQ_Real/19332.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/morphs/cluster_133_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/cluster_133_percentile_summary.png
+
+[0;34m[Processing cluster 194] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 194] 2026-08-04 21:11:58.288526[0m
+Clean samples: 182
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Lognormal
+name                                                      Lognormal
+distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
+params            (0.8231123599023769, -0.05516182980331773, 0.3...
+ks_statistic                                               0.077996
+p_value                                                    0.207086
+log_likelihood                                           -35.770002
+AIC                                                       77.540004
+Name: 3, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0372, 1.3305]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/39580.png
+Computing landmarks ../data/FFHQ_Real/39580.png
+Alignining ../data/FFHQ_Real/27522.png
+Computing landmarks ../data/FFHQ_Real/27522.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/50816.png
+Computing landmarks ../data/FFHQ_Real/50816.png
+Alignining ../data/FFHQ_Real/13971.png
+Computing landmarks ../data/FFHQ_Real/13971.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/63494.png
+Computing landmarks ../data/FFHQ_Real/63494.png
+Alignining ../data/FFHQ_Real/57068.png
+Computing landmarks ../data/FFHQ_Real/57068.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/45163.png
+Computing landmarks ../data/FFHQ_Real/45163.png
+Alignining ../data/FFHQ_Real/26161.png
+Computing landmarks ../data/FFHQ_Real/26161.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/17221.png
+Computing landmarks ../data/FFHQ_Real/17221.png
+Alignining ../data/FFHQ_Real/58967.png
+Computing landmarks ../data/FFHQ_Real/58967.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/01604.png
+Computing landmarks ../data/FFHQ_Real/01604.png
+Alignining ../data/FFHQ_Real/07557.png
+Computing landmarks ../data/FFHQ_Real/07557.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/48179.png
+Computing landmarks ../data/FFHQ_Real/48179.png
+Alignining ../data/FFHQ_Real/44116.png
+Computing landmarks ../data/FFHQ_Real/44116.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/06218.png
+Computing landmarks ../data/FFHQ_Real/06218.png
+Alignining ../data/FFHQ_Real/34816.png
+Computing landmarks ../data/FFHQ_Real/34816.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/01588.png
+Computing landmarks ../data/FFHQ_Real/01588.png
+Alignining ../data/FFHQ_Real/44597.png
+Computing landmarks ../data/FFHQ_Real/44597.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/55924.png
+Computing landmarks ../data/FFHQ_Real/55924.png
+Alignining ../data/FFHQ_Real/56903.png
+Computing landmarks ../data/FFHQ_Real/56903.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/06245.png
+Computing landmarks ../data/FFHQ_Real/06245.png
+Alignining ../data/FFHQ_Real/17224.png
+Computing landmarks ../data/FFHQ_Real/17224.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/09735.png
+Computing landmarks ../data/FFHQ_Real/09735.png
+Alignining ../data/FFHQ_Real/05891.png
+Computing landmarks ../data/FFHQ_Real/05891.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/55566.png
+Computing landmarks ../data/FFHQ_Real/55566.png
+Alignining ../data/FFHQ_Real/30905.png
+Computing landmarks ../data/FFHQ_Real/30905.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/05674.png
+Computing landmarks ../data/FFHQ_Real/05674.png
+Alignining ../data/FFHQ_Real/29683.png
+Computing landmarks ../data/FFHQ_Real/29683.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/53213.png
+Computing landmarks ../data/FFHQ_Real/53213.png
+Alignining ../data/FFHQ_Real/68013.png
+Computing landmarks ../data/FFHQ_Real/68013.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/43091.png
+Computing landmarks ../data/FFHQ_Real/43091.png
+Alignining ../data/FFHQ_Real/34816.png
+Computing landmarks ../data/FFHQ_Real/34816.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/15515.png
+Computing landmarks ../data/FFHQ_Real/15515.png
+Alignining ../data/FFHQ_Real/12586.png
+Computing landmarks ../data/FFHQ_Real/12586.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/49106.png
+Computing landmarks ../data/FFHQ_Real/49106.png
+Alignining ../data/FFHQ_Real/28273.png
+Computing landmarks ../data/FFHQ_Real/28273.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/morphs/cluster_194_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/cluster_194_percentile_summary.png
+
+[0;34m[Processing cluster 129] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 129] 2026-08-04 21:11:58.288526[0m
+Clean samples: 254
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (1.1564976483962588, 0.010825992453129617, 0.2...
+ks_statistic                                               0.040082
+p_value                                                    0.793725
+log_likelihood                                            87.223105
+AIC                                                      -168.44621
+Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0322, 0.7308]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/31015.png
+Computing landmarks ../data/FFHQ_Real/31015.png
+Alignining ../data/FFHQ_Real/60605.png
+Computing landmarks ../data/FFHQ_Real/60605.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/18117.png
+Computing landmarks ../data/FFHQ_Real/18117.png
+Alignining ../data/FFHQ_Real/21710.png
+Computing landmarks ../data/FFHQ_Real/21710.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/21638.png
+Computing landmarks ../data/FFHQ_Real/21638.png
+Alignining ../data/FFHQ_Real/13289.png
+Computing landmarks ../data/FFHQ_Real/13289.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/68997.png
+Computing landmarks ../data/FFHQ_Real/68997.png
+Alignining ../data/FFHQ_Real/08336.png
+Computing landmarks ../data/FFHQ_Real/08336.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/16217.png
+Computing landmarks ../data/FFHQ_Real/16217.png
+Alignining ../data/FFHQ_Real/69833.png
+Computing landmarks ../data/FFHQ_Real/69833.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/20630.png
+Computing landmarks ../data/FFHQ_Real/20630.png
+Alignining ../data/FFHQ_Real/19109.png
+Computing landmarks ../data/FFHQ_Real/19109.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/45808.png
+Computing landmarks ../data/FFHQ_Real/45808.png
+Alignining ../data/FFHQ_Real/18641.png
+Computing landmarks ../data/FFHQ_Real/18641.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/55477.png
+Computing landmarks ../data/FFHQ_Real/55477.png
+Alignining ../data/FFHQ_Real/19309.png
+Computing landmarks ../data/FFHQ_Real/19309.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/41698.png
+Computing landmarks ../data/FFHQ_Real/41698.png
+Alignining ../data/FFHQ_Real/02362.png
+Computing landmarks ../data/FFHQ_Real/02362.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/00316.png
+Computing landmarks ../data/FFHQ_Real/00316.png
+Alignining ../data/FFHQ_Real/28361.png
+Computing landmarks ../data/FFHQ_Real/28361.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/23905.png
+Computing landmarks ../data/FFHQ_Real/23905.png
+Alignining ../data/FFHQ_Real/08336.png
+Computing landmarks ../data/FFHQ_Real/08336.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/57058.png
+Computing landmarks ../data/FFHQ_Real/57058.png
+Alignining ../data/FFHQ_Real/02156.png
+Computing landmarks ../data/FFHQ_Real/02156.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/08232.png
+Computing landmarks ../data/FFHQ_Real/08232.png
+Alignining ../data/FFHQ_Real/62119.png
+Computing landmarks ../data/FFHQ_Real/62119.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/08567.png
+Computing landmarks ../data/FFHQ_Real/08567.png
+Alignining ../data/FFHQ_Real/27654.png
+Computing landmarks ../data/FFHQ_Real/27654.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/26198.png
+Computing landmarks ../data/FFHQ_Real/26198.png
+Alignining ../data/FFHQ_Real/56371.png
+Computing landmarks ../data/FFHQ_Real/56371.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/50814.png
+Computing landmarks ../data/FFHQ_Real/50814.png
+Alignining ../data/FFHQ_Real/04204.png
+Computing landmarks ../data/FFHQ_Real/04204.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/68516.png
+Computing landmarks ../data/FFHQ_Real/68516.png
+Alignining ../data/FFHQ_Real/02449.png
+Computing landmarks ../data/FFHQ_Real/02449.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/10020.png
+Computing landmarks ../data/FFHQ_Real/10020.png
+Alignining ../data/FFHQ_Real/23905.png
+Computing landmarks ../data/FFHQ_Real/23905.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/morphs/cluster_129_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/cluster_129_percentile_summary.png
+
+[0;34m[Processing cluster 340] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 340] 2026-08-04 21:11:58.288526[0m
+Clean samples: 316
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Gamma
+name                                                          Gamma
+distribution      <scipy.stats._continuous_distns.gamma_gen obje...
+params            (1.878887355462596, 0.007239505399224222, 0.11...
+ks_statistic                                               0.041736
+p_value                                                    0.625387
+log_likelihood                                           192.995791
+AIC                                                     -379.991582
+Name: 1, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0434, 0.5405]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/26841.png
+Computing landmarks ../data/FFHQ_Real/26841.png
+Alignining ../data/FFHQ_Real/63241.png
+Computing landmarks ../data/FFHQ_Real/63241.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/14906.png
+Computing landmarks ../data/FFHQ_Real/14906.png
+Alignining ../data/FFHQ_Real/30718.png
+Computing landmarks ../data/FFHQ_Real/30718.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/64079.png
+Computing landmarks ../data/FFHQ_Real/64079.png
+Alignining ../data/FFHQ_Real/31879.png
+Computing landmarks ../data/FFHQ_Real/31879.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/51833.png
+Computing landmarks ../data/FFHQ_Real/51833.png
+Alignining ../data/FFHQ_Real/46757.png
+Computing landmarks ../data/FFHQ_Real/46757.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/17816.png
+Computing landmarks ../data/FFHQ_Real/17816.png
+Alignining ../data/FFHQ_Real/10193.png
+Computing landmarks ../data/FFHQ_Real/10193.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/29280.png
+Computing landmarks ../data/FFHQ_Real/29280.png
+Alignining ../data/FFHQ_Real/03013.png
+Computing landmarks ../data/FFHQ_Real/03013.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/08364.png
+Computing landmarks ../data/FFHQ_Real/08364.png
+Alignining ../data/FFHQ_Real/13921.png
+Computing landmarks ../data/FFHQ_Real/13921.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/68853.png
+Computing landmarks ../data/FFHQ_Real/68853.png
+Alignining ../data/FFHQ_Real/21163.png
+Computing landmarks ../data/FFHQ_Real/21163.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/44590.png
+Computing landmarks ../data/FFHQ_Real/44590.png
+Alignining ../data/FFHQ_Real/04338.png
+Computing landmarks ../data/FFHQ_Real/04338.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/13553.png
+Computing landmarks ../data/FFHQ_Real/13553.png
+Alignining ../data/FFHQ_Real/63078.png
+Computing landmarks ../data/FFHQ_Real/63078.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/55014.png
+Computing landmarks ../data/FFHQ_Real/55014.png
+Alignining ../data/FFHQ_Real/26276.png
+Computing landmarks ../data/FFHQ_Real/26276.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/04073.png
+Computing landmarks ../data/FFHQ_Real/04073.png
+Alignining ../data/FFHQ_Real/27206.png
+Computing landmarks ../data/FFHQ_Real/27206.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/57729.png
+Computing landmarks ../data/FFHQ_Real/57729.png
+Alignining ../data/FFHQ_Real/30718.png
+Computing landmarks ../data/FFHQ_Real/30718.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/54788.png
+Computing landmarks ../data/FFHQ_Real/54788.png
+Alignining ../data/FFHQ_Real/25903.png
+Computing landmarks ../data/FFHQ_Real/25903.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/41974.png
+Computing landmarks ../data/FFHQ_Real/41974.png
+Alignining ../data/FFHQ_Real/56779.png
+Computing landmarks ../data/FFHQ_Real/56779.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/48480.png
+Computing landmarks ../data/FFHQ_Real/48480.png
+Alignining ../data/FFHQ_Real/05266.png
+Computing landmarks ../data/FFHQ_Real/05266.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/36563.png
+Computing landmarks ../data/FFHQ_Real/36563.png
+Alignining ../data/FFHQ_Real/59313.png
+Computing landmarks ../data/FFHQ_Real/59313.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/00088.png
+Computing landmarks ../data/FFHQ_Real/00088.png
+Alignining ../data/FFHQ_Real/54788.png
+Computing landmarks ../data/FFHQ_Real/54788.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/morphs/cluster_340_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/cluster_340_percentile_summary.png
+
+[0;34m[Processing cluster 277] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 277] 2026-08-04 21:11:58.288526[0m
+Clean samples: 178
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Gamma
+name                                                          Gamma
+distribution      <scipy.stats._continuous_distns.gamma_gen obje...
+params            (0.8904266871682678, 0.009347660723409729, 0.2...
+ks_statistic                                               0.056389
+p_value                                                    0.602949
+log_likelihood                                            87.196529
+AIC                                                     -168.393058
+Name: 1, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0181, 0.7328]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/64800.png
+Computing landmarks ../data/FFHQ_Real/64800.png
+Alignining ../data/FFHQ_Real/32619.png
+Computing landmarks ../data/FFHQ_Real/32619.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/24803.png
+Computing landmarks ../data/FFHQ_Real/24803.png
+Alignining ../data/FFHQ_Real/52919.png
+Computing landmarks ../data/FFHQ_Real/52919.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/16545.png
+Computing landmarks ../data/FFHQ_Real/16545.png
+Alignining ../data/FFHQ_Real/27391.png
+Computing landmarks ../data/FFHQ_Real/27391.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/23744.png
+Computing landmarks ../data/FFHQ_Real/23744.png
+Alignining ../data/FFHQ_Real/41562.png
+Computing landmarks ../data/FFHQ_Real/41562.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/11475.png
+Computing landmarks ../data/FFHQ_Real/11475.png
+Alignining ../data/FFHQ_Real/18296.png
+Computing landmarks ../data/FFHQ_Real/18296.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/15186.png
+Computing landmarks ../data/FFHQ_Real/15186.png
+Alignining ../data/FFHQ_Real/17292.png
+Computing landmarks ../data/FFHQ_Real/17292.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/05472.png
+Computing landmarks ../data/FFHQ_Real/05472.png
+Alignining ../data/FFHQ_Real/67037.png
+Computing landmarks ../data/FFHQ_Real/67037.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/31507.png
+Computing landmarks ../data/FFHQ_Real/31507.png
+Alignining ../data/FFHQ_Real/42336.png
+Computing landmarks ../data/FFHQ_Real/42336.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/02037.png
+Computing landmarks ../data/FFHQ_Real/02037.png
+Alignining ../data/FFHQ_Real/40547.png
+Computing landmarks ../data/FFHQ_Real/40547.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/45191.png
+Computing landmarks ../data/FFHQ_Real/45191.png
+Alignining ../data/FFHQ_Real/69708.png
+Computing landmarks ../data/FFHQ_Real/69708.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/16199.png
+Computing landmarks ../data/FFHQ_Real/16199.png
+Alignining ../data/FFHQ_Real/39275.png
+Computing landmarks ../data/FFHQ_Real/39275.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/49568.png
+Computing landmarks ../data/FFHQ_Real/49568.png
+Alignining ../data/FFHQ_Real/49493.png
+Computing landmarks ../data/FFHQ_Real/49493.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/47334.png
+Computing landmarks ../data/FFHQ_Real/47334.png
+Alignining ../data/FFHQ_Real/32442.png
+Computing landmarks ../data/FFHQ_Real/32442.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/57517.png
+Computing landmarks ../data/FFHQ_Real/57517.png
+Alignining ../data/FFHQ_Real/11700.png
+Computing landmarks ../data/FFHQ_Real/11700.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/46452.png
+Computing landmarks ../data/FFHQ_Real/46452.png
+Alignining ../data/FFHQ_Real/34420.png
+Computing landmarks ../data/FFHQ_Real/34420.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/48102.png
+Computing landmarks ../data/FFHQ_Real/48102.png
+Alignining ../data/FFHQ_Real/34480.png
+Computing landmarks ../data/FFHQ_Real/34480.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/07494.png
+Computing landmarks ../data/FFHQ_Real/07494.png
+Alignining ../data/FFHQ_Real/63407.png
+Computing landmarks ../data/FFHQ_Real/63407.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/06052.png
+Computing landmarks ../data/FFHQ_Real/06052.png
+Alignining ../data/FFHQ_Real/63840.png
+Computing landmarks ../data/FFHQ_Real/63840.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/morphs/cluster_277_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/cluster_277_percentile_summary.png
+
+[0;34m[Processing cluster 423] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 423] 2026-08-04 21:11:58.288526[0m
+Clean samples: 166
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Gamma
+name                                                          Gamma
+distribution      <scipy.stats._continuous_distns.gamma_gen obje...
+params            (1.2822248059513883, 0.005238998816077485, 0.1...
+ks_statistic                                               0.044661
+p_value                                                    0.880134
+log_likelihood                                            74.441555
+AIC                                                     -142.883109
+Name: 1, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0264, 0.6623]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/42329.png
+Computing landmarks ../data/FFHQ_Real/42329.png
+Alignining ../data/FFHQ_Real/59509.png
+Computing landmarks ../data/FFHQ_Real/59509.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/01551.png
+Computing landmarks ../data/FFHQ_Real/01551.png
+Alignining ../data/FFHQ_Real/08295.png
+Computing landmarks ../data/FFHQ_Real/08295.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/50331.png
+Computing landmarks ../data/FFHQ_Real/50331.png
+Alignining ../data/FFHQ_Real/08583.png
+Computing landmarks ../data/FFHQ_Real/08583.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/20246.png
+Computing landmarks ../data/FFHQ_Real/20246.png
+Alignining ../data/FFHQ_Real/22636.png
+Computing landmarks ../data/FFHQ_Real/22636.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/57866.png
+Computing landmarks ../data/FFHQ_Real/57866.png
+Alignining ../data/FFHQ_Real/45109.png
+Computing landmarks ../data/FFHQ_Real/45109.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/09637.png
+Computing landmarks ../data/FFHQ_Real/09637.png
+Alignining ../data/FFHQ_Real/55128.png
+Computing landmarks ../data/FFHQ_Real/55128.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/14134.png
+Computing landmarks ../data/FFHQ_Real/14134.png
+Alignining ../data/FFHQ_Real/42611.png
+Computing landmarks ../data/FFHQ_Real/42611.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/12060.png
+Computing landmarks ../data/FFHQ_Real/12060.png
+Alignining ../data/FFHQ_Real/23196.png
+Computing landmarks ../data/FFHQ_Real/23196.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/52339.png
+Computing landmarks ../data/FFHQ_Real/52339.png
+Alignining ../data/FFHQ_Real/39594.png
+Computing landmarks ../data/FFHQ_Real/39594.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/25300.png
+Computing landmarks ../data/FFHQ_Real/25300.png
+Alignining ../data/FFHQ_Real/12060.png
+Computing landmarks ../data/FFHQ_Real/12060.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/27298.png
+Computing landmarks ../data/FFHQ_Real/27298.png
+Alignining ../data/FFHQ_Real/02405.png
+Computing landmarks ../data/FFHQ_Real/02405.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/42840.png
+Computing landmarks ../data/FFHQ_Real/42840.png
+Alignining ../data/FFHQ_Real/55493.png
+Computing landmarks ../data/FFHQ_Real/55493.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/30326.png
+Computing landmarks ../data/FFHQ_Real/30326.png
+Alignining ../data/FFHQ_Real/13356.png
+Computing landmarks ../data/FFHQ_Real/13356.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/61961.png
+Computing landmarks ../data/FFHQ_Real/61961.png
+Alignining ../data/FFHQ_Real/36431.png
+Computing landmarks ../data/FFHQ_Real/36431.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/19716.png
+Computing landmarks ../data/FFHQ_Real/19716.png
+Alignining ../data/FFHQ_Real/20882.png
+Computing landmarks ../data/FFHQ_Real/20882.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/11093.png
+Computing landmarks ../data/FFHQ_Real/11093.png
+Alignining ../data/FFHQ_Real/06195.png
+Computing landmarks ../data/FFHQ_Real/06195.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/62832.png
+Computing landmarks ../data/FFHQ_Real/62832.png
+Alignining ../data/FFHQ_Real/00679.png
+Computing landmarks ../data/FFHQ_Real/00679.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/48120.png
+Computing landmarks ../data/FFHQ_Real/48120.png
+Alignining ../data/FFHQ_Real/62416.png
+Computing landmarks ../data/FFHQ_Real/62416.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/morphs/cluster_423_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/cluster_423_percentile_summary.png
+
+[0;34m[Processing cluster 311] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 311] 2026-08-04 21:11:58.288526[0m
+Clean samples: 111
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Weibull
+name                                                        Weibull
+distribution      <scipy.stats._continuous_distns.weibull_min_ge...
+params            (0.8955894960313069, 0.02062763864333604, 0.22...
+ks_statistic                                               0.068166
+p_value                                                    0.655308
+log_likelihood                                             63.54929
+AIC                                                     -121.098581
+Name: 2, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0289, 0.7926]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/29889.png
+Computing landmarks ../data/FFHQ_Real/29889.png
+Alignining ../data/FFHQ_Real/59233.png
+Computing landmarks ../data/FFHQ_Real/59233.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/02594.png
+Computing landmarks ../data/FFHQ_Real/02594.png
+Alignining ../data/FFHQ_Real/62344.png
+Computing landmarks ../data/FFHQ_Real/62344.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/19077.png
+Computing landmarks ../data/FFHQ_Real/19077.png
+Alignining ../data/FFHQ_Real/58218.png
+Computing landmarks ../data/FFHQ_Real/58218.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/45501.png
+Computing landmarks ../data/FFHQ_Real/45501.png
+Alignining ../data/FFHQ_Real/67486.png
+Computing landmarks ../data/FFHQ_Real/67486.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/17525.png
+Computing landmarks ../data/FFHQ_Real/17525.png
+Alignining ../data/FFHQ_Real/05615.png
+Computing landmarks ../data/FFHQ_Real/05615.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/66216.png
+Computing landmarks ../data/FFHQ_Real/66216.png
+Alignining ../data/FFHQ_Real/12861.png
+Computing landmarks ../data/FFHQ_Real/12861.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/06938.png
+Computing landmarks ../data/FFHQ_Real/06938.png
+Alignining ../data/FFHQ_Real/65628.png
+Computing landmarks ../data/FFHQ_Real/65628.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/52281.png
+Computing landmarks ../data/FFHQ_Real/52281.png
+Alignining ../data/FFHQ_Real/13580.png
+Computing landmarks ../data/FFHQ_Real/13580.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/05274.png
+Computing landmarks ../data/FFHQ_Real/05274.png
+Alignining ../data/FFHQ_Real/34103.png
+Computing landmarks ../data/FFHQ_Real/34103.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/21946.png
+Computing landmarks ../data/FFHQ_Real/21946.png
+Alignining ../data/FFHQ_Real/34103.png
+Computing landmarks ../data/FFHQ_Real/34103.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/43969.png
+Computing landmarks ../data/FFHQ_Real/43969.png
+Alignining ../data/FFHQ_Real/59748.png
+Computing landmarks ../data/FFHQ_Real/59748.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/26582.png
+Computing landmarks ../data/FFHQ_Real/26582.png
+Alignining ../data/FFHQ_Real/28459.png
+Computing landmarks ../data/FFHQ_Real/28459.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/57604.png
+Computing landmarks ../data/FFHQ_Real/57604.png
+Alignining ../data/FFHQ_Real/06938.png
+Computing landmarks ../data/FFHQ_Real/06938.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/67588.png
+Computing landmarks ../data/FFHQ_Real/67588.png
+Alignining ../data/FFHQ_Real/23560.png
+Computing landmarks ../data/FFHQ_Real/23560.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/28224.png
+Computing landmarks ../data/FFHQ_Real/28224.png
+Alignining ../data/FFHQ_Real/55701.png
+Computing landmarks ../data/FFHQ_Real/55701.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/53499.png
+Computing landmarks ../data/FFHQ_Real/53499.png
+Alignining ../data/FFHQ_Real/12283.png
+Computing landmarks ../data/FFHQ_Real/12283.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/29329.png
+Computing landmarks ../data/FFHQ_Real/29329.png
+Alignining ../data/FFHQ_Real/55768.png
+Computing landmarks ../data/FFHQ_Real/55768.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/24978.png
+Computing landmarks ../data/FFHQ_Real/24978.png
+Alignining ../data/FFHQ_Real/62665.png
+Computing landmarks ../data/FFHQ_Real/62665.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/morphs/cluster_311_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/cluster_311_percentile_summary.png
+
+[0;34m[Processing cluster 513] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 513] 2026-08-04 21:11:58.288526[0m
+Clean samples: 39
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Lognormal
+name                                                      Lognormal
+distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
+params            (0.3385274743480173, -0.12517926410808913, 0.3...
+ks_statistic                                               0.124617
+p_value                                                    0.538699
+log_likelihood                                            28.683347
+AIC                                                      -51.366695
+Name: 3, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0711, 0.4727]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/07745.png
+Computing landmarks ../data/FFHQ_Real/07745.png
+Alignining ../data/FFHQ_Real/56981.png
+Computing landmarks ../data/FFHQ_Real/56981.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/55984.png
+Computing landmarks ../data/FFHQ_Real/55984.png
+Alignining ../data/FFHQ_Real/33514.png
+Computing landmarks ../data/FFHQ_Real/33514.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/54907.png
+Computing landmarks ../data/FFHQ_Real/54907.png
+Alignining ../data/FFHQ_Real/03151.png
+Computing landmarks ../data/FFHQ_Real/03151.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/51822.png
+Computing landmarks ../data/FFHQ_Real/51822.png
+Alignining ../data/FFHQ_Real/69327.png
+Computing landmarks ../data/FFHQ_Real/69327.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/19334.png
+Computing landmarks ../data/FFHQ_Real/19334.png
+Alignining ../data/FFHQ_Real/06101.png
+Computing landmarks ../data/FFHQ_Real/06101.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/55756.png
+Computing landmarks ../data/FFHQ_Real/55756.png
+Alignining ../data/FFHQ_Real/03151.png
+Computing landmarks ../data/FFHQ_Real/03151.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/29956.png
+Computing landmarks ../data/FFHQ_Real/29956.png
+Alignining ../data/FFHQ_Real/55988.png
+Computing landmarks ../data/FFHQ_Real/55988.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/53575.png
+Computing landmarks ../data/FFHQ_Real/53575.png
+Alignining ../data/FFHQ_Real/45276.png
+Computing landmarks ../data/FFHQ_Real/45276.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/27796.png
+Computing landmarks ../data/FFHQ_Real/27796.png
+Alignining ../data/FFHQ_Real/49581.png
+Computing landmarks ../data/FFHQ_Real/49581.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/40576.png
+Computing landmarks ../data/FFHQ_Real/40576.png
+Alignining ../data/FFHQ_Real/45333.png
+Computing landmarks ../data/FFHQ_Real/45333.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/10077.png
+Computing landmarks ../data/FFHQ_Real/10077.png
+Alignining ../data/FFHQ_Real/20895.png
+Computing landmarks ../data/FFHQ_Real/20895.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/11297.png
+Computing landmarks ../data/FFHQ_Real/11297.png
+Alignining ../data/FFHQ_Real/48282.png
+Computing landmarks ../data/FFHQ_Real/48282.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/08699.png
+Computing landmarks ../data/FFHQ_Real/08699.png
+Alignining ../data/FFHQ_Real/29956.png
+Computing landmarks ../data/FFHQ_Real/29956.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/23481.png
+Computing landmarks ../data/FFHQ_Real/23481.png
+Alignining ../data/FFHQ_Real/10077.png
+Computing landmarks ../data/FFHQ_Real/10077.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/35438.png
+Computing landmarks ../data/FFHQ_Real/35438.png
+Alignining ../data/FFHQ_Real/16688.png
+Computing landmarks ../data/FFHQ_Real/16688.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/40991.png
+Computing landmarks ../data/FFHQ_Real/40991.png
+Alignining ../data/FFHQ_Real/16688.png
+Computing landmarks ../data/FFHQ_Real/16688.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/39244.png
+Computing landmarks ../data/FFHQ_Real/39244.png
+Alignining ../data/FFHQ_Real/48647.png
+Computing landmarks ../data/FFHQ_Real/48647.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/60104.png
+Computing landmarks ../data/FFHQ_Real/60104.png
+Alignining ../data/FFHQ_Real/23481.png
+Computing landmarks ../data/FFHQ_Real/23481.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/morphs/cluster_513_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/cluster_513_percentile_summary.png
+
+[0;34m[Processing cluster 270] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 270] 2026-08-04 21:11:58.288526[0m
+Clean samples: 114
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Lognormal
+name                                                      Lognormal
+distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
+params            (0.711731371538816, -0.03193616176196013, 0.20...
+ks_statistic                                               0.048997
+p_value                                                    0.934617
+log_likelihood                                            56.805077
+AIC                                                     -107.610153
+Name: 3, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0321, 0.6341]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/22817.png
+Computing landmarks ../data/FFHQ_Real/22817.png
+Alignining ../data/FFHQ_Real/56315.png
+Computing landmarks ../data/FFHQ_Real/56315.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/00353.png
+Computing landmarks ../data/FFHQ_Real/00353.png
+Alignining ../data/FFHQ_Real/33630.png
+Computing landmarks ../data/FFHQ_Real/33630.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/43154.png
+Computing landmarks ../data/FFHQ_Real/43154.png
+Alignining ../data/FFHQ_Real/02877.png
+Computing landmarks ../data/FFHQ_Real/02877.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/15576.png
+Computing landmarks ../data/FFHQ_Real/15576.png
+Alignining ../data/FFHQ_Real/37610.png
+Computing landmarks ../data/FFHQ_Real/37610.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/58691.png
+Computing landmarks ../data/FFHQ_Real/58691.png
+Alignining ../data/FFHQ_Real/48718.png
+Computing landmarks ../data/FFHQ_Real/48718.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/33978.png
+Computing landmarks ../data/FFHQ_Real/33978.png
+Alignining ../data/FFHQ_Real/01674.png
+Computing landmarks ../data/FFHQ_Real/01674.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/37701.png
+Computing landmarks ../data/FFHQ_Real/37701.png
+Alignining ../data/FFHQ_Real/02560.png
+Computing landmarks ../data/FFHQ_Real/02560.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/02228.png
+Computing landmarks ../data/FFHQ_Real/02228.png
+Alignining ../data/FFHQ_Real/54892.png
+Computing landmarks ../data/FFHQ_Real/54892.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/28036.png
+Computing landmarks ../data/FFHQ_Real/28036.png
+Alignining ../data/FFHQ_Real/67574.png
+Computing landmarks ../data/FFHQ_Real/67574.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/68364.png
+Computing landmarks ../data/FFHQ_Real/68364.png
+Alignining ../data/FFHQ_Real/02228.png
+Computing landmarks ../data/FFHQ_Real/02228.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/62050.png
+Computing landmarks ../data/FFHQ_Real/62050.png
+Alignining ../data/FFHQ_Real/54798.png
+Computing landmarks ../data/FFHQ_Real/54798.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/51089.png
+Computing landmarks ../data/FFHQ_Real/51089.png
+Alignining ../data/FFHQ_Real/36154.png
+Computing landmarks ../data/FFHQ_Real/36154.png
+Error generating morph 11: [Errno 2] No such file or directory: './temp_0.png'
+Alignining ../data/FFHQ_Real/68412.png
+Computing landmarks ../data/FFHQ_Real/68412.png
+Alignining ../data/FFHQ_Real/34127.png
+Computing landmarks ../data/FFHQ_Real/34127.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/20139.png
+Computing landmarks ../data/FFHQ_Real/20139.png
+Alignining ../data/FFHQ_Real/54798.png
+Computing landmarks ../data/FFHQ_Real/54798.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/43999.png
+Computing landmarks ../data/FFHQ_Real/43999.png
+Alignining ../data/FFHQ_Real/67574.png
+Computing landmarks ../data/FFHQ_Real/67574.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/15162.png
+Computing landmarks ../data/FFHQ_Real/15162.png
+Alignining ../data/FFHQ_Real/41284.png
+Computing landmarks ../data/FFHQ_Real/41284.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/01287.png
+Computing landmarks ../data/FFHQ_Real/01287.png
+Alignining ../data/FFHQ_Real/50570.png
+Computing landmarks ../data/FFHQ_Real/50570.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/35014.png
+Computing landmarks ../data/FFHQ_Real/35014.png
+Alignining ../data/FFHQ_Real/31646.png
+Computing landmarks ../data/FFHQ_Real/31646.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/morphs/cluster_270_p90_sample_17.png ... 
+
+Generated 17 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/cluster_270_percentile_summary.png
+
+[0;34m[Processing cluster 348] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Cleaning Cluster 348] 2026-08-04 21:11:58.288526[0m
+Clean samples: 143
+
+[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+Best fitted distributed:  Lognormal
+name                                                      Lognormal
+distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
+params            (0.9962273772319444, -0.008321480688282269, 0....
+ks_statistic                                               0.080104
+p_value                                                    0.301617
+log_likelihood                                            97.694884
+AIC                                                     -189.389767
+Name: 3, dtype: object
+
+[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+Trust Region (90.0%): [0.0155, 0.6232]
+
+[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+Alignining ../data/FFHQ_Real/51266.png
+Computing landmarks ../data/FFHQ_Real/51266.png
+Alignining ../data/FFHQ_Real/08905.png
+Computing landmarks ../data/FFHQ_Real/08905.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p10_sample_0.png ... 
+
+Alignining ../data/FFHQ_Real/27133.png
+Computing landmarks ../data/FFHQ_Real/27133.png
+Alignining ../data/FFHQ_Real/00675.png
+Computing landmarks ../data/FFHQ_Real/00675.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p10_sample_1.png ... 
+
+Alignining ../data/FFHQ_Real/28616.png
+Computing landmarks ../data/FFHQ_Real/28616.png
+Alignining ../data/FFHQ_Real/57581.png
+Computing landmarks ../data/FFHQ_Real/57581.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p20_sample_2.png ... 
+
+Alignining ../data/FFHQ_Real/57984.png
+Computing landmarks ../data/FFHQ_Real/57984.png
+Alignining ../data/FFHQ_Real/41322.png
+Computing landmarks ../data/FFHQ_Real/41322.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p20_sample_3.png ... 
+
+Alignining ../data/FFHQ_Real/64125.png
+Computing landmarks ../data/FFHQ_Real/64125.png
+Alignining ../data/FFHQ_Real/40791.png
+Computing landmarks ../data/FFHQ_Real/40791.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p30_sample_4.png ... 
+
+Alignining ../data/FFHQ_Real/07702.png
+Computing landmarks ../data/FFHQ_Real/07702.png
+Alignining ../data/FFHQ_Real/46521.png
+Computing landmarks ../data/FFHQ_Real/46521.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p30_sample_5.png ... 
+
+Alignining ../data/FFHQ_Real/07967.png
+Computing landmarks ../data/FFHQ_Real/07967.png
+Alignining ../data/FFHQ_Real/15437.png
+Computing landmarks ../data/FFHQ_Real/15437.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p40_sample_6.png ... 
+
+Alignining ../data/FFHQ_Real/22517.png
+Computing landmarks ../data/FFHQ_Real/22517.png
+Alignining ../data/FFHQ_Real/07702.png
+Computing landmarks ../data/FFHQ_Real/07702.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p40_sample_7.png ... 
+
+Alignining ../data/FFHQ_Real/19041.png
+Computing landmarks ../data/FFHQ_Real/19041.png
+Alignining ../data/FFHQ_Real/11159.png
+Computing landmarks ../data/FFHQ_Real/11159.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p50_sample_8.png ... 
+
+Alignining ../data/FFHQ_Real/51456.png
+Computing landmarks ../data/FFHQ_Real/51456.png
+Alignining ../data/FFHQ_Real/30466.png
+Computing landmarks ../data/FFHQ_Real/30466.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p50_sample_9.png ... 
+
+Alignining ../data/FFHQ_Real/42645.png
+Computing landmarks ../data/FFHQ_Real/42645.png
+Alignining ../data/FFHQ_Real/67177.png
+Computing landmarks ../data/FFHQ_Real/67177.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p60_sample_10.png ... 
+
+Alignining ../data/FFHQ_Real/58242.png
+Computing landmarks ../data/FFHQ_Real/58242.png
+Alignining ../data/FFHQ_Real/10798.png
+Computing landmarks ../data/FFHQ_Real/10798.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p60_sample_11.png ... 
+
+Alignining ../data/FFHQ_Real/30068.png
+Computing landmarks ../data/FFHQ_Real/30068.png
+Alignining ../data/FFHQ_Real/13250.png
+Computing landmarks ../data/FFHQ_Real/13250.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p70_sample_12.png ... 
+
+Alignining ../data/FFHQ_Real/15926.png
+Computing landmarks ../data/FFHQ_Real/15926.png
+Alignining ../data/FFHQ_Real/11159.png
+Computing landmarks ../data/FFHQ_Real/11159.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p70_sample_13.png ... 
+
+Alignining ../data/FFHQ_Real/21251.png
+Computing landmarks ../data/FFHQ_Real/21251.png
+Alignining ../data/FFHQ_Real/30466.png
+Computing landmarks ../data/FFHQ_Real/30466.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p80_sample_14.png ... 
+
+Alignining ../data/FFHQ_Real/20003.png
+Computing landmarks ../data/FFHQ_Real/20003.png
+Alignining ../data/FFHQ_Real/31717.png
+Computing landmarks ../data/FFHQ_Real/31717.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p80_sample_15.png ... 
+
+Alignining ../data/FFHQ_Real/25273.png
+Computing landmarks ../data/FFHQ_Real/25273.png
+Alignining ../data/FFHQ_Real/01376.png
+Computing landmarks ../data/FFHQ_Real/01376.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p90_sample_16.png ... 
+
+Alignining ../data/FFHQ_Real/61362.png
+Computing landmarks ../data/FFHQ_Real/61362.png
+Alignining ../data/FFHQ_Real/10859.png
+Computing landmarks ../data/FFHQ_Real/10859.png
+Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/morphs/cluster_348_p90_sample_17.png ... 
+
+Generated 18 morphs.
+Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/cluster_348_percentile_summary.png
+
+[0;34m[Controlled Morph Generation was Successfully completed] 2026-08-04 21:11:58.288526[0m
+
+[0;34m[end] 2026-08-04 21:28:10.500339[0m
+
+Total Execution Time: 972.21 seconds

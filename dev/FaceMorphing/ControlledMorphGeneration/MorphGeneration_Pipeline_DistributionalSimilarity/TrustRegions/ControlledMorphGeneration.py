@@ -5,6 +5,9 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+from matplotlib.gridspec import GridSpec
+import matplotlib as mpl
+import matplotlib.colors as mcolors
 from argparse import Namespace
 from scipy.spatial.distance import cdist
 from libs import LIB_FaceMorph, LIB_MorphGAN
@@ -354,18 +357,6 @@ def analyze_neighbor_pairs(cluster_df):
 
     return pd.DataFrame(rows)
 
-#Tue 30 June 19:02:45 GMT by MAPA
-def estimate_min_tsne_distance(cluster_df, percentile):
-    # Compute all nearest neighbor distances
-    neighbor_pairs = analyze_neighbor_pairs(cluster_df)
-
-    # Estimate minimum valid t-SNE distance based on specified percentile from neighbor_pairs distance distribution
-    threshold = np.percentile(neighbor_pairs["distance"], percentile)
-
-    print(f"Automatic minimum t-SNE distance: {threshold:.4f}")
-
-    return threshold, neighbor_pairs
-
 #Wed 15 July 17:48:50 GMT by MAPA 
 def plot_fitted_distribution(
         values,
@@ -478,116 +469,6 @@ def plot_fitted_distribution(
 
     plt.close()
 
-#Wed 11 June 14:08:13 GMT by MAPA
-def generate_cluster_pairs(
-        cluster_df,
-        n_pairs=5,
-        mode="closest",
-        min_tsne_distance=0
-    ):
-
-    points = cluster_df[
-        ["tsne_x", "tsne_y"]
-    ].values
-
-    dist_matrix = cdist(
-        points,
-        points,
-        metric="euclidean"
-    )
-
-    np.fill_diagonal(
-        dist_matrix,
-        np.inf if mode=="closest" else -np.inf
-    )
-
-    candidate_pairs = []
-
-    for i in range(len(cluster_df)):
-        for j in range(i+1, len(cluster_df)):
-
-            d = dist_matrix[i, j]
-
-            # Avoid "identic" samples
-            if mode == "closest":
-
-                if d < min_tsne_distance:
-                    continue
-
-            # age_diff = abs(
-            #     cluster_df.iloc[i]["Age"] -
-            #     cluster_df.iloc[j]["Age"]
-            # )
-
-            candidate_pairs.append((i,j, d)
-            )
-
-    if mode == "closest":
-        candidate_pairs.sort(
-            key=lambda x:x[2]
-        )
-
-    else:
-        candidate_pairs.sort(
-            key=lambda x:x[2],
-            reverse=True
-        )
-
-    selected = []
-    used = set()
-
-    for i,j,d in candidate_pairs:
-
-        if i in used:
-            continue
-
-        if j in used:
-            continue
-
-        used.add(i)
-        used.add(j)
-
-        selected.append((i,j,d))
-
-        if len(selected) >= n_pairs:
-            break
-
-    pairs = []
-
-    for i,j,d in selected:
-
-        s1 = cluster_df.iloc[i]
-        s2 = cluster_df.iloc[j]
-
-        pairs.append({
-
-            "cluster": s1["cluster"],
-
-            "file_1": s1["file"],
-            "file_2": s2["file"],
-
-            "Age_1": s1["Age"],
-            "Age_2": s2["Age"],
-
-            "Race_1": s1["Dominant_Race"],
-            "Race_2": s2["Dominant_Race"],
-
-            "Gender_1": s1["Dominant_Gender"],
-            "Gender_2": s2["Dominant_Gender"],
-
-            "cluster_prob_1":
-                s1["cluster_prob"],
-
-            "cluster_prob_2":
-                s2["cluster_prob"],
-
-            "tsne_dist": d,
-
-            "pair_type": mode
-        })
-
-    return pd.DataFrame(pairs)
-
 #Mon 13 July 17:48:50 GMT by MAPA 
 def fit_candidate_distributions(values, candidate_distributions_dict):
     # Store every distribution type 
@@ -651,7 +532,420 @@ def compute_trust_region(best_distribution, confidence=0.95):
         "upper": upper
     }
 
-#Wed 11 June 14:08:13 GMT by MAPA       Modified: Mon 13 July 17:48:50 GMT by MAPA 
+#Mon 04 Aug 13:45:30 GMT by MAPA 
+def sample_distribution_percentiles(best_distribution, percentiles=np.arange(0.10, 1.00, 0.10)):
+    """
+    Computes representative distances from the fitted probability
+    distribution using its inverse cumulative distribution function (PPF).
+    """
+    # Extract distribution and its parameters
+    distribution = best_distribution["distribution"]
+    params = best_distribution["params"]
+
+    # Row array for dataframe
+    rows = []
+
+    for p in percentiles:
+        # Get target distance for each percentile
+        target_distance = distribution.ppf(p,*params)
+
+        # Append row
+        rows.append({
+            "percentile": p,
+            "target_distance": target_distance
+        })
+
+    # Return dataframe
+    return pd.DataFrame(rows)
+
+#Mon 04 Aug 13:45:30 GMT by MAPA 
+def select_pairs_from_distribution(target_samples, neighbor_pairs, cluster_df, samples_per_percentile=2):
+    """
+    Selects representative image pairs whose nearest-neighbor distance
+    is closest to the target distances obtained from the fitted
+    probability distribution.
+    """
+
+    selected_rows = []
+
+    # Keep track of already selected neighbor pairs
+    used_pairs = set()
+
+    for _, target in target_samples.iterrows():
+        # Extract params
+        percentile = target["percentile"]
+        target_distance = target["target_distance"]
+        
+        # Compute absolute distance error
+        candidates = neighbor_pairs.copy()
+
+        candidates["distance_error"] = np.abs( candidates["distance"] - target_distance)
+
+        candidates = candidates.sort_values(by="distance_error")
+
+        selected = 0
+
+        # Select closest real pairs
+        for _, pair in candidates.iterrows():
+
+            idx1 = int(pair["idx1"])
+            idx2 = int(pair["idx2"])
+
+            # Avoid duplicates
+            pair_key = tuple(sorted((idx1, idx2)))
+
+            if pair_key in used_pairs:
+                continue
+
+            used_pairs.add(pair_key)
+
+            s1 = cluster_df.iloc[idx1]
+            s2 = cluster_df.iloc[idx2]
+
+            selected_rows.append({
+                "percentile": percentile,
+                "target_distance": target_distance,
+                "real_distance": pair["distance"],
+                "distance_error": pair["distance_error"],
+                "idx1": idx1,
+                "idx2": idx2,
+                "file_1": s1["file"],
+                "file_2": s2["file"],
+                "Age_1": s1["Age"],
+                "Age_2": s2["Age"],
+                "Race_1": s1["Dominant_Race"],
+                "Race_2": s2["Dominant_Race"],
+                "Gender_1": s1["Dominant_Gender"],
+                "Gender_2": s2["Dominant_Gender"],
+                "cluster_prob_1": s1["cluster_prob"],
+                "cluster_prob_2": s2["cluster_prob"]
+            })
+
+            selected += 1
+
+            if selected >= samples_per_percentile:
+                break
+
+    return pd.DataFrame(selected_rows)
+
+#Mon 04 Aug 13:45:30 GMT by MAPA 
+def generate_percentile_morphs(
+        experimental_pairs,
+        cluster_id,
+        output_dir_path,
+        alpha=0.5
+    ):
+    
+    # Generates morph images for the representative pairs selected from the fitted distance distribution.
+
+    os.makedirs(output_dir_path, exist_ok=True)
+
+    generated_samples = []
+
+    for idx, row in experimental_pairs.iterrows():
+
+        morph_filename = (
+            f"cluster_{cluster_id}"
+            f"_p{int(row['percentile']*100):02d}"
+            f"_sample_{idx}.png"
+        )
+
+        morph_path = os.path.join(output_dir_path,morph_filename)
+
+        params = Namespace(
+            Sb1=row["file_1"],
+            Sb2=row["file_2"],
+            Morph=morph_path,
+            Alpha=alpha
+        )
+
+        try:
+            LIB_MorphGAN.MorphFace(params)
+
+            generated_samples.append({
+                "row": row,
+                "morph_path": morph_path
+            })
+
+        except Exception as e:
+            print( f"Error generating morph {idx}: {e}")
+
+    print(f"Generated {len(generated_samples)} morphs.")
+
+    return generated_samples
+
+#Mon 04 Aug 19:29:50 GMT by MAPA 
+def create_percentile_summary(
+        generated_samples,
+        cluster_id,
+        values,
+        best_distribution,
+        trust_region,
+        output_dir_path
+    ):
+
+    # Exit if no morphs were generated
+    if len(generated_samples) == 0:
+        return
+
+    # Number of experimental morph pairs
+    n = len(generated_samples)
+
+    # Figure layout
+    fig = plt.figure(figsize=(4*n, 14), constrained_layout=True)
+
+    gs = GridSpec(
+        4,
+        n,
+        height_ratios=[5,2.5,2.5,2.5],
+        hspace=0.2,
+        wspace=0.025,
+        figure=fig
+    )
+
+    # Plot fitted distance distribution
+    ax_hist = fig.add_subplot(gs[0, :])
+
+    # Recover fitted distribution
+    distribution = best_distribution["distribution"]
+    params = best_distribution["params"]
+
+    # Generate evaluation points
+    x = np.linspace(
+        np.min(values),
+        np.max(values),
+        500
+    )
+
+    # Evaluate fitted PDF
+    pdf = distribution.pdf(x, *params)
+
+    # Plot observed distance histogram
+    ax_hist.hist(
+        values,
+        bins=30,
+        density=True,
+        alpha=0.5,
+        edgecolor="black",
+        label="Observed distances"
+    )
+
+    # Plot fitted probability density function
+    ax_hist.plot(
+        x,
+        pdf,
+        linewidth=3,
+        color="red",
+        label=f"{best_distribution['name']} PDF"
+    )
+
+    # Highlight trust region
+    lower = trust_region["lower"]
+    upper = trust_region["upper"]
+
+    mask = (x >= lower) & (x <= upper)
+
+    ax_hist.fill_between(
+        x[mask],
+        pdf[mask],
+        alpha=0.25,
+        color="green",
+        label=f"{trust_region['confidence']*100:.0f}% Trust Region"
+    )
+
+    # Draw confidence interval limits
+    ax_hist.axvline(
+        lower,
+        linestyle="--",
+        linewidth=2,
+        color="green"
+    )
+
+    ax_hist.axvline(
+        upper,
+        linestyle="--",
+        linewidth=2,
+        color="green"
+    )
+
+    
+    # Display Statistics textbox
+    stats_text = (
+        f"{best_distribution['name']}\n"
+        f"KS = {best_distribution['ks_statistic']:.4f}\n"
+        f"p = {best_distribution['p_value']:.4f}\n"
+        f"AIC = {best_distribution['AIC']:.2f}"
+    )
+
+    ax_hist.text(
+        0.98,
+        0.98,
+        stats_text,
+        transform=ax_hist.transAxes,
+        fontsize=10,
+        va="top",
+        ha="right",
+        bbox=dict(
+            facecolor="white",
+            alpha=0.95
+        )
+    )
+
+    # Define percentile colormap
+    cmap = mpl.colormaps["viridis"]
+
+    # Mark selected experimental pairs on the distribution
+    ymax = pdf.max()
+
+    for sample in generated_samples:
+
+        row = sample["row"]
+
+        color = cmap(row["percentile"])
+
+        # Draw pair location on the fitted distribution
+        ax_hist.scatter(
+            row["real_distance"],
+            ymax*0.03,
+            s=120,
+            marker="v",
+            color=color,
+            edgecolor="black",
+            zorder=20
+        )
+
+        # Annotate corresponding percentile
+        ax_hist.text(
+            row["real_distance"],
+            ymax*0.08,
+            f"P{int(row['percentile']*100)}",
+            rotation=90,
+            ha="center",
+            fontsize=8
+        )
+
+    # Add percentile colorbar
+    norm = mcolors.Normalize(vmin=0.10,vmax=0.90)
+
+    sm = plt.cm.ScalarMappable(
+        cmap=cmap,
+        norm=norm
+    )
+    sm.set_array([])
+    fig.colorbar(
+        sm,
+        ax=ax_hist,
+        label="Distribution Percentile"
+    )
+
+    # Configure distribution plot
+    ax_hist.set_xlabel(
+        "Nearest Neighbor Distance",
+        fontsize=12
+    )
+    ax_hist.set_ylabel(
+        "Density",
+        fontsize=12
+    )
+    ax_hist.set_title(
+        f"Cluster {cluster_id} Distribution Fit",
+        fontsize=16,
+        fontweight="bold"
+    )
+    ax_hist.legend()
+
+    # Build image panels
+    first_ax1 = None
+    first_ax2 = None
+    first_ax3 = None
+
+    for col, sample in enumerate(generated_samples):
+
+        row = sample["row"]
+
+        color = cmap(row["percentile"])
+
+        # Load source images and generated morph
+        img1 = mpimg.imread(row["file_1"])
+        img2 = mpimg.imread(row["file_2"])
+        morph = mpimg.imread(sample["morph_path"])
+
+        # Source image 1
+        ax1 = fig.add_subplot(gs[1, col])
+        ax1.imshow(img1)
+        ax1.set_title(
+            f"P{int(row['percentile']*100)}\n"
+            f"d={row['real_distance']:.3f}",
+            fontsize=9
+        )
+        ax1.axis("off")
+
+        # Source image 2
+        ax2 = fig.add_subplot(gs[2, col])
+        ax2.imshow(img2)
+        ax2.axis("off")
+
+        # Generated morph
+        ax3 = fig.add_subplot(gs[3, col])
+        ax3.imshow(morph)
+        ax3.set_title(
+            f"err={row['distance_error']:.3f}",
+            fontsize=8
+        )
+        ax3.axis("off")
+
+        # Highlight images using percentile color
+        for ax in [ax1, ax2, ax3]:
+            for spine in ax.spines.values():
+                spine.set_visible(True)
+                spine.set_linewidth(4)
+                spine.set_color(color)
+
+        # Store first column for row labels
+        if first_ax1 is None:
+            first_ax1 = ax1
+            first_ax2 = ax2
+            first_ax3 = ax3
+
+    # Store first column for row labels
+    first_ax1.set_ylabel(
+        "SOURCE 1",
+        fontsize=14,
+        fontweight="bold"
+    )
+    first_ax2.set_ylabel(
+        "SOURCE 2",
+        fontsize=14,
+        fontweight="bold"
+    )
+    first_ax3.set_ylabel(
+        "MORPH",
+        fontsize=14,
+        fontweight="bold"
+    )
+
+    # Figure title and configuration
+    fig.suptitle(
+        f"Controlled Morph Generation Experiment\n"
+        f"Cluster {cluster_id}",
+        fontsize=20,
+        fontweight="bold"
+    )
+    output_path = os.path.join(
+        output_dir_path,
+        f"cluster_{cluster_id}_percentile_summary.png"
+    )
+    plt.savefig(
+        output_path,
+        dpi=250,
+        bbox_inches="tight"
+    )
+    plt.close()
+
+    print(f"Saved summary: {output_path}")
+
+
+#Wed 11 June 14:08:13 GMT by MAPA       Modified: Mon 04 Aug 19:29:50 GMT by MAPA 
 def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv"):
     print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(start) + "\033[0m")
     # Load clustered manifold dataset
@@ -659,12 +953,9 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
     print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(start) + "\033[0m")
     # Get top populated HDBSCAN clusters
-    top_clusters = get_top_clusters(dataset, n_clusters=5)
+    top_clusters = get_top_clusters(dataset, n_clusters=15)
 
     print("Selected clusters:",top_clusters)
-
-    # Store generated pairs from clusters
-    all_pairs = []
 
     # Controlled Morph generation dir base path
     controlled_morph_generation_dir_base_path = "../data/DistributionalSim_ControlledMorphGeneration_MorphPairs/TrustRegions"
@@ -676,9 +967,16 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     os.makedirs(controlled_morph_generation_dir_base_path, exist_ok=True)   
     os.makedirs(controlled_morph_gen_results_dir_path, exist_ok=True) 
 
+    cluster_idx = 0
+
     # Proccess n selected clusters
     print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(start) + "\033[0m")
     for cluster_id in top_clusters:
+        # Create cluster's directory safely   
+        cluster_controlled_morph_gen_results_dir_path = controlled_morph_gen_results_dir_path + f"/top_{cluster_idx}_cluster_{cluster_id}"
+        os.makedirs(cluster_controlled_morph_gen_results_dir_path, exist_ok=True) 
+
+        cluster_idx += 1
 
         print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(start) + "\033[0m")
 
@@ -723,9 +1021,10 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         print(best_distribution)
         
         # Save results
-        fitted_results.to_csv( controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
+        fitted_results.to_csv( cluster_controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
         
         # - Determine trust region
+        print("\n" + "\033[0;34m" + f"[Computing trust region...] " + str(start) + "\033[0m")
         trust_region = compute_trust_region(best_distribution, confidence = 0.90)
         print(
             f"Trust Region ({trust_region['confidence']*100:.1f}%): "
@@ -733,57 +1032,55 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # - Save histogram with its distribution fit and the resultant trust region
+        print("\n" + "\033[0;34m" + f"[Plotting resultant trust region...] " + str(start) + "\033[0m")
         plot_fitted_distribution(
             values=distances,
             best_distribution=best_distribution,
             trust_region=trust_region,
-            filepath=controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit_{best_distribution['name']}.png",
+            filepath=cluster_controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit_{best_distribution['name']}.png",
             title=f"Cluster {cluster_id}: Neighbor Distances Distribution Fit ({best_distribution['name']})"
         )
 
-        # | Should we generate morphs with each confidence variant trying to maximize morph quality? |
-        # | Morph quality score could be its embedding distance from parent samples |
+        # - For a fitted distribution F(x), select representative points from the CDF
+        print("\n" + "\033[0;34m" + f"[Selecting representative points from the CDF...] " + str(start) + "\033[0m")
+        target_samples = sample_distribution_percentiles(best_distribution)
+
+        # identify the actual pairs with distances closest to these points
+        print("\n" + "\033[0;34m" + f"[Selecting pairs...] " + str(start) + "\033[0m")
+        experimental_pairs = select_pairs_from_distribution(
+            target_samples,
+            neighbor_pairs,
+            cluster_df,
+            samples_per_percentile=2
+        )
+
+        experimental_pairs.to_csv(
+            cluster_controlled_morph_gen_results_dir_path +
+            f"/cluster_{cluster_id}_experimental_pairs.csv",
+            index=False
+        )
+
+        # generate two morphs for each level and plot gloabl cluster's summary
+        print("\n" + "\033[0;34m" + f"[Generating morphs...] " + str(start) + "\033[0m")
+        generated_samples = generate_percentile_morphs(
+            experimental_pairs,
+            cluster_id,
+            cluster_controlled_morph_gen_results_dir_path + f"/morphs",
+            alpha=0.5
+        )
+        create_percentile_summary(
+            generated_samples=generated_samples,
+            cluster_id=cluster_id,
+            values=distances,
+            best_distribution=best_distribution,
+            trust_region=trust_region,
+            output_dir_path=cluster_controlled_morph_gen_results_dir_path
+        )
 
         # - Generate a global trust region based on each cluster’s trust parameters
-        
-        
 
 
-
-        # Save cluster pairs into csv
-        #cluster_pairs.to_csv(controlled_morph_generation_dir_base_path + f"/cluster_{cluster_id}_pairs.csv",index=False)
-
-        # Store cluster pairs for final export
-        #all_pairs.append(cluster_pairs)
-
-
-
-        # - Generate morphs
-
-        # Generate morph images and summary visualization
-        # process_cluster_generation(
-        #     cluster_pairs_df=cluster_pairs,
-        #     cluster_id=cluster_id,
-        #     output_dir_path=controlled_morph_gen_results_dir_path,
-        #     alpha=0.5
-        # )
-
-    # # Concat pairs to generate
-    # final_df = pd.concat(
-    #     all_pairs,
-    #     ignore_index=True
-    # )
-
-    # # Save final sample pairs for generation
-    # final_df.to_csv(
-    #     controlled_morph_generation_dir_base_path + f"/all_morph_pairs.csv",
-    #     index=False
-    # )
-
-    # print(f"\nGenerated {len(final_df)} pairs.")
-
-    #return final_df
-    return
+    print("\n" + "\033[0;34m" + f"[Controlled Morph Generation was Successfully completed] " + str(start) + "\033[0m")
 
 
 if __name__ == "__main__":
