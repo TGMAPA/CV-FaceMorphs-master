@@ -14,6 +14,8 @@ from libs import LIB_FaceMorph, LIB_MorphGAN
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
 from scipy import stats
+import ast
+import ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.TrustRegions.ClusterQualityMetrics as qMetrics
 
 
 # Wed 11 June 2026 by MAPA
@@ -296,34 +298,25 @@ def get_top_clusters(dataset, n_clusters=5):
         .sort_values(ascending=False)
     )
 
-    return cluster_sizes.head(n_clusters).index.tolist()
+    top_clusters = cluster_sizes.head(n_clusters)
+
+    return top_clusters
 
 #Wed 11 June 14:08:13 GMT by MAPA
-def get_clean_cluster(
-        dataset,
-        cluster_id,
-        min_prob=0.80
-    ):
+def get_clean_cluster(dataset, cluster_id, min_prob=0.80):
+    # Filter cluster according to it's cluster_id
+    subset = dataset[dataset["cluster"] == cluster_id].copy()
 
-    subset = dataset[
-        dataset["cluster"] == cluster_id
-    ].copy()
+    # Filter cluster according to it's dominant_race
+    dominant_race = (subset["Dominant_Race"].mode()[0])
 
-    dominant_race = (
-        subset["Dominant_Race"]
-        .mode()[0]
-    )
+    # Filter cluster according to it's dominant_gender
+    dominant_gender = (subset["Dominant_Gender"].mode()[0])
 
-    dominant_gender = (
-        subset["Dominant_Gender"]
-        .mode()[0]
-    )
-
+    # Create a new set with filtered samples. Samples are also filtered with a min_prob of belonging to the referred cluster
     subset = subset[
-        (subset["Dominant_Race"] == dominant_race)
-        &
-        (subset["Dominant_Gender"] == dominant_gender)
-        &
+        (subset["Dominant_Race"] == dominant_race)&
+        (subset["Dominant_Gender"] == dominant_gender)&
         (subset["cluster_prob"] >= min_prob)
     ]
 
@@ -945,7 +938,7 @@ def create_percentile_summary(
     print(f"Saved summary: {output_path}")
 
 
-#Wed 11 June 14:08:13 GMT by MAPA       Modified: Mon 04 Aug 19:29:50 GMT by MAPA 
+#Wed 11 June 14:08:13 GMT by MAPA      Last Mod: Wed 02 Sep 20:13:30 GMT by MAPA 
 def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv"):
     print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(start) + "\033[0m")
     # Load clustered manifold dataset
@@ -954,7 +947,6 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(start) + "\033[0m")
     # Get top populated HDBSCAN clusters
     top_clusters = get_top_clusters(dataset, n_clusters=15)
-
     print("Selected clusters:",top_clusters)
 
     # Controlled Morph generation dir base path
@@ -969,9 +961,12 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
 
     cluster_idx = 0
 
+    # Cluser quality metrics array
+    all_cluster_quality = []
+
     # Proccess n selected clusters
     print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(start) + "\033[0m")
-    for cluster_id in top_clusters:
+    for cluster_id, original_n in top_clusters.items():
         # Create cluster's directory safely   
         cluster_controlled_morph_gen_results_dir_path = controlled_morph_gen_results_dir_path + f"/top_{cluster_idx}_cluster_{cluster_id}"
         os.makedirs(cluster_controlled_morph_gen_results_dir_path, exist_ok=True) 
@@ -983,12 +978,18 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         # - Remove low-confidence samples and demographic inconsistencies
         print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(start) + "\033[0m")
         cluster_df = get_clean_cluster(dataset, cluster_id, min_prob=0.80)
-        print(f"Clean samples: {len(cluster_df)}")
+        clean_n = len(cluster_df)
+        print(
+            f"Cluster {cluster_id}: "
+            f"Original: {original_n}"
+            f"Clean   : {clean_n}"
+        )
 
-        # Skip clusters with insufficient samples
-        if len(cluster_df) < 20:
-            print("Skipping cluster")
-            continue
+        # - Compute cluster quality metrics
+        print("\n" + "\033[0;34m" + f"[Computing cluster quality metrics...] " + str(start) + "\033[0m")
+
+        # Extract embeddings as an array [floats]
+        embeddings = np.array(cluster_df["embedding"].apply(ast.literal_eval).tolist(), dtype=float)
 
         # - Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
         neighbor_pairs = analyze_neighbor_pairs(cluster_df)
@@ -997,6 +998,22 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         # Extract distances values for distribution analysis
         distances = neighbor_pairs["distance"].values
 
+        # ============================================================
+        # - CLUSTER QUALITY METRICS
+
+        # Compute cluster's retention rate (after cleaning samples)
+        clean_retention_rate = clean_n/original_n
+        
+        # T-STUDENT
+        #t_student = qMetrics.compute_t_student_metrics(distances,confidence=0.95)
+
+        # COMPRESSION
+        compression = qMetrics.compute_compression_metrics(embeddings)
+
+        # DENSITY
+        density = qMetrics.compute_density_metrics(neighbor_pairs,k=2)
+
+        # DISTRIBUTIONAL QUALITY
         # Define candidate distributions to fit
         candidate_distributions = {
             "Chi-Square": stats.chi2,
@@ -1005,21 +1022,90 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
             "Lognormal": stats.lognorm
         }
 
-        # Fit data to candidate distributions
+        # Fit data to candidate distributions and compute KS (How well does the selected distribution represent the observed data?)
+        # and AIC (How favorable is the selected model regarding the candidates, considering fit and complexity?) 
+        # as Distribution quality metrics
         fitted_results = fit_candidate_distributions(distances, candidate_distributions)
-        
+
         # Sort values by its ks in order to know the best fitted distribution model
-        fitted_results = fitted_results.sort_values(
-            by=["ks_statistic", "AIC"],
-            ascending=[True, True]
-        )
+        fitted_results = fitted_results.sort_values(by=["ks_statistic", "AIC"], ascending=[True, True])
 
         # Select the best model
         print("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(start) + "\033[0m")
         best_distribution = fitted_results.iloc[0]
         print("Best fitted distributed: ", best_distribution["name"])
         print(best_distribution)
-        
+
+        distribution_quality = {
+            "best_distribution": best_distribution["name"],
+            "ks_statistic": best_distribution["ks_statistic"],
+            "ks_p_value": best_distribution["p_value"],
+            "aic": best_distribution["AIC"]
+        }
+
+        # BOOTSTRAP STABILITY (Do the obtained model and parameters hold up when we perturb or resample the data?)
+        bootstrap_results = qMetrics.bootstrap_distribution_stability(
+            distances=distances,
+            candidate_distributions=candidate_distributions,
+            n_iterations=100,
+            confidence=0.90,
+            random_state=42
+        )
+        bootstrap_stability = qMetrics.summarize_bootstrap_stability(bootstrap_results)
+
+        # Cluster quality metrics dictionary
+        cluster_quality = {
+            "cluster_id": cluster_id,
+            "n_samples": len(cluster_df),
+
+            # Cleaning Retention rate
+            "original_n": original_n,
+            "clean_n": clean_n,
+            "clean_retention_rate" : clean_retention_rate,
+
+            # T-Student
+            # "t_mean": t_student["mean"],
+            # "t_std": t_student["std"],
+            # "t_ci_lower": t_student["ci_lower"],
+            # "t_ci_upper": t_student["ci_upper"],
+            # "t_ci_width": t_student["ci_width"],
+
+            # Compression
+            "compression_mean_radius": compression["centroid_radius_mean"],
+            "compression_std_radius": compression["centroid_radius_std"],
+            "compression_median_radius": compression["centroid_radius_median"],
+            "compression_q90_radius": compression["centroid_radius_q90"],
+            #"compression_cv": compression["compression_cv"],
+
+            # Density
+            "density_mean_knn_distance": density["mean_knn_distance"],
+            "density_median_knn_distance": density["median_knn_distance"],
+            "density_knn": density["knn_density"],
+
+            # Distribution
+            "fitted_distribution": distribution_quality["best_distribution"],
+            "ks": distribution_quality["ks_statistic"],
+            # "ks_p_value": distribution_quality["ks_p_value"],
+            "aic": distribution_quality["aic"],
+
+            # Bootstrap
+            "bootstrap_model_stability": bootstrap_stability["model_stability"],
+            # "bootstrap_mean_ks": bootstrap_stability["mean_ks"],
+            # "bootstrap_std_ks": bootstrap_stability["std_ks"],
+            # "bootstrap_mean_aic": bootstrap_stability["mean_aic"],
+            # "bootstrap_std_aic": bootstrap_stability["std_aic"],
+            # "bootstrap_trust_lower_std": bootstrap_stability["std_trust_lower"],
+            # "bootstrap_trust_upper_std": bootstrap_stability["std_trust_upper"]
+        }
+
+        # Append Cluster's QMetrics to buffer
+        all_cluster_quality.append(cluster_quality)
+
+        print("\n" + "\033[0;34m" + f"[Cluster quality metrics Completed] " + str(start) + "\033[0m")
+
+        # - END - CLUSTER QUALITY METRICS
+        # ============================================================
+
         # Save results
         fitted_results.to_csv( cluster_controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
         
@@ -1078,7 +1164,13 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # - Generate a global trust region based on each cluster’s trust parameters
-
+        
+    # Save all clusters quality metrics
+    quality_df = pd.DataFrame(all_cluster_quality)
+    quality_df.to_csv(
+        controlled_morph_gen_results_dir_path + "/cluster_quality_summary.csv",
+        index=False
+    )
 
     print("\n" + "\033[0;34m" + f"[Controlled Morph Generation was Successfully completed] " + str(start) + "\033[0m")
 

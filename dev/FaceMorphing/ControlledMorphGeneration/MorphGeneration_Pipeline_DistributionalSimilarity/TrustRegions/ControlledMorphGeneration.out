@@ -1,21 +1,39 @@
 
-[0;34m[start] 2026-08-04 21:11:58.288526[0m
+[0;34m[start] 2026-09-03 20:21:08.904086[0m
 
 
-[0;34m[Loading manifold clustered dataset...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Loading manifold clustered dataset...] 2026-09-03 20:21:08.904086[0m
 Loaded 69998 samples
 
-[0;34m[Extracting top Clusters...] 2026-08-04 21:11:58.288526[0m
-Selected clusters: [393, 92, 118, 40, 280, 133, 194, 129, 340, 277, 423, 311, 513, 270, 348]
+[0;34m[Extracting top Clusters...] 2026-09-03 20:21:08.904086[0m
+Selected clusters: cluster
+393    1561
+92     1310
+118     973
+40      967
+280     926
+133     910
+194     696
+129     495
+340     396
+277     245
+423     210
+311     203
+513     173
+270     162
+348     161
+dtype: int64
 
-[0;34m[Starting Cluser Processing...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Starting Cluser Processing...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Processing cluster 393] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 393] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 393] 2026-08-04 21:11:58.288526[0m
-Clean samples: 918
+[0;34m[Cleaning Cluster 393] 2026-09-03 20:21:08.904086[0m
+Cluster 393: Original: 1561Clean   : 918
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -26,16 +44,18 @@ log_likelihood                                           497.833679
 AIC                                                     -989.667357
 Name: 1, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0332, 0.5721]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/07938.png
 Computing landmarks ../data/FFHQ_Real/07938.png
 Alignining ../data/FFHQ_Real/09003.png
@@ -149,12 +169,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_0_cluster_393/cluster_393_percentile_summary.png
 
-[0;34m[Processing cluster 92] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 92] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 92] 2026-08-04 21:11:58.288526[0m
-Clean samples: 1186
+[0;34m[Cleaning Cluster 92] 2026-09-03 20:21:08.904086[0m
+Cluster 92: Original: 1310Clean   : 1186
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -165,16 +187,18 @@ log_likelihood                                           770.887483
 AIC                                                    -1535.774965
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0246, 0.5105]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/40567.png
 Computing landmarks ../data/FFHQ_Real/40567.png
 Alignining ../data/FFHQ_Real/38693.png
@@ -286,12 +310,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_1_cluster_92/cluster_92_percentile_summary.png
 
-[0;34m[Processing cluster 118] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 118] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 118] 2026-08-04 21:11:58.288526[0m
-Clean samples: 717
+[0;34m[Cleaning Cluster 118] 2026-09-03 20:21:08.904086[0m
+Cluster 118: Original: 973Clean   : 717
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -302,16 +328,18 @@ log_likelihood                                           485.196793
 AIC                                                     -964.393585
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0314, 0.5034]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/10910.png
 Computing landmarks ../data/FFHQ_Real/10910.png
 Alignining ../data/FFHQ_Real/35917.png
@@ -423,12 +451,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_2_cluster_118/cluster_118_percentile_summary.png
 
-[0;34m[Processing cluster 40] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 40] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 40] 2026-08-04 21:11:58.288526[0m
-Clean samples: 835
+[0;34m[Cleaning Cluster 40] 2026-09-03 20:21:08.904086[0m
+Cluster 40: Original: 967Clean   : 835
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -439,16 +469,18 @@ log_likelihood                                           623.369868
 AIC                                                    -1240.739737
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0179, 0.4757]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/60883.png
 Computing landmarks ../data/FFHQ_Real/60883.png
 Alignining ../data/FFHQ_Real/63937.png
@@ -560,12 +592,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_3_cluster_40/cluster_40_percentile_summary.png
 
-[0;34m[Processing cluster 280] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 280] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 280] 2026-08-04 21:11:58.288526[0m
-Clean samples: 405
+[0;34m[Cleaning Cluster 280] 2026-09-03 20:21:08.904086[0m
+Cluster 280: Original: 926Clean   : 405
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -576,16 +610,18 @@ log_likelihood                                           112.871467
 AIC                                                     -219.742934
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0438, 0.7392]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/07929.png
 Computing landmarks ../data/FFHQ_Real/07929.png
 Alignining ../data/FFHQ_Real/01744.png
@@ -697,12 +733,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_4_cluster_280/cluster_280_percentile_summary.png
 
-[0;34m[Processing cluster 133] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 133] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 133] 2026-08-04 21:11:58.288526[0m
-Clean samples: 537
+[0;34m[Cleaning Cluster 133] 2026-09-03 20:21:08.904086[0m
+Cluster 133: Original: 910Clean   : 537
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -713,16 +751,18 @@ log_likelihood                                           291.028613
 AIC                                                     -576.057225
 Name: 1, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0429, 0.5691]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/59956.png
 Computing landmarks ../data/FFHQ_Real/59956.png
 Alignining ../data/FFHQ_Real/36011.png
@@ -834,12 +874,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_5_cluster_133/cluster_133_percentile_summary.png
 
-[0;34m[Processing cluster 194] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 194] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 194] 2026-08-04 21:11:58.288526[0m
-Clean samples: 182
+[0;34m[Cleaning Cluster 194] 2026-09-03 20:21:08.904086[0m
+Cluster 194: Original: 696Clean   : 182
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Lognormal
 name                                                      Lognormal
 distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
@@ -850,16 +892,18 @@ log_likelihood                                           -35.770002
 AIC                                                       77.540004
 Name: 3, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0372, 1.3305]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/39580.png
 Computing landmarks ../data/FFHQ_Real/39580.png
 Alignining ../data/FFHQ_Real/27522.png
@@ -971,12 +1015,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_6_cluster_194/cluster_194_percentile_summary.png
 
-[0;34m[Processing cluster 129] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 129] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 129] 2026-08-04 21:11:58.288526[0m
-Clean samples: 254
+[0;34m[Cleaning Cluster 129] 2026-09-03 20:21:08.904086[0m
+Cluster 129: Original: 495Clean   : 254
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -987,16 +1033,18 @@ log_likelihood                                            87.223105
 AIC                                                      -168.44621
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0322, 0.7308]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/31015.png
 Computing landmarks ../data/FFHQ_Real/31015.png
 Alignining ../data/FFHQ_Real/60605.png
@@ -1108,12 +1156,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_7_cluster_129/cluster_129_percentile_summary.png
 
-[0;34m[Processing cluster 340] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 340] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 340] 2026-08-04 21:11:58.288526[0m
-Clean samples: 316
+[0;34m[Cleaning Cluster 340] 2026-09-03 20:21:08.904086[0m
+Cluster 340: Original: 396Clean   : 316
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -1124,16 +1174,18 @@ log_likelihood                                           192.995791
 AIC                                                     -379.991582
 Name: 1, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0434, 0.5405]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/26841.png
 Computing landmarks ../data/FFHQ_Real/26841.png
 Alignining ../data/FFHQ_Real/63241.png
@@ -1245,12 +1297,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_8_cluster_340/cluster_340_percentile_summary.png
 
-[0;34m[Processing cluster 277] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 277] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 277] 2026-08-04 21:11:58.288526[0m
-Clean samples: 178
+[0;34m[Cleaning Cluster 277] 2026-09-03 20:21:08.904086[0m
+Cluster 277: Original: 245Clean   : 178
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -1261,16 +1315,18 @@ log_likelihood                                            87.196529
 AIC                                                     -168.393058
 Name: 1, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0181, 0.7328]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/64800.png
 Computing landmarks ../data/FFHQ_Real/64800.png
 Alignining ../data/FFHQ_Real/32619.png
@@ -1382,12 +1438,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_9_cluster_277/cluster_277_percentile_summary.png
 
-[0;34m[Processing cluster 423] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 423] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 423] 2026-08-04 21:11:58.288526[0m
-Clean samples: 166
+[0;34m[Cleaning Cluster 423] 2026-09-03 20:21:08.904086[0m
+Cluster 423: Original: 210Clean   : 166
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Gamma
 name                                                          Gamma
 distribution      <scipy.stats._continuous_distns.gamma_gen obje...
@@ -1398,16 +1456,18 @@ log_likelihood                                            74.441555
 AIC                                                     -142.883109
 Name: 1, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0264, 0.6623]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/42329.png
 Computing landmarks ../data/FFHQ_Real/42329.png
 Alignining ../data/FFHQ_Real/59509.png
@@ -1519,12 +1579,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_10_cluster_423/cluster_423_percentile_summary.png
 
-[0;34m[Processing cluster 311] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 311] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 311] 2026-08-04 21:11:58.288526[0m
-Clean samples: 111
+[0;34m[Cleaning Cluster 311] 2026-09-03 20:21:08.904086[0m
+Cluster 311: Original: 203Clean   : 111
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Weibull
 name                                                        Weibull
 distribution      <scipy.stats._continuous_distns.weibull_min_ge...
@@ -1535,16 +1597,18 @@ log_likelihood                                             63.54929
 AIC                                                     -121.098581
 Name: 2, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0289, 0.7926]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/29889.png
 Computing landmarks ../data/FFHQ_Real/29889.png
 Alignining ../data/FFHQ_Real/59233.png
@@ -1656,12 +1720,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_11_cluster_311/cluster_311_percentile_summary.png
 
-[0;34m[Processing cluster 513] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 513] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 513] 2026-08-04 21:11:58.288526[0m
-Clean samples: 39
+[0;34m[Cleaning Cluster 513] 2026-09-03 20:21:08.904086[0m
+Cluster 513: Original: 173Clean   : 39
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Lognormal
 name                                                      Lognormal
 distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
@@ -1672,16 +1738,18 @@ log_likelihood                                            28.683347
 AIC                                                      -51.366695
 Name: 3, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0711, 0.4727]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/07745.png
 Computing landmarks ../data/FFHQ_Real/07745.png
 Alignining ../data/FFHQ_Real/56981.png
@@ -1793,12 +1861,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_12_cluster_513/cluster_513_percentile_summary.png
 
-[0;34m[Processing cluster 270] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 270] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 270] 2026-08-04 21:11:58.288526[0m
-Clean samples: 114
+[0;34m[Cleaning Cluster 270] 2026-09-03 20:21:08.904086[0m
+Cluster 270: Original: 162Clean   : 114
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Lognormal
 name                                                      Lognormal
 distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
@@ -1809,16 +1879,18 @@ log_likelihood                                            56.805077
 AIC                                                     -107.610153
 Name: 3, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0321, 0.6341]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/22817.png
 Computing landmarks ../data/FFHQ_Real/22817.png
 Alignining ../data/FFHQ_Real/56315.png
@@ -1929,12 +2001,14 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 17 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_13_cluster_270/cluster_270_percentile_summary.png
 
-[0;34m[Processing cluster 348] 2026-08-04 21:11:58.288526[0m
+[0;34m[Processing cluster 348] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Cleaning Cluster 348] 2026-08-04 21:11:58.288526[0m
-Clean samples: 143
+[0;34m[Cleaning Cluster 348] 2026-09-03 20:21:08.904086[0m
+Cluster 348: Original: 161Clean   : 143
 
-[0;34m[Selecting the best distribution model...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Computing cluster quality metrics...] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Selecting the best distribution model...] 2026-09-03 20:21:08.904086[0m
 Best fitted distributed:  Lognormal
 name                                                      Lognormal
 distribution      <scipy.stats._continuous_distns.lognorm_gen ob...
@@ -1945,16 +2019,18 @@ log_likelihood                                            97.694884
 AIC                                                     -189.389767
 Name: 3, dtype: object
 
-[0;34m[Computing trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Cluster quality metrics Completed] 2026-09-03 20:21:08.904086[0m
+
+[0;34m[Computing trust region...] 2026-09-03 20:21:08.904086[0m
 Trust Region (90.0%): [0.0155, 0.6232]
 
-[0;34m[Plotting resultant trust region...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Plotting resultant trust region...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting representative points from the CDF...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting representative points from the CDF...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Selecting pairs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Selecting pairs...] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[Generating morphs...] 2026-08-04 21:11:58.288526[0m
+[0;34m[Generating morphs...] 2026-09-03 20:21:08.904086[0m
 Alignining ../data/FFHQ_Real/51266.png
 Computing landmarks ../data/FFHQ_Real/51266.png
 Alignining ../data/FFHQ_Real/08905.png
@@ -2066,8 +2142,8 @@ Writting morphed face : ./ControlledMorphGeneration/MorphGeneration_Pipeline_Dis
 Generated 18 morphs.
 Saved summary: ./ControlledMorphGeneration/MorphGeneration_Pipeline_DistributionalSimilarity/TrustRegions/results/top_14_cluster_348/cluster_348_percentile_summary.png
 
-[0;34m[Controlled Morph Generation was Successfully completed] 2026-08-04 21:11:58.288526[0m
+[0;34m[Controlled Morph Generation was Successfully completed] 2026-09-03 20:21:08.904086[0m
 
-[0;34m[end] 2026-08-04 21:28:10.500339[0m
+[0;34m[end] 2026-09-03 20:40:13.476671[0m
 
-Total Execution Time: 972.21 seconds
+Total Execution Time: 1144.57 seconds
