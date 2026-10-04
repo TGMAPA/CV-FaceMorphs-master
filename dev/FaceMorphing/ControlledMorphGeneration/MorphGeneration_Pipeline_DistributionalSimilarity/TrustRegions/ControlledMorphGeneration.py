@@ -1,5 +1,6 @@
 # Libraries
 import pandas as pd
+import seaborn as sns
 import datetime
 import numpy as np
 import os
@@ -288,8 +289,45 @@ def load_manifold_dataset(path):
 
     return dataset
 
+def plot_cluster_sizes_distribution(cluster_sizes, path):
+    # Create figure 
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+    # Plot 1: Standard linear scale distribution
+    sns.histplot(
+        cluster_sizes,
+        bins=30,
+        kde=True,
+        color="#2b5c8f",
+        edgecolor="black",
+        ax=axes[0],
+    )
+    axes[0].set_title("Cluster Size Distribution", fontsize=12, fontweight="bold")
+    axes[0].set_xlabel("Cluster Size (Number of Samples)", fontsize=10)
+    axes[0].set_ylabel("Frequency", fontsize=10)
+    axes[0].grid(axis="y", linestyle="--", alpha=0.5)
+
+    # Plot 2: Logarithmic scale distribution
+    sns.histplot(
+        cluster_sizes,
+        bins=30,
+        log_scale=True,
+        color="#2b5c8f",
+        edgecolor="black",
+        ax=axes[1],
+    )
+    axes[1].set_title("Cluster Size Distribution (Log Scale)",fontsize=12,fontweight="bold")
+    axes[1].set_xlabel("Cluster Size (Log)", fontsize=10)
+    axes[1].set_ylabel("Frequency", fontsize=10)
+    axes[1].grid(True, which="both", linestyle="--", alpha=0.4)
+
+    # Adjust layout and save the single figure
+    plt.tight_layout()
+    plt.savefig(path+"/distribucion_cluster_size_combined.png", dpi=300, bbox_inches="tight")
+
+
 #Wed 11 June 14:08:13 GMT by MAPA
-def get_top_clusters(dataset, n_clusters=5):
+def get_sample_clusters(dataset, n_clusters=3, mixed_clusters=False, mid_strategy="mean"):
 
     cluster_sizes = (
         dataset[dataset["cluster"] != -1]
@@ -298,9 +336,44 @@ def get_top_clusters(dataset, n_clusters=5):
         .sort_values(ascending=False)
     )
 
-    top_clusters = cluster_sizes.head(n_clusters)
+    # - Get top n clusters, mid n clusters and low n clusters
 
-    return top_clusters
+    # Top clusters
+    top_clusters = cluster_sizes.head(n_clusters)
+    
+    if not mixed_clusters:
+        return {
+            "top": top_clusters,
+            "mid": None,
+            "bottom": None
+        }
+    
+    # Bottom CLusters
+    bottom_clusters = cluster_sizes.tail(n_clusters)
+
+    # Mid clusters
+    if mid_strategy == "mean":
+        target = cluster_sizes.mean()
+    elif mid_strategy == "median":
+        target = cluster_sizes.median()
+    else:  # position
+        mid_start = (len(cluster_sizes) - n_clusters) // 2
+        mid_clusters = cluster_sizes.iloc[mid_start : mid_start + n_clusters]
+        return {
+            "top": top_clusters,
+            "mid": mid_clusters,
+            "bottom": bottom_clusters
+        }
+
+    # Select the n clusters closest to the set mid size
+    closest_indices = (cluster_sizes - target).abs().nsmallest(n_clusters).index
+    mid_clusters = cluster_sizes.loc[closest_indices]
+
+    return {
+        "top": top_clusters,
+        "mid": mid_clusters,
+        "bottom": bottom_clusters
+    }, cluster_sizes
 
 #Wed 11 June 14:08:13 GMT by MAPA
 def get_clean_cluster(dataset, cluster_id, min_prob=0.80):
@@ -484,6 +557,7 @@ def fit_candidate_distributions(values, candidate_distributions_dict):
 
         # Compute AIC (Akaike Information Criterion)
         # Evaluates which distribution provides the best balance between model fit and simplicity, penalizing overly complex distributions to prevent overfitting.
+        # Using: AIC = 2k - 2ln(L)
         k = len(params)
         aic = 2 * k - 2 * log_likelihood
 
@@ -940,14 +1014,24 @@ def create_percentile_summary(
 
 #Wed 11 June 14:08:13 GMT by MAPA      Last Mod: Wed 02 Sep 20:13:30 GMT by MAPA 
 def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv"):
-    print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(start) + "\033[0m")
+    print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(datetime.datetime.now()) + "\033[0m")
     # Load clustered manifold dataset
     dataset = load_manifold_dataset(manifold_dataset_clustered_path)
 
-    print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(start) + "\033[0m")
+    print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(datetime.datetime.now()) + "\033[0m")
     # Get top populated HDBSCAN clusters
-    top_clusters = get_top_clusters(dataset, n_clusters=15)
-    print("Selected clusters:",top_clusters)
+    raw_sample_clusters, cluster_sizes = get_sample_clusters(dataset, n_clusters=5, mixed_clusters=True, mid_strategy="mean")
+
+    # Get mixed clusters
+    sample_clusters = []
+    for key, set in raw_sample_clusters.items():
+        set = dict(set)
+        for cluster_id, n in set.items():
+            sample_clusters.append([cluster_id, n, key])
+
+    print("Selected clusters:\n")
+    for cluster in sample_clusters:
+        print(cluster)
 
     # Controlled Morph generation dir base path
     controlled_morph_generation_dir_base_path = "../data/DistributionalSim_ControlledMorphGeneration_MorphPairs/TrustRegions"
@@ -959,24 +1043,42 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
     os.makedirs(controlled_morph_generation_dir_base_path, exist_ok=True)   
     os.makedirs(controlled_morph_gen_results_dir_path, exist_ok=True) 
 
+    # Plot cluster_size distribution
+    plot_cluster_sizes_distribution(cluster_sizes, controlled_morph_gen_results_dir_path)
+
     cluster_idx = 0
 
     # Cluser quality metrics array
     all_cluster_quality = []
 
+    total_samples = 0
+    clean_samples = 0
+    # Clean retention rate: full dataset
+    for cluster_id, n in cluster_sizes.items():
+        total_samples+=n
+        cluster_df = get_clean_cluster(dataset, cluster_id, min_prob=0.80)
+        clean_n = len(cluster_df)
+        clean_samples+=clean_n
+
+    print("\n- Full Cluster Space Cleaning metrics:")
+    print("Total samples      : ", total_samples)
+    print("Total Clean samples: ", clean_samples)
+    print("Retention Rate     : ", clean_samples/total_samples*100)
+    exit(0)
+
     # Proccess n selected clusters
-    print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(start) + "\033[0m")
-    for cluster_id, original_n in top_clusters.items():
+    print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(datetime.datetime.now()) + "\033[0m")
+    for cluster_id, original_n, cluster_location in sample_clusters:
         # Create cluster's directory safely   
-        cluster_controlled_morph_gen_results_dir_path = controlled_morph_gen_results_dir_path + f"/top_{cluster_idx}_cluster_{cluster_id}"
+        cluster_controlled_morph_gen_results_dir_path = controlled_morph_gen_results_dir_path + f"/{cluster_location}_{cluster_idx}_cluster_{cluster_id}"
         os.makedirs(cluster_controlled_morph_gen_results_dir_path, exist_ok=True) 
 
         cluster_idx += 1
 
-        print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
 
         # - Remove low-confidence samples and demographic inconsistencies
-        print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
         cluster_df = get_clean_cluster(dataset, cluster_id, min_prob=0.80)
         clean_n = len(cluster_df)
         print(
@@ -986,7 +1088,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # - Compute cluster quality metrics
-        print("\n" + "\033[0;34m" + f"[Computing cluster quality metrics...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Computing cluster quality metrics...] " + str(datetime.datetime.now()) + "\033[0m")
 
         # Extract embeddings as an array [floats]
         embeddings = np.array(cluster_df["embedding"].apply(ast.literal_eval).tolist(), dtype=float)
@@ -994,7 +1096,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         # - Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
         neighbor_pairs = analyze_neighbor_pairs(cluster_df)
 
-        # - Fit some distribution types (χ², Gamma, Weibull y Lognormal) and compare
+        # - Fit some distribution types (χ², Gamma, Weibull and Lognormal) and compare
         # Extract distances values for distribution analysis
         distances = neighbor_pairs["distance"].values
 
@@ -1031,7 +1133,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         fitted_results = fitted_results.sort_values(by=["ks_statistic", "AIC"], ascending=[True, True])
 
         # Select the best model
-        print("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(datetime.datetime.now()) + "\033[0m")
         best_distribution = fitted_results.iloc[0]
         print("Best fitted distributed: ", best_distribution["name"])
         print(best_distribution)
@@ -1063,19 +1165,11 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
             "clean_n": clean_n,
             "clean_retention_rate" : clean_retention_rate,
 
-            # T-Student
-            # "t_mean": t_student["mean"],
-            # "t_std": t_student["std"],
-            # "t_ci_lower": t_student["ci_lower"],
-            # "t_ci_upper": t_student["ci_upper"],
-            # "t_ci_width": t_student["ci_width"],
-
             # Compression
             "compression_mean_radius": compression["centroid_radius_mean"],
             "compression_std_radius": compression["centroid_radius_std"],
             "compression_median_radius": compression["centroid_radius_median"],
             "compression_q90_radius": compression["centroid_radius_q90"],
-            #"compression_cv": compression["compression_cv"],
 
             # Density
             "density_mean_knn_distance": density["mean_knn_distance"],
@@ -1085,23 +1179,16 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
             # Distribution
             "fitted_distribution": distribution_quality["best_distribution"],
             "ks": distribution_quality["ks_statistic"],
-            # "ks_p_value": distribution_quality["ks_p_value"],
             "aic": distribution_quality["aic"],
 
             # Bootstrap
-            "bootstrap_model_stability": bootstrap_stability["model_stability"],
-            # "bootstrap_mean_ks": bootstrap_stability["mean_ks"],
-            # "bootstrap_std_ks": bootstrap_stability["std_ks"],
-            # "bootstrap_mean_aic": bootstrap_stability["mean_aic"],
-            # "bootstrap_std_aic": bootstrap_stability["std_aic"],
-            # "bootstrap_trust_lower_std": bootstrap_stability["std_trust_lower"],
-            # "bootstrap_trust_upper_std": bootstrap_stability["std_trust_upper"]
+            "bootstrap_model_stability": bootstrap_stability["model_stability"]
         }
 
         # Append Cluster's QMetrics to buffer
         all_cluster_quality.append(cluster_quality)
 
-        print("\n" + "\033[0;34m" + f"[Cluster quality metrics Completed] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Cluster quality metrics Completed] " + str(datetime.datetime.now()) + "\033[0m")
 
         # - END - CLUSTER QUALITY METRICS
         # ============================================================
@@ -1110,7 +1197,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         fitted_results.to_csv( cluster_controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
         
         # - Determine trust region
-        print("\n" + "\033[0;34m" + f"[Computing trust region...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Computing trust region...] " + str(datetime.datetime.now()) + "\033[0m")
         trust_region = compute_trust_region(best_distribution, confidence = 0.90)
         print(
             f"Trust Region ({trust_region['confidence']*100:.1f}%): "
@@ -1118,7 +1205,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # - Save histogram with its distribution fit and the resultant trust region
-        print("\n" + "\033[0;34m" + f"[Plotting resultant trust region...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Plotting resultant trust region...] " + str(datetime.datetime.now()) + "\033[0m")
         plot_fitted_distribution(
             values=distances,
             best_distribution=best_distribution,
@@ -1128,11 +1215,11 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # - For a fitted distribution F(x), select representative points from the CDF
-        print("\n" + "\033[0;34m" + f"[Selecting representative points from the CDF...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Selecting representative points from the CDF...] " + str(datetime.datetime.now()) + "\033[0m")
         target_samples = sample_distribution_percentiles(best_distribution)
 
         # identify the actual pairs with distances closest to these points
-        print("\n" + "\033[0;34m" + f"[Selecting pairs...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Selecting pairs...] " + str(datetime.datetime.now()) + "\033[0m")
         experimental_pairs = select_pairs_from_distribution(
             target_samples,
             neighbor_pairs,
@@ -1147,7 +1234,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         )
 
         # generate two morphs for each level and plot gloabl cluster's summary
-        print("\n" + "\033[0;34m" + f"[Generating morphs...] " + str(start) + "\033[0m")
+        print("\n" + "\033[0;34m" + f"[Generating morphs...] " + str(datetime.datetime.now()) + "\033[0m")
         generated_samples = generate_percentile_morphs(
             experimental_pairs,
             cluster_id,
@@ -1172,7 +1259,7 @@ def ControlledMorphGeneration(manifold_dataset_clustered_path = "../data/Manifol
         index=False
     )
 
-    print("\n" + "\033[0;34m" + f"[Controlled Morph Generation was Successfully completed] " + str(start) + "\033[0m")
+    print("\n" + "\033[0;34m" + f"[Controlled Morph Generation was Successfully completed] " + str(datetime.datetime.now()) + "\033[0m")
 
 
 if __name__ == "__main__":
