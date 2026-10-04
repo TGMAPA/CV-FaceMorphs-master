@@ -1,0 +1,11 @@
+# configs/default.yaml
+dataset:
+  raw_dir: "data/raw"
+
+demographics:
+  generate_eda: true           
+  deepface_actions: ["age", "gender", "race"]
+  detector_backend: "opencv"   
+  
+outputs:
+  experiment_dir: "outputs/exp_001"

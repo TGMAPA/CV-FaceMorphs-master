@@ -1,0 +1,44 @@
+name: demofull
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - python >= 3.10
+  - pip
+  - cmake
+  - dlib
+  - ffmpeg
+  - ffmpeg-python
+  - future
+  - imutils
+  - networkx
+  - numpy=1.24
+  - packaging
+  - Pillow
+  - pyparsing
+  - django
+  - PyWavelets
+  - scikit-image
+  - tifffile
+  - opencv
+  - click
+  - requests 
+  - ninja 
+  - imageio-ffmpeg==0.4.3
+  - imageio
+  - pytorch=1.13.0
+  - cudatoolkit=11.6
+  - torchvision=0.14.0
+  - pip:
+    - PyYAML
+    - pandas
+    - tabulate
+    - scikit-learn
+    - scikit-image
+    - scipy
+    - pyparsing
+    - cycler
+    - matplotlib
+    - tqdm
+    - oulumetrics  
