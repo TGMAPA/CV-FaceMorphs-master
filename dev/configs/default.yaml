@@ -6,7 +6,7 @@ dataset:
   #raw_dir: "data/dataset/raw/FFHQ_Real"
   raw_dir: "data/FFHQ_Real"
   name : "FFHQ_Real"
-  n: -1
+  n: 1000
 
 demographics:
   generate_eda: true 
