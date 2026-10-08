@@ -43,4 +43,11 @@ output/
 data/*
 !data/.gitkeep
 
-outputs/*
+# --- Output directory files:
+outputs/**
+!outputs/**/
+!outputs/**/*.png
+!outputs/**/*.jpg
+!outputs/**/*.jpeg
+!outputs/**/*.svg
+!outputs/**/*.html
