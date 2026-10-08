@@ -11,6 +11,7 @@ from face_morphing.pipeline.ClusterManager import ClusterManager
 from face_morphing.pipeline.MorphGenerator import MorphGenerator
 
 
+
 # Wed 07 Oct 2026 12:01:50 GMT by MAPA
 def makedir(config: Config, dir_name):
     dir_path = config.outputs.experiment_dir + dir_name
@@ -161,6 +162,11 @@ def run_pipeline(config: Config):
         output_plot_dir=config.outputs.experiment_dir,
         clustered_mainfold_dataset=embeddings_and_demographics_dataset,
         manifold_dataset_clustered_path=clustered_dataset_output_csv_path,
+        n_clusters = config.controlled_morph_generation.n_clusters,
+        mixed_clusters = config.controlled_morph_generation.mixed_clusters,
+        mid_strategy = config.controlled_morph_generation.mid_strategy,
+        cleaning_min_prob = config.controlled_morph_generation.cleaning_min_prob,
+        morph_gen_alpha = config.controlled_morph_generation.morph_gen_alpha,
         gpuAcc=config.controlled_morph_generation.gpuAcc
     )
 

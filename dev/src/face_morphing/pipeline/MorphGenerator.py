@@ -465,6 +465,11 @@ class MorphGenerator:
         output_plot_dir,
         clustered_mainfold_dataset = None,
         manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv",
+        n_clusters = 15,
+        mixed_clusters = True,
+        mid_strategy="mean",
+        cleaning_min_prob = 0.80,
+        morph_gen_alpha = 0.5,
         gpuAcc = True
     ):
         print("\n" + "\033[0;34m" + "[Loading manifold clustered dataset...] " + str(datetime.datetime.now()) + "\033[0m")
@@ -476,7 +481,7 @@ class MorphGenerator:
 
         print("\n" + "\033[0;34m" + "[Extracting top Clusters...] " + str(datetime.datetime.now()) + "\033[0m")
         # Get top populated HDBSCAN clusters
-        raw_sample_clusters, cluster_sizes = ClusterManager.get_sample_clusters(dataset, n_clusters=5, mixed_clusters=True, mid_strategy="mean")
+        raw_sample_clusters, cluster_sizes = ClusterManager.get_sample_clusters(dataset, n_clusters, mixed_clusters, mid_strategy)
 
         # Get mixed clusters
         sample_clusters = []
@@ -508,7 +513,7 @@ class MorphGenerator:
         # Clean retention rate: full dataset
         for cluster_id, n in cluster_sizes.items():
             total_samples+=n
-            cluster_df = ClusterManager.get_clean_cluster(dataset, cluster_id, min_prob=0.80)
+            cluster_df = ClusterManager.get_clean_cluster(dataset, cluster_id, cleaning_min_prob)
             clean_n = len(cluster_df)
             clean_samples+=clean_n
 
@@ -531,7 +536,7 @@ class MorphGenerator:
 
             # - Remove low-confidence samples and demographic inconsistencies
             print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
-            cluster_df = ClusterManager.get_clean_cluster(dataset, cluster_id, min_prob=0.80)
+            cluster_df = ClusterManager.get_clean_cluster(dataset, cluster_id, cleaning_min_prob)
             clean_n = len(cluster_df)
             print(
                 f"Cluster {cluster_id}: "
@@ -565,7 +570,7 @@ class MorphGenerator:
             compression = ClusterManager.compute_compression_metrics(embeddings)
 
             # DENSITY
-            density = ClusterManager.compute_density_metrics(neighbor_pairs,k=2)
+            density = ClusterManager.compute_density_metrics(neighbor_pairs)
 
             # DISTRIBUTIONAL QUALITY
             # Define candidate distributions to fit
@@ -692,7 +697,7 @@ class MorphGenerator:
                 experimental_pairs,
                 cluster_id,
                 cluster_controlled_morph_gen_results_dir_path + f"/morphs",
-                alpha=0.5
+                alpha=morph_gen_alpha
             )
             ClusterManager.create_percentile_summary(
                 generated_samples=generated_samples,

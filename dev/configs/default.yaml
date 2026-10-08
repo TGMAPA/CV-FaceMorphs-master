@@ -38,6 +38,11 @@ cluster_generation:
   show_plots_runtime: False
 
 controlled_morph_generation:
+  n_clusters: 15
+  mixed_clusters: True
+  mid_strategy: "mean"
+  cleaning_min_prob: 0.80
+  morph_gen_alpha: 0.5
   gpuAcc: True
 
 outputs:

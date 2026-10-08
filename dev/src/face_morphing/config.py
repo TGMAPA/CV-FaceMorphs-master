@@ -1,3 +1,4 @@
+# Libraries
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 import yaml
@@ -57,6 +58,11 @@ class ClusterGeneration:
 
 @dataclass
 class ControlledMorphGeneration:
+    n_clusters: int = 15
+    mixed_clusters: bool = True
+    mid_strategy: str = "mean"
+    cleaning_min_prob: float = 0.80
+    morph_gen_alpha: float = 0.5
     gpuAcc: bool = True
 
 @dataclass

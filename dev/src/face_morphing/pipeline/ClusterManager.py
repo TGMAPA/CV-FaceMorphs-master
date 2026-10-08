@@ -12,7 +12,6 @@ from matplotlib.gridspec import GridSpec
 import matplotlib.colors as mcolors
 import matplotlib.image as mpimg
 
-
 # Modules
 from face_morphing.pipeline import Embeddings_Dim_Reduction
 
@@ -1081,7 +1080,7 @@ class ClusterManager:
     # Wed 02 Sep 20:13:30 GMT by MAPA
     # How close are the samples to each other inside a cluster?
     @classmethod
-    def compute_density_metrics(cls, neighbor_pairs, k=2):
+    def compute_density_metrics(cls, neighbor_pairs):
         # Extract nearest-neighbor distances from the pairwise results
         distances = np.asarray(neighbor_pairs["distance"], dtype=float)
 

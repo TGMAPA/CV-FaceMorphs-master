@@ -8,7 +8,10 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE, Isomap, LocallyLinearEmbedding
 
 
-# --Plotting Tools
+
+# ==============================================
+# ---            Plotting Tools              ---
+# ==============================================
 #Tue 07 April 13:25:35 GMT by MAPA
 def plot_embedding(X_transformed, labels, title, filename, show_plots = False):
     plt.figure(figsize=(12, 8))
@@ -32,7 +35,10 @@ def plot_graph_per_demographic_label(reduced_X, labels, dim_reduction_algorithm,
         plot_embedding(reduced_X, labels[col], title, output_plot_dir + "/" + title.strip()+".png", show_plots)
 
             
-# --Dim Reduction Algorithms Implementation
+
+# ==============================================
+# ---Dim Reduction Algorithms Implementation ---
+# ==============================================
 #Tue 07 April 13:25:35 GMT by MAPA
 def run_tsne(X, n_components=2, tSNE_perplexity=30, y=None, init='pca', learning_rate='auto', random_state=42, output_plot_dir=None, plot=False, show_plots=False):
     print("Running t-SNE...")
@@ -85,8 +91,12 @@ DIM_REDUCTION_ALGORITHMS = {
     "lle":run_LLE
 }
 
+
+
+# ==============================================
+# ---    Dataset Dim Reduction Pipeline      ---
+# ==============================================
 #Tue 07 April 13:25:35 GMT by MAPA
-# --Dataset Dim Reduction Pipeline
 def Dataset_Dim_Reduction(dataset, output_plot_dir, n_components=2, n_neighbors=10, tSNE_perplexity=30, exec_heavy_algorithms=False, plot=False, show_plots=False, random_state=42):
     # Split dataset
     # X: dataset_embeddings
