@@ -13,6 +13,7 @@ DEFAULT_CONFIG_PATH = DEV_DIR / "configs" / "default.yaml"
 @dataclass
 class ExperimentData:
     name: str = "Exp_01"
+    n: int = -1
 
 @dataclass
 class DatasetConfig:
@@ -23,6 +24,7 @@ class DatasetConfig:
 class DemographicsConfig:
     generate_eda: bool = True
     os_png_tool: str = "cv2" 
+    run_plots: bool = True
 
 @dataclass
 class DataEncoding:

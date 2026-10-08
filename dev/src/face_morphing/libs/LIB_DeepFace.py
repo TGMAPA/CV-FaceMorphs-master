@@ -1,5 +1,7 @@
 # Import packages
 import pandas, tqdm, glob, os, random, json, cv2, sys
+from pathlib import Path
+import matplotlib.pyplot as plt
 from types import SimpleNamespace
 from multiprocessing import Pool, cpu_count
 import multiprocessing as mp
@@ -424,6 +426,127 @@ def GPUAccDirectoryEmbeddingGeneration(csv_status_file,files,Options):
 
 	return output_obj, errors
 
+# Wed 07 Oct 2026 19:59:50 GMT by MAPA
+# Plot Demography insights and analysis
+def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pandas.DataFrame:
+    """
+    Parses DeepFace demographic JSON metadata, generates exploratory data analysis (EDA)
+    plots, and saves them to the specified output directory.
+
+    Args:
+        json_path (str or Path): Path to the demographic metadata JSON file.
+        output_dir (str or Path): Destination directory where plot images will be saved.
+
+    Returns:
+        pandas.DataFrame: The processed DataFrame with extracted demographic features.
+    """
+    # Ensure output directory exists
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Load demographic metadata JSON
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Extract demographics list handling common JSON structures
+    if isinstance(data, list) and len(data) > 0 and "Demographics" in data[0]:
+        demographics = data[0]["Demographics"]
+    elif isinstance(data, dict) and "Demographics" in data:
+        demographics = data["Demographics"]
+    else:
+        demographics = data
+
+    df = pandas.DataFrame(demographics)
+
+    # Define race columns and extract dominant race & confidence score
+    race_cols = ["asian", "indian", "black", "white", "middle eastern", "latino hispanic"]
+    existing_race_cols = [col for col in race_cols if col in df.columns]
+
+    if existing_race_cols:
+        df["dominant_race"] = df[existing_race_cols].idxmax(axis=1)
+        df["race_confidence"] = df[existing_race_cols].max(axis=1)
+
+    # Extract dominant gender
+    gender_cols = [col for col in ["Man", "Woman"] if col in df.columns]
+    if gender_cols:
+        df["gender"] = df[gender_cols].idxmax(axis=1)
+
+    # Bin age attribute into categorical age groups
+    if "age" in df.columns:
+        df["age_group"] = pandas.cut(
+            df["age"],
+            bins=[0, 18, 30, 45, 60, 100],
+            labels=["<18", "18-30", "30-45", "45-60", "60+"]
+        )
+
+    # ---------------------------------------------------------
+    # Plot 1: Dominant Race Distribution (Pie Chart)
+    # ---------------------------------------------------------
+    if "dominant_race" in df.columns:
+        plt.figure(figsize=(7, 7))
+        df["dominant_race"].value_counts().plot(kind="pie", autopct="%1.1f%%", startangle=140)
+        plt.title("Dominant Race Distribution")
+        plt.ylabel("")  # Hide default pandas ylabel
+        plt.tight_layout()
+        plt.savefig(output_path / "dominant_race_distribution.png", dpi=300)
+        plt.close()
+
+    # ---------------------------------------------------------
+    # Plot 2: Gender Distribution (Bar Chart)
+    # ---------------------------------------------------------
+    if "gender" in df.columns:
+        plt.figure(figsize=(6, 4))
+        df["gender"].value_counts().plot(kind="bar", color=["#1f77b4", "#e377c2"])
+        plt.title("Gender Distribution")
+        plt.xlabel("Gender")
+        plt.ylabel("Count")
+        plt.xticks(rotation=0)
+        plt.tight_layout()
+        plt.savefig(output_path / "gender_distribution.png", dpi=300)
+        plt.close()
+
+    # ---------------------------------------------------------
+    # Plot 3: Age Distribution (Histogram)
+    # ---------------------------------------------------------
+    if "age" in df.columns:
+        plt.figure(figsize=(8, 5))
+        df["age"].hist(bins=30, edgecolor="black", grid=False)
+        plt.title("Age Distribution")
+        plt.xlabel("Age")
+        plt.ylabel("Frequency")
+        plt.tight_layout()
+        plt.savefig(output_path / "age_distribution.png", dpi=300)
+        plt.close()
+
+    # ---------------------------------------------------------
+    # Plot 4: Cross-tabulation (Dominant Race vs. Gender)
+    # ---------------------------------------------------------
+    if "dominant_race" in df.columns and "gender" in df.columns:
+        ax = pandas.crosstab(df["dominant_race"], df["gender"]).plot(
+            kind="bar", stacked=True, figsize=(9, 5)
+        )
+        plt.title("Cross-tabulation: Dominant Race vs Gender")
+        plt.xlabel("Dominant Race")
+        plt.ylabel("Frequency")
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.savefig(output_path / "race_vs_gender_stacked.png", dpi=300)
+        plt.close(ax.get_figure())
+
+    # ---------------------------------------------------------
+    # Plot 5: DeepFace Race Inference Confidence Distribution
+    # ---------------------------------------------------------
+    if "race_confidence" in df.columns:
+        plt.figure(figsize=(8, 5))
+        df["race_confidence"].hist(bins=50, edgecolor="black", grid=False)
+        plt.title("DeepFace Confidence Distribution for Race Inference")
+        plt.xlabel("Confidence Score")
+        plt.ylabel("Frequency")
+        plt.tight_layout()
+        plt.savefig(output_path / "race_confidence_distribution.png", dpi=300)
+        plt.close()
+
+    return df
 
 '''
 ██████   █████  ██████  ███████ ███████ ██████  

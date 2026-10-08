@@ -6,10 +6,12 @@ dataset:
   #raw_dir: "data/dataset/raw/FFHQ_Real"
   raw_dir: "data/FFHQ_Real"
   name : "FFHQ_Real"
+  n: -1
 
 demographics:
   generate_eda: true 
   os_png_tool: cv2 
+  run_plots: true
 
 data_encoding:
   model: "Facenet512"

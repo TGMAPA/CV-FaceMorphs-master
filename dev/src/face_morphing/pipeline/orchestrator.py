@@ -45,7 +45,7 @@ def run_pipeline(config: Config):
     # ====================================
     # == Pipeline secuential execution  == #Sun 05 Oct 2026 17:43:28 GMT by MAPA
     # ====================================
-    n = 1000
+    n = config.dataset.n
 
     # ------ Demographic info extraction ------ 
     # Demographic Extraction
@@ -56,9 +56,19 @@ def run_pipeline(config: Config):
             SPath=config.dataset.raw_dir,
             JSON=json_metadata_path,
             N=n,
-            os_png_tool=config.demographics.os_png_tool
+            os_png_tool=config.demographics.os_png_tool,
+            run_plots = config.demographics.run_plots,
+            
         )
     )
+
+    # Plot demographic data
+    embeddings_output_dir = makedir(config, "/demographic_analysis_figs")
+    LIB_DeepFace.generate_and_save_demographic_plots(
+        json_path=json_metadata_path,
+        output_dir=embeddings_output_dir
+    ) 
+
     # Clean cuda cache
     torch.cuda.empty_cache()
 
@@ -76,7 +86,7 @@ def run_pipeline(config: Config):
     # ------ Data encoding (embedding generation) ------ 
     print("\n" + "\033[0;35m" + f"[Running Data Encoding (embedding generation)...] " + str(datetime.datetime.now()) + "\033[0m")
     title+= f"_{config.data_encoding.model}"
-    embeddings_output_dir = makedir(config, "/Embeddings")
+    embeddings_output_dir = makedir(config, "/embeddings")
     json_embedding_data_path = embeddings_output_dir + f"/{title}_embedding_meta_data.json"
     csv_embedding_data_statuslog_path = embeddings_output_dir + f"/{title}_embedding_meta_data_statuslog.csv"
     LIB_DeepFace.GenerateJSONEmbeddings(
@@ -97,7 +107,7 @@ def run_pipeline(config: Config):
     print("\n" + "\033[0;35m" + f"[Embedding Space Dim Reduction...] " + str(datetime.datetime.now()) + "\033[0m")
     # Create Dataset by joining embedding's json with demographic structured file
     # cols (file Age embedding Dominant_Race Dominant_Gender)
-    embeddings_and_demogrpahics_output_dir = makedir(config, "/Embeddings_and_Demographics")
+    embeddings_and_demogrpahics_output_dir = makedir(config, "/embeddings_and_demographics")
     dataset_csv_path = embeddings_and_demogrpahics_output_dir + f"/{title}_embeddings_and_demographics_meta_data.csv"
     embeddings_and_demographics_dataset = DatasetLector.createDataset(
         demographic_csv_path=csv_metadata_path, 
