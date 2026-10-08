@@ -19,313 +19,12 @@ import ast
 import ControlledMorphGeneration.MorphGeneration_Pipeline_DistributionalSimilarity.TrustRegions.ClusterQualityMetrics as qMetrics
 
 
-# Wed 11 June 2026 by MAPA
-def process_cluster_generation(
-        cluster_pairs_df,
-        cluster_id,
-        output_dir_path="./results",
-        alpha=0.5
-    ):
-
-    # Create output directory if it does not exist
-    os.makedirs(
-        output_dir_path,
-        exist_ok=True
-    )
-
-    print(
-        f"\nGenerating cluster summary for cluster {cluster_id}"
-    )
-
-    generated_samples = []
-
-    # =====================================================
-    # Generate all morphs for the current cluster
-    # =====================================================
-    for idx, row in cluster_pairs_df.iterrows():
-
-        temp_morph_path = os.path.join(
-            output_dir_path,
-            f"cluster_{cluster_id}_temp_{idx}.png"
-        )
-
-        params = Namespace(
-            Sb1=row["file_1"],
-            Sb2=row["file_2"],
-            Morph=temp_morph_path,
-            Alpha=alpha
-        )
-
-        try:
-
-            LIB_MorphGAN.MorphFace(params)
-
-            generated_samples.append({
-
-                "row": row,
-
-                "morph_path": temp_morph_path
-
-            })
-
-        except Exception as e:
-
-            print(
-                f"Error generating morph for pair {idx}: {e}"
-            )
-
-    # Validate generated samples
-    if len(generated_samples) == 0:
-
-        print(
-            f"No morphs generated for cluster {cluster_id}"
-        )
-
-        return
-
-    # =====================================================
-    # Create summary figure
-    # =====================================================
-    n_experiments = len(generated_samples)
-
-    fig, axes = plt.subplots(
-        3,
-        n_experiments,
-        figsize=(6 * n_experiments, 16)
-    )
-
-    # Fix indexing when there is only one experiment
-    if n_experiments == 1:
-
-        axes = np.array(axes).reshape(3, 1)
-
-    # =====================================================
-    # Populate figure
-    # =====================================================
-    for col, sample in enumerate(generated_samples):
-
-        row = sample["row"]
-
-        try:
-
-            img1 = mpimg.imread(
-                row["file_1"]
-            )
-
-            img2 = mpimg.imread(
-                row["file_2"]
-            )
-
-            morph_img = mpimg.imread(
-                sample["morph_path"]
-            )
-
-            # ==========================================
-            # Row 1 : Source Image 1
-            # ==========================================
-            axes[0, col].imshow(img1)
-
-            axes[0, col].set_title(
-
-                f"Source 1\n"
-                f"{row['Race_1']} | {row['Gender_1']}\n"
-                f"Age: {row['Age_1']}\n"
-                f"{os.path.basename(row['file_1'])}",
-
-                fontsize=8
-
-            )
-
-            axes[0, col].axis("off")
-
-            # ==========================================
-            # Row 2 : Source Image 2
-            # ==========================================
-            axes[1, col].imshow(img2)
-
-            axes[1, col].set_title(
-
-                f"Source 2\n"
-                f"{row['Race_2']} | {row['Gender_2']}\n"
-                f"Age: {row['Age_2']}\n"
-                f"{os.path.basename(row['file_2'])}",
-
-                fontsize=8
-
-            )
-
-            axes[1, col].axis("off")
-
-            # ==========================================
-            # Row 3 : Morph Result
-            # ==========================================
-            axes[2, col].imshow(morph_img)
-
-            axes[2, col].set_title(
-
-                f"Morph Result\n"
-                f"Type: {row['pair_type']}\n"
-                f"t-SNE Dist: {row['tsne_dist']:.4f}",
-
-                fontsize=8
-
-            )
-
-            axes[2, col].axis("off")
-
-        except Exception as e:
-
-            print(
-                f"Error creating panel for pair {col}: {e}"
-            )
-
-    # =====================================================
-    # Add row labels
-    # =====================================================
-    axes[0, 0].set_ylabel(
-        "SOURCE 1",
-        fontsize=16,
-        fontweight="bold"
-    )
-
-    axes[1, 0].set_ylabel(
-        "SOURCE 2",
-        fontsize=16,
-        fontweight="bold"
-    )
-
-    axes[2, 0].set_ylabel(
-        "MORPH RESULT",
-        fontsize=16,
-        fontweight="bold"
-    )
-
-    # =====================================================
-    # Global title
-    # =====================================================
-    closest_count = len(
-        cluster_pairs_df[
-            cluster_pairs_df["pair_type"] == "closest"
-        ]
-    )
-
-    farthest_count = len(
-        cluster_pairs_df[
-            cluster_pairs_df["pair_type"] == "farthest"
-        ]
-    )
-
-    fig.suptitle(
-
-        f"Controlled Morph Generation Analysis\n"
-        f"Cluster {cluster_id}\n"
-        f"Closest Pairs: {closest_count} | "
-        f"Farthest Pairs: {farthest_count}\n"
-        f"Alpha: {alpha}",
-
-        fontsize=20,
-        fontweight="bold"
-
-    )
-
-    plt.tight_layout(
-        rect=[0, 0, 1, 0.95]
-    )
-
-    # =====================================================
-    # Save summary figure
-    # =====================================================
-    output_path = os.path.join(
-
-        output_dir_path,
-
-        f"cluster_{cluster_id}_summary.png"
-
-    )
-
-    plt.savefig(
-
-        output_path,
-
-        dpi=200,
-
-        bbox_inches="tight"
-
-    )
-
-    plt.close(fig)
-
-    print(
-        f"Saved cluster summary: {output_path}"
-    )
-
-    # =====================================================
-    # Remove temporary morph files
-    # =====================================================
-    for sample in generated_samples:
-
-        try:
-
-            if os.path.exists(
-                sample["morph_path"]
-            ):
-
-                os.remove(
-                    sample["morph_path"]
-                )
-
-        except Exception as e:
-
-            print(
-                f"Error removing temp file: {e}"
-            )
-
-#Wed 11 June 14:08:13 GMT by MAPA
 def load_manifold_dataset(path):
-
     dataset = pd.read_csv(path)
-
     print(f"Loaded {len(dataset)} samples")
-
     return dataset
 
-def plot_cluster_sizes_distribution(cluster_sizes, path):
-    # Create figure 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-    # Plot 1: Standard linear scale distribution
-    sns.histplot(
-        cluster_sizes,
-        bins=30,
-        kde=True,
-        color="#2b5c8f",
-        edgecolor="black",
-        ax=axes[0],
-    )
-    axes[0].set_title("Cluster Size Distribution", fontsize=12, fontweight="bold")
-    axes[0].set_xlabel("Cluster Size (Number of Samples)", fontsize=10)
-    axes[0].set_ylabel("Frequency", fontsize=10)
-    axes[0].grid(axis="y", linestyle="--", alpha=0.5)
-
-    # Plot 2: Logarithmic scale distribution
-    sns.histplot(
-        cluster_sizes,
-        bins=30,
-        log_scale=True,
-        color="#2b5c8f",
-        edgecolor="black",
-        ax=axes[1],
-    )
-    axes[1].set_title("Cluster Size Distribution (Log Scale)",fontsize=12,fontweight="bold")
-    axes[1].set_xlabel("Cluster Size (Log)", fontsize=10)
-    axes[1].set_ylabel("Frequency", fontsize=10)
-    axes[1].grid(True, which="both", linestyle="--", alpha=0.4)
-
-    # Adjust layout and save the single figure
-    plt.tight_layout()
-    plt.savefig(path+"/distribucion_cluster_size_combined.png", dpi=300, bbox_inches="tight")
-
-
+# --- CLUSTER Operations
 #Wed 11 June 14:08:13 GMT by MAPA
 def get_sample_clusters(dataset, n_clusters=3, mixed_clusters=False, mid_strategy="mean"):
 
@@ -412,7 +111,6 @@ def analyze_neighbor_pairs(cluster_df):
 
     # Store nearest neighbor information
     for i in range(len(cluster_df)):
-
         j = indices[i,1]
 
         rows.append({
@@ -423,118 +121,9 @@ def analyze_neighbor_pairs(cluster_df):
 
     return pd.DataFrame(rows)
 
-#Wed 15 July 17:48:50 GMT by MAPA 
-def plot_fitted_distribution(
-        values,
-        best_distribution,
-        trust_region,
-        filepath,
-        title
-    ):
 
-    # Recover scipy distribution
-    distribution = best_distribution["distribution"]
 
-    # Recover estimated parameters
-    params = best_distribution["params"]
-
-    # Generate x-axis values
-    x = np.linspace(
-        np.min(values),
-        np.max(values),
-        500
-    )
-
-    # Evaluate fitted PDF
-    pdf = distribution.pdf(x,*params)
-
-    # Create figure
-    plt.figure(figsize=(10,6))
-
-    # Histogram (normalized)
-    plt.hist(
-        values,
-        bins=30,
-        density=True,
-        alpha=0.6,
-        edgecolor="black",
-        label="Observed distances"
-    )
-
-    # Plot fitted PDF
-    plt.plot(
-        x,
-        pdf,
-        linewidth=3,
-        label=f"{best_distribution['name']} fit"
-    )
-
-    text = (
-        f"{best_distribution['name']}\n"
-        f"KS = {best_distribution['ks_statistic']:.4f}\n"
-        f"p = {best_distribution['p_value']:.4f}\n"
-        f"AIC = {best_distribution['AIC']:.2f}"
-    )
-
-    plt.text(
-        0.98,
-        0.98,
-        text,
-        transform=plt.gca().transAxes,
-        fontsize=9,
-        verticalalignment="top",
-        horizontalalignment="right",
-        bbox=dict(
-            facecolor="white",
-            alpha=0.9
-        )
-    )
-
-    # Trust region
-    lower = trust_region["lower"]
-    upper = trust_region["upper"]
-
-    mask = (x >= lower) & (x <= upper)
-
-    plt.fill_between(
-        x[mask],
-        pdf[mask],
-        alpha=0.3,
-        label=f"{trust_region['confidence']*100:.0f}% Trust Region"
-    )
-
-    # Vertical lines
-    plt.axvline(
-        lower,
-        linestyle="--",
-        linewidth=2,
-        label=f"Lower = {lower:.4f}"
-    )
-
-    plt.axvline(
-        upper,
-        linestyle="--",
-        linewidth=2,
-        label=f"Upper = {upper:.4f}"
-    )
-
-    plt.xlabel("Nearest Neighbor Distance")
-
-    plt.ylabel("Density")
-
-    plt.title(title)
-
-    plt.legend()
-
-    plt.tight_layout()
-
-    plt.savefig(
-        filepath,
-        dpi=250
-    )
-
-    plt.close()
-
+# ANAYSIS
 #Mon 13 July 17:48:50 GMT by MAPA 
 def fit_candidate_distributions(values, candidate_distributions_dict):
     # Store every distribution type 
@@ -625,6 +214,9 @@ def sample_distribution_percentiles(best_distribution, percentiles=np.arange(0.1
     # Return dataframe
     return pd.DataFrame(rows)
 
+
+
+# Morph Generations
 #Mon 04 Aug 13:45:30 GMT by MAPA 
 def select_pairs_from_distribution(target_samples, neighbor_pairs, cluster_df, samples_per_percentile=2):
     """
@@ -645,16 +237,13 @@ def select_pairs_from_distribution(target_samples, neighbor_pairs, cluster_df, s
         
         # Compute absolute distance error
         candidates = neighbor_pairs.copy()
-
         candidates["distance_error"] = np.abs( candidates["distance"] - target_distance)
-
         candidates = candidates.sort_values(by="distance_error")
 
         selected = 0
 
         # Select closest real pairs
         for _, pair in candidates.iterrows():
-
             idx1 = int(pair["idx1"])
             idx2 = int(pair["idx2"])
 
@@ -696,21 +285,14 @@ def select_pairs_from_distribution(target_samples, neighbor_pairs, cluster_df, s
     return pd.DataFrame(selected_rows)
 
 #Mon 04 Aug 13:45:30 GMT by MAPA 
-def generate_percentile_morphs(
-        experimental_pairs,
-        cluster_id,
-        output_dir_path,
-        alpha=0.5
-    ):
-    
-    # Generates morph images for the representative pairs selected from the fitted distance distribution.
+# Generates morph images for the representative pairs selected from the fitted distance distribution.
+def generate_percentile_morphs(experimental_pairs, cluster_id, output_dir_path, alpha=0.5):
 
     os.makedirs(output_dir_path, exist_ok=True)
 
     generated_samples = []
 
     for idx, row in experimental_pairs.iterrows():
-
         morph_filename = (
             f"cluster_{cluster_id}"
             f"_p{int(row['percentile']*100):02d}"
@@ -728,12 +310,7 @@ def generate_percentile_morphs(
 
         try:
             LIB_MorphGAN.MorphFace(params)
-
-            generated_samples.append({
-                "row": row,
-                "morph_path": morph_path
-            })
-
+            generated_samples.append({"row": row, "morph_path": morph_path})
         except Exception as e:
             print( f"Error generating morph {idx}: {e}")
 
@@ -741,6 +318,138 @@ def generate_percentile_morphs(
 
     return generated_samples
 
+# Wed 11 June 2026 by MAPA
+def process_cluster_generation(cluster_pairs_df, cluster_id, output_dir_path="./results", alpha=0.5):
+    # Create output directory if it does not exist
+    os.makedirs(output_dir_path, exist_ok=True)
+
+    print(f"\nGenerating cluster summary for cluster {cluster_id}")
+
+    generated_samples = []
+
+    # Generate all morphs for the current cluster
+    for idx, row in cluster_pairs_df.iterrows():
+        temp_morph_path = os.path.join(
+            output_dir_path,
+            f"cluster_{cluster_id}_temp_{idx}.png"
+        )
+
+        params = Namespace(Sb1=row["file_1"], Sb2=row["file_2"], Morph=temp_morph_path,Alpha=alpha)
+
+        try:
+            LIB_MorphGAN.MorphFace(params)
+            generated_samples.append({
+                "row": row,
+                "morph_path": temp_morph_path
+            })
+        except Exception as e:
+            print(f"Error generating morph for pair {idx}: {e}")
+
+    # Validate generated samples
+    if len(generated_samples) == 0:
+        print(f"No morphs generated for cluster {cluster_id}")
+        return
+
+    # =====================================================
+    # Create summary figure
+    # =====================================================
+    n_experiments = len(generated_samples)
+
+    fig, axes = plt.subplots(
+        3,
+        n_experiments,
+        figsize=(6 * n_experiments, 16)
+    )
+
+    # Fix indexing when there is only one experiment
+    if n_experiments == 1:
+        axes = np.array(axes).reshape(3, 1)
+
+    # Populate figure
+    for col, sample in enumerate(generated_samples):
+        row = sample["row"]
+
+        try:
+            img1 = mpimg.imread(row["file_1"])
+            img2 = mpimg.imread(row["file_2"])
+
+            morph_img = mpimg.imread(sample["morph_path"])
+
+            # Row 1 : Source Image 1
+            axes[0, col].imshow(img1)
+            axes[0, col].set_title(
+                f"Source 1\n"
+                f"{row['Race_1']} | {row['Gender_1']}\n"
+                f"Age: {row['Age_1']}\n"
+                f"{os.path.basename(row['file_1'])}",
+                fontsize=8
+            )
+            axes[0, col].axis("off")
+
+            # Row 2 : Source Image 2
+            axes[1, col].imshow(img2)
+            axes[1, col].set_title(
+                f"Source 2\n"
+                f"{row['Race_2']} | {row['Gender_2']}\n"
+                f"Age: {row['Age_2']}\n"
+                f"{os.path.basename(row['file_2'])}",
+                fontsize=8
+            )
+            axes[1, col].axis("off")
+
+            # Row 3 : Morph Result
+            axes[2, col].imshow(morph_img)
+            axes[2, col].set_title(
+                f"Morph Result\n"
+                f"Type: {row['pair_type']}\n"
+                f"t-SNE Dist: {row['tsne_dist']:.4f}",
+                fontsize=8
+            )
+            axes[2, col].axis("off")
+
+        except Exception as e:
+            print(f"Error creating panel for pair {col}: {e}")
+
+    # Add row labels
+    axes[0, 0].set_ylabel("SOURCE 1", fontsize=16, fontweight="bold")
+    axes[1, 0].set_ylabel("SOURCE 2", fontsize=16, fontweight="bold")
+    axes[2, 0].set_ylabel("MORPH RESULT", fontsize=16, fontweight="bold")
+
+    # Global title
+    closest_count = len(cluster_pairs_df[cluster_pairs_df["pair_type"] == "closest"])
+    farthest_count = len(cluster_pairs_df[cluster_pairs_df["pair_type"] == "farthest"])
+
+    fig.suptitle(
+        f"Controlled Morph Generation Analysis\n"
+        f"Cluster {cluster_id}\n"
+        f"Closest Pairs: {closest_count} | "
+        f"Farthest Pairs: {farthest_count}\n"
+        f"Alpha: {alpha}",
+        fontsize=20,
+        fontweight="bold"
+    )
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+    # Save summary figure
+    output_path = os.path.join(output_dir_path, f"cluster_{cluster_id}_summary.png")
+
+    plt.savefig(output_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Saved cluster summary: {output_path}")
+
+    # Remove temporary morph files
+    for sample in generated_samples:
+        try:
+            if os.path.exists(sample["morph_path"]):
+                os.remove(sample["morph_path"])
+        except Exception as e:
+            print(f"Error removing temp file: {e}")
+
+
+
+# ---- Plots
 #Mon 04 Aug 19:29:50 GMT by MAPA 
 def create_percentile_summary(
         generated_samples,
@@ -865,7 +574,6 @@ def create_percentile_summary(
     ymax = pdf.max()
 
     for sample in generated_samples:
-
         row = sample["row"]
 
         color = cmap(row["percentile"])
@@ -899,21 +607,11 @@ def create_percentile_summary(
         norm=norm
     )
     sm.set_array([])
-    fig.colorbar(
-        sm,
-        ax=ax_hist,
-        label="Distribution Percentile"
-    )
+    fig.colorbar(sm, ax=ax_hist, label="Distribution Percentile")
 
     # Configure distribution plot
-    ax_hist.set_xlabel(
-        "Nearest Neighbor Distance",
-        fontsize=12
-    )
-    ax_hist.set_ylabel(
-        "Density",
-        fontsize=12
-    )
+    ax_hist.set_xlabel("Nearest Neighbor Distance", fontsize=12)
+    ax_hist.set_ylabel("Density", fontsize=12)
     ax_hist.set_title(
         f"Cluster {cluster_id} Distribution Fit",
         fontsize=16,
@@ -927,7 +625,6 @@ def create_percentile_summary(
     first_ax3 = None
 
     for col, sample in enumerate(generated_samples):
-
         row = sample["row"]
 
         color = cmap(row["percentile"])
@@ -975,21 +672,9 @@ def create_percentile_summary(
             first_ax3 = ax3
 
     # Store first column for row labels
-    first_ax1.set_ylabel(
-        "SOURCE 1",
-        fontsize=14,
-        fontweight="bold"
-    )
-    first_ax2.set_ylabel(
-        "SOURCE 2",
-        fontsize=14,
-        fontweight="bold"
-    )
-    first_ax3.set_ylabel(
-        "MORPH",
-        fontsize=14,
-        fontweight="bold"
-    )
+    first_ax1.set_ylabel("SOURCE 1", fontsize=14, fontweight="bold")
+    first_ax2.set_ylabel("SOURCE 2", fontsize=14, fontweight="bold")
+    first_ax3.set_ylabel("MORPH",fontsize=14,fontweight="bold")
 
     # Figure title and configuration
     fig.suptitle(
@@ -998,18 +683,140 @@ def create_percentile_summary(
         fontsize=20,
         fontweight="bold"
     )
-    output_path = os.path.join(
-        output_dir_path,
-        f"cluster_{cluster_id}_percentile_summary.png"
-    )
-    plt.savefig(
-        output_path,
-        dpi=250,
-        bbox_inches="tight"
-    )
+    output_path = os.path.join(output_dir_path, f"cluster_{cluster_id}_percentile_summary.png")
+    plt.savefig(output_path, dpi=250, bbox_inches="tight")
     plt.close()
 
     print(f"Saved summary: {output_path}")
+
+#Wed 15 July 17:48:50 GMT by MAPA 
+def plot_fitted_distribution(values, best_distribution, trust_region, filepath, title):
+    # Recover scipy distribution
+    distribution = best_distribution["distribution"]
+
+    # Recover estimated parameters
+    params = best_distribution["params"]
+
+    # Generate x-axis values
+    x = np.linspace(np.min(values), np.max(values), 500)
+
+    # Evaluate fitted PDF
+    pdf = distribution.pdf(x,*params)
+
+    # Create figure
+    plt.figure(figsize=(10,6))
+
+    # Histogram (normalized)
+    plt.hist(
+        values,
+        bins=30,
+        density=True,
+        alpha=0.6,
+        edgecolor="black",
+        label="Observed distances"
+    )
+
+    # Plot fitted PDF
+    plt.plot(
+        x,
+        pdf,
+        linewidth=3,
+        label=f"{best_distribution['name']} fit"
+    )
+
+    text = (
+        f"{best_distribution['name']}\n"
+        f"KS = {best_distribution['ks_statistic']:.4f}\n"
+        f"p = {best_distribution['p_value']:.4f}\n"
+        f"AIC = {best_distribution['AIC']:.2f}"
+    )
+
+    plt.text(
+        0.98,
+        0.98,
+        text,
+        transform=plt.gca().transAxes,
+        fontsize=9,
+        verticalalignment="top",
+        horizontalalignment="right",
+        bbox=dict(
+            facecolor="white",
+            alpha=0.9
+        )
+    )
+
+    # Trust region
+    lower = trust_region["lower"]
+    upper = trust_region["upper"]
+    mask = (x >= lower) & (x <= upper)
+
+    plt.fill_between(
+        x[mask],
+        pdf[mask],
+        alpha=0.3,
+        label=f"{trust_region['confidence']*100:.0f}% Trust Region"
+    )
+
+    # Vertical lines
+    plt.axvline(
+        lower,
+        linestyle="--",
+        linewidth=2,
+        label=f"Lower = {lower:.4f}"
+    )
+
+    plt.axvline(
+        upper,
+        linestyle="--",
+        linewidth=2,
+        label=f"Upper = {upper:.4f}"
+    )
+
+    plt.xlabel("Nearest Neighbor Distance")
+    plt.ylabel("Density")
+    plt.title(title)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(filepath, dpi=250)
+    plt.close()
+
+# Wed 02 Sep 20:13:30 GMT by MAPA
+def plot_cluster_sizes_distribution(cluster_sizes, path):
+    # Create figure 
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+    # Plot 1: Standard linear scale distribution
+    sns.histplot(
+        cluster_sizes,
+        bins=30,
+        kde=True,
+        color="#2b5c8f",
+        edgecolor="black",
+        ax=axes[0],
+    )
+    axes[0].set_title("Cluster Size Distribution", fontsize=12, fontweight="bold")
+    axes[0].set_xlabel("Cluster Size (Number of Samples)", fontsize=10)
+    axes[0].set_ylabel("Frequency", fontsize=10)
+    axes[0].grid(axis="y", linestyle="--", alpha=0.5)
+
+    # Plot 2: Logarithmic scale distribution
+    sns.histplot(
+        cluster_sizes,
+        bins=30,
+        log_scale=True,
+        color="#2b5c8f",
+        edgecolor="black",
+        ax=axes[1],
+    )
+    axes[1].set_title("Cluster Size Distribution (Log Scale)",fontsize=12,fontweight="bold")
+    axes[1].set_xlabel("Cluster Size (Log)", fontsize=10)
+    axes[1].set_ylabel("Frequency", fontsize=10)
+    axes[1].grid(True, which="both", linestyle="--", alpha=0.4)
+
+    # Adjust layout and save the single figure
+    plt.tight_layout()
+    plt.savefig(path+"/distribucion_cluster_size_combined.png", dpi=300, bbox_inches="tight")
+
 
 
 #Wed 11 June 14:08:13 GMT by MAPA      Last Mod: Wed 02 Sep 20:13:30 GMT by MAPA 

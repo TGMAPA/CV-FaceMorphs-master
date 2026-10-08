@@ -2,6 +2,7 @@
 import pandas, tqdm, glob, os, random, json, cv2, sys
 from types import SimpleNamespace
 from multiprocessing import Pool, cpu_count
+import multiprocessing as mp
 import tensorflow as tf
 
 repo_path = 'libs/utils/'
@@ -10,7 +11,7 @@ sys.path.append(repo_path)
 # Import modules
 from deepface import DeepFace
 
-import Utils
+from face_morphing.libs.utils import Utils
 
 
 DEEPFACE_MODELS = [
@@ -290,12 +291,16 @@ def GenerateEmbeddingFromImage(input_path, model, detector_backend = "opencv"):
 	'''
 	return True, embedding_objs
 
-# Initialize GPU 
+# Initialize GPU
 def init_worker():
     gpus = tf.config.list_physical_devices('GPU')
     if gpus:
         for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
+            try:
+                tf.config.experimental.set_memory_growth(gpu, True)
+            except RuntimeError:
+				# Omit if GPU was already initialized by the parent process or env variable
+                pass
 
 # Workers
 def process_file(args):
@@ -382,11 +387,12 @@ def secuentialDirectoryEmbeddingGeneration(
 	return json_obj, errors
 
 # GPU Accelerated Directory embedding generation
-def GPUAccDirectoryEmbeddingGeneration(
-		csv_status_file,
-		files,
-		Options
-		):
+def GPUAccDirectoryEmbeddingGeneration(csv_status_file,files,Options):
+	# Force spawn method for CUDA / tensorflow compatibility in subprocces
+	try:
+		mp.set_start_method('spawn', force=True)
+	except RuntimeError:
+		pass
 	
 	output_obj = []
 
@@ -659,3 +665,43 @@ def GenerateDirectoryEmbeddings(Options):
 
 	print(f"Embeddings generated. Errors: {errors}")
 	print("Embeddings were successfully generated...")
+
+# Generate embeddings into json from a JSON metadata file using deepFace and pretrained models
+def GenerateJSONEmbeddings(Options):
+	assert Options.model in DEEPFACE_MODELS, "Invalid model, choose from: " + str(DEEPFACE_MODELS)
+	assert os.path.exists(Options.SPath), "Source JSON File not found: " + Options.SPath
+
+	# Csv for keeping generation control
+	csv_status_file = Options.csv_status_file
+
+	# Json that stores every generated embedding
+	output_json_path = Options.JSON
+
+	# Read image paths from JSON input
+	with open(Options.SPath, "r") as file:
+		data = json.load(file)
+
+	all_files_path = []
+	for entry in data:
+		if "Demographics" in entry:
+			for item in entry["Demographics"]:
+				if "File" in item:
+					all_files_path.append(item["File"])
+
+	assert len(all_files_path) > 0, "No image paths were found inside the JSON file."
+
+	if not Options.gpuAcc:
+		# Execute process - sequential
+		output_obj, errors = secuentialDirectoryEmbeddingGeneration(csv_status_file, all_files_path, Options)
+	else:
+		# Execute process - gpuAcc
+		output_obj, errors = GPUAccDirectoryEmbeddingGeneration(csv_status_file, all_files_path, Options)
+
+	# Dump data in json
+	with open(output_json_path, "w") as file:
+		file.write(output_obj)
+
+	print( "Embeddings were successfully generated...")
+	print(f"Errors                  : {errors}")
+	print(f"Status Log file in      : {csv_status_file}")
+	print(f"Embedding's json file in: {csv_status_file}")

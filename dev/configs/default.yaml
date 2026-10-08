@@ -1,11 +1,45 @@
 # configs/default.yaml
+experiment_data: 
+  name: "test"
+
 dataset:
-  raw_dir: "data/raw"
+  #raw_dir: "data/dataset/raw/FFHQ_Real"
+  raw_dir: "data/FFHQ_Real"
+  name : "FFHQ_Real"
 
 demographics:
-  generate_eda: true           
-  deepface_actions: ["age", "gender", "race"]
-  detector_backend: "opencv"   
-  
+  generate_eda: true 
+  os_png_tool: cv2 
+
+data_encoding:
+  model: "Facenet512"
+  detector_backend: "skip"
+  gpuAcc: true
+  n_processes: 4
+
+dim_reduction:
+  n_components: 2
+  exec_heavy_algorithms: False
+  show_plots_runtime: False
+  tSNE_perplexity: 30
+  n_neighbors: 10
+  plot_results: True
+  random_state: 42
+
+cluster_generation:
+  selected_dim_reduction_algorithm: "tsne"
+  dim_red_algorithm_params:
+    tSNE_perplexity: 30
+    init: "pca" 
+    learning_rate: "auto"
+    random_state: 42
+  hdbscan_min_cluster_size: 20
+  hdbscan_min_samples: 10
+  show_plots_runtime: False
+
+controlled_morph_generation:
+  gpuAcc: True
+
 outputs:
-  experiment_dir: "outputs/exp_001"
+  experiment_dir: "outputs"
+  allow_dir_overwrite: true

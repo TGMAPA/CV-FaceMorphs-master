@@ -131,6 +131,42 @@ def main():
 	subparser.add_argument("--n_processes", required = False, type = int, default = 4, help = "Activate gpu and multiproccessing acceleration with 4 processes");
 	subparser.set_defaults(func = LIB_DeepFace.GenerateDirectoryEmbeddings);
 
+	# Create embeddings from image directory using json file with the following structure:
+	"""
+	[
+		{
+			"Folder": "/CV-FaceMorphs-master/dev/",
+			"Samples": 69998,
+			"os_png_tool": "cv2",
+			"Demographics": [
+				{
+					"File": "../CV-FaceMorphs-master/dev/data/FFHQ_Real/31021.png",
+					"asian": 0.043925727952743715,
+					"indian": 0.015683582336643208,
+					"black": 0.00039174510552873976,
+					"white": 95.35763319043717,
+					"middle eastern": 2.958278750386387,
+					"latino hispanic": 1.624086119343505,
+					"age": 13.0,
+					"Woman": 47.68184721469879,
+					"Man": 52.31815576553345
+				},
+				...
+				}
+			]
+		}
+	]
+	"""
+	subparser = subparsers.add_parser("ImageDirectoryEmbeddingGeneration", description = "Create image directory embeddings with deepFace methods");
+	subparser.add_argument("--SPath", required = True, type = str, default = "./demographics_meta_data.json", help = "Json image source path");
+	subparser.add_argument("--model", required = False, type = str, default = "Facenet512", help = "Pretrained face recognition model for embedding generation");
+	subparser.add_argument("--JSON", required = False, type = str, default = "./deepface_embeddings_metadata.json", help = "JSON meta data to save");
+	subparser.add_argument("--csv_status_file", required = False, type = str, default = "./deepface_embeddings_metadata_status.csv", help = "CSV file for process status data");
+	subparser.add_argument("--detector_backend", required = False, type = str, default = "opencv", help = "Face preDetection process. Select method. 'SKIP' Allows skipping face detection process (Assuming face existance in samples)");
+	subparser.add_argument("--gpuAcc", required = False, type = bool, default = False, help = "Activate gpu and multiproccessing acceleration");
+	subparser.add_argument("--n_processes", required = False, type = int, default = 4, help = "Activate gpu and multiproccessing acceleration with 4 processes");
+	subparser.set_defaults(func = LIB_DeepFace.GenerateJSONEmbeddings);
+
 
 	Options = parser.parse_args();
 	

@@ -6,18 +6,12 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE, Isomap, LocallyLinearEmbedding
 
-
 #Tue 07 April 13:25:35 GMT by MAPA
 
 def string_to_array(text):
     return np.array(json.loads(text))
 
-def createDataset(
-        demographic_csv_path, 
-        embeddings_json_path, 
-        create_csv = True, 
-        dataset_csv_path = "joined_df.csv"
-        ):
+def createDataset(demographic_csv_path, embeddings_json_path, create_csv = True, dataset_csv_path = "joined_df.csv"):
     print("Creating Dataset...")
 
     if not create_csv:
@@ -144,7 +138,7 @@ def main():
     # X: dataset_embeddings
     X = np.array(dataset['embedding'].tolist())
 
-    # y: labels_demograficas
+    # y: demographic_labels
     y = dataset[['Age', 'Dominant_Race', 'Dominant_Gender']]
 
     print("----- Extracted data:")

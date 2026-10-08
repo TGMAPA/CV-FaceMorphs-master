@@ -1,3 +1,6 @@
+import numpy as np
+import json
+
 # Write rows in csv  #Thursday 26 March 2026 08:41:50 GMT by MAPA
 def writeInCsv(file, body:list):
 
@@ -14,4 +17,6 @@ def writeInCsv(file, body:list):
 
 	file.write(string)
 	
-
+#Tue 07 April 13:25:35 GMT by MAPA
+def string_to_array(text):
+    return np.array(json.loads(text))

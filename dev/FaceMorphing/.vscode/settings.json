@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "env/bin/python3"
+    "python.pythonPath": "env/bin/python3",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

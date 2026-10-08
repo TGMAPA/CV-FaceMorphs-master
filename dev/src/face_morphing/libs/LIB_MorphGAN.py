@@ -1,7 +1,5 @@
-repo_path = 'libs/stylegan2-ada-pytorch-main/'
 import numpy, cv2, os, dlib, subprocess, scipy, torch, sys, pickle
-sys.path.append(repo_path)
-import projector
+import stylegan2_ada.projector as projector
 import matplotlib.pyplot as plt
 from PIL import Image
 
@@ -21,7 +19,12 @@ class LandmarksDetector:
             except:
                 print("Exception in get_landmarks()!")
 
-landmarks_detector = LandmarksDetector();
+
+# Obtain directory's absolute path   #Tuesday 06 October 2026 20:04:40 GMT by MAPA
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+predictor_model_path = os.path.join(CURRENT_DIR, "utils", "shape_predictor_68_face_landmarks.dat")
+print("MorphGAN's predictor_model_path: ", predictor_model_path)
+landmarks_detector = LandmarksDetector(predictor_model_path);
 
 def image_align(src_file, dst_file, face_landmarks, output_size=1024, transform_size=4096, enable_padding=True, x_scale=1, y_scale=1, em_scale=0.1, alpha=False):
         # Align function from FFHQ dataset pre-processing step
@@ -123,22 +126,6 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     assert os.path.exists(Options.Sb1), "File not found " + Options.Sb1;
     assert os.path.exists(Options.Sb2), "File not found " + Options.Sb2;
 
-    aligned_face_path = "./temp_0.png";	
-    AlignFace(Options.Sb1, aligned_face_path);
-    Options.Sb1 = aligned_face_path;
-    aligned_face_path = "./temp_1.png";
-    AlignFace(Options.Sb2, aligned_face_path);
-    Options.Sb2 = aligned_face_path;	
-
-    face1 = Image.open(Options.Sb1)
-    face2 = Image.open(Options.Sb2)
-
-    face1_array = numpy.array(face1)
-    face2_array = numpy.array(face2)
-
-    face1_tensor = torch.tensor(face1_array, dtype=torch.float32)  # Change dtype as needed
-    face2_tensor = torch.tensor(face2_array, dtype=torch.float32)
-
     # Set device
     # if(torch.backends.mps.is_available()): # True
     #     print("MPS is available")
@@ -152,9 +139,36 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     else:
         device = torch.device("cpu")
 
+    torch.cuda.empty_cache()
+
+    # Align faces
+    aligned_temp_0 = f"./temp_0_{os.getpid()}.png"
+    aligned_temp_1 = f"./temp_1_{os.getpid()}.png"
+    AlignFace(Options.Sb1, aligned_temp_0)
+    AlignFace(Options.Sb2, aligned_temp_1)	
+
+    face1 = Image.open(aligned_temp_0)
+    face2 = Image.open(aligned_temp_1)
+
+    face1_array = numpy.array(face1)
+    face2_array = numpy.array(face2)
+
+    face1_tensor = torch.tensor(face1_array, dtype=torch.float32)  # Change dtype as needed
+    face2_tensor = torch.tensor(face2_array, dtype=torch.float32)
+
+    #Tuesday 06 October 2026 20:04:40 GMT by MAPA
     # Load the generator model from the pickle file
-    with open('./libs/stylegan2-ada-pytorch-main/MODELS/ffhq_res256.pkl', 'rb') as f:
-        G = pickle.load(f)['G_ema'].to(device) 
+    if G is None :
+        # Obtain root path
+        CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+        # Move to root Directory
+        DEV_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", "..", ".."))
+
+        model_path = os.path.join(DEV_DIR, "src", "stylegan2_ada", "MODELS", "ffhq_res256.pkl")
+        with open(model_path, 'rb') as f:
+            G = pickle.load(f)['G_ema'].to(device)
+
 
     face1_tensor = face1_tensor.squeeze()
     face1_tensor = face1_tensor.permute(2, 0, 1)
@@ -171,12 +185,10 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 
     # Project the image
     projected_w_steps1 = projector.project(G, target=face1_tensor, num_steps=2, w_avg_samples = 1000, device = device, verbose=False);
-
     projected_w_steps2 = projector.project(G, target=face2_tensor, num_steps=2, w_avg_samples = 1000,   device=device, verbose=False)
 
     # check if the projected_w_steps1 and projected_w_steps2 are exactly the same
     (projected_w_steps1 == projected_w_steps2).all()
-
 
     w1 = projected_w_steps1[-1].unsqueeze(0)
     w2 = projected_w_steps2[-1].unsqueeze(0)
@@ -225,8 +237,11 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
 
     #CropFace(morphed_frame, img1, Options.Morph.replace(".png" , "_crop.png"), points)
 
-    os.system("rm %s" %(Options.Sb1));
-    os.system("rm %s" %(Options.Sb2));	
+    #Tuesday 06 October 2026 20:04:40 GMT by MAPA
+    # Optimized temp file removal
+    for tmp in [aligned_temp_0, aligned_temp_1]:
+        if os.path.exists(tmp):
+            os.remove(tmp)
 
 
 def morph_2_faces_process(file1_path, file2_path, alpha, Morph_Results, temp_dir_path, device, model, log = False): #Sun 26 Feb 2026 11:21:45 GMT by MAPA

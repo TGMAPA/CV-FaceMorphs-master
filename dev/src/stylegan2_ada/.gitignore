@@ -43,4 +43,4 @@ output/
 data/*
 !data/.gitkeep
 
-outputs/*
+stylegan2_ada.egg-info

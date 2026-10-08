@@ -43,4 +43,4 @@ output/
 data/*
 !data/.gitkeep
 
-outputs/*
+face_morphing.egg-info
