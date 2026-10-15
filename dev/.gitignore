@@ -51,3 +51,4 @@ outputs/**
 !outputs/**/*.jpeg
 !outputs/**/*.svg
 !outputs/**/*.html
+!outputs/**/*.log
