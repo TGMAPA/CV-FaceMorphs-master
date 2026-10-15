@@ -118,8 +118,9 @@ def AlignFace(File, TempFile):
 	for i, face_landmarks in enumerate(landmarks_detector.get_landmarks(File), start = 1):
 		image_align(File, TempFile, face_landmarks)
 
+G = None 
 def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT 
-
+    global G
     alpha = Options.Alpha;
 
     assert alpha > 0 and alpha < 1, "alpha not in [0,1]";

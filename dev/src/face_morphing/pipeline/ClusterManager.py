@@ -414,6 +414,10 @@ class ClusterManager:
         # Create df
         df_summary = pd.DataFrame(summaries)
 
+        # Control para evitar que el pipeline truene si no hay clústeres válidos
+        if df_summary.empty:
+            raise ValueError("\033[0;33m[WARNING] No valid clusters found (all samples were noise / cluster -1). Skipping plot generation.\033[0m")
+
         # Interactive Plot
         fig = px.scatter(
             df_summary,
@@ -891,6 +895,11 @@ class ClusterManager:
     def fit_candidate_distributions(cls, values, candidate_distributions_dict):
         # Store every distribution type 
         fitted_distributions = []
+
+        # Verify data quantity before fitting
+        if len(values) < 4 or np.var(values) == 0:
+            print("[WARNING] Insufficient data or zero variance to fit distributions..")
+            return pd.DataFrame(fitted_distributions)
 
         # Estimate distribution parameters with scipy (max likelihood)
         for key, distribution in candidate_distributions_dict.items():

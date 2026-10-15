@@ -1,4 +1,4 @@
-
+# ==== Start session ====
 # Create new session with a name
 tmux new -s <session_name>
 
@@ -11,10 +11,10 @@ tmux ls
 tmux attach -t <session_name>
 
 # Kill session
-tmux kill-session -t pipeline
+tmux kill-session -t <session_name>
 
 
-# -- Run pipeline
+# ==== Run pipeline ====
 # Inside the tmux session or in terminal
 python -u main.py 2>&1 | tee -a outputs/pipeline.log
 

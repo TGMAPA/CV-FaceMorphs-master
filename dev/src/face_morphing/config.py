@@ -13,12 +13,12 @@ DEFAULT_CONFIG_PATH = DEV_DIR / "configs" / "default.yaml"
 @dataclass
 class ExperimentData:
     name: str = "Exp_01"
-    n: int = -1
 
 @dataclass
 class DatasetConfig:
     raw_dir: str = "data/raw"
     name: str = "Dataset"
+    n: int = -1
 
 @dataclass
 class DemographicsConfig:

@@ -1,5 +1,6 @@
 # Libraries
-import datetime, os, ast, torch
+import datetime, os, ast, torch, traceback
+from tqdm import tqdm
 import torch.multiprocessing as mp
 import numpy as np
 import pandas as pd
@@ -23,6 +24,7 @@ class MorphGenerator:
     # Worker for pair subset processing (Morph Generation) in a specific GPU
     @classmethod
     def _percentile_gpu_worker(cls, gpu_id, pairs_chunk, cluster_id, output_dir_path, alpha,return_dict):
+        torch.cuda.set_device(gpu_id)
         device = torch.device(f"cuda:{gpu_id}")
         
         generated_samples = []
@@ -48,7 +50,8 @@ class MorphGenerator:
                 LIB_MorphGAN.MorphFace(params)
                 generated_samples.append({"row": row, "morph_path": morph_path})
             except Exception as e:
-                print(f"[GPU {gpu_id} | {str(device)}]: Morph generation error {idx}: {e}")
+                print(f"[GPU {gpu_id} | {str(device)}]: Morph generation error {idx}: {e}", flush=True)
+                traceback.print_exc()
 
         return_dict[gpu_id] = generated_samples
 
@@ -56,6 +59,8 @@ class MorphGenerator:
     # Cluster generation gpu worker for subset pair morph generation
     @classmethod
     def _cluster_generation_gpu_worker(cls, gpu_id, pairs_chunk, cluster_id, output_dir_path, alpha, model_path, return_dict):
+        # Asignar la GPU del worker actual
+        torch.cuda.set_device(gpu_id)
         device = torch.device(f"cuda:{gpu_id}")
         
         generated_samples = []
@@ -70,7 +75,8 @@ class MorphGenerator:
                     "morph_path": temp_morph_path
                 })
             except Exception as e:
-                print(f"[GPU {gpu_id} | {str(device)}]: Morph generation error {idx}: {e}")
+                print(f"[GPU {gpu_id} | {str(device)}]: Morph generation error {idx}: {e}", flush=True)
+                traceback.print_exc()
 
         return_dict[gpu_id] = generated_samples
 
@@ -285,6 +291,36 @@ class MorphGenerator:
 
         print(f" Starting morph Generation per Percentile for cluster {cluster_id}...")
         print(f" N_Worker_GPU: {num_gpus}")
+
+        # If there is only 1 gpu
+        if num_gpus == 1:
+            generated_samples = []
+            
+            for idx, row in experimental_pairs.iterrows():
+                morph_filename = (
+                    f"cluster_{cluster_id}"
+                    f"_p{int(row['percentile']*100):02d}"
+                    f"_sample_{idx}.png"
+                )
+    
+                morph_path = os.path.join(output_dir_path,morph_filename)
+    
+                params = Namespace(
+                    Sb1=row["file_1"],
+                    Sb2=row["file_2"],
+                    Morph=morph_path,
+                    Alpha=alpha
+                )
+    
+                try:
+                    LIB_MorphGAN.MorphFace(params)
+                    generated_samples.append({"row": row, "morph_path": morph_path})
+                except Exception as e:
+                    print( f"Error generating morph {idx}: {e}")
+    
+            print(f"Generated {len(generated_samples)} morphs.")
+    
+            return generated_samples
 
         # Split dataframe pair in chunks for each available GPU
         chunks = np.array_split(experimental_pairs, num_gpus)
@@ -525,27 +561,36 @@ class MorphGenerator:
 
         # Proccess n selected clusters
         print("\n" + "\033[0;34m" + f"[Starting Cluser Processing...] " + str(datetime.datetime.now()) + "\033[0m")
-        for cluster_id, original_n, cluster_location in sample_clusters:
+        #for cluster_id, original_n, cluster_location in sample_clusters:
+        for cluster_id, original_n, cluster_location in tqdm(sample_clusters, desc="Overall Cluster Progress", unit="cluster"):
             # Create cluster's directory safely   
             cluster_controlled_morph_gen_results_dir_path = controlled_morph_gen_results_dir_path + f"/{cluster_location}_{cluster_idx}_cluster_{cluster_id}"
+
+            # If the cluster was already processed in a previous run, skip it
+            summary_csv = os.path.join(cluster_controlled_morph_gen_results_dir_path, f"cluster_{cluster_id}_experimental_pairs.csv")
+            if os.path.exists(summary_csv):
+                print("\n" + "\033[0;34m" + f"[Skipping Cluster {cluster_id} already processed. Skipping...] " + str(datetime.datetime.now()) + "\033[0m")
+                cluster_idx += 1
+                continue
+
             os.makedirs(cluster_controlled_morph_gen_results_dir_path, exist_ok=True) 
 
             cluster_idx += 1
 
-            print("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Processing cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
 
             # - Remove low-confidence samples and demographic inconsistencies
-            print("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Cleaning Cluster {cluster_id}] " + str(datetime.datetime.now()) + "\033[0m")
             cluster_df = ClusterManager.get_clean_cluster(dataset, cluster_id, cleaning_min_prob)
             clean_n = len(cluster_df)
-            print(
+            tqdm.write(
                 f"Cluster {cluster_id}: "
-                f"Original: {original_n}"
+                f"Original: {original_n} "
                 f"Clean   : {clean_n}"
             )
 
             # - Compute cluster quality metrics
-            print("\n" + "\033[0;34m" + f"[Computing cluster quality metrics...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Computing cluster quality metrics...] " + str(datetime.datetime.now()) + "\033[0m")
 
             # Extract embeddings as an array [floats]
             embeddings = np.array(cluster_df["embedding"].apply(cls.safe_parse_embedding).tolist(), dtype=float)
@@ -590,10 +635,10 @@ class MorphGenerator:
             fitted_results = fitted_results.sort_values(by=["ks_statistic", "AIC"], ascending=[True, True])
 
             # Select the best model
-            print("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Selecting the best distribution model...] " + str(datetime.datetime.now()) + "\033[0m")
             best_distribution = fitted_results.iloc[0]
-            print("Best fitted distributed: ", best_distribution["name"])
-            print(best_distribution)
+            tqdm.write("Best fitted distributed: " + str(best_distribution["name"]))
+            tqdm.write(str(best_distribution))
 
             distribution_quality = {
                 "best_distribution": best_distribution["name"],
@@ -645,7 +690,7 @@ class MorphGenerator:
             # Append Cluster's ClusterManager to buffer
             all_cluster_quality.append(cluster_quality)
 
-            print("\n" + "\033[0;34m" + f"[Cluster quality metrics Completed] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Cluster quality metrics Completed] " + str(datetime.datetime.now()) + "\033[0m")
 
             # - END - CLUSTER QUALITY METRICS
             # ============================================================
@@ -654,15 +699,14 @@ class MorphGenerator:
             fitted_results.to_csv( cluster_controlled_morph_gen_results_dir_path + f"/cluster_{cluster_id}_distribution_fit.csv",index=False)
             
             # - Determine trust region
-            print("\n" + "\033[0;34m" + f"[Computing trust region...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Computing trust region...] " + str(datetime.datetime.now()) + "\033[0m")
             trust_region = ClusterManager.compute_trust_region(best_distribution, confidence = 0.90)
-            print(
-                f"Trust Region ({trust_region['confidence']*100:.1f}%): "
-                f"[{trust_region['lower']:.4f}, {trust_region['upper']:.4f}]"
+            tqdm.write(
+                f"Trust Region ({trust_region['confidence']*100:.1f}%): " + f"[{trust_region['lower']:.4f}, {trust_region['upper']:.4f}]"
             )
 
             # - Save histogram with its distribution fit and the resultant trust region
-            print("\n" + "\033[0;34m" + f"[Plotting resultant trust region...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Plotting resultant trust region...] " + str(datetime.datetime.now()) + "\033[0m")
             ClusterManager.plot_fitted_distribution(
                 values=distances,
                 best_distribution=best_distribution,
@@ -672,11 +716,11 @@ class MorphGenerator:
             )
 
             # - For a fitted distribution F(x), select representative points from the CDF
-            print("\n" + "\033[0;34m" + f"[Selecting representative points from the CDF...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Selecting representative points from the CDF...] " + str(datetime.datetime.now()) + "\033[0m")
             target_samples = ClusterManager.sample_distribution_percentiles(best_distribution)
 
             # identify the actual pairs with distances closest to these points
-            print("\n" + "\033[0;34m" + f"[Selecting pairs...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Selecting pairs...] " + str(datetime.datetime.now()) + "\033[0m")
             experimental_pairs = cls.select_pairs_from_distribution(
                 target_samples,
                 neighbor_pairs,
@@ -691,7 +735,7 @@ class MorphGenerator:
             )
 
             # generate two morphs for each level and plot gloabl cluster's summary
-            print("\n" + "\033[0;34m" + f"[Generating morphs...] " + str(datetime.datetime.now()) + "\033[0m")
+            tqdm.write("\n" + "\033[0;34m" + f"[Generating morphs...] " + str(datetime.datetime.now()) + "\033[0m")
             generation_method = cls.gpuAcc_generate_percentile_morphs if gpuAcc else cls.generate_percentile_morphs
             generated_samples = generation_method(
                 experimental_pairs,

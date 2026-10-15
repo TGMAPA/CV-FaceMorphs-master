@@ -1,12 +1,11 @@
 # configs/default.yaml
 experiment_data: 
-  name: "test"
+  name: "exp_01"
 
 dataset:
-  #raw_dir: "data/dataset/raw/FFHQ_Real"
   raw_dir: "data/FFHQ_Real"
   name : "FFHQ_Real"
-  n: 1000
+  n: -1
 
 demographics:
   generate_eda: true 
@@ -40,7 +39,7 @@ cluster_generation:
   show_plots_runtime: False
 
 controlled_morph_generation:
-  n_clusters: 15
+  n_clusters: 5
   mixed_clusters: True
   mid_strategy: "mean"
   cleaning_min_prob: 0.80
