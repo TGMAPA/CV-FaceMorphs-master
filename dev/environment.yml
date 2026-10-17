@@ -13,15 +13,22 @@ dependencies:
   - scipy
   - pandas
   - scikit-learn
+  - scikit-image
   - matplotlib
+  - seaborn
+  - opencv
+  - ffmpeg-python
+  - imutils
   - pyyaml
   - tqdm
   - pillow
+  - django
   - pip
   - pip:
       - torch==2.2.2
       - torchvision==0.17.2
-      - deepface==0.0.94
+      - tensorflow==2.12.0
+      - tf-keras
       - facenet-pytorch
       - retina-face
       - mtcnn
@@ -29,4 +36,3 @@ dependencies:
       - plotly
       - rich
       - gdown
-      - tf-keras
