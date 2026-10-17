@@ -26,5 +26,6 @@ BUPT_Balanced_demographics_N10.csv
 
 *.csv
 *.json
+!package_info.json
 
 CSV/
