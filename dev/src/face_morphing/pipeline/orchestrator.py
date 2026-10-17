@@ -41,9 +41,6 @@ def check_gpus():
         
     print("=" * 60 + "\n")
 
-# Llama a la función al arrancar el script
-check_gpus()
-
 #Sun 05 Oct 2026 17:43:28 GMT by MAPA
 def init_process(config: Config, title: str):
     # Clean cuda cache
