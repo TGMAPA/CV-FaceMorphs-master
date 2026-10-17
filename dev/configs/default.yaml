@@ -5,7 +5,7 @@ experiment_data:
 dataset:
   raw_dir: "data/FFHQ_Real"
   name : "FFHQ_Real"
-  n: 50
+  n: -1
 
 demographics:
   generate_eda: true 
