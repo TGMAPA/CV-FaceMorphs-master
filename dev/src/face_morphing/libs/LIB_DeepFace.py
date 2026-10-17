@@ -1,5 +1,5 @@
 # Import packages
-import pandas, tqdm, glob, os, random, json, cv2, sys
+import pandas, tqdm, glob, os, random, json, cv2, sys, torch
 from pathlib import Path
 import matplotlib.pyplot as plt
 from types import SimpleNamespace
@@ -26,6 +26,17 @@ DEEPFACE_MODELS = [
 		"GhostFaceNet",
 	]
 
+
+# Deactive GPUS for tensorflow in every children process if Pascal Arq detected
+if torch.cuda.is_available():
+    for i in range(torch.cuda.device_count()):
+        # Compute Capability 6.x = Pascal (GTX 1080 Ti)
+        if torch.cuda.get_device_capability(i)[0] == 6:
+            try:
+                tf.config.set_visible_devices([], 'GPU')
+            except Exception:
+                pass
+            break
 
 def GetRace(Files, pbar, subsample = 10):
 	# Some identities have 500 samples
