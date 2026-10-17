@@ -318,8 +318,6 @@ dependencies:
       - cffi==2.0.0
       - click==8.3.1
       - cryptography==46.0.5
-      - deepface==0.0.94
-      - face-morphing==0.1.0
       - facenet-pytorch==2.6.0
       - filelock==3.25.0
       - fire==0.7.1
@@ -391,8 +389,6 @@ dependencies:
       - scipy==1.15.3
       - seaborn==0.13.2
       - soupsieve==2.8.3
-      - stylegan2-ada==0.1.0
-      - stylegan2-ada-pytorch-main==0.1.0
       - sympy==1.14.0
       - tabulate==0.9.0
       - tensorboard==2.12.3
