@@ -11,6 +11,9 @@ exec "pip install -e src/face_morphing" for face_morphing import as local module
 exec "pip install -e src/stylegan2_ada" for stylegan2_ada import as local module
 exec "pip install -e src/deepfaceMaster" for deepfaceMaster import as local module
 
+For GPU with tf inside conda env, execute (before running script): 
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
 """
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
 
