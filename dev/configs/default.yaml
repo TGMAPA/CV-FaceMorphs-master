@@ -1,11 +1,11 @@
 # configs/default.yaml
 experiment_data: 
-  name: "exp_02"
+  name: "exp_02_server"
 
 dataset:
   raw_dir: "data/FFHQ_Real"
   name : "FFHQ_Real"
-  n: 500
+  n: -1
 
 demographics:
   generate_eda: true 
