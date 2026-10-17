@@ -1,6 +1,6 @@
 # main.py
 
-import argparse, datetime
+import argparse, datetime, os
 from pathlib import Path
 from src.face_morphing.config import Config
 from src.face_morphing.pipeline.orchestrator import run_pipeline
@@ -12,6 +12,7 @@ exec "pip install -e src/stylegan2_ada" for stylegan2_ada import as local module
 exec "pip install -e src/deepfaceMaster" for deepfaceMaster import as local module
 
 """
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
 
 def main():
     parser = argparse.ArgumentParser()
