@@ -16,7 +16,7 @@ tmux kill-session -t <session_name>
 
 # ==== Run pipeline ====
 # Inside the tmux session or in terminal
-python -u main.py 2>&1 | tee -a outputs/pipeline.log
+TF_USE_LEGACY_KERAS=1 LD_LIBRARY_PATH=$CONDA_PREFIX/lib python -u main.py 2>&1 | tee -a outputs/pipeline.log
 
 # See the last log lines live
 tail -f outputs/pipeline.log
