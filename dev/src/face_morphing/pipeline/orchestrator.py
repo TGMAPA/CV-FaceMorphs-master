@@ -57,6 +57,8 @@ def init_process(config: Config, title: str):
     if not config.outputs.allow_dir_overwrite:
         assert not os.path.exists(config.outputs.experiment_dir), f"Output Path '{config.outputs.experiment_dir}' already exists. Verify or allow directory overwrite."
     os.makedirs(config.outputs.experiment_dir, exist_ok=True)
+
+    check_gpus()
     
 
 #Sun 04 Oct 2026 13:49:45 GMT by MAPA
