@@ -1,6 +1,6 @@
 # configs/default.yaml
 experiment_data: 
-  name: "exp_01"
+  name: "exp_02"
 
 dataset:
   raw_dir: "data/FFHQ_Real"
