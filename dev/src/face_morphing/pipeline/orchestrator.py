@@ -1,5 +1,6 @@
 # Libraries
 import datetime, os, torch
+import tensorflow as tf
 from types import SimpleNamespace
 from face_morphing.config import Config
 from face_morphing.pipeline import DatasetLector
@@ -18,6 +19,30 @@ def makedir(config: Config, dir_name):
     os.makedirs(dir_path, exist_ok=True)
 
     return dir_path
+
+# Sat 17 Oct 2026 15:17:40 GMT by MAPA
+def check_gpus():
+    print("=" * 60)
+    print(" GPU AVAILABILITY")
+    print("=" * 60)
+    
+    # Check PyTorch GPUs
+    torch_available = torch.cuda.is_available()
+    torch_count = torch.cuda.device_count() if torch_available else 0
+    print(f" PyTorch: {torch_count} GPU(s) disponible(s)")
+    for i in range(torch_count):
+        print(f"   - GPU {i}: {torch.cuda.get_device_name(i)}")
+        
+    # Check TensorFlow GPUs
+    tf_gpus = tf.config.list_physical_devices('GPU')
+    print(f" TensorFlow: {len(tf_gpus)} GPU(s) disponible(s)")
+    for gpu in tf_gpus:
+        print(f"   - Device: {gpu.name}")
+        
+    print("=" * 60 + "\n")
+
+# Llama a la función al arrancar el script
+check_gpus()
 
 #Sun 05 Oct 2026 17:43:28 GMT by MAPA
 def init_process(config: Config, title: str):
