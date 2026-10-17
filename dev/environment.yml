@@ -36,3 +36,4 @@ dependencies:
       - plotly
       - rich
       - gdown
+      - nvidia-cuda-nvcc-cu12

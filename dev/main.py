@@ -1,6 +1,6 @@
 # main.py
 
-import argparse, datetime, os
+import argparse, datetime, os, site
 from pathlib import Path
 from src.face_morphing.config import Config
 from src.face_morphing.pipeline.orchestrator import run_pipeline
@@ -11,12 +11,22 @@ exec "pip install -e src/face_morphing" for face_morphing import as local module
 exec "pip install -e src/stylegan2_ada" for stylegan2_ada import as local module
 exec "pip install -e src/deepfaceMaster" for deepfaceMaster import as local module
 
-For GPU with tf inside conda env, execute (before running script): 
-!export TF_USE_LEGACY_KERAS=1
-!export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
-
 """
+
+# Configure TF and gpu's variables
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
+os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
+
+# Link nvidia libraries 
+nvidia_paths = [
+    os.path.join(sp, "nvidia", d, "lib")
+    for sp in site.getsitepackages()
+    if os.path.exists(os.path.join(sp, "nvidia"))
+    for d in os.listdir(os.path.join(sp, "nvidia"))
+    if os.path.isdir(os.path.join(sp, "nvidia", d, "lib"))
+]
+if nvidia_paths:
+    os.environ["LD_LIBRARY_PATH"] = ":".join(nvidia_paths) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
 
 def main():
     parser = argparse.ArgumentParser()
