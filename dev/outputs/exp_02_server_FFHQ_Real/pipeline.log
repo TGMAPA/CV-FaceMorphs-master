@@ -1,0 +1,45 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792272108.340561 2795480 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+MorphGAN's predictor_model_path:  /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/src/face_morphing/libs/utils/shape_predictor_68_face_landmarks.dat
+============================================================
+ GPU AVAILABILITY
+============================================================
+ PyTorch: 2 GPU(s) disponible(s)
+   - GPU 0: NVIDIA GeForce GTX 1080 Ti
+   - GPU 1: NVIDIA GeForce GTX 1080 Ti
+W0000 00:00:1792272111.691618 2795480 gpu_device.cc:2365] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+ TensorFlow: 0 GPU(s) disponible(s)
+============================================================
+
+
+[0;31m[start] 2026-10-17 15:21:51.691840[0m
+
+
+[0;35m[Starting Face Morphing Pipeline Execution for data/FFHQ_Real...] 2026-10-17 15:21:51.698979[0m
+============================================================
+ GPU AVAILABILITY
+============================================================
+ PyTorch: 2 GPU(s) disponible(s)
+   - GPU 0: NVIDIA GeForce GTX 1080 Ti
+   - GPU 1: NVIDIA GeForce GTX 1080 Ti
+ TensorFlow: 0 GPU(s) disponible(s)
+============================================================
+
+
+[0;35m[Running Demographic Extraction...] 2026-10-17 15:21:51.699222[0m
+Processing ... /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real 
+ Processing file: 0 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/09909.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:01<00:02,  1.41s/it]Action: gender:  33%|███▎      | 1/3 [00:01<00:02,  1.41s/it]Action: gender:  67%|██████▋   | 2/3 [00:02<00:01,  1.33s/it]Action: race:  67%|██████▋   | 2/3 [00:02<00:01,  1.33s/it]  Action: race: 100%|██████████| 3/3 [00:03<00:00,  1.31s/it]Action: race: 100%|██████████| 3/3 [00:03<00:00,  1.32s/it]
+ Processing file: 1 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/35300.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:00<00:00,  7.77it/s]Action: gender:  33%|███▎      | 1/3 [00:00<00:00,  7.77it/s]Action: gender:  67%|██████▋   | 2/3 [00:00<00:00,  7.83it/s]Action: race:  67%|██████▋   | 2/3 [00:00<00:00,  7.83it/s]  Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.82it/s]Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.81it/s]
+ Processing file: 2 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/09137.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:00<00:00,  7.65it/s]Action: gender:  33%|███▎      | 1/3 [00:00<00:00,  7.65it/s]Action: gender:  67%|██████▋   | 2/3 [00:00<00:00,  7.59it/s]Action: race:  67%|██████▋   | 2/3 [00:00<00:00,  7.59it/s]  Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.77it/s]Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.72it/s]
+ Processing file: 3 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/30565.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:00<00:00,  7.85it/s]Action: gender:  33%|███▎      | 1/3 [00:00<00:00,  7.85it/s]Action: gender:  67%|██████▋   | 2/3 [00:00<00:00,  7.54it/s]Action: race:  67%|██████▋   | 2/3 [00:00<00:00,  7.54it/s]  Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.72it/s]Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.70it/s]
+ Processing file: 4 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/25722.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:00<00:00,  8.55it/s]Action: gender:  33%|███▎      | 1/3 [00:00<00:00,  8.55it/s]Action: gender:  67%|██████▋   | 2/3 [00:00<00:00,  8.05it/s]Action: race:  67%|██████▋   | 2/3 [00:00<00:00,  8.05it/s]  Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.61it/s]Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.76it/s]
+ Processing file: 5 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/31702.png
+Finding actions:   0%|          | 0/3 [00:00<?, ?it/s]Action: age:   0%|          | 0/3 [00:00<?, ?it/s]    Action: age:  33%|███▎      | 1/3 [00:00<00:00,  7.89it/s]Action: gender:  33%|███▎      | 1/3 [00:00<00:00,  7.89it/s]Action: gender:  67%|██████▋   | 2/3 [00:00<00:00,  7.76it/s]Action: race:  67%|██████▋   | 2/3 [00:00<00:00,  7.76it/s]  Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.64it/s]Action: race: 100%|██████████| 3/3 [00:00<00:00,  7.68it/s]
+ Processing file: 6 /home/miguel/Documents/Morphs-Repo/CV-FaceMorphs-master/dev/data/FFHQ_Real/22464.png
