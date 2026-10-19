@@ -1,10 +1,10 @@
 # configs/default.yaml
 experiment_data: 
-  name: "exp_02_server"
+  name: "exp_03_server"
 
 dataset:
-  raw_dir: "data/FFHQ_Real"
-  name : "FFHQ_Real"
+  raw_dir: data/CelebA/IMG
+  name : "CelebA"
   n: -1
 
 demographics:
