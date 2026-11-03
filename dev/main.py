@@ -2,7 +2,6 @@
 
 import argparse, datetime, os, site, torch
 import tensorflow as tf
-from pathlib import Path
 from src.face_morphing.config import Config
 from src.face_morphing.pipeline.orchestrator import run_pipeline
 
@@ -34,7 +33,7 @@ def configure_hardware_and_diagnose():
     print(" Adaptative GPU Hardware Review")
     print("=" * 65)
 
-    # 1. Inspeccionar GPUs con PyTorch
+    # Inspect GPUs with PyTorch
     torch_available = torch.cuda.is_available()
     torch_gpus = torch.cuda.device_count() if torch_available else 0
     print(f" PyTorch: {torch_gpus} GPU(s) available")
@@ -44,7 +43,7 @@ def configure_hardware_and_diagnose():
         cap = torch.cuda.get_device_capability(i)
         name = torch.cuda.get_device_name(i)
         print(f"   - GPU {i}: {name} (Compute Capability {cap[0]}.{cap[1]})")
-        # Arquitectura Pascal corresponde a Compute Capability 6.x (GTX 1080 Ti, 1070, etc.)
+        # Pascal Arq: Compute Capability 6.x (GTX 1080 Ti, 1070, etc.)
         if cap[0] == 6:
             has_pascal_gpu = True
 
@@ -73,7 +72,7 @@ def configure_hardware_and_diagnose():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, default="configs/default.yaml", help="Ruta relativa al archivo de configuración YAML")
+    parser.add_argument("--config", type=str, default="configs/default.yaml", help="Relative path to yaml config file.")
     args = parser.parse_args()
 
     # Diagnose hardware and setup tf
