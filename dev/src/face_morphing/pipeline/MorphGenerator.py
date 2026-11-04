@@ -499,6 +499,7 @@ class MorphGenerator:
     def ControlledMorphGeneration(
         cls, 
         output_plot_dir,
+        selected_dim_reduction_algorithm,
         clustered_mainfold_dataset = None,
         manifold_dataset_clustered_path = "../data/ManifoldAnalysis/manifold_dataset.csv",
         n_clusters = 15,
@@ -596,7 +597,7 @@ class MorphGenerator:
             embeddings = np.array(cluster_df["embedding"].apply(cls.safe_parse_embedding).tolist(), dtype=float)
 
             # - Compute innercluster pair to pair L1 histogram using knn (param: 2 neighs)
-            neighbor_pairs = ClusterManager.analyze_neighbor_pairs(cluster_df)
+            neighbor_pairs = ClusterManager.analyze_neighbor_pairs(cluster_df, selected_dim_reduction_algorithm)
 
             # - Fit some distribution types (χ², Gamma, Weibull and Lognormal) and compare
             # Extract distances values for distribution analysis

@@ -77,10 +77,10 @@ class ClusterManager:
             dataset = cls.load_manifold_dataset(clustered_dataset_output_path)
             
             # Rebuild variables for output
-            X_tsne = dataset[['tsne_x', 'tsne_y']].to_numpy()
+            X = dataset[[f'{dim_red_algorithm}_x', f'{dim_red_algorithm}_y']].to_numpy()
             cluster_labels = dataset['cluster'].to_numpy()
             
-            return X_tsne, cluster_labels, dataset
+            return X, cluster_labels, dataset
 
         print("Starting manifold execution...")
         
@@ -195,9 +195,9 @@ class ClusterManager:
 
     #Tue 30 June 19:02:45 GMT by MAPA
     @classmethod
-    def analyze_neighbor_pairs(cls, cluster_df):
+    def analyze_neighbor_pairs(cls, cluster_df, selected_dim_reduction_algorithm):
         # Extract 2D t-SNE coordinates
-        points = cluster_df[["tsne_x","tsne_y"]].values
+        points = cluster_df[[f"{selected_dim_reduction_algorithm}_x",f"{selected_dim_reduction_algorithm}_y"]].values
 
         # Fit Nearest Neighbor model using 2 neighbors in order to get only 
         # each point related with it's nearest neighbor
@@ -288,8 +288,8 @@ class ClusterManager:
 
         fig = px.scatter(
             dataset,
-            x='tsne_x',
-            y='tsne_y',
+            x=f'{dim_red_algorithm}_x',
+            y=f'{dim_red_algorithm}_y',
             color=demographic_col,
             hover_data=[
                 'cluster',

@@ -19,6 +19,11 @@ class DatasetConfig:
     raw_dir: str = "data/raw"
     name: str = "Dataset"
     n: int = -1
+    identity_csv: str = None
+    identity_col_name: str = None
+    file_path_col_name: str = None
+    max_images_per_identity: int = 1
+    identity_random_state: int = 42
 
 @dataclass
 class DemographicsConfig:

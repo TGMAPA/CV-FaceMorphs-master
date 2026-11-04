@@ -1,5 +1,5 @@
 # Libraries
-import datetime, os, torch
+import datetime, os, torch, json
 import tensorflow as tf
 from types import SimpleNamespace
 from face_morphing.config import Config
@@ -10,6 +10,7 @@ from face_morphing.libs import LIB_DeepFace
 from face_morphing.pipeline import Embeddings_Dim_Reduction
 from face_morphing.pipeline.ClusterManager import ClusterManager
 from face_morphing.pipeline.MorphGenerator import MorphGenerator
+from face_morphing.libs.utils import Utils
 
 
 
@@ -49,20 +50,74 @@ def run_pipeline(config: Config):
     # ====================================
     n = config.dataset.n
 
+    # ------ Dataset preparation / Identity filtering ------ #Tue 03 November 18:33:58 GMT by MAPA
+    processing_dir = config.dataset.raw_dir
+    identity_metadata = None
+
+    identity_csv = getattr(config.dataset,"identity_csv",None)
+
+    if identity_csv is not None:
+        if not os.path.isfile(identity_csv):
+            raise FileNotFoundError(f"Identity CSV not found: {identity_csv}")
+        
+        print("\n" + "\033[0;35m" + f"[Running Identity-Based Dataset Filtering...] " + str(datetime.datetime.now()) + "\033[0m")
+
+        identity_output_dir = makedir(config,"/identity_filtered_dataset")
+
+        processing_dir, filtered_csv_path, identity_metadata = DatasetLector.create_identity_filtered_dataset(
+                                                                    raw_dir=config.dataset.raw_dir,
+                                                                    identity_csv=identity_csv,
+                                                                    output_dir=identity_output_dir,
+                                                                    identity_col_name=config.dataset.identity_col_name,
+                                                                    file_path_col_name=config.dataset.file_path_col_name,
+                                                                    max_images_per_identity=config.dataset.max_images_per_identity,
+                                                                    random_state=config.dataset.identity_random_state
+                                                                )
+
     # ------ Demographic info extraction ------ 
     # Demographic Extraction
     print("\n" + "\033[0;35m" + f"[Running Demographic Extraction...] " + str(datetime.datetime.now()) + "\033[0m")
     json_metadata_path = config.outputs.experiment_dir + f"/{title}_demographics_meta_data.json"
-    LIB_DeepFace.Demographics4Folder(
-        SimpleNamespace(
-            SPath=config.dataset.raw_dir,
-            JSON=json_metadata_path,
-            N=n,
-            os_png_tool=config.demographics.os_png_tool,
-            run_plots = config.demographics.run_plots,
-            
+    demographic_samples = Utils.count_demographic_samples(json_metadata_path)
+    if demographic_samples > 0:
+        print(
+            f"\n[SKIP] Demographic extraction already exists: "
+            f"{demographic_samples} samples."
         )
-    )
+    else:
+        LIB_DeepFace.Demographics4Folder(
+            SimpleNamespace(
+                SPath=processing_dir,
+                JSON=json_metadata_path,
+                N=n,
+                os_png_tool=config.demographics.os_png_tool,
+                run_plots = config.demographics.run_plots,
+            )
+        )
+
+        demographic_samples = Utils.count_demographic_samples(json_metadata_path)
+
+        if demographic_samples == 0:
+            raise ValueError("Demographic extraction produced no valid samples.")
+
+    # Enrich demographic metadata with identity information
+    if identity_metadata is not None:
+        with open(json_metadata_path, "r") as f:
+            demographic_data = json.load(f)
+
+        has_identity = all(
+            "ID" in item
+            for entry in demographic_data
+            for item in entry.get("Demographics", [])
+        )
+
+        if not has_identity:
+            DatasetLector.add_identity_to_demographics_json(
+                json_path=json_metadata_path,
+                identity_metadata=identity_metadata
+            )
+        else:
+            print("[SKIP] Identity information already exists.")
 
     # Plot demographic data
     embeddings_output_dir = makedir(config, "/demographic_analysis_figs")
@@ -91,19 +146,71 @@ def run_pipeline(config: Config):
     embeddings_output_dir = makedir(config, "/embeddings")
     json_embedding_data_path = embeddings_output_dir + f"/{title}_embedding_meta_data.json"
     csv_embedding_data_statuslog_path = embeddings_output_dir + f"/{title}_embedding_meta_data_statuslog.csv"
-    LIB_DeepFace.GenerateJSONEmbeddings(
-        SimpleNamespace(
-            SPath=json_metadata_path, 
-            model=config.data_encoding.model, 
-            JSON=json_embedding_data_path, 
-            csv_status_file=csv_embedding_data_statuslog_path, 
-            detector_backend=config.data_encoding.detector_backend, 
-            gpuAcc=config.data_encoding.gpuAcc,
-            n_processes=config.data_encoding.n_processes
+    if Utils.valid_embeddings_json(json_embedding_data_path):
+        with open(json_embedding_data_path, "r") as f:
+            embedding_data = json.load(f)
+
+        embedding_samples = len(embedding_data)
+
+        if embedding_samples != demographic_samples:
+            raise ValueError(
+                f"Embedding count mismatch: "
+                f"{embedding_samples} embeddings vs "
+                f"{demographic_samples} demographic samples."
+            )
+
+        print(
+            f"[SKIP] Embeddings already exist: "
+            f"{embedding_samples} samples."
         )
-    )
+    else:
+        LIB_DeepFace.GenerateJSONEmbeddings(
+            SimpleNamespace(
+                SPath=json_metadata_path, 
+                model=config.data_encoding.model, 
+                JSON=json_embedding_data_path, 
+                csv_status_file=csv_embedding_data_statuslog_path, 
+                detector_backend=config.data_encoding.detector_backend, 
+                gpuAcc=config.data_encoding.gpuAcc,
+                n_processes=config.data_encoding.n_processes
+            )
+        )
+
+        if not Utils.valid_embeddings_json(json_embedding_data_path):
+            raise ValueError("Embedding generation failed or returned invalid data.")
+
+        with open(json_embedding_data_path, "r") as f:
+            embedding_data = json.load(f)
+
+        embedding_samples = len(embedding_data)
+
+        if embedding_samples != demographic_samples:
+            raise ValueError(
+                f"Embedding count mismatch: "
+                f"{embedding_samples} embeddings vs "
+                f"{demographic_samples} demographic samples."
+            )
+            
+
     # Clean cuda cache
     torch.cuda.empty_cache()
+
+    # ------ Embedding deduplication ------
+    print("\n" + "\033[0;35m" + f"[Running Embedding Deduplication...] " + str(datetime.datetime.now()) + "\033[0m")
+
+    deduplicated_embedding_json_path = (embeddings_output_dir + f"/{title}_embedding_meta_data_deduplicated.json")
+
+    duplicates_csv_path = (embeddings_output_dir + f"/{title}_embedding_duplicates.csv")
+
+    (
+        deduplicated_embedding_json_path,
+        deduplicated_embedding_samples,
+        duplicates_df
+    ) = Utils.remove_duplicate_embeddings(
+        input_json_path=json_embedding_data_path,
+        output_json_path=deduplicated_embedding_json_path,
+        duplicates_csv_path=duplicates_csv_path
+    )
 
     # ------ Embedding space dim reduction ------ 
     print("\n" + "\033[0;35m" + f"[Embedding Space Dim Reduction...] " + str(datetime.datetime.now()) + "\033[0m")
@@ -113,7 +220,7 @@ def run_pipeline(config: Config):
     dataset_csv_path = embeddings_and_demogrpahics_output_dir + f"/{title}_embeddings_and_demographics_meta_data.csv"
     embeddings_and_demographics_dataset = DatasetLector.createDataset(
         demographic_csv_path=csv_metadata_path, 
-        embeddings_json_path=json_embedding_data_path, 
+        embeddings_json_path=deduplicated_embedding_json_path, 
         create_csv=True, 
         dataset_csv_path=dataset_csv_path
     )
@@ -173,6 +280,7 @@ def run_pipeline(config: Config):
     MorphGenerator.ControlledMorphGeneration(
         output_plot_dir=config.outputs.experiment_dir,
         clustered_mainfold_dataset=embeddings_and_demographics_dataset,
+        selected_dim_reduction_algorithm = config.cluster_generation.selected_dim_reduction_algorithm,
         manifold_dataset_clustered_path=clustered_dataset_output_csv_path,
         n_clusters = config.controlled_morph_generation.n_clusters,
         mixed_clusters = config.controlled_morph_generation.mixed_clusters,

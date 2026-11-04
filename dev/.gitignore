@@ -52,3 +52,4 @@ outputs/**
 !outputs/**/*.svg
 !outputs/**/*.html
 # !outputs/**/*.log
+outputs/**/identity_filtered_dataset

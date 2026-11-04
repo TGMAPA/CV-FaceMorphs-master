@@ -170,6 +170,10 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
         with open(model_path, 'rb') as f:
             G = pickle.load(f)['G_ema'].to(device)
 
+    print("[DEBUG] Generator loaded", flush=True)
+    if device.type == "cuda":
+        torch.cuda.synchronize()
+        print("[DEBUG] CUDA synchronized after model loading", flush=True)
 
     face1_tensor = face1_tensor.squeeze()
     face1_tensor = face1_tensor.permute(2, 0, 1)
@@ -184,9 +188,23 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
     face1_tensor = face1_tensor.to(device)
     face2_tensor = face2_tensor.to(device)
 
+    print("[DEBUG] Face tensors prepared", flush=True)
+    if device.type == "cuda":
+        torch.cuda.synchronize()
+
     # Project the image
+    print("[DEBUG] Starting projection 1", flush=True)
     projected_w_steps1 = projector.project(G, target=face1_tensor, num_steps=2, w_avg_samples = 1000, device = device, verbose=False);
+    print("[DEBUG] Projection 1 completed", flush=True)
+    if device.type == "cuda":
+        torch.cuda.synchronize()
+
+    print("[DEBUG] Starting projection 2", flush=True)
     projected_w_steps2 = projector.project(G, target=face2_tensor, num_steps=2, w_avg_samples = 1000,   device=device, verbose=False)
+    print("[DEBUG] Projection 2 completed", flush=True)
+    if device.type == "cuda":
+        torch.cuda.synchronize()  
+    
 
     # check if the projected_w_steps1 and projected_w_steps2 are exactly the same
     (projected_w_steps1 == projected_w_steps2).all()
@@ -219,7 +237,9 @@ def MorphFace(Options): #Sun 07 Dec 2025 11:56:11 GMT
         interpolations[i] = w1 + (w2 - w1) * i / (num_interpolations - 1)
 
     # Generate the images
+    print("[DEBUG] Starting synthesis img", flush=True)
     interpolated_images = G.synthesis(interpolations, noise_mode='const', force_fp32=True)
+    print("[DEBUG] Synthesis img completed", flush=True)
 
     interpolated_images.shape
     interpolated_images[5].shape

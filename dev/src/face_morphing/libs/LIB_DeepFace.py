@@ -314,29 +314,35 @@ def init_worker():
 
 # Workers
 def process_file(args):
-    file, Options = args
+	file, Options = args
 
-    file_path = os.path.join(Options.SPath, file)
+	file_path = file if os.path.isabs(file) else os.path.join(Options.SPath, file)
 
-    try:
-        status, output = GenerateEmbeddingFromImage(
-            input_path=file_path,
-            model=Options.model,
-            detector_backend="skip"
-        )
+	try:
+		if not os.path.isfile(file_path):
+			return (file_path, False, f"Image not found: {file_path}",None)
+		
+		status, output = GenerateEmbeddingFromImage(
+			input_path=file_path,
+			model=Options.model,
+			detector_backend=Options.detector_backend
+		)
 
-        if not status:
-            return (file_path, False, output, None)
+		if not status:
+			return (file_path, False, output, None)
 
-        # Extract embedding
-        emb = output[0]
-        emb["Model"] = Options.model
-        emb["image_path"] = file_path
+		if not output:
+			return (file_path, False, "No face embedding returned", None)
 
-        return (file_path, True, "NA", emb)
+		# Extract embedding
+		emb = output[0]
+		emb["Model"] = Options.model
+		emb["image_path"] = file_path
 
-    except Exception as e:
-        return (file_path, False, str(e), None)
+		return (file_path, True, "NA", emb)
+
+	except Exception as e:
+		return (file_path, False, str(e), None)
 
 # Secuential Directory embedding generation
 def secuentialDirectoryEmbeddingGeneration(
@@ -357,29 +363,44 @@ def secuentialDirectoryEmbeddingGeneration(
 		# write headers
 		Utils.writeInCsv(csv_file, ["id", "path", "wasGenerationSuccessfull", "error"])
 
-		for file in files:
+		for id, file in enumerate(files):
 			# Complete file path
-			file_path = Options.SPath+"/" + file
+			file_path = file if os.path.isabs(file) else os.path.join(Options.SPath, file)
 			print("Proccessing file ",id," in "+ file_path +" ...")
+
+			if not os.path.isfile(file_path):
+				Utils.writeInCsv(
+					csv_file,
+					[id, file_path, False, "Image file not found"]
+				)
+				errors += 1
+				continue
 
 			#Generate embedding
 			status, output = GenerateEmbeddingFromImage(
 								input_path=file_path,
 								model=Options.model,
-								detector_backend="skip"
+								detector_backend=Options.detector_backend
 							)
 			
 			if not status:
 				# Write log in csv - INCOMPLETE GENERATION 
-				Utils.writeInCsv(csv_file, [id, file_path, status, output])
+				Utils.writeInCsv(csv_file, [id, file_path, False, output])
 
 				# Update
 				errors+=1
-				id+=1
+				continue
+
+			if not output:
+				Utils.writeInCsv(
+					csv_file,
+					[id, file_path, False, "No embedding returned"]
+				)
+				errors += 1
 				continue
 
 			# write log in cs
-			Utils.writeInCsv(csv_file, [id, file_path, status, "NA"])
+			Utils.writeInCsv(csv_file, [id, file_path, True, "NA"])
 
 			# Extend obj with extra meta data
 			output[0]["Model"] = Options.model
@@ -387,9 +408,6 @@ def secuentialDirectoryEmbeddingGeneration(
 
 			# Append embedding in json_obj
 			output_obj.append(output[0])
-
-			# Update id
-			id+=1
 
 	# Convert the collected results into a formatted JSON string
 	json_obj = json.dumps(output_obj, indent = 3);
@@ -734,7 +752,8 @@ def transform_deepFacejson2csv(Options):
 				continue
 
 			rows.append({
-				"file": sourceDataPath + '/'+ d.get("File").split("/")[-1],
+				"file": os.path.abspath(d.get("File")),
+				"ID": d.get("ID"),
 				"Asian": d.get("asian", 0),
 				"Indian": d.get("indian", 0),
 				"African": d.get("black", 0),
@@ -742,8 +761,8 @@ def transform_deepFacejson2csv(Options):
 				"MiddleEast": d.get("middle eastern", 0),
 				"Latino": d.get("latino hispanic", 0),
 				"Age": d.get("age", 0),
-				"Female": d.get("Man", 0),
-				"Male": d.get("Woman", 0)
+				"Female": d.get("Woman", 0),
+				"Male": d.get("Man", 0)
 			})
 
 	DF = pandas.DataFrame(rows)
@@ -832,7 +851,18 @@ def GenerateJSONEmbeddings(Options):
 	with open(output_json_path, "w") as file:
 		file.write(output_obj)
 
-	print( "Embeddings were successfully generated...")
+	successful = len(all_files_path) - errors
+
+	print(f"Total images            : {len(all_files_path)}")
+	print(f"Successful embeddings   : {successful}")
 	print(f"Errors                  : {errors}")
 	print(f"Status Log file in      : {csv_status_file}")
 	print(f"Embedding's json file in: {output_json_path}")
+
+	if successful == 0:
+		raise RuntimeError(
+			"Embedding generation failed for all images. "
+			"Check the status log."
+		)
+
+	print("Embedding generation completed.")

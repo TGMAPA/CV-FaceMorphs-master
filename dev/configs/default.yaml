@@ -1,11 +1,16 @@
 # configs/default.yaml
 experiment_data: 
-  name: "exp_03_server"
+  name: "exp_05_server"
 
 dataset:
   raw_dir: data/CelebA/IMG
   name : "CelebA"
   n: -1
+  identity_csv: "data/CelebA/identity_CelebA.csv"
+  identity_col_name: "ID"
+  file_path_col_name: "File"
+  max_images_per_identity: 1
+  identity_random_state: 42
 
 demographics:
   generate_eda: true 
@@ -27,12 +32,23 @@ dim_reduction:
   plot_results: True
   random_state: 42
 
+# cluster_generation:
+#   selected_dim_reduction_algorithm: "tsne"
+#   dim_red_algorithm_params:
+#     tSNE_perplexity: 30
+#     init: "pca" 
+#     learning_rate: "auto"
+#     random_state: 42
+#   hdbscan_min_cluster_size: 20
+#   hdbscan_min_samples: 10
+#   show_plots_runtime: False
+
 cluster_generation:
-  selected_dim_reduction_algorithm: "tsne"
+  selected_dim_reduction_algorithm: "umap"
   dim_red_algorithm_params:
-    tSNE_perplexity: 30
-    init: "pca" 
-    learning_rate: "auto"
+    #tSNE_perplexity: 30
+    # init: "pca" 
+    # learning_rate: "auto"
     random_state: 42
   hdbscan_min_cluster_size: 20
   hdbscan_min_samples: 10
