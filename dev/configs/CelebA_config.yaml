@@ -1,0 +1,67 @@
+# configs/default.yaml
+experiment_data: 
+  name: "exp_06_server"
+
+dataset:
+  raw_dir: data/CelebA/IMG
+  name : "CelebA"
+  n: -1
+  identity_csv: "data/CelebA/identity_CelebA.csv"
+  identity_col_name: "ID"
+  file_path_col_name: "File"
+  max_images_per_identity: 1
+  identity_random_state: 42
+
+demographics:
+  generate_eda: true 
+  os_png_tool: cv2 
+  run_plots: true
+
+data_encoding:
+  model: "Facenet512"
+  detector_backend: "skip"
+  gpuAcc: true
+  n_processes: 10
+
+dim_reduction:
+  n_components: 2
+  exec_heavy_algorithms: False
+  show_plots_runtime: False
+  tSNE_perplexity: 30
+  n_neighbors: 10
+  plot_results: True
+  random_state: 42
+
+# cluster_generation:
+#   selected_dim_reduction_algorithm: "tsne"
+#   dim_red_algorithm_params:
+#     tSNE_perplexity: 30
+#     init: "pca" 
+#     learning_rate: "auto"
+#     random_state: 42
+#   hdbscan_min_cluster_size: 20
+#   hdbscan_min_samples: 10
+#   show_plots_runtime: False
+
+cluster_generation:
+  selected_dim_reduction_algorithm: "umap"
+  dim_red_algorithm_params:
+    #tSNE_perplexity: 30
+    # init: "pca" 
+    # learning_rate: "auto"
+    random_state: 42
+  hdbscan_min_cluster_size: 20
+  hdbscan_min_samples: 10
+  show_plots_runtime: False
+
+controlled_morph_generation:
+  n_clusters: 2
+  mixed_clusters: True
+  mid_strategy: "mean"
+  cleaning_min_prob: 0.80
+  morph_gen_alpha: 0.5
+  gpuAcc: True
+
+outputs:
+  experiment_dir: "outputs"
+  allow_dir_overwrite: true

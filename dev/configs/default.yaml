@@ -1,6 +1,6 @@
 # configs/default.yaml
 experiment_data: 
-  name: "exp_05_server"
+  name: "exp_06_server"
 
 dataset:
   raw_dir: data/CelebA/IMG

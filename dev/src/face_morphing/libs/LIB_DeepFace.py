@@ -455,20 +455,18 @@ def GPUAccDirectoryEmbeddingGeneration(csv_status_file,files,Options):
 
 	return output_obj, errors
 
-# Wed 07 Oct 2026 19:59:50 GMT by MAPA
-# Plot Demography insights and analysis
-def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pandas.DataFrame:
-    """
-    Parses DeepFace demographic JSON metadata, generates exploratory data analysis (EDA)
-    plots, and saves them to the specified output directory.
 
-    Args:
-        json_path (str or Path): Path to the demographic metadata JSON file.
-        output_dir (str or Path): Destination directory where plot images will be saved.
+# Wed 13 Nov 2026
+# Plot Demography insights and analysis
+def generate_and_save_demographic_plots(json_path: str,output_dir: str) -> pandas.DataFrame:
+    """
+    Parses DeepFace demographic JSON metadata, generates exploratory
+    data analysis (EDA) plots, and saves linear/logarithmic comparisons.
 
     Returns:
-        pandas.DataFrame: The processed DataFrame with extracted demographic features.
+        pandas.DataFrame: Processed DataFrame with demographic features.
     """
+
     # Ensure output directory exists
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -477,7 +475,7 @@ def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pand
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # Extract demographics list handling common JSON structures
+    # Extract demographics
     if isinstance(data, list) and len(data) > 0 and "Demographics" in data[0]:
         demographics = data[0]["Demographics"]
     elif isinstance(data, dict) and "Demographics" in data:
@@ -487,8 +485,12 @@ def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pand
 
     df = pandas.DataFrame(demographics)
 
-    # Define race columns and extract dominant race & confidence score
-    race_cols = ["asian", "indian", "black", "white", "middle eastern", "latino hispanic"]
+    # Define race columns and extract dominant race & confidence
+    race_cols = [
+        "asian", "indian", "black", "white",
+        "middle eastern", "latino hispanic"
+    ]
+
     existing_race_cols = [col for col in race_cols if col in df.columns]
 
     if existing_race_cols:
@@ -497,6 +499,7 @@ def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pand
 
     # Extract dominant gender
     gender_cols = [col for col in ["Man", "Woman"] if col in df.columns]
+
     if gender_cols:
         df["gender"] = df[gender_cols].idxmax(axis=1)
 
@@ -509,71 +512,232 @@ def generate_and_save_demographic_plots(json_path: str, output_dir: str) -> pand
         )
 
     # ---------------------------------------------------------
+    # Helper: Save linear and logarithmic plots side by side
+    # ---------------------------------------------------------
+    def save_linear_log_plot(
+        fig,
+        axes,
+        filename,
+        title,
+        xlabel,
+        ylabel,
+        plot_function
+    ):
+        """
+        Generates the same plot using linear and logarithmic
+        Y-axis scales and saves both in a single figure.
+        """
+
+        fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+
+        # Linear scale
+        plot_function(axes[0])
+        axes[0].set_title(f"{title} - Linear Scale")
+        axes[0].set_xlabel(xlabel)
+        axes[0].set_ylabel(ylabel)
+        axes[0].grid(axis="y", alpha=0.3)
+
+        # Logarithmic scale
+        plot_function(axes[1])
+        axes[1].set_yscale("log")
+        axes[1].set_title(f"{title} - Logarithmic Scale")
+        axes[1].set_xlabel(xlabel)
+        axes[1].set_ylabel(f"{ylabel} (log scale)")
+        axes[1].grid(axis="y", which="both", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(output_path / filename, dpi=300, bbox_inches="tight")
+        plt.close(fig)
+
+    # ---------------------------------------------------------
     # Plot 1: Dominant Race Distribution (Pie Chart)
     # ---------------------------------------------------------
     if "dominant_race" in df.columns:
-        plt.figure(figsize=(7, 7))
-        df["dominant_race"].value_counts().plot(kind="pie", autopct="%1.1f%%", startangle=140)
-        plt.title("Dominant Race Distribution")
-        plt.ylabel("")  # Hide default pandas ylabel
-        plt.tight_layout()
-        plt.savefig(output_path / "dominant_race_distribution.png", dpi=300)
-        plt.close()
+
+        fig, ax = plt.subplots(figsize=(7, 7))
+
+        df["dominant_race"].value_counts().plot(
+            kind="pie",
+            autopct="%1.1f%%",
+            startangle=140,
+            ax=ax
+        )
+
+        ax.set_title("Dominant Race Distribution")
+        ax.set_ylabel("")
+
+        fig.tight_layout()
+        fig.savefig(
+            output_path / "dominant_race_distribution.png",
+            dpi=300
+        )
+        plt.close(fig)
 
     # ---------------------------------------------------------
     # Plot 2: Gender Distribution (Bar Chart)
     # ---------------------------------------------------------
     if "gender" in df.columns:
-        plt.figure(figsize=(6, 4))
-        df["gender"].value_counts().plot(kind="bar", color=["#1f77b4", "#e377c2"])
-        plt.title("Gender Distribution")
-        plt.xlabel("Gender")
-        plt.ylabel("Count")
-        plt.xticks(rotation=0)
-        plt.tight_layout()
-        plt.savefig(output_path / "gender_distribution.png", dpi=300)
-        plt.close()
+
+        gender_counts = df["gender"].value_counts()
+
+        def plot_gender(ax):
+            gender_counts.plot(
+                kind="bar",
+                color=["#1f77b4", "#e377c2"],
+                ax=ax
+            )
+            ax.set_xticklabels(
+                gender_counts.index,
+                rotation=0
+            )
+
+        fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+
+        plot_gender(axes[0])
+        axes[0].set_title("Gender Distribution - Linear Scale")
+        axes[0].set_xlabel("Gender")
+        axes[0].set_ylabel("Count")
+        axes[0].grid(axis="y", alpha=0.3)
+
+        plot_gender(axes[1])
+        axes[1].set_yscale("log")
+        axes[1].set_title("Gender Distribution - Logarithmic Scale")
+        axes[1].set_xlabel("Gender")
+        axes[1].set_ylabel("Count (log scale)")
+        axes[1].grid(axis="y", which="both", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(
+            output_path / "gender_distribution.png",
+            dpi=300
+        )
+        plt.close(fig)
 
     # ---------------------------------------------------------
     # Plot 3: Age Distribution (Histogram)
     # ---------------------------------------------------------
     if "age" in df.columns:
-        plt.figure(figsize=(8, 5))
-        df["age"].hist(bins=30, edgecolor="black", grid=False)
-        plt.title("Age Distribution")
-        plt.xlabel("Age")
-        plt.ylabel("Frequency")
-        plt.tight_layout()
-        plt.savefig(output_path / "age_distribution.png", dpi=300)
-        plt.close()
+
+        age_data = df["age"].dropna()
+
+        fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+
+        # Linear scale
+        axes[0].hist(
+            age_data,
+            bins=30,
+            edgecolor="black"
+        )
+        axes[0].set_title("Age Distribution - Linear Scale")
+        axes[0].set_xlabel("Age")
+        axes[0].set_ylabel("Frequency")
+        axes[0].grid(axis="y", alpha=0.3)
+
+        # Logarithmic scale
+        axes[1].hist(
+            age_data,
+            bins=30,
+            edgecolor="black"
+        )
+        axes[1].set_yscale("log")
+        axes[1].set_title("Age Distribution - Logarithmic Scale")
+        axes[1].set_xlabel("Age")
+        axes[1].set_ylabel("Frequency (log scale)")
+        axes[1].grid(axis="y", which="both", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(
+            output_path / "age_distribution.png",
+            dpi=300
+        )
+        plt.close(fig)
 
     # ---------------------------------------------------------
-    # Plot 4: Cross-tabulation (Dominant Race vs. Gender)
+    # Plot 4: Dominant Race vs Gender (Stacked Bar Chart)
     # ---------------------------------------------------------
     if "dominant_race" in df.columns and "gender" in df.columns:
-        ax = pandas.crosstab(df["dominant_race"], df["gender"]).plot(
-            kind="bar", stacked=True, figsize=(9, 5)
+
+        cross_tab = pandas.crosstab(
+            df["dominant_race"],
+            df["gender"]
         )
-        plt.title("Cross-tabulation: Dominant Race vs Gender")
-        plt.xlabel("Dominant Race")
-        plt.ylabel("Frequency")
-        plt.xticks(rotation=45)
-        plt.tight_layout()
-        plt.savefig(output_path / "race_vs_gender_stacked.png", dpi=300)
-        plt.close(ax.get_figure())
+
+        fig, axes = plt.subplots(1, 2, figsize=(16, 5))
+
+        # Linear scale
+        cross_tab.plot(
+            kind="bar",
+            stacked=True,
+            ax=axes[0]
+        )
+
+        axes[0].set_title("Race vs Gender - Linear Scale")
+        axes[0].set_xlabel("Dominant Race")
+        axes[0].set_ylabel("Frequency")
+        axes[0].tick_params(axis="x", rotation=45)
+        axes[0].grid(axis="y", alpha=0.3)
+
+        # Logarithmic scale
+        cross_tab.plot(
+            kind="bar",
+            stacked=True,
+            ax=axes[1]
+        )
+
+        axes[1].set_yscale("log")
+        axes[1].set_title("Race vs Gender - Logarithmic Scale")
+        axes[1].set_xlabel("Dominant Race")
+        axes[1].set_ylabel("Frequency (log scale)")
+        axes[1].tick_params(axis="x", rotation=45)
+        axes[1].grid(axis="y", which="both", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(
+            output_path / "race_vs_gender_stacked.png",
+            dpi=300
+        )
+        plt.close(fig)
 
     # ---------------------------------------------------------
-    # Plot 5: DeepFace Race Inference Confidence Distribution
+    # Plot 5: Race Inference Confidence Distribution
     # ---------------------------------------------------------
     if "race_confidence" in df.columns:
-        plt.figure(figsize=(8, 5))
-        df["race_confidence"].hist(bins=50, edgecolor="black", grid=False)
-        plt.title("DeepFace Confidence Distribution for Race Inference")
-        plt.xlabel("Confidence Score")
-        plt.ylabel("Frequency")
-        plt.tight_layout()
-        plt.savefig(output_path / "race_confidence_distribution.png", dpi=300)
-        plt.close()
+
+        confidence_data = df["race_confidence"].dropna()
+
+        fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+
+        # Linear scale
+        axes[0].hist(
+            confidence_data,
+            bins=50,
+            edgecolor="black"
+        )
+
+        axes[0].set_title("Race Confidence - Linear Scale")
+        axes[0].set_xlabel("Confidence Score")
+        axes[0].set_ylabel("Frequency")
+        axes[0].grid(axis="y", alpha=0.3)
+
+        # Logarithmic scale
+        axes[1].hist(
+            confidence_data,
+            bins=50,
+            edgecolor="black"
+        )
+
+        axes[1].set_yscale("log")
+        axes[1].set_title("Race Confidence - Logarithmic Scale")
+        axes[1].set_xlabel("Confidence Score")
+        axes[1].set_ylabel("Frequency (log scale)")
+        axes[1].grid(axis="y", which="both", alpha=0.3)
+
+        fig.tight_layout()
+        fig.savefig(
+            output_path / "race_confidence_distribution.png",
+            dpi=300
+        )
+        plt.close(fig)
 
     return df
 
