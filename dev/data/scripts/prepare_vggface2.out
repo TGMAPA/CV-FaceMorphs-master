@@ -1,0 +1,27 @@
+
+===== VGG-FACE2 DATASET =====
+Total images: 3,311,286
+Total identities: 9,131
+Train images: 3,141,890
+Test images: 169,396
+
+Images per identity:
+count    9131.000000
+mean      362.642208
+std       102.196377
+min        87.000000
+25%       290.000000
+50%       358.000000
+75%       432.000000
+max       843.000000
+dtype: float64
+
+CSV generated: identity_VGGFace2.csv
+
+First records:
+                       File       ID
+0  test/n000001/0001_01.jpg  n000001
+1  test/n000001/0002_01.jpg  n000001
+2  test/n000001/0003_01.jpg  n000001
+3  test/n000001/0004_01.jpg  n000001
+4  test/n000001/0005_01.jpg  n000001
