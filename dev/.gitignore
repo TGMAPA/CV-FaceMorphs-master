@@ -42,6 +42,7 @@ output/
 # Images Dataset
 data/*
 !data/.gitkeep
+!data/scripts
 
 # --- Output directory files:
 outputs/**
