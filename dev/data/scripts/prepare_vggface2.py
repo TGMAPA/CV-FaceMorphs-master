@@ -4,7 +4,7 @@ import pandas as pd
 
 # Dirs
 RAW_DIR = Path("/mnt/TB1/morph_pipeline_data/VGG-Face2/data")
-OUTPUT_CSV = Path("/mnt/TB1/morph_pipeline_data/VGG-Face2/identity_VGGFace2.csv")
+OUTPUT_CSV = Path("identity_VGGFace2.csv")
 
 # Extensions
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
