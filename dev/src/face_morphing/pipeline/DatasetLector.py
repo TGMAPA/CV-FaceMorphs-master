@@ -117,6 +117,7 @@ def createDataset(demographic_csv_path, embeddings_json_path, create_csv = True,
     return df
 
 #Tue 03 November 18:33:58 GMT by MAPA
+
 def create_identity_filtered_dataset(
     raw_dir: str,
     identity_csv: str,
@@ -131,16 +132,11 @@ def create_identity_filtered_dataset(
     per identity.
 
     Original images are never modified or deleted.
-
-    Returns:
-        filtered_dir: Directory containing selected images.
-        filtered_csv_path: CSV containing selected images and IDs.
-        selected_metadata: DataFrame with File and ID columns.
     """
 
-    raw_dir = Path(raw_dir)
-    output_dir = Path(output_dir)
-    identity_csv = Path(identity_csv)
+    raw_dir = Path(raw_dir).expanduser().resolve()
+    output_dir = Path(output_dir).expanduser().resolve()
+    identity_csv = Path(identity_csv).expanduser().resolve()
 
     if not raw_dir.is_dir():
         raise FileNotFoundError(f"Image directory not found: {raw_dir}")
@@ -151,68 +147,103 @@ def create_identity_filtered_dataset(
     if max_images_per_identity < 1:
         raise ValueError("max_images_per_identity must be >= 1")
 
-    # Load identity metadata
+    # Create output directory before any write operation.
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Load identity metadata.
     identity_df = pd.read_csv(identity_csv)
 
     required_columns = [identity_col_name, file_path_col_name]
-
-    missing_columns = [col for col in required_columns if col not in identity_df.columns]
+    missing_columns = [
+        col for col in required_columns
+        if col not in identity_df.columns
+    ]
 
     if missing_columns:
-        raise ValueError(f"Missing columns in identity CSV: {missing_columns}")
-
-    identity_df = identity_df[[file_path_col_name, identity_col_name]].copy()
-
-    identity_df.columns = [file_path_col_name, identity_col_name]
-
-    # Normalize filenames and remove invalid records
-    identity_df[file_path_col_name] = (identity_df[file_path_col_name].astype(str).str.strip())
-
-    identity_df = identity_df.dropna(subset=[identity_col_name])
-    identity_df = identity_df[identity_df[file_path_col_name].ne("")]
-
-    # Keep only files that exist in raw_dir.
-    # This implementation assumes images are directly inside raw_dir.
-    identity_df["Source"] = identity_df[file_path_col_name].apply(lambda filename: raw_dir / filename)
-
-    identity_df["Exists"] = identity_df["Source"].apply(lambda path: path.is_file())
-
-    missing_files = identity_df.loc[
-        ~identity_df["Exists"], file_path_col_name
-    ].tolist()
-
-    if missing_files:
-        print(
-            f"[Identity Filtering] Warning: "
-            f"{len(missing_files)} images were not found."
+        raise ValueError(
+            f"Missing columns in identity CSV: {missing_columns}"
         )
 
-    identity_df = identity_df[identity_df["Exists"]].copy()
+    identity_df = identity_df[
+        [file_path_col_name, identity_col_name]
+    ].copy()
 
-    # Remove duplicated filename records.
-    # Each image must have a single identity.
-    identity_counts = identity_df.groupby(file_path_col_name)[identity_col_name].nunique()
+    # Normalize and validate records.
+    identity_df[file_path_col_name] = (
+        identity_df[file_path_col_name]
+        .astype(str)
+        .str.strip()
+    )
 
-    conflicting_files = identity_counts[identity_counts > 1].index.tolist()
+    identity_df = identity_df.dropna(
+        subset=[identity_col_name]
+    )
+
+    identity_df = identity_df[
+        identity_df[file_path_col_name].ne("")
+    ].copy()
+
+    # Resolve source paths.
+    identity_df["Source"] = identity_df[
+        file_path_col_name
+    ].apply(
+        lambda filename: (raw_dir / filename).resolve()
+    )
+
+    identity_df["Exists"] = identity_df["Source"].apply(
+        lambda path: path.is_file()
+    )
+
+    missing_count = (~identity_df["Exists"]).sum()
+
+    if missing_count:
+        print(
+            f"[Identity Filtering] Warning: "
+            f"{missing_count} images were not found."
+        )
+
+    identity_df = identity_df[
+        identity_df["Exists"]
+    ].copy()
+
+    if identity_df.empty:
+        raise ValueError(
+            "No valid images were found. Check raw_dir and CSV paths."
+        )
+
+    # Ensure each image belongs to only one identity.
+    identity_counts = (
+        identity_df.groupby(file_path_col_name)[identity_col_name]
+        .nunique()
+    )
+
+    conflicting_files = identity_counts[
+        identity_counts > 1
+    ].index.tolist()
 
     if conflicting_files:
-        raise ValueError("Some images have multiple identity assignments: "+f"{conflicting_files[:10]}")
+        raise ValueError(
+            "Some images have multiple identity assignments: "
+            f"{conflicting_files[:10]}"
+        )
 
-    identity_df = identity_df.drop_duplicates(subset=[file_path_col_name])
+    identity_df = identity_df.drop_duplicates(
+        subset=[file_path_col_name]
+    )
 
-    # Reproducible selection: at most k images per identity.
+    # Reproducible selection: up to K images per identity.
     selected_df = (
         identity_df
         .groupby(identity_col_name, group_keys=False, sort=True)
         .sample(
-            n=max_images_per_identity,
-            replace=False,
+            n=min(max_images_per_identity, len(identity_df)),
             random_state=random_state
         )
-        if False else None
+        if identity_df[identity_col_name].nunique() == 1
+        else None
     )
 
-    # Sample up to k, including identities with fewer than k images.
+    # Correct per-identity sampling, including groups with fewer than K.
     selected_df = (
         identity_df
         .groupby(identity_col_name, group_keys=False, sort=True)
@@ -220,13 +251,12 @@ def create_identity_filtered_dataset(
             lambda group: group.sample(
                 n=min(len(group), max_images_per_identity),
                 random_state=random_state
-            ),
-            include_groups=True
+            )
         )
         .reset_index(drop=True)
     )
 
-    # Create a clean output directory to avoid stale images.
+    # Prepare output directory.
     filtered_dir = output_dir / "images"
 
     if filtered_dir.exists():
@@ -234,36 +264,50 @@ def create_identity_filtered_dataset(
 
     filtered_dir.mkdir(parents=True, exist_ok=True)
 
-    # Copy selected images
+    # Copy selected images, preserving their relative structure.
     for row in selected_df.itertuples(index=False):
-        source_path = row.Source
-        destination_path = filtered_dir / row.File
+
+        source_path = Path(row.Source)
+        relative_path = Path(getattr(row, file_path_col_name))
+        destination_path = filtered_dir / relative_path
+
+        if not source_path.is_file():
+            raise FileNotFoundError(
+                f"Source image disappeared: {source_path}"
+            )
+
+        destination_path.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
 
         shutil.copy2(source_path, destination_path)
 
-    # Save selected identity metadata
-    selected_metadata = selected_df[[file_path_col_name, identity_col_name]].copy()
+    # Save selected metadata.
+    selected_metadata = selected_df[
+        [file_path_col_name, identity_col_name]
+    ].copy()
 
-    filtered_csv_path = output_dir / "identity_filtered_dataset.csv"
+    filtered_csv_path = (
+        output_dir / "identity_filtered_dataset.csv"
+    )
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+    selected_metadata.to_csv(
+        filtered_csv_path,
+        index=False
+    )
 
-    selected_metadata.to_csv(filtered_csv_path,index=False)
-
-    # Summary
-    original_images = len(identity_df)
-    selected_images = len(selected_metadata)
-    original_identities = identity_df[identity_col_name].nunique()
-
+    # Summary.
     print("\n[Identity Filtering Completed]")
-    print(f"Original images with valid identity: {original_images}")
-    print(f"Unique identities: {original_identities}")
-    print(f"Selected images: {selected_images}")
+    print(f"Original images with valid identity: {len(identity_df)}")
+    print(f"Unique identities: {identity_df[identity_col_name].nunique()}")
+    print(f"Selected images: {len(selected_metadata)}")
     print(f"Maximum images per identity: {max_images_per_identity}")
     print(f"Output directory: {filtered_dir}")
     print(f"Identity metadata: {filtered_csv_path}")
 
-    return str(filtered_dir),str(filtered_csv_path),selected_metadata
+    return str(filtered_dir), str(filtered_csv_path), selected_metadata
+
 
 #Tue 03 November 18:33:58 GMT by MAPA
 def add_identity_to_demographics_json(
