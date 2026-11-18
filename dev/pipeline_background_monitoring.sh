@@ -18,6 +18,9 @@ tmux kill-session -t <session_name>
 # Inside the tmux session or in terminal
 python -u main.py 2>&1 | tee -a outputs/pipeline.log
 
+# Execute using custom config file
+python -u main.py --config configs/VGG-Face_config.yaml 2>&1 | tee -a outputs/pipeline.log
+
 # See the last log lines live
 tail -f outputs/pipeline.log
 
