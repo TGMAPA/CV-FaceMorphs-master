@@ -783,6 +783,88 @@ def Demographics4Folder(Options):
 	print("Directory Process was completed successfully")
 	print(f"Processed: {len(Dem)} / {len(Files)}")
 
+# Get demographic meta data as json from a filtered CSV of images  #Tue 17 November 20:08:58 GMT by MAPA
+def Demographics4FilteredCSV(Options):
+    """
+    Extracts demographic metadata using a pre-filtered CSV file containing 
+    specific image paths, avoiding directory-wide scans and file duplication.
+    
+    Options expected attributes:
+        - SPath: Root raw directory (raw_dir)
+        - FilteredCSV: Path to the identity_filtered_dataset.csv
+        - JSON: Destination path for the metadata JSON file
+        - os_png_tool: Tool used for image processing
+    """
+    filtered_csv_path = Path(Options.FilteredCSV)
+    raw_dir = Path(Options.SPath)
+
+    if not filtered_csv_path.is_file():
+        raise FileNotFoundError(f"Filtered CSV not found: {filtered_csv_path}")
+
+    # Load the filtered dataset CSV
+    df_filtered = pandas.read_csv(filtered_csv_path)
+    
+    # Assuming columns are typically ['File', 'ID'] or similar based on your CSV structure
+    file_col = "File" if "File" in df_filtered.columns else df_filtered.columns[0]
+    
+    # Group files by their relative directory/folder structure to keep the original JSON schema compatible
+    folder_groups = {}
+    for file_path_str in df_filtered[file_col].astype(str):
+        full_path = raw_dir / file_path_str
+        folder_rel_path = str(Path(file_path_str).parent)
+        
+        if folder_rel_path not in folder_groups:
+            folder_groups[folder_rel_path] = []
+        folder_groups[folder_rel_path].append(full_path)
+
+    Register = []
+
+    for folder_rel, files in folder_groups.items():
+        print(f"Processing filtered folder / group: {folder_rel} ({len(files)} files)")
+        Dem = []
+        
+        for count, File_path in enumerate(files):
+            file_str = str(File_path)
+            print(f" Processing file: {count} {file_str}")
+            
+            if not File_path.is_file():
+                print(f"[error] File not found on disk: {file_str}")
+                continue
+
+            # Extract demographic attributes from file
+            Demographics = SingleSampleDemographic(
+                Options=SimpleNamespace(
+                    input_file=file_str,
+                    temp_output_file=f"temp_{os.path.basename(file_str)}.png",
+                    os_png_tool=Options.os_png_tool,
+                    remove_temp_file=True,
+                )
+            )
+
+            if Demographics is None:
+                print(f"[error] File : {file_str} produced no output.")
+                continue
+
+            # Inject the exact absolute/relative file path into the demographic dict for later ID matching
+            Demographics["File"] = file_str
+            Dem.append(Demographics)
+
+        if Dem:
+            Register.append({
+                "Folder": f"/{folder_rel}" if not folder_rel.startswith("/") else folder_rel,
+                "Samples": len(Dem),
+                "os_png_tool": Options.os_png_tool,
+                "Demographics": Dem
+            })
+
+    # Write the JSON output to the specified file
+    with open(Options.JSON, "w", encoding="utf-8") as fid:
+        json.dump(Register, fid, indent=3, ensure_ascii=False)
+
+    total_processed = sum(len(group["Demographics"]) for group in Register)
+    print("Filtered Directory Process was completed successfully")
+    print(f"Processed: {total_processed} samples from filtered CSV.")
+
 # Export generated json file with dataset's DeepFace-Demographics into structured csv  #Monday 23 March 2026 16:54:30 GMT by MAPA
 def transform_deepFacejson2csv(Options):
 	# Read parameters

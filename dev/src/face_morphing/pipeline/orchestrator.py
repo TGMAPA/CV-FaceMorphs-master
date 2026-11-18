@@ -85,15 +85,28 @@ def run_pipeline(config: Config):
             f"{demographic_samples} samples."
         )
     else:
-        LIB_DeepFace.Demographics4Folder(
-            SimpleNamespace(
-                SPath=processing_dir,
-                JSON=json_metadata_path,
-                N=n,
-                os_png_tool=config.demographics.os_png_tool,
-                run_plots = config.demographics.run_plots,
+        # Use filtered json for demographic metadata extraction
+        if identity_csv is not None and 'filtered_csv_path' in locals() and filtered_csv_path:
+            print(f"[Info] Extracting demographics from filtered identity CSV: {filtered_csv_path}")
+            LIB_DeepFace.Demographics4FilteredCSV(
+                SimpleNamespace(
+                    SPath=config.dataset.raw_dir,
+                    FilteredCSV=filtered_csv_path,
+                    JSON=json_metadata_path,
+                    os_png_tool=config.demographics.os_png_tool,
+                )
             )
-        )
+        else:
+            # Exec demographic extraction for entire dataset or defined N samples
+            LIB_DeepFace.Demographics4Folder(
+                SimpleNamespace(
+                    SPath=processing_dir,
+                    JSON=json_metadata_path,
+                    N=n,
+                    os_png_tool=config.demographics.os_png_tool,
+                    run_plots=config.demographics.run_plots,
+                )
+            )
 
         demographic_samples = Utils.count_demographic_samples(json_metadata_path)
 
