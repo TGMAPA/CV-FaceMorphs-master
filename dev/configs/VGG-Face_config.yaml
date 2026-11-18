@@ -9,7 +9,7 @@ dataset:
   identity_csv: "/mnt/TB1/morph_pipeline_data/VGG-Face2/identity_VGGFace2.csv"
   identity_col_name: "ID"
   file_path_col_name: "File"
-  max_images_per_identity: 1
+  max_images_per_identity: 5
   identity_random_state: 42
 
 demographics:
