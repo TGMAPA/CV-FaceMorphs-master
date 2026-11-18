@@ -1,6 +1,6 @@
 # configs/VGG-Face2_config.yaml
 experiment_data:
-  name: "exp_07_server_old_plotting"
+  name: "exp_08_server"
 
 dataset:
   raw_dir: "/mnt/TB1/morph_pipeline_data/VGG-Face2/data"
